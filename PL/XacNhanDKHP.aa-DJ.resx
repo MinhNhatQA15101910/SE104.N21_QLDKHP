@@ -1,0 +1,426 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<root>
+  <!-- 
+    Microsoft ResX Schema 
+    
+    Version 2.0
+    
+    The primary goals of this format is to allow a simple XML format 
+    that is mostly human readable. The generation and parsing of the 
+    various data types are done through the TypeConverter classes 
+    associated with the data types.
+    
+    Example:
+    
+    ... ado.net/XML headers & schema ...
+    <resheader name="resmimetype">text/microsoft-resx</resheader>
+    <resheader name="version">2.0</resheader>
+    <resheader name="reader">System.Resources.ResXResourceReader, System.Windows.Forms, ...</resheader>
+    <resheader name="writer">System.Resources.ResXResourceWriter, System.Windows.Forms, ...</resheader>
+    <data name="Name1"><value>this is my long string</value><comment>this is a comment</comment></data>
+    <data name="Color1" type="System.Drawing.Color, System.Drawing">Blue</data>
+    <data name="Bitmap1" mimetype="application/x-microsoft.net.object.binary.base64">
+        <value>[base64 mime encoded serialized .NET Framework object]</value>
+    </data>
+    <data name="Icon1" type="System.Drawing.Icon, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+        <value>[base64 mime encoded string representing a byte array form of the .NET Framework object]</value>
+        <comment>This is a comment</comment>
+    </data>
+                
+    There are any number of "resheader" rows that contain simple 
+    name/value pairs.
+    
+    Each data row contains a name, and value. The row also contains a 
+    type or mimetype. Type corresponds to a .NET class that support 
+    text/value conversion through the TypeConverter architecture. 
+    Classes that don't support this are serialized and stored with the 
+    mimetype set.
+    
+    The mimetype is used for serialized objects, and tells the 
+    ResXResourceReader how to depersist the object. This is currently not 
+    extensible. For a given mimetype the value must be set accordingly:
+    
+    Note - application/x-microsoft.net.object.binary.base64 is the format 
+    that the ResXResourceWriter will generate, however the reader can 
+    read any of the formats listed below.
+    
+    mimetype: application/x-microsoft.net.object.binary.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Binary.BinaryFormatter
+            : and then encoded with base64 encoding.
+    
+    mimetype: application/x-microsoft.net.object.soap.base64
+    value   : The object must be serialized with 
+            : System.Runtime.Serialization.Formatters.Soap.SoapFormatter
+            : and then encoded with base64 encoding.
+
+    mimetype: application/x-microsoft.net.object.bytearray.base64
+    value   : The object must be serialized into a byte array 
+            : using a System.ComponentModel.TypeConverter
+            : and then encoded with base64 encoding.
+    -->
+  <xsd:schema id="root" xmlns="" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:msdata="urn:schemas-microsoft-com:xml-msdata">
+    <xsd:import namespace="http://www.w3.org/XML/1998/namespace" />
+    <xsd:element name="root" msdata:IsDataSet="true">
+      <xsd:complexType>
+        <xsd:choice maxOccurs="unbounded">
+          <xsd:element name="metadata">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" />
+              </xsd:sequence>
+              <xsd:attribute name="name" use="required" type="xsd:string" />
+              <xsd:attribute name="type" type="xsd:string" />
+              <xsd:attribute name="mimetype" type="xsd:string" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="assembly">
+            <xsd:complexType>
+              <xsd:attribute name="alias" type="xsd:string" />
+              <xsd:attribute name="name" type="xsd:string" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="data">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+                <xsd:element name="comment" type="xsd:string" minOccurs="0" msdata:Ordinal="2" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" msdata:Ordinal="1" />
+              <xsd:attribute name="type" type="xsd:string" msdata:Ordinal="3" />
+              <xsd:attribute name="mimetype" type="xsd:string" msdata:Ordinal="4" />
+              <xsd:attribute ref="xml:space" />
+            </xsd:complexType>
+          </xsd:element>
+          <xsd:element name="resheader">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="value" type="xsd:string" minOccurs="0" msdata:Ordinal="1" />
+              </xsd:sequence>
+              <xsd:attribute name="name" type="xsd:string" use="required" />
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:choice>
+      </xsd:complexType>
+    </xsd:element>
+  </xsd:schema>
+  <resheader name="resmimetype">
+    <value>text/microsoft-resx</value>
+  </resheader>
+  <resheader name="version">
+    <value>2.0</value>
+  </resheader>
+  <resheader name="reader">
+    <value>System.Resources.ResXResourceReader, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <resheader name="writer">
+    <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
+  </resheader>
+  <assembly alias="mscorlib" name="mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="Column3.MinimumWidth" type="System.Int32, mscorlib">
+    <value>6</value>
+  </data>
+  <assembly alias="System.Windows.Forms" name="System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089" />
+  <data name="kryptonDataGridView2.Dock" type="System.Windows.Forms.DockStyle, System.Windows.Forms">
+    <value>None</value>
+  </data>
+  <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
+  <data name="kryptonDataGridView2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>2, 15</value>
+  </data>
+  <data name="kryptonDataGridView2.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 2, 2, 2</value>
+  </data>
+  <data name="kryptonDataGridView2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>419, 211</value>
+  </data>
+  <data name="groupBox3.Location" type="System.Drawing.Point, System.Drawing">
+    <value>4, 187</value>
+  </data>
+  <data name="groupBox3.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 2, 2, 2</value>
+  </data>
+  <data name="groupBox3.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 2, 2, 2</value>
+  </data>
+  <data name="groupBox3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>426, 228</value>
+  </data>
+  <data name="kryptonTextBox4.Location" type="System.Drawing.Point, System.Drawing">
+    <value>320, 32</value>
+  </data>
+  <data name="kryptonTextBox4.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 2, 2, 2</value>
+  </data>
+  <data name="kryptonTextBox4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>94, 29</value>
+  </data>
+  <data name="kryptonTextBox5.Location" type="System.Drawing.Point, System.Drawing">
+    <value>321, 82</value>
+  </data>
+  <data name="kryptonTextBox5.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 2, 2, 2</value>
+  </data>
+  <data name="kryptonTextBox5.Size" type="System.Drawing.Size, System.Drawing">
+    <value>94, 29</value>
+  </data>
+  <data name="kryptonTextBox2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>128, 131</value>
+  </data>
+  <data name="kryptonTextBox2.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 2, 2, 2</value>
+  </data>
+  <data name="kryptonTextBox2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>94, 29</value>
+  </data>
+  <data name="kryptonTextBox1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>128, 82</value>
+  </data>
+  <data name="kryptonTextBox1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 2, 2, 2</value>
+  </data>
+  <data name="kryptonTextBox1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>94, 29</value>
+  </data>
+  <data name="kryptonTextBox6.Location" type="System.Drawing.Point, System.Drawing">
+    <value>128, 32</value>
+  </data>
+  <data name="kryptonTextBox6.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 2, 2, 2</value>
+  </data>
+  <data name="kryptonTextBox6.Size" type="System.Drawing.Size, System.Drawing">
+    <value>94, 29</value>
+  </data>
+  <data name="label8.Location" type="System.Drawing.Point, System.Drawing">
+    <value>15, 131</value>
+  </data>
+  <data name="label8.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 0, 2, 0</value>
+  </data>
+  <data name="label8.Size" type="System.Drawing.Size, System.Drawing">
+    <value>60, 16</value>
+  </data>
+  <data name="label7.Location" type="System.Drawing.Point, System.Drawing">
+    <value>249, 82</value>
+  </data>
+  <data name="label7.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 0, 2, 0</value>
+  </data>
+  <data name="label7.Size" type="System.Drawing.Size, System.Drawing">
+    <value>62, 16</value>
+  </data>
+  <data name="label6.Location" type="System.Drawing.Point, System.Drawing">
+    <value>15, 82</value>
+  </data>
+  <data name="label6.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 0, 2, 0</value>
+  </data>
+  <data name="label6.Size" type="System.Drawing.Size, System.Drawing">
+    <value>51, 16</value>
+  </data>
+  <data name="label5.Location" type="System.Drawing.Point, System.Drawing">
+    <value>249, 33</value>
+  </data>
+  <data name="label5.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 0, 2, 0</value>
+  </data>
+  <data name="label5.Size" type="System.Drawing.Size, System.Drawing">
+    <value>46, 16</value>
+  </data>
+  <data name="label4.Location" type="System.Drawing.Point, System.Drawing">
+    <value>15, 33</value>
+  </data>
+  <data name="label4.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 0, 2, 0</value>
+  </data>
+  <data name="label4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>102, 16</value>
+  </data>
+  <data name="groupBox1.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Times New Roman, 10.2pt</value>
+  </data>
+  <data name="groupBox1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>638, 119</value>
+  </data>
+  <data name="groupBox1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 2, 2, 2</value>
+  </data>
+  <data name="groupBox1.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 2, 2, 2</value>
+  </data>
+  <data name="groupBox1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>435, 427</value>
+  </data>
+  <data name="kryptonDataGridView1.Location" type="System.Drawing.Point, System.Drawing">
+    <value>2, 18</value>
+  </data>
+  <data name="kryptonDataGridView1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 2, 2, 2</value>
+  </data>
+  <data name="kryptonDataGridView1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>580, 404</value>
+  </data>
+  <data name="groupBox4.Font" type="System.Drawing.Font, System.Drawing">
+    <value>Times New Roman, 10.2pt</value>
+  </data>
+  <data name="groupBox4.Location" type="System.Drawing.Point, System.Drawing">
+    <value>20, 119</value>
+  </data>
+  <data name="groupBox4.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 2, 2, 2</value>
+  </data>
+  <data name="groupBox4.Padding" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 2, 2, 2</value>
+  </data>
+  <data name="groupBox4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>584, 424</value>
+  </data>
+  <data name="kryptonTextBox3.Location" type="System.Drawing.Point, System.Drawing">
+    <value>16, 13</value>
+  </data>
+  <data name="kryptonTextBox3.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 2, 2, 2</value>
+  </data>
+  <data name="kryptonTextBox3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>464, 27</value>
+  </data>
+  <data name="pictureBox4.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
+        DAAACwwBP0AiyAAABBFJREFUeF7tms1vDGEcxx+lONRpdxDhIF7OiL/AgRBx64GDBLMrEQ2VcOiUJepA
+        4iUkFhdx4KwRDYmaaePm7eJCOGhVxLFvQbTjN5tf2tV9up2nfXaeefl+km+a7c7+5nl+35lnvjuzIitY
+        Be9M3vZO8UsQJbmid8Cy3Qmr4E5atneQ/w2mKPlNdIT6tXIneYt5k7P7dlCd31M1bfePZb/cxW+DCg0y
+        IFd0t9OyMyKpO5wv9m3jzUAjDLCKvRvyBe+HvK7n5wvuz7zdv5k3zziaDVh9qN+ipeaTvOa06Oz4vPLI
+        i1X8sQyj0YDc4VcrqPlv5fUksr3X1jG3hT+eUXQZUHzTnLfd5/Ja9eT2bmzrWcZVMogWA/xFtK4/kNcJ
+        pUfBOLhYxtBgAC0l1+Q1wosu2le4XMbQeA34j0bVTR0wwDAwwDAwwDAwwDAwIDpo8lflTQkv+rJ1mcvV
+        BwbIWOAXJtt9GDSWi9UHBsxCcMug4D2TN6ee3F7R+mEpV5kbGDA7kdw0gwH1qdw2Lrgf5U2a1rxvG8OA
+        uQn14OSot4k3VwMGhKNhjw5hQHiCh+dkwq+pJgUPz4t9O/nt+QED1KB8v58aj5+PmIQMOE3rfju/BAAA
+        AIB/VzT7d0SXXxZD9NeHpPpGuuCXxBJumz6o8Zdm7AyaXSVumz7IgO+SHUFyDXDb9AEDFFQWX7lt+qDC
+        XTU7guQqi3PcNn1ULsJlcZF2EFxo5DvOuspikP6WGnIRnslop7g51il8SPijjrjBbYkOv1UsJhMeywaU
+        KTmiJ+gFtyVa6FRroUG8rxlUVuSId0EPuB1mGCuJNXQmDEgHmGLRsjM07oh13AazkAFbaUAjsoGmUcFc
+        RzvEFp5+PKAB7SYj/soGnCbxHPfxtOMFDexE9WBTKUe08XTjCR0hqY2nRuKmKpV46ohu2QQSLUc8NRY3
+        VUldPI1D3FQlLfE0VnFTlaTH01jGTVXIhD0c3aSTjKt4zPGMm6rQRJIXT8+K4zz8dEBHVGLiaSLipiqJ
+        iadJipuqxD6eJjFuqhLXeJrouKkKGRCreJqKuKkKmRCLeMpjSEfcVGWsQ5yc2ZDIlba4qQqd/rekjYlA
+        dPRf52FkF2PxNM1xU5XI42kW4qYqlXjqiEFpwzSK9jFE+1rLuwXVRBBPhzMXN1VpVDzNdNxUhRrVXt08
+        Lcp63FSBLpBNNT98XZgmuDQIAwwwDAwwDAwwDAwwDAwwDAwwDAwwDAwwDAwwDAwwDAwwDAwwDAwwjGYD
+        vvi3xV4uDcKgyYBxvyzO+/fFci4LwqLBgCf+PbGeywFVFmAAlhsdzMMALDc6UTQAy41uQhqA5aZRzGEA
+        lptGU8cALDdRIDEAy02UVBmA5cYEbEA3lhsAAAAAgHQixD9zfTXM9vNAbQAAAABJRU5ErkJggg==
+</value>
+  </data>
+  <data name="pictureBox4.Location" type="System.Drawing.Point, System.Drawing">
+    <value>500, 6</value>
+  </data>
+  <data name="pictureBox4.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 2, 2, 2</value>
+  </data>
+  <data name="pictureBox4.Size" type="System.Drawing.Size, System.Drawing">
+    <value>30, 37</value>
+  </data>
+  <data name="pictureBox6.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        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
+</value>
+  </data>
+  <data name="pictureBox6.Location" type="System.Drawing.Point, System.Drawing">
+    <value>535, 13</value>
+  </data>
+  <data name="pictureBox6.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 2, 2, 2</value>
+  </data>
+  <data name="pictureBox6.Size" type="System.Drawing.Size, System.Drawing">
+    <value>30, 31</value>
+  </data>
+  <data name="panel2.Location" type="System.Drawing.Point, System.Drawing">
+    <value>20, 56</value>
+  </data>
+  <data name="panel2.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 2, 2, 2</value>
+  </data>
+  <data name="panel2.Size" type="System.Drawing.Size, System.Drawing">
+    <value>580, 51</value>
+  </data>
+  <data name="kryptonButton6.Location" type="System.Drawing.Point, System.Drawing">
+    <value>9, 2</value>
+  </data>
+  <data name="kryptonButton6.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 2, 2, 2</value>
+  </data>
+  <data name="kryptonButton6.Size" type="System.Drawing.Size, System.Drawing">
+    <value>44, 46</value>
+  </data>
+  <data name="kryptonButton6.Values.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABkAAAAZCAYAAADE6YVjAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAN
+        0AAADdABEGw9BwAAAStJREFUSEvt1bFKA0EUheERjGAhYhFQNASbFAoROwtBREwhCMY3sE+Xl8hDxE5B
+        CfoAmtZaMVUUJYpgGtFCFFGI/ykWtnCdO2GrkANfM+Rylp3MrDNkG10cIKOFtLOBO/RwiDGkGhXcQwVN
+        zCPVDFbBGfJINfFNbmEdc1DRf2YxAW8KaEMF8oYOHg30YBeoYQmJWcQDopIPvEJlPu+I5p5QQeJ52sEz
+        9ONrbKGIZY8V7OEcmv1CFSP4M2VERQ1kYc0k9Mp+8II1JCZedIppWDOOY2hWN8QoEhMvOkFIkf6l2lPt
+        sfeM9Vs0gxt8YlULvsSL6rDcwlO4wjc2tWDJLm6xD8strJJLqKSkBWty0LAlfZeEZFgSlGFJUKISXZTm
+        wxgaHdgj6KO34Jxzv6ckb8z7pmgxAAAAAElFTkSuQmCC
+</value>
+  </data>
+  <data name="kryptonButton6.Values.Text" xml:space="preserve">
+    <value />
+  </data>
+  <data name="lblQLMB.Location" type="System.Drawing.Point, System.Drawing">
+    <value>338, 7</value>
+  </data>
+  <data name="lblQLMB.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 0, 2, 0</value>
+  </data>
+  <data name="lblQLMB.Size" type="System.Drawing.Size, System.Drawing">
+    <value>377, 27</value>
+  </data>
+  <data name="panel1.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 2, 2, 2</value>
+  </data>
+  <data name="panel1.Size" type="System.Drawing.Size, System.Drawing">
+    <value>1082, 51</value>
+  </data>
+  <data name="kryptonButton3.Location" type="System.Drawing.Point, System.Drawing">
+    <value>890, 56</value>
+  </data>
+  <data name="kryptonButton3.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 2, 2, 2</value>
+  </data>
+  <data name="kryptonButton3.Size" type="System.Drawing.Size, System.Drawing">
+    <value>143, 44</value>
+  </data>
+  <data name="$this.AutoScaleDimensions" type="System.Drawing.SizeF, System.Drawing">
+    <value>6, 13</value>
+  </data>
+  <data name="$this.ClientSize" type="System.Drawing.Size, System.Drawing">
+    <value>1082, 613</value>
+  </data>
+  <data name="$this.Margin" type="System.Windows.Forms.Padding, System.Windows.Forms">
+    <value>2, 2, 2, 2</value>
+  </data>
+  <data name="$this.StartPosition" type="System.Windows.Forms.FormStartPosition, System.Windows.Forms">
+    <value>CenterScreen</value>
+  </data>
+</root>
