@@ -8,8 +8,8 @@ namespace DTO
 {
     public class Nganh
     {
-        string MaNganh { get; set; }
-        string TenNganh { get; set; }
-        string MaKhoa { get; set; }
+        public string MaNganh { get; set; }
+        public string TenNganh { get; set; }
+        public string MaKhoa { get; set; }
     }
 }

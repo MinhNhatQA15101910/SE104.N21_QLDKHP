@@ -8,7 +8,7 @@ namespace DTO
 {
     public class HocKy
     {
-        int MaHocKy { get; set; }
-        string TenHocKy { set; get; }
+        public int MaHocKy { get; set; }
+        public string TenHocKy { set; get; }
     }
 }

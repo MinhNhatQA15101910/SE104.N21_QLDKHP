@@ -46,5 +46,15 @@ namespace DAL
 
             return DangNhapMessage.Success;
         }
+
+        public static List<CT_NguoiDung> LayDSNguoiDung()
+        {
+            List<CT_NguoiDung> output;
+            using (IDbConnection connection = new SqlConnection(DatabaseConnection.CnnString()))
+            {
+                output = connection.Query<CT_NguoiDung>("spNGUOIDUNG_LayDSNguoiDung").ToList();
+            }
+            return output;
+        }
     }
 }

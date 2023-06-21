@@ -8,7 +8,7 @@ namespace DTO
 {
     public class Tinh
     {
-        int MaTinh { get; set; }
-        string TenTTP { get; set; }
+        public int MaTinh { get; set; }
+        public string TenTTP { get; set; }
     }
 }

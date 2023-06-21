@@ -8,8 +8,8 @@ namespace DTO
 {
     public class LoaiMonHoc
     {
-        int MaLoaiMonHoc { get; set; }
-        string TenLoaiMonHoc { get; set; }
-        int SoTiet { get; set; }
+        public int MaLoaiMonHoc { get; set; }
+        public string TenLoaiMonHoc { get; set; }
+        public int SoTiet { get; set; }
     }
 }

@@ -8,11 +8,11 @@ namespace DTO
 {
     public class SinhVien
     {
-        string MaSV { get; set; }
-        string HoTen { get; set; }
-        DateTime NgaySinh { get; set; }
-        string GioiTinh { get; set; }
-        int MaHuyen { get; set; }
-        string MaNganh { get; set; }
+        public string MaSV { get; set; }
+        public string HoTen { get; set; }
+        public DateTime NgaySinh { get; set; }
+        public string GioiTinh { get; set; }
+        public int MaHuyen { get; set; }
+        public string MaNganh { get; set; }
     }
 }

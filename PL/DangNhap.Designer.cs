@@ -299,6 +299,7 @@ namespace PL
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.StateCommon.Back.Color1 = System.Drawing.Color.Transparent;
+            this.Text = "Đăng nhập";
             ((System.ComponentModel.ISupportInitialize)(this.pnlNoiDung)).EndInit();
             this.pnlNoiDung.ResumeLayout(false);
             this.pnlNoiDung.PerformLayout();

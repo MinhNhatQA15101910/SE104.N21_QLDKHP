@@ -8,8 +8,8 @@ namespace DTO
 {
     public class DoiTuong
     {
-        int MaDT { get; set; }
-        string TenDT { get; set; }
-        float TiLeGiamHocPhi { get; set; }
+        public int MaDT { get; set; }
+        public string TenDT { get; set; }
+        public float TiLeGiamHocPhi { get; set; }
     }
 }

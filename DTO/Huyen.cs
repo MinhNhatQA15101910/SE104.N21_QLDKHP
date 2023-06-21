@@ -8,9 +8,9 @@ namespace DTO
 {
     public class Huyen
     {
-        int MaHuyen { get; set; }
-        string TenHuyen { get; set; }
-        bool VungUT { get; set; }
-        int MaTinh { get; set; }
+        public int MaHuyen { get; set; }
+        public string TenHuyen { get; set; }
+        public bool VungUT { get; set; }
+        public int MaTinh { get; set; }
     }
 }

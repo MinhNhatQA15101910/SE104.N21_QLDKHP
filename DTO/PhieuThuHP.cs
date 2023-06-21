@@ -8,9 +8,9 @@ namespace DTO
 {
     public class PhieuThuHP
     {
-        int MaPhieuThuHP { get; set; }
-        int MaPhieuDKHP { get; set; }
-        DateTime NgayLap { get; set; }
-        int SoTienThu { get; set; }
+        public int MaPhieuThuHP { get; set; }
+        public int MaPhieuDKHP { get; set; }
+        public DateTime NgayLap { get; set; }
+        public int SoTienThu { get; set; }
     }
 }

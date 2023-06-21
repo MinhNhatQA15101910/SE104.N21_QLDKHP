@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CT_NguoiDung.cs" />
     <Compile Include="DoiTuong.cs" />
     <Compile Include="HocKy.cs" />
     <Compile Include="Huyen.cs" />

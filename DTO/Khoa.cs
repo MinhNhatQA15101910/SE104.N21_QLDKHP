@@ -8,7 +8,7 @@ namespace DTO
 {
     public class Khoa
     {
-        string MaKhoa { get; set; }
-        string TenKhoa { get; set; }
+        public string MaKhoa { get; set; }
+        public string TenKhoa { get; set; }
     }
 }

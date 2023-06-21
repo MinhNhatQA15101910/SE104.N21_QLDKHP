@@ -24,5 +24,10 @@ namespace BLL
 
             return NguoiDungDAL.DangNhap(tenDangNhap, matKhau);
         }
+
+        public static List<CT_NguoiDung> LayDSNguoiDung()
+        {
+            return NguoiDungDAL.LayDSNguoiDung();
+        }
     }
 }

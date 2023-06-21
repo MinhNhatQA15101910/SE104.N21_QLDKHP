@@ -444,9 +444,6 @@
     <EmbeddedResource Include="TraCuuMonHocMo.resx">
       <DependentUpon>TraCuuMonHocMo.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="XacNhanDKHP.aa-DJ.resx">
-      <DependentUpon>XacNhanDKHP.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="XacNhanDKHP.resx">
       <DependentUpon>XacNhanDKHP.cs</DependentUpon>
     </EmbeddedResource>

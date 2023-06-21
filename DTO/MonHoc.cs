@@ -8,9 +8,9 @@ namespace DTO
 {
     public class MonHoc
     {
-        string MaMH { get; set; }
-        string TenMH { get; set; }
-        int MaLoaiMonHoc { get; set; }
-        int SoTiet { get; set; }
+        public string MaMH { get; set; }
+        public string TenMH { get; set; }
+        public int MaLoaiMonHoc { get; set; }
+        public int SoTiet { get; set; }
     }
 }

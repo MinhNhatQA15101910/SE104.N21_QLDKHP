@@ -8,10 +8,10 @@ namespace DTO
 {
     public class PhieuDKHP
     {
-        int MaPhieuDKHP { get; set; }
-        string MaSV { get; set; }
-        DateTime NgayLap { get; set; }
-        int MaHocKy { get; set; }
-        int NamHoc { get; set; }
+        public int MaPhieuDKHP { get; set; }
+        public string MaSV { get; set; }
+        public DateTime NgayLap { get; set; }
+        public int MaHocKy { get; set; }
+        public int NamHoc { get; set; }
     }
 }

@@ -49,6 +49,7 @@
     <Compile Include="GlobalConfigDAL.cs" />
     <Compile Include="NguoiDungDAL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="SinhVienDAL.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DTO\DTO.csproj">
