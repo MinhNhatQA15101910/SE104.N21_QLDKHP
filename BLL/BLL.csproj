@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DoiTuongBLL.cs" />
     <Compile Include="GlobalConfigBLL.cs" />
     <Compile Include="NguoiDungBLL.cs" />
     <Compile Include="NhomNguoiDungBLL.cs" />

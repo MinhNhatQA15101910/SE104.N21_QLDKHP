@@ -34,7 +34,7 @@ namespace PL
             this.btnTTSV = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.btnDKHP = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.btnThanhToanHP = new ComponentFactory.Krypton.Toolkit.KryptonButton();
-            this.label1 = new System.Windows.Forms.Label();
+            this.lblHome = new System.Windows.Forms.Label();
             this.lblHoTen = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.lblMSSV = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.pnlDangXuat = new System.Windows.Forms.Panel();
@@ -52,7 +52,7 @@ namespace PL
             // 
             this.btnTTSV.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnTTSV.Location = new System.Drawing.Point(27, 54);
-            this.btnTTSV.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnTTSV.Margin = new System.Windows.Forms.Padding(2);
             this.btnTTSV.Name = "btnTTSV";
             this.btnTTSV.OverrideDefault.Back.Color1 = System.Drawing.Color.White;
             this.btnTTSV.OverrideDefault.Back.Color2 = System.Drawing.Color.MediumSeaGreen;
@@ -80,7 +80,7 @@ namespace PL
             // 
             this.btnDKHP.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnDKHP.Location = new System.Drawing.Point(27, 238);
-            this.btnDKHP.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnDKHP.Margin = new System.Windows.Forms.Padding(2);
             this.btnDKHP.Name = "btnDKHP";
             this.btnDKHP.OverrideDefault.Back.Color1 = System.Drawing.Color.White;
             this.btnDKHP.OverrideDefault.Back.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(251)))), ((int)(((byte)(143)))), ((int)(((byte)(80)))));
@@ -104,7 +104,7 @@ namespace PL
             // 
             this.btnThanhToanHP.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnThanhToanHP.Location = new System.Drawing.Point(242, 237);
-            this.btnThanhToanHP.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnThanhToanHP.Margin = new System.Windows.Forms.Padding(2);
             this.btnThanhToanHP.Name = "btnThanhToanHP";
             this.btnThanhToanHP.OverrideDefault.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(57)))), ((int)(((byte)(154)))), ((int)(((byte)(228)))));
             this.btnThanhToanHP.OverrideDefault.Back.Color2 = System.Drawing.Color.White;
@@ -124,20 +124,20 @@ namespace PL
             this.btnThanhToanHP.TabIndex = 3;
             this.btnThanhToanHP.Values.Text = "THANH TOÁN\r\n     HỌC PHÍ";
             // 
-            // label1
+            // lblHome
             // 
-            this.label1.Font = new System.Drawing.Font("Times New Roman", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(22, 7);
-            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(99, 33);
-            this.label1.TabIndex = 4;
-            this.label1.Text = "HOME";
+            this.lblHome.Font = new System.Drawing.Font("Times New Roman", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblHome.Location = new System.Drawing.Point(22, 7);
+            this.lblHome.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblHome.Name = "lblHome";
+            this.lblHome.Size = new System.Drawing.Size(99, 33);
+            this.lblHome.TabIndex = 4;
+            this.lblHome.Text = "HOME";
             // 
             // lblHoTen
             // 
             this.lblHoTen.Location = new System.Drawing.Point(250, 386);
-            this.lblHoTen.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.lblHoTen.Margin = new System.Windows.Forms.Padding(2);
             this.lblHoTen.Name = "lblHoTen";
             this.lblHoTen.Size = new System.Drawing.Size(194, 25);
             this.lblHoTen.StateCommon.ShortText.Color1 = System.Drawing.Color.Black;
@@ -149,7 +149,7 @@ namespace PL
             // lblMSSV
             // 
             this.lblMSSV.Location = new System.Drawing.Point(276, 19);
-            this.lblMSSV.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.lblMSSV.Margin = new System.Windows.Forms.Padding(2);
             this.lblMSSV.Name = "lblMSSV";
             this.lblMSSV.Size = new System.Drawing.Size(93, 25);
             this.lblMSSV.StateCommon.ShortText.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
@@ -161,7 +161,7 @@ namespace PL
             this.pnlDangXuat.Controls.Add(this.btnDoiMatKhau);
             this.pnlDangXuat.Controls.Add(this.btnDangXuat);
             this.pnlDangXuat.Location = new System.Drawing.Point(381, 35);
-            this.pnlDangXuat.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pnlDangXuat.Margin = new System.Windows.Forms.Padding(2);
             this.pnlDangXuat.Name = "pnlDangXuat";
             this.pnlDangXuat.Size = new System.Drawing.Size(94, 66);
             this.pnlDangXuat.TabIndex = 51;
@@ -171,7 +171,7 @@ namespace PL
             // 
             this.btnDoiMatKhau.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnDoiMatKhau.Location = new System.Drawing.Point(0, 33);
-            this.btnDoiMatKhau.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnDoiMatKhau.Margin = new System.Windows.Forms.Padding(2);
             this.btnDoiMatKhau.Name = "btnDoiMatKhau";
             this.btnDoiMatKhau.OverrideDefault.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(225)))), ((int)(((byte)(200)))));
             this.btnDoiMatKhau.OverrideDefault.Back.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
@@ -192,7 +192,7 @@ namespace PL
             // 
             this.btnDangXuat.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnDangXuat.Location = new System.Drawing.Point(0, 0);
-            this.btnDangXuat.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnDangXuat.Margin = new System.Windows.Forms.Padding(2);
             this.btnDangXuat.Name = "btnDangXuat";
             this.btnDangXuat.OverrideDefault.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(225)))), ((int)(((byte)(200)))));
             this.btnDangXuat.OverrideDefault.Back.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
@@ -231,7 +231,7 @@ namespace PL
             this.imgDangXuat.Cursor = System.Windows.Forms.Cursors.Hand;
             this.imgDangXuat.Image = global::PL.Properties.Resources.icons8_triangle_arrow_171;
             this.imgDangXuat.Location = new System.Drawing.Point(443, 20);
-            this.imgDangXuat.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.imgDangXuat.Margin = new System.Windows.Forms.Padding(2);
             this.imgDangXuat.Name = "imgDangXuat";
             this.imgDangXuat.Size = new System.Drawing.Size(29, 29);
             this.imgDangXuat.TabIndex = 40;
@@ -241,7 +241,7 @@ namespace PL
             // 
             this.pictureBox1.Image = global::PL.Properties.Resources.icons8_circled_user_male_skin_type_6_48;
             this.pictureBox1.Location = new System.Drawing.Point(389, 4);
-            this.pictureBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.pictureBox1.Margin = new System.Windows.Forms.Padding(2);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(51, 41);
             this.pictureBox1.TabIndex = 37;
@@ -258,11 +258,11 @@ namespace PL
             this.Controls.Add(this.lblMSSV);
             this.Controls.Add(this.pictureBox1);
             this.Controls.Add(this.lblHoTen);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.lblHome);
             this.Controls.Add(this.btnThanhToanHP);
             this.Controls.Add(this.btnDKHP);
             this.Controls.Add(this.btnTTSV);
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.MaximizeBox = false;
             this.Name = "SinhVien";
             this.Palette = this.paleDangNhap;
@@ -285,7 +285,7 @@ namespace PL
         private ComponentFactory.Krypton.Toolkit.KryptonButton btnTTSV;
         private ComponentFactory.Krypton.Toolkit.KryptonButton btnDKHP;
         private ComponentFactory.Krypton.Toolkit.KryptonButton btnThanhToanHP;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lblHome;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel lblHoTen;
         private System.Windows.Forms.PictureBox pictureBox1;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel lblMSSV;

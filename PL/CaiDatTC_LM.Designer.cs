@@ -220,7 +220,6 @@
             this.kryptonButton4.TabIndex = 42;
             this.kryptonButton4.Values.Image = global::PL.Properties.Resources.icons8_edit_property_25;
             this.kryptonButton4.Values.Text = " SỬA";
-            this.kryptonButton4.Click += new System.EventHandler(this.kryptonButton4_Click);
             // 
             // kryptonButton3
             // 
@@ -260,7 +259,6 @@
             this.kryptonButton3.TabIndex = 40;
             this.kryptonButton3.Values.Image = global::PL.Properties.Resources.icons8_add_properties_25;
             this.kryptonButton3.Values.Text = " THÊM";
-            this.kryptonButton3.Click += new System.EventHandler(this.kryptonButton3_Click);
             // 
             // kryptonButton2
             // 
@@ -300,7 +298,6 @@
             this.kryptonButton2.TabIndex = 41;
             this.kryptonButton2.Values.Image = global::PL.Properties.Resources.icons8_delete_document_25;
             this.kryptonButton2.Values.Text = " XÓA";
-            this.kryptonButton2.Click += new System.EventHandler(this.kryptonButton2_Click);
             // 
             // kryptonDataGridView1
             // 
@@ -445,7 +442,6 @@
             this.kryptonButton12.StateCommon.Content.ShortText.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.kryptonButton12.TabIndex = 8;
             this.kryptonButton12.Values.Text = "Vùng ưu tiên";
-            this.kryptonButton12.Click += new System.EventHandler(this.kryptonButton12_Click);
             // 
             // panel2
             // 
@@ -603,7 +599,6 @@
             this.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Custom;
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Load += new System.EventHandler(this.Setting_Load);
             ((System.ComponentModel.ISupportInitialize)(this.kryptonDataGridView1)).EndInit();
             this.panel1.ResumeLayout(false);
             this.panel4.ResumeLayout(false);

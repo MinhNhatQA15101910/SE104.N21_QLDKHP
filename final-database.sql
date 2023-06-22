@@ -2349,3 +2349,52 @@ begin
 	where NGUOIDUNG.MaNhom = NHOMNGUOIDUNG.MaNhom
 end
 go
+
+--spNGUOIDUNG_ThemTaiKhoanSV
+create proc spNGUOIDUNG_ThemTaiKhoanSV (@MaSV nvarchar(10))
+as
+begin
+	insert into NGUOIDUNG
+	values (@MaSV, 'FA585D89C851DD338A70DCF535AA2A92FEE7836DD6AFF1226583E88E0996293F16BC009C652826E0FC5C706695A03CDDCE372F139EFF4D13959DA6F1F5D3EABE', 'sv')
+end
+go
+
+--spNGUOIDUNG_XoaTaiKhoan
+create proc spNGUOIDUNG_XoaTaiKhoan (@TenDangNhap nvarchar(10))
+as
+begin
+	delete from NGUOIDUNG
+	where TenDangNhap = @TenDangNhap
+end
+go
+
+--spNGUOIDUNG_DoiMatKhau
+create proc spNGUOIDUNG_DoiMatKhau (@TenDangNhap nvarchar(10), @MatKhauHT nvarchar(200), @MatKhauMoi nvarchar(200))
+as
+begin
+	update NGUOIDUNG
+	set MatKhau = @MatKhauMoi
+	where TenDangNhap = @TenDangNhap
+	and MatKhau = @MatKhauHT
+end
+go
+
+--spNHOMNGUOIDUNG_LayDSNhomNguoiDung
+create proc spNHOMNGUOIDUNG_LayDSNhomNguoiDung
+as
+begin
+	select *
+	from NHOMNGUOIDUNG
+	where MaNhom <> 'sv'
+end
+go
+
+--spNGUOIDUNG_SuaTaiKhoan
+create proc spNGUOIDUNG_SuaTaiKhoan (@TenDangNhapBD nvarchar(10), @TenDangNhap nvarchar(10), @MaNhom nvarchar(20))
+as
+begin
+	update NGUOIDUNG
+	set TenDangNhap = @TenDangNhap, MaNhom = @MaNhom
+	where TenDangNhap = @TenDangNhapBD
+end
+go

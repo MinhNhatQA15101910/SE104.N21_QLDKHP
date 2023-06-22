@@ -39,4 +39,30 @@ namespace DTO
         Failed,
         Error
     }
+
+    public enum SuaTaiKhoanMessage
+    {
+        EmptyTenDangNhap, 
+        DuplicateTenDangNhap,
+        Success, 
+        Error
+    }
+
+    public enum ThemTaiKhoanMessage
+    {
+        EmptyTenDangNhap,
+        DuplicateTenDangNhap,
+        Success,
+        Error
+    }
+
+    public enum SuaDoiTuongMessage
+    {
+        EmptyTenDoiTuong,
+        EmptyTiLeGiam,
+        TiLeGiamKhongHopLe,
+        DuplicateTenDoiTuong,
+        Success,
+        Error
+    }
 }

@@ -77,10 +77,6 @@ namespace PL
             {
                 cmbLoaiTaiKhoan.SelectedValue = nguoiDung.MaNhom;
             }
-            else
-            {
-                cmbLoaiTaiKhoan.SelectedIndex = -1;
-            }
         }
 
         private void btnQuayLai_Click(object sender, EventArgs e)
@@ -91,7 +87,64 @@ namespace PL
         private void btnClear_Click(object sender, EventArgs e)
         {
             txtTenDangNhap.Clear();
-            cmbLoaiTaiKhoan.SelectedIndex = -1;
+            mNhomNguoiDung = new BindingList<NhomNguoiDung>(NhomNguoiDungBLL.LayDSNhomNguoiDung());
+            mNhomNguoiDungSource.DataSource = mNhomNguoiDung;
+        }
+
+        private void btnXacNhan_Click(object sender, EventArgs e)
+        {
+            if (nguoiDung != null)
+            {
+                string tenDangNhapBD = nguoiDung.TenDangNhap;
+                string tenDangNhap = txtTenDangNhap.Text.Trim();
+                string maNhom = (string)cmbLoaiTaiKhoan.SelectedValue;
+
+                SuaTaiKhoanMessage message = NguoiDungBLL.SuaTaiKhoan(tenDangNhapBD, tenDangNhap, maNhom);
+                switch (message)
+                {
+                    case SuaTaiKhoanMessage.EmptyTenDangNhap:
+                        MessageBox.Show("Tên đăng nhập không được để trống!");
+                        break;
+                    case SuaTaiKhoanMessage.DuplicateTenDangNhap:
+                        MessageBox.Show("Tên đăng nhập đã tồn tại, vui lòng nhập giá trị khác!");
+                        break;
+                    case SuaTaiKhoanMessage.Error:
+                        MessageBox.Show("Đã có lỗi xảy ra!");
+                        break;
+                    case SuaTaiKhoanMessage.Success:
+                        MessageBox.Show("Cập nhật tài khoản thành công!");
+                        Close();
+                        break;
+                }
+            }
+            else
+            {
+                string tenDangNhap = txtTenDangNhap.Text.Trim();
+                string maNhom = (string)cmbLoaiTaiKhoan.SelectedValue;
+
+                ThemTaiKhoanMessage message = NguoiDungBLL.ThemTaiKhoan(tenDangNhap, maNhom);
+                switch (message)
+                {
+                    case ThemTaiKhoanMessage.EmptyTenDangNhap:
+                        MessageBox.Show("Tên đăng nhập không được để trống!");
+                        break;
+                    case ThemTaiKhoanMessage.DuplicateTenDangNhap:
+                        MessageBox.Show("Tên đăng nhập đã tồn tại, vui lòng nhập giá trị khác!");
+                        break;
+                    case ThemTaiKhoanMessage.Error:
+                        MessageBox.Show("Đã có lỗi xảy ra!");
+                        break;
+                    case ThemTaiKhoanMessage.Success:
+                        if (themSuaTaiKhoanRequester != null)
+                        {
+                            themSuaTaiKhoanRequester.OnThemSuaTaiKhoanClosing();
+                        }
+
+                        MessageBox.Show("Thêm tài khoản thành công!");
+
+                        break;
+                }
+            }
         }
     }
 }

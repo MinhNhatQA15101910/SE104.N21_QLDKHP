@@ -74,5 +74,25 @@ namespace BLL
 
             return NguoiDungDAL.DoiMatKhau(matKhauHT, matKhauMoi);
         }
+
+        public static SuaTaiKhoanMessage SuaTaiKhoan(string tenDangNhapBD, string tenDangNhap, string maNhom)
+        {
+            if (tenDangNhap == "")
+            {
+                return SuaTaiKhoanMessage.EmptyTenDangNhap;
+            }
+
+            return NguoiDungDAL.SuaTaiKhoan(tenDangNhapBD, tenDangNhap, maNhom);
+        }
+
+        public static ThemTaiKhoanMessage ThemTaiKhoan(string tenDangNhap, string maNhom)
+        {
+            if (tenDangNhap == "")
+            {
+                return ThemTaiKhoanMessage.EmptyTenDangNhap;
+            }
+
+            return NguoiDungDAL.ThemTaiKhoan(tenDangNhap, maNhom);
+        }
     }
 }

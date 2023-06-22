@@ -121,16 +121,6 @@ namespace PL
             dgvDSTK.Columns["MaNhom"].Visible = false;
         }
 
-        private void btnQuayLai2_Click(object sender, EventArgs e)
-        {
-            Close();
-        }
-
-        private void btnQuayLai1_Click(object sender, EventArgs e)
-        {
-            Close();
-        }
-
         private void dgvDSSVChuaCoTK_SelectionChanged(object sender, EventArgs e)
         {
             if (dgvDSSVChuaCoTK.CurrentRow != null)
@@ -380,6 +370,16 @@ namespace PL
 
             ThemSuaTaiKhoan themSuaTaiKhoan = new ThemSuaTaiKhoan(this, nguoiDung);
             themSuaTaiKhoan.Show();
+        }
+
+        private void picQuayLai1_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
+        private void picQuayLai2_Click(object sender, EventArgs e)
+        {
+            Close();
         }
     }
 }

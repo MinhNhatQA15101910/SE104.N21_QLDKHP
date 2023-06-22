@@ -95,6 +95,67 @@ namespace DAL
             return DoiMatKhauMessage.Success;
         }
 
+        public static ThemTaiKhoanMessage ThemTaiKhoan(string tenDangNhap, string maNhom)
+        {
+            try
+            {
+                using (IDbConnection connection = new SqlConnection(DatabaseConnection.CnnString()))
+                {
+                    var p = new DynamicParameters();
+                    p.Add("@TenDangNhap", tenDangNhap);
+                    p.Add("@MaNhom", maNhom);
+                    connection.Execute("spNGUOIDUNG_ThemTaiKhoan", p, commandType: CommandType.StoredProcedure);
+                }
+            }
+            catch (SqlException ex)
+            {
+                if (ex.Number == 2627)
+                {
+                    if (ex.Message.Contains("PK_NGUOIDUNG"))
+                    {
+                        return ThemTaiKhoanMessage.DuplicateTenDangNhap;
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                return ThemTaiKhoanMessage.Error;
+            }
+
+            return ThemTaiKhoanMessage.Success;
+        }
+
+        public static SuaTaiKhoanMessage SuaTaiKhoan(string tenDangNhapBD, string tenDangNhap, string maNhom)
+        {
+            try
+            {
+                using (IDbConnection connection = new SqlConnection(DatabaseConnection.CnnString()))
+                {
+                    var p = new DynamicParameters();
+                    p.Add("@TenDangNhapBD", tenDangNhapBD);
+                    p.Add("@TenDangNhap", tenDangNhap);
+                    p.Add("@MaNhom", maNhom);
+                    connection.Execute("spNGUOIDUNG_SuaTaiKhoan", p, commandType: CommandType.StoredProcedure);
+                }
+            }
+            catch (SqlException ex)
+            {
+                if (ex.Number == 2627)
+                {
+                    if (ex.Message.Contains("PK_NGUOIDUNG"))
+                    {
+                        return SuaTaiKhoanMessage.DuplicateTenDangNhap;
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                return SuaTaiKhoanMessage.Error;
+            }
+
+            return SuaTaiKhoanMessage.Success;
+        }
+
         public static ThemTaiKhoanSVMessage ThemTaiKhoanSV(IList<SinhVien> dssv)
         {
             try

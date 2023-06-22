@@ -25,8 +25,6 @@ namespace PL
 
         private void pictureBox1_Click(object sender, EventArgs e)
         {
-            CaiDatTH t = new CaiDatTH();
-            t.ShowDialog();
         }
     
     }

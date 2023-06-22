@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace PL.Interfaces
 {
-    public interface ICaiDatVUTRequester
+    public interface ICaiDatRequester
     {
-        void OnCaiDatVUTClosing();
+        void OnCaiDatClosing();
     }
 }

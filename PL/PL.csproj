@@ -92,17 +92,11 @@
     <Compile Include="DSSV.Designer.cs">
       <DependentUpon>DSSV.cs</DependentUpon>
     </Compile>
-    <Compile Include="CaiDatTH.cs">
+    <Compile Include="QuanLyDoiTuong.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="CaiDatTH.Designer.cs">
-      <DependentUpon>CaiDatTH.cs</DependentUpon>
-    </Compile>
-    <Compile Include="CaiDatVUT.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="CaiDatVUT.Designer.cs">
-      <DependentUpon>CaiDatVUT.cs</DependentUpon>
+    <Compile Include="QuanLyDoiTuong.Designer.cs">
+      <DependentUpon>QuanLyDoiTuong.cs</DependentUpon>
     </Compile>
     <Compile Include="GV.cs">
       <SubType>Form</SubType>
@@ -112,7 +106,7 @@
     </Compile>
     <Compile Include="Interfaces\IAdminRequester.cs" />
     <Compile Include="Interfaces\IBaoCaoRequester.cs" />
-    <Compile Include="Interfaces\ICaiDatVUTRequester.cs" />
+    <Compile Include="Interfaces\ICaiDatRequester.cs" />
     <Compile Include="Interfaces\IChuongTrinhHocRequester.cs" />
     <Compile Include="Interfaces\IDKHPRequester.cs" />
     <Compile Include="Interfaces\IDSSVRequester.cs" />
@@ -186,23 +180,17 @@
     <Compile Include="SuaKhoa.Designer.cs">
       <DependentUpon>SuaKhoa.cs</DependentUpon>
     </Compile>
-    <Compile Include="SuaKhuVucUT.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="SuaKhuVucUT.Designer.cs">
-      <DependentUpon>SuaKhuVucUT.cs</DependentUpon>
-    </Compile>
     <Compile Include="SuaLoaiMon.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="SuaLoaiMon.Designer.cs">
       <DependentUpon>SuaLoaiMon.cs</DependentUpon>
     </Compile>
-    <Compile Include="SuaLoaiUT.cs">
+    <Compile Include="ThemSuaDoiTuong.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="SuaLoaiUT.Designer.cs">
-      <DependentUpon>SuaLoaiUT.cs</DependentUpon>
+    <Compile Include="ThemSuaDoiTuong.Designer.cs">
+      <DependentUpon>ThemSuaDoiTuong.cs</DependentUpon>
     </Compile>
     <Compile Include="SuaMonHoc.cs">
       <SubType>Form</SubType>
@@ -257,12 +245,6 @@
     </Compile>
     <Compile Include="ThemLoaiMon.Designer.cs">
       <DependentUpon>ThemLoaiMon.cs</DependentUpon>
-    </Compile>
-    <Compile Include="ThemLoaiUT.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="ThemLoaiUT.Designer.cs">
-      <DependentUpon>ThemLoaiUT.cs</DependentUpon>
     </Compile>
     <Compile Include="ThemMonHoc.cs">
       <SubType>Form</SubType>
@@ -367,14 +349,11 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
-    <EmbeddedResource Include="CaiDatTH.resx">
-      <DependentUpon>CaiDatTH.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="CaiDatTC_LM.resx">
       <DependentUpon>CaiDatTC_LM.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="CaiDatVUT.resx">
-      <DependentUpon>CaiDatVUT.cs</DependentUpon>
+    <EmbeddedResource Include="QuanLyDoiTuong.resx">
+      <DependentUpon>QuanLyDoiTuong.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SinhVien.resx">
       <DependentUpon>SinhVien.cs</DependentUpon>
@@ -382,14 +361,11 @@
     <EmbeddedResource Include="SuaKhoa.resx">
       <DependentUpon>SuaKhoa.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="SuaKhuVucUT.resx">
-      <DependentUpon>SuaKhuVucUT.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="SuaLoaiMon.resx">
       <DependentUpon>SuaLoaiMon.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="SuaLoaiUT.resx">
-      <DependentUpon>SuaLoaiUT.cs</DependentUpon>
+    <EmbeddedResource Include="ThemSuaDoiTuong.resx">
+      <DependentUpon>ThemSuaDoiTuong.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="SuaMonHoc.resx">
       <DependentUpon>SuaMonHoc.cs</DependentUpon>
@@ -417,9 +393,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ThemLoaiMon.resx">
       <DependentUpon>ThemLoaiMon.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ThemLoaiUT.resx">
-      <DependentUpon>ThemLoaiUT.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ThemMonHoc.resx">
       <DependentUpon>ThemMonHoc.cs</DependentUpon>
