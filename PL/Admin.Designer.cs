@@ -30,12 +30,11 @@ namespace PL
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle10 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle11 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle12 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Admin));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle5 = new System.Windows.Forms.DataGridViewCellStyle();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle6 = new System.Windows.Forms.DataGridViewCellStyle();
             this.tapPgTaiKhoan = new System.Windows.Forms.TabPage();
-            this.btnQuayLai2 = new System.Windows.Forms.PictureBox();
             this.pnlBlock = new System.Windows.Forms.Panel();
             this.dgvDSTK = new ComponentFactory.Krypton.Toolkit.KryptonDataGridView();
             this.pnlThongTinChiTiet = new ComponentFactory.Krypton.Toolkit.KryptonPanel();
@@ -45,7 +44,6 @@ namespace PL
             this.plt5 = new ComponentFactory.Krypton.Toolkit.KryptonPalette(this.components);
             this.lblLoaiTaiKhoan = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.btnSua = new ComponentFactory.Krypton.Toolkit.KryptonButton();
-            this.kryptonLabel5 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.btnXoa = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.txtTenDangNhap = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
             this.btnThem = new ComponentFactory.Krypton.Toolkit.KryptonButton();
@@ -54,57 +52,77 @@ namespace PL
             this.plt4 = new ComponentFactory.Krypton.Toolkit.KryptonPalette(this.components);
             this.pnlChucNangTaiKhoan = new System.Windows.Forms.Panel();
             this.txtTimKiemTaiKhoan = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
-            this.picLocTaiKhoan = new System.Windows.Forms.PictureBox();
-            this.picBoLocTaiKhoan = new System.Windows.Forms.PictureBox();
             this.plt2 = new ComponentFactory.Krypton.Toolkit.KryptonPalette(this.components);
             this.tapPgSinhVien = new System.Windows.Forms.TabPage();
             this.pnlSinhVien = new System.Windows.Forms.Panel();
-            this.btnQuayLai1 = new System.Windows.Forms.PictureBox();
             this.lblTaiKhoanSinhVien = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.kryptonLabel3 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.kryptonLabel2 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.lblDSTKSVDaChon = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.lblDanhSachSinhVien = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
             this.dgvDSSVDaChon = new ComponentFactory.Krypton.Toolkit.KryptonDataGridView();
             this.plt7 = new ComponentFactory.Krypton.Toolkit.KryptonPalette(this.components);
             this.dgvDSSVChuaCoTK = new ComponentFactory.Krypton.Toolkit.KryptonDataGridView();
             this.pnlChucNangSinhVien = new System.Windows.Forms.Panel();
             this.txtTimKiemSinhVien = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
             this.btnThemTK = new ComponentFactory.Krypton.Toolkit.KryptonButton();
+            this.SinhVien = new System.Windows.Forms.TabControl();
+            this.plt3 = new ComponentFactory.Krypton.Toolkit.KryptonPalette(this.components);
+            this.plt1 = new ComponentFactory.Krypton.Toolkit.KryptonPalette(this.components);
+            this.pnlDangXuat1 = new System.Windows.Forms.Panel();
+            this.btnDoiMatKhau1 = new ComponentFactory.Krypton.Toolkit.KryptonButton();
+            this.btnDangXuat1 = new ComponentFactory.Krypton.Toolkit.KryptonButton();
+            this.pnlDangXuat2 = new System.Windows.Forms.Panel();
+            this.btnDoiMatKhau2 = new ComponentFactory.Krypton.Toolkit.KryptonButton();
+            this.btnDangXuat2 = new ComponentFactory.Krypton.Toolkit.KryptonButton();
+            this.imgDangXuat1 = new System.Windows.Forms.PictureBox();
+            this.picAvatar1 = new System.Windows.Forms.PictureBox();
+            this.btnQuayLai1 = new System.Windows.Forms.PictureBox();
             this.picLocSinhVien = new System.Windows.Forms.PictureBox();
             this.picBoLocSinhVien = new System.Windows.Forms.PictureBox();
             this.picBoChon = new System.Windows.Forms.PictureBox();
             this.picChon = new System.Windows.Forms.PictureBox();
-            this.SinhVien = new System.Windows.Forms.TabControl();
-            this.plt3 = new ComponentFactory.Krypton.Toolkit.KryptonPalette(this.components);
-            this.plt1 = new ComponentFactory.Krypton.Toolkit.KryptonPalette(this.components);
+            this.picDangXuat2 = new System.Windows.Forms.PictureBox();
+            this.picAvatar2 = new System.Windows.Forms.PictureBox();
+            this.btnQuayLai2 = new System.Windows.Forms.PictureBox();
+            this.picLocTaiKhoan = new System.Windows.Forms.PictureBox();
+            this.picBoLocTaiKhoan = new System.Windows.Forms.PictureBox();
             this.tapPgTaiKhoan.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.btnQuayLai2)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDSTK)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.pnlThongTinChiTiet)).BeginInit();
             this.pnlThongTinChiTiet.SuspendLayout();
             this.pnlChucNangTaiKhoan.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picLocTaiKhoan)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picBoLocTaiKhoan)).BeginInit();
             this.tapPgSinhVien.SuspendLayout();
             this.pnlSinhVien.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.btnQuayLai1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDSSVDaChon)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDSSVChuaCoTK)).BeginInit();
             this.pnlChucNangSinhVien.SuspendLayout();
+            this.SinhVien.SuspendLayout();
+            this.pnlDangXuat1.SuspendLayout();
+            this.pnlDangXuat2.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.imgDangXuat1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picAvatar1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btnQuayLai1)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picLocSinhVien)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picBoLocSinhVien)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picBoChon)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.picChon)).BeginInit();
-            this.SinhVien.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picDangXuat2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picAvatar2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btnQuayLai2)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picLocTaiKhoan)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picBoLocTaiKhoan)).BeginInit();
             this.SuspendLayout();
             // 
             // tapPgTaiKhoan
             // 
-            this.tapPgTaiKhoan.Controls.Add(this.btnQuayLai2);
+            this.tapPgTaiKhoan.Controls.Add(this.pnlDangXuat2);
             this.tapPgTaiKhoan.Controls.Add(this.pnlBlock);
             this.tapPgTaiKhoan.Controls.Add(this.dgvDSTK);
             this.tapPgTaiKhoan.Controls.Add(this.pnlThongTinChiTiet);
             this.tapPgTaiKhoan.Controls.Add(this.lblDanhSachTaiKhoan);
             this.tapPgTaiKhoan.Controls.Add(this.pnlChucNangTaiKhoan);
+            this.tapPgTaiKhoan.Controls.Add(this.picDangXuat2);
+            this.tapPgTaiKhoan.Controls.Add(this.picAvatar2);
+            this.tapPgTaiKhoan.Controls.Add(this.btnQuayLai2);
             this.tapPgTaiKhoan.Location = new System.Drawing.Point(4, 22);
             this.tapPgTaiKhoan.Margin = new System.Windows.Forms.Padding(2);
             this.tapPgTaiKhoan.Name = "tapPgTaiKhoan";
@@ -113,18 +131,6 @@ namespace PL
             this.tapPgTaiKhoan.TabIndex = 1;
             this.tapPgTaiKhoan.Text = "CHUNG";
             this.tapPgTaiKhoan.UseVisualStyleBackColor = true;
-            // 
-            // btnQuayLai2
-            // 
-            this.btnQuayLai2.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnQuayLai2.Image = global::PL.Properties.Resources.icons8_log_out_30__1_;
-            this.btnQuayLai2.Location = new System.Drawing.Point(16, 8);
-            this.btnQuayLai2.Margin = new System.Windows.Forms.Padding(2);
-            this.btnQuayLai2.Name = "btnQuayLai2";
-            this.btnQuayLai2.Size = new System.Drawing.Size(28, 32);
-            this.btnQuayLai2.TabIndex = 54;
-            this.btnQuayLai2.TabStop = false;
-            this.btnQuayLai2.Click += new System.EventHandler(this.btnQuayLai2_Click);
             // 
             // pnlBlock
             // 
@@ -137,10 +143,10 @@ namespace PL
             // 
             // dgvDSTK
             // 
-            dataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(159)))), ((int)(((byte)(159)))));
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.Black;
-            this.dgvDSTK.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle10.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(159)))), ((int)(((byte)(159)))));
+            dataGridViewCellStyle10.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle10.ForeColor = System.Drawing.Color.Black;
+            this.dgvDSTK.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle10;
             this.dgvDSTK.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvDSTK.Cursor = System.Windows.Forms.Cursors.Hand;
             this.dgvDSTK.Location = new System.Drawing.Point(4, 100);
@@ -167,7 +173,6 @@ namespace PL
             this.pnlThongTinChiTiet.Controls.Add(this.txtLoaiTK);
             this.pnlThongTinChiTiet.Controls.Add(this.lblLoaiTaiKhoan);
             this.pnlThongTinChiTiet.Controls.Add(this.btnSua);
-            this.pnlThongTinChiTiet.Controls.Add(this.kryptonLabel5);
             this.pnlThongTinChiTiet.Controls.Add(this.btnXoa);
             this.pnlThongTinChiTiet.Controls.Add(this.txtTenDangNhap);
             this.pnlThongTinChiTiet.Controls.Add(this.btnThem);
@@ -182,7 +187,7 @@ namespace PL
             // 
             // lblTenDangNhap
             // 
-            this.lblTenDangNhap.Location = new System.Drawing.Point(54, 89);
+            this.lblTenDangNhap.Location = new System.Drawing.Point(55, 87);
             this.lblTenDangNhap.Margin = new System.Windows.Forms.Padding(2);
             this.lblTenDangNhap.Name = "lblTenDangNhap";
             this.lblTenDangNhap.Palette = this.plt6;
@@ -200,6 +205,7 @@ namespace PL
             // 
             // txtLoaiTK
             // 
+            this.txtLoaiTK.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.txtLoaiTK.Location = new System.Drawing.Point(156, 153);
             this.txtLoaiTK.Margin = new System.Windows.Forms.Padding(2);
             this.txtLoaiTK.Name = "txtLoaiTK";
@@ -218,7 +224,6 @@ namespace PL
             this.txtLoaiTK.StateCommon.Content.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtLoaiTK.StateCommon.Content.Padding = new System.Windows.Forms.Padding(2, -1, -1, -1);
             this.txtLoaiTK.TabIndex = 48;
-            this.txtLoaiTK.Text = "Sinh viên";
             // 
             // plt5
             // 
@@ -277,18 +282,7 @@ namespace PL
             this.btnSua.TabIndex = 46;
             this.btnSua.Values.Image = global::PL.Properties.Resources.icons8_edit_profile_25;
             this.btnSua.Values.Text = " SỬA";
-            // 
-            // kryptonLabel5
-            // 
-            this.kryptonLabel5.Location = new System.Drawing.Point(54, 89);
-            this.kryptonLabel5.Margin = new System.Windows.Forms.Padding(2);
-            this.kryptonLabel5.Name = "kryptonLabel5";
-            this.kryptonLabel5.Palette = this.plt6;
-            this.kryptonLabel5.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Custom;
-            this.kryptonLabel5.Size = new System.Drawing.Size(6, 2);
-            this.kryptonLabel5.StateCommon.ShortText.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.kryptonLabel5.TabIndex = 46;
-            this.kryptonLabel5.Values.Text = "";
+            this.btnSua.Click += new System.EventHandler(this.btnSua_Click);
             // 
             // btnXoa
             // 
@@ -327,9 +321,11 @@ namespace PL
             this.btnXoa.TabIndex = 45;
             this.btnXoa.Values.Image = global::PL.Properties.Resources.icons8_remove_user_female_25;
             this.btnXoa.Values.Text = " XÓA";
+            this.btnXoa.Click += new System.EventHandler(this.btnXoa_Click);
             // 
             // txtTenDangNhap
             // 
+            this.txtTenDangNhap.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.txtTenDangNhap.Location = new System.Drawing.Point(156, 84);
             this.txtTenDangNhap.Margin = new System.Windows.Forms.Padding(2);
             this.txtTenDangNhap.Name = "txtTenDangNhap";
@@ -348,7 +344,6 @@ namespace PL
             this.txtTenDangNhap.StateCommon.Content.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtTenDangNhap.StateCommon.Content.Padding = new System.Windows.Forms.Padding(2, -1, -1, -1);
             this.txtTenDangNhap.TabIndex = 21;
-            this.txtTenDangNhap.Text = "Nguyễn Thị Thùy Trinh";
             // 
             // btnThem
             // 
@@ -379,8 +374,8 @@ namespace PL
             this.btnThem.StateCommon.Content.ShortText.Font = new System.Drawing.Font("Times New Roman", 10.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnThem.StatePressed.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
             this.btnThem.StatePressed.Back.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
-            this.btnThem.StateTracking.Back.Color1 = System.Drawing.Color.White;
-            this.btnThem.StateTracking.Back.Color2 = System.Drawing.Color.White;
+            this.btnThem.StateTracking.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
+            this.btnThem.StateTracking.Back.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
             this.btnThem.StateTracking.Border.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(196)))), ((int)(((byte)(64)))), ((int)(((byte)(77)))));
             this.btnThem.StateTracking.Border.Color2 = System.Drawing.Color.White;
             this.btnThem.StateTracking.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
@@ -389,6 +384,7 @@ namespace PL
             this.btnThem.TabIndex = 44;
             this.btnThem.Values.Image = global::PL.Properties.Resources.icons8_blocked_account_female_25;
             this.btnThem.Values.Text = " THÊM";
+            this.btnThem.Click += new System.EventHandler(this.btnThem_Click);
             // 
             // lblThongTinChiTiet
             // 
@@ -433,6 +429,7 @@ namespace PL
             // 
             // txtTimKiemTaiKhoan
             // 
+            this.txtTimKiemTaiKhoan.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.txtTimKiemTaiKhoan.Location = new System.Drawing.Point(30, 9);
             this.txtTimKiemTaiKhoan.Margin = new System.Windows.Forms.Padding(2);
             this.txtTimKiemTaiKhoan.Name = "txtTimKiemTaiKhoan";
@@ -446,30 +443,8 @@ namespace PL
             this.txtTimKiemTaiKhoan.StateCommon.Content.Padding = new System.Windows.Forms.Padding(2, -1, -1, -1);
             this.txtTimKiemTaiKhoan.TabIndex = 10;
             this.txtTimKiemTaiKhoan.Text = "🔎 Tìm kiếm";
-            // 
-            // picLocTaiKhoan
-            // 
-            this.picLocTaiKhoan.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.picLocTaiKhoan.Image = ((System.Drawing.Image)(resources.GetObject("picLocTaiKhoan.Image")));
-            this.picLocTaiKhoan.Location = new System.Drawing.Point(416, 2);
-            this.picLocTaiKhoan.Margin = new System.Windows.Forms.Padding(2);
-            this.picLocTaiKhoan.Name = "picLocTaiKhoan";
-            this.picLocTaiKhoan.Size = new System.Drawing.Size(30, 37);
-            this.picLocTaiKhoan.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.picLocTaiKhoan.TabIndex = 17;
-            this.picLocTaiKhoan.TabStop = false;
-            // 
-            // picBoLocTaiKhoan
-            // 
-            this.picBoLocTaiKhoan.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.picBoLocTaiKhoan.Image = ((System.Drawing.Image)(resources.GetObject("picBoLocTaiKhoan.Image")));
-            this.picBoLocTaiKhoan.Location = new System.Drawing.Point(450, 9);
-            this.picBoLocTaiKhoan.Margin = new System.Windows.Forms.Padding(2);
-            this.picBoLocTaiKhoan.Name = "picBoLocTaiKhoan";
-            this.picBoLocTaiKhoan.Size = new System.Drawing.Size(30, 31);
-            this.picBoLocTaiKhoan.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.picBoLocTaiKhoan.TabIndex = 22;
-            this.picBoLocTaiKhoan.TabStop = false;
+            this.txtTimKiemTaiKhoan.Enter += new System.EventHandler(this.txtTimKiemTaiKhoan_Enter);
+            this.txtTimKiemTaiKhoan.Leave += new System.EventHandler(this.txtTimKiemTaiKhoan_Leave);
             // 
             // plt2
             // 
@@ -492,10 +467,13 @@ namespace PL
             // 
             // pnlSinhVien
             // 
+            this.pnlSinhVien.Controls.Add(this.pnlDangXuat1);
+            this.pnlSinhVien.Controls.Add(this.imgDangXuat1);
+            this.pnlSinhVien.Controls.Add(this.picAvatar1);
             this.pnlSinhVien.Controls.Add(this.btnQuayLai1);
             this.pnlSinhVien.Controls.Add(this.lblTaiKhoanSinhVien);
-            this.pnlSinhVien.Controls.Add(this.kryptonLabel3);
-            this.pnlSinhVien.Controls.Add(this.kryptonLabel2);
+            this.pnlSinhVien.Controls.Add(this.lblDSTKSVDaChon);
+            this.pnlSinhVien.Controls.Add(this.lblDanhSachSinhVien);
             this.pnlSinhVien.Controls.Add(this.dgvDSSVDaChon);
             this.pnlSinhVien.Controls.Add(this.dgvDSSVChuaCoTK);
             this.pnlSinhVien.Controls.Add(this.pnlChucNangSinhVien);
@@ -508,18 +486,6 @@ namespace PL
             this.pnlSinhVien.Size = new System.Drawing.Size(1000, 522);
             this.pnlSinhVien.TabIndex = 0;
             // 
-            // btnQuayLai1
-            // 
-            this.btnQuayLai1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnQuayLai1.Image = global::PL.Properties.Resources.icons8_log_out_30__1_;
-            this.btnQuayLai1.Location = new System.Drawing.Point(14, 6);
-            this.btnQuayLai1.Margin = new System.Windows.Forms.Padding(2);
-            this.btnQuayLai1.Name = "btnQuayLai1";
-            this.btnQuayLai1.Size = new System.Drawing.Size(28, 32);
-            this.btnQuayLai1.TabIndex = 53;
-            this.btnQuayLai1.TabStop = false;
-            this.btnQuayLai1.Click += new System.EventHandler(this.btnQuayLai1_Click);
-            // 
             // lblTaiKhoanSinhVien
             // 
             this.lblTaiKhoanSinhVien.Location = new System.Drawing.Point(382, 9);
@@ -531,34 +497,34 @@ namespace PL
             this.lblTaiKhoanSinhVien.TabIndex = 52;
             this.lblTaiKhoanSinhVien.Values.Text = "TÀI KHOẢN SINH VIÊN";
             // 
-            // kryptonLabel3
+            // lblDSTKSVDaChon
             // 
-            this.kryptonLabel3.Location = new System.Drawing.Point(548, 116);
-            this.kryptonLabel3.Margin = new System.Windows.Forms.Padding(2);
-            this.kryptonLabel3.Name = "kryptonLabel3";
-            this.kryptonLabel3.Palette = this.plt6;
-            this.kryptonLabel3.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Custom;
-            this.kryptonLabel3.Size = new System.Drawing.Size(240, 20);
-            this.kryptonLabel3.TabIndex = 51;
-            this.kryptonLabel3.Values.Text = "Danh sách tài khoản sinh viên đã chọn";
+            this.lblDSTKSVDaChon.Location = new System.Drawing.Point(548, 116);
+            this.lblDSTKSVDaChon.Margin = new System.Windows.Forms.Padding(2);
+            this.lblDSTKSVDaChon.Name = "lblDSTKSVDaChon";
+            this.lblDSTKSVDaChon.Palette = this.plt6;
+            this.lblDSTKSVDaChon.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Custom;
+            this.lblDSTKSVDaChon.Size = new System.Drawing.Size(240, 20);
+            this.lblDSTKSVDaChon.TabIndex = 51;
+            this.lblDSTKSVDaChon.Values.Text = "Danh sách tài khoản sinh viên đã chọn";
             // 
-            // kryptonLabel2
+            // lblDanhSachSinhVien
             // 
-            this.kryptonLabel2.Location = new System.Drawing.Point(20, 116);
-            this.kryptonLabel2.Margin = new System.Windows.Forms.Padding(2);
-            this.kryptonLabel2.Name = "kryptonLabel2";
-            this.kryptonLabel2.Palette = this.plt6;
-            this.kryptonLabel2.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Custom;
-            this.kryptonLabel2.Size = new System.Drawing.Size(131, 20);
-            this.kryptonLabel2.TabIndex = 50;
-            this.kryptonLabel2.Values.Text = "Danh sách sinh viên";
+            this.lblDanhSachSinhVien.Location = new System.Drawing.Point(20, 116);
+            this.lblDanhSachSinhVien.Margin = new System.Windows.Forms.Padding(2);
+            this.lblDanhSachSinhVien.Name = "lblDanhSachSinhVien";
+            this.lblDanhSachSinhVien.Palette = this.plt6;
+            this.lblDanhSachSinhVien.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Custom;
+            this.lblDanhSachSinhVien.Size = new System.Drawing.Size(131, 20);
+            this.lblDanhSachSinhVien.TabIndex = 50;
+            this.lblDanhSachSinhVien.Values.Text = "Danh sách sinh viên";
             // 
             // dgvDSSVDaChon
             // 
-            dataGridViewCellStyle5.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(159)))), ((int)(((byte)(159)))));
-            dataGridViewCellStyle5.Font = new System.Drawing.Font("Tempus Sans ITC", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle5.ForeColor = System.Drawing.Color.Black;
-            this.dgvDSSVDaChon.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle5;
+            dataGridViewCellStyle11.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(159)))), ((int)(((byte)(159)))));
+            dataGridViewCellStyle11.Font = new System.Drawing.Font("Tempus Sans ITC", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle11.ForeColor = System.Drawing.Color.Black;
+            this.dgvDSSVDaChon.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle11;
             this.dgvDSSVDaChon.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvDSSVDaChon.Cursor = System.Windows.Forms.Cursors.Hand;
             this.dgvDSSVDaChon.Location = new System.Drawing.Point(533, 141);
@@ -587,10 +553,10 @@ namespace PL
             // 
             // dgvDSSVChuaCoTK
             // 
-            dataGridViewCellStyle6.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(159)))), ((int)(((byte)(159)))));
-            dataGridViewCellStyle6.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle6.ForeColor = System.Drawing.Color.Black;
-            this.dgvDSSVChuaCoTK.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle6;
+            dataGridViewCellStyle12.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(159)))), ((int)(((byte)(159)))));
+            dataGridViewCellStyle12.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle12.ForeColor = System.Drawing.Color.Black;
+            this.dgvDSSVChuaCoTK.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle12;
             this.dgvDSSVChuaCoTK.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvDSSVChuaCoTK.Cursor = System.Windows.Forms.Cursors.Hand;
             this.dgvDSSVChuaCoTK.Location = new System.Drawing.Point(10, 141);
@@ -625,6 +591,7 @@ namespace PL
             // 
             // txtTimKiemSinhVien
             // 
+            this.txtTimKiemSinhVien.Cursor = System.Windows.Forms.Cursors.IBeam;
             this.txtTimKiemSinhVien.Location = new System.Drawing.Point(16, 15);
             this.txtTimKiemSinhVien.Margin = new System.Windows.Forms.Padding(2);
             this.txtTimKiemSinhVien.Name = "txtTimKiemSinhVien";
@@ -638,6 +605,8 @@ namespace PL
             this.txtTimKiemSinhVien.StateCommon.Content.Padding = new System.Windows.Forms.Padding(2, -1, -1, -1);
             this.txtTimKiemSinhVien.TabIndex = 10;
             this.txtTimKiemSinhVien.Text = "🔎 Tìm kiếm";
+            this.txtTimKiemSinhVien.Enter += new System.EventHandler(this.txtTimKiemSinhVien_Enter);
+            this.txtTimKiemSinhVien.Leave += new System.EventHandler(this.txtTimKiemSinhVien_Leave);
             // 
             // btnThemTK
             // 
@@ -687,54 +656,7 @@ namespace PL
             this.btnThemTK.TabIndex = 23;
             this.btnThemTK.Values.Image = global::PL.Properties.Resources.icons8_add_friend_25;
             this.btnThemTK.Values.Text = "THÊM TÀI KHOẢN";
-            // 
-            // picLocSinhVien
-            // 
-            this.picLocSinhVien.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.picLocSinhVien.Image = ((System.Drawing.Image)(resources.GetObject("picLocSinhVien.Image")));
-            this.picLocSinhVien.Location = new System.Drawing.Point(439, 5);
-            this.picLocSinhVien.Margin = new System.Windows.Forms.Padding(2);
-            this.picLocSinhVien.Name = "picLocSinhVien";
-            this.picLocSinhVien.Size = new System.Drawing.Size(30, 37);
-            this.picLocSinhVien.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.picLocSinhVien.TabIndex = 17;
-            this.picLocSinhVien.TabStop = false;
-            // 
-            // picBoLocSinhVien
-            // 
-            this.picBoLocSinhVien.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.picBoLocSinhVien.Image = ((System.Drawing.Image)(resources.GetObject("picBoLocSinhVien.Image")));
-            this.picBoLocSinhVien.Location = new System.Drawing.Point(473, 11);
-            this.picBoLocSinhVien.Margin = new System.Windows.Forms.Padding(2);
-            this.picBoLocSinhVien.Name = "picBoLocSinhVien";
-            this.picBoLocSinhVien.Size = new System.Drawing.Size(30, 31);
-            this.picBoLocSinhVien.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.picBoLocSinhVien.TabIndex = 22;
-            this.picBoLocSinhVien.TabStop = false;
-            // 
-            // picBoChon
-            // 
-            this.picBoChon.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.picBoChon.Image = ((System.Drawing.Image)(resources.GetObject("picBoChon.Image")));
-            this.picBoChon.Location = new System.Drawing.Point(472, 278);
-            this.picBoChon.Margin = new System.Windows.Forms.Padding(2);
-            this.picBoChon.Name = "picBoChon";
-            this.picBoChon.Size = new System.Drawing.Size(40, 45);
-            this.picBoChon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.picBoChon.TabIndex = 20;
-            this.picBoChon.TabStop = false;
-            // 
-            // picChon
-            // 
-            this.picChon.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.picChon.Image = ((System.Drawing.Image)(resources.GetObject("picChon.Image")));
-            this.picChon.Location = new System.Drawing.Point(472, 218);
-            this.picChon.Margin = new System.Windows.Forms.Padding(2);
-            this.picChon.Name = "picChon";
-            this.picChon.Size = new System.Drawing.Size(40, 44);
-            this.picChon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.picChon.TabIndex = 18;
-            this.picChon.TabStop = false;
+            this.btnThemTK.Click += new System.EventHandler(this.btnThemTK_Click);
             // 
             // SinhVien
             // 
@@ -766,6 +688,262 @@ namespace PL
             this.plt1.HeaderStyles.HeaderCommon.StateCommon.Back.Color1 = System.Drawing.Color.White;
             this.plt1.HeaderStyles.HeaderCommon.StateCommon.Back.Color2 = System.Drawing.Color.White;
             // 
+            // pnlDangXuat1
+            // 
+            this.pnlDangXuat1.Controls.Add(this.btnDoiMatKhau1);
+            this.pnlDangXuat1.Controls.Add(this.btnDangXuat1);
+            this.pnlDangXuat1.Location = new System.Drawing.Point(889, 31);
+            this.pnlDangXuat1.Margin = new System.Windows.Forms.Padding(2);
+            this.pnlDangXuat1.Name = "pnlDangXuat1";
+            this.pnlDangXuat1.Size = new System.Drawing.Size(94, 66);
+            this.pnlDangXuat1.TabIndex = 56;
+            this.pnlDangXuat1.Visible = false;
+            // 
+            // btnDoiMatKhau1
+            // 
+            this.btnDoiMatKhau1.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnDoiMatKhau1.Location = new System.Drawing.Point(0, 34);
+            this.btnDoiMatKhau1.Margin = new System.Windows.Forms.Padding(2);
+            this.btnDoiMatKhau1.Name = "btnDoiMatKhau1";
+            this.btnDoiMatKhau1.OverrideDefault.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(225)))), ((int)(((byte)(200)))));
+            this.btnDoiMatKhau1.OverrideDefault.Back.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            this.btnDoiMatKhau1.Size = new System.Drawing.Size(94, 32);
+            this.btnDoiMatKhau1.StateCommon.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(225)))), ((int)(((byte)(200)))));
+            this.btnDoiMatKhau1.StateCommon.Back.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            this.btnDoiMatKhau1.StateCommon.Content.ShortText.Color1 = System.Drawing.Color.Black;
+            this.btnDoiMatKhau1.StateCommon.Content.ShortText.Color2 = System.Drawing.Color.Black;
+            this.btnDoiMatKhau1.StateCommon.Content.ShortText.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDoiMatKhau1.StatePressed.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            this.btnDoiMatKhau1.StatePressed.Back.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            this.btnDoiMatKhau1.StateTracking.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(196)))), ((int)(((byte)(64)))), ((int)(((byte)(77)))));
+            this.btnDoiMatKhau1.StateTracking.Back.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(196)))), ((int)(((byte)(64)))), ((int)(((byte)(77)))));
+            this.btnDoiMatKhau1.TabIndex = 1;
+            this.btnDoiMatKhau1.Values.Text = "Đổi mật khẩu";
+            this.btnDoiMatKhau1.Click += new System.EventHandler(this.btnDoiMatKhau1_Click);
+            // 
+            // btnDangXuat1
+            // 
+            this.btnDangXuat1.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnDangXuat1.Location = new System.Drawing.Point(0, 2);
+            this.btnDangXuat1.Margin = new System.Windows.Forms.Padding(2);
+            this.btnDangXuat1.Name = "btnDangXuat1";
+            this.btnDangXuat1.OverrideDefault.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(225)))), ((int)(((byte)(200)))));
+            this.btnDangXuat1.OverrideDefault.Back.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            this.btnDangXuat1.Size = new System.Drawing.Size(94, 32);
+            this.btnDangXuat1.StateCommon.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(225)))), ((int)(((byte)(200)))));
+            this.btnDangXuat1.StateCommon.Back.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            this.btnDangXuat1.StateCommon.Content.ShortText.Color1 = System.Drawing.Color.Black;
+            this.btnDangXuat1.StateCommon.Content.ShortText.Color2 = System.Drawing.Color.Black;
+            this.btnDangXuat1.StateCommon.Content.ShortText.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDangXuat1.StatePressed.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            this.btnDangXuat1.StatePressed.Back.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            this.btnDangXuat1.StateTracking.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(196)))), ((int)(((byte)(64)))), ((int)(((byte)(77)))));
+            this.btnDangXuat1.StateTracking.Back.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(196)))), ((int)(((byte)(64)))), ((int)(((byte)(77)))));
+            this.btnDangXuat1.TabIndex = 0;
+            this.btnDangXuat1.Values.Text = "Đăng xuất";
+            this.btnDangXuat1.Click += new System.EventHandler(this.btnDangXuat1_Click);
+            // 
+            // pnlDangXuat2
+            // 
+            this.pnlDangXuat2.Controls.Add(this.btnDoiMatKhau2);
+            this.pnlDangXuat2.Controls.Add(this.btnDangXuat2);
+            this.pnlDangXuat2.Location = new System.Drawing.Point(892, 30);
+            this.pnlDangXuat2.Margin = new System.Windows.Forms.Padding(2);
+            this.pnlDangXuat2.Name = "pnlDangXuat2";
+            this.pnlDangXuat2.Size = new System.Drawing.Size(94, 66);
+            this.pnlDangXuat2.TabIndex = 52;
+            this.pnlDangXuat2.Visible = false;
+            // 
+            // btnDoiMatKhau2
+            // 
+            this.btnDoiMatKhau2.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnDoiMatKhau2.Location = new System.Drawing.Point(0, 33);
+            this.btnDoiMatKhau2.Margin = new System.Windows.Forms.Padding(2);
+            this.btnDoiMatKhau2.Name = "btnDoiMatKhau2";
+            this.btnDoiMatKhau2.OverrideDefault.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(225)))), ((int)(((byte)(200)))));
+            this.btnDoiMatKhau2.OverrideDefault.Back.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            this.btnDoiMatKhau2.Size = new System.Drawing.Size(94, 32);
+            this.btnDoiMatKhau2.StateCommon.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(225)))), ((int)(((byte)(200)))));
+            this.btnDoiMatKhau2.StateCommon.Back.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            this.btnDoiMatKhau2.StateCommon.Content.ShortText.Color1 = System.Drawing.Color.Black;
+            this.btnDoiMatKhau2.StateCommon.Content.ShortText.Color2 = System.Drawing.Color.Black;
+            this.btnDoiMatKhau2.StateCommon.Content.ShortText.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDoiMatKhau2.StatePressed.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            this.btnDoiMatKhau2.StatePressed.Back.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            this.btnDoiMatKhau2.StateTracking.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(196)))), ((int)(((byte)(64)))), ((int)(((byte)(77)))));
+            this.btnDoiMatKhau2.StateTracking.Back.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(196)))), ((int)(((byte)(64)))), ((int)(((byte)(77)))));
+            this.btnDoiMatKhau2.TabIndex = 1;
+            this.btnDoiMatKhau2.Values.Text = "Đổi mật khẩu";
+            this.btnDoiMatKhau2.Click += new System.EventHandler(this.btnDoiMatKhau2_Click);
+            // 
+            // btnDangXuat2
+            // 
+            this.btnDangXuat2.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnDangXuat2.Location = new System.Drawing.Point(0, 0);
+            this.btnDangXuat2.Margin = new System.Windows.Forms.Padding(2);
+            this.btnDangXuat2.Name = "btnDangXuat2";
+            this.btnDangXuat2.OverrideDefault.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(225)))), ((int)(((byte)(200)))));
+            this.btnDangXuat2.OverrideDefault.Back.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            this.btnDangXuat2.Size = new System.Drawing.Size(94, 32);
+            this.btnDangXuat2.StateCommon.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(238)))), ((int)(((byte)(225)))), ((int)(((byte)(200)))));
+            this.btnDangXuat2.StateCommon.Back.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            this.btnDangXuat2.StateCommon.Content.ShortText.Color1 = System.Drawing.Color.Black;
+            this.btnDangXuat2.StateCommon.Content.ShortText.Color2 = System.Drawing.Color.Black;
+            this.btnDangXuat2.StateCommon.Content.ShortText.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnDangXuat2.StatePressed.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            this.btnDangXuat2.StatePressed.Back.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(128)))));
+            this.btnDangXuat2.StateTracking.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(196)))), ((int)(((byte)(64)))), ((int)(((byte)(77)))));
+            this.btnDangXuat2.StateTracking.Back.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(196)))), ((int)(((byte)(64)))), ((int)(((byte)(77)))));
+            this.btnDangXuat2.TabIndex = 0;
+            this.btnDangXuat2.Values.Text = "Đăng xuất";
+            this.btnDangXuat2.Click += new System.EventHandler(this.btnDangXuat2_Click);
+            // 
+            // imgDangXuat1
+            // 
+            this.imgDangXuat1.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.imgDangXuat1.Image = global::PL.Properties.Resources.icons8_triangle_arrow_171;
+            this.imgDangXuat1.Location = new System.Drawing.Point(954, 14);
+            this.imgDangXuat1.Margin = new System.Windows.Forms.Padding(2);
+            this.imgDangXuat1.Name = "imgDangXuat1";
+            this.imgDangXuat1.Size = new System.Drawing.Size(29, 29);
+            this.imgDangXuat1.TabIndex = 55;
+            this.imgDangXuat1.TabStop = false;
+            this.imgDangXuat1.Click += new System.EventHandler(this.imgDangXuat1_Click);
+            // 
+            // picAvatar1
+            // 
+            this.picAvatar1.Image = global::PL.Properties.Resources.icons8_circled_user_male_skin_type_6_48;
+            this.picAvatar1.Location = new System.Drawing.Point(902, 2);
+            this.picAvatar1.Margin = new System.Windows.Forms.Padding(2);
+            this.picAvatar1.Name = "picAvatar1";
+            this.picAvatar1.Size = new System.Drawing.Size(51, 41);
+            this.picAvatar1.TabIndex = 54;
+            this.picAvatar1.TabStop = false;
+            // 
+            // btnQuayLai1
+            // 
+            this.btnQuayLai1.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnQuayLai1.Image = global::PL.Properties.Resources.icons8_log_out_30__1_;
+            this.btnQuayLai1.Location = new System.Drawing.Point(14, 6);
+            this.btnQuayLai1.Margin = new System.Windows.Forms.Padding(2);
+            this.btnQuayLai1.Name = "btnQuayLai1";
+            this.btnQuayLai1.Size = new System.Drawing.Size(28, 32);
+            this.btnQuayLai1.TabIndex = 53;
+            this.btnQuayLai1.TabStop = false;
+            this.btnQuayLai1.Click += new System.EventHandler(this.btnQuayLai1_Click);
+            // 
+            // picLocSinhVien
+            // 
+            this.picLocSinhVien.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.picLocSinhVien.Image = ((System.Drawing.Image)(resources.GetObject("picLocSinhVien.Image")));
+            this.picLocSinhVien.Location = new System.Drawing.Point(439, 5);
+            this.picLocSinhVien.Margin = new System.Windows.Forms.Padding(2);
+            this.picLocSinhVien.Name = "picLocSinhVien";
+            this.picLocSinhVien.Size = new System.Drawing.Size(30, 37);
+            this.picLocSinhVien.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.picLocSinhVien.TabIndex = 17;
+            this.picLocSinhVien.TabStop = false;
+            this.picLocSinhVien.Click += new System.EventHandler(this.picLocSinhVien_Click);
+            // 
+            // picBoLocSinhVien
+            // 
+            this.picBoLocSinhVien.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.picBoLocSinhVien.Image = ((System.Drawing.Image)(resources.GetObject("picBoLocSinhVien.Image")));
+            this.picBoLocSinhVien.Location = new System.Drawing.Point(473, 11);
+            this.picBoLocSinhVien.Margin = new System.Windows.Forms.Padding(2);
+            this.picBoLocSinhVien.Name = "picBoLocSinhVien";
+            this.picBoLocSinhVien.Size = new System.Drawing.Size(30, 31);
+            this.picBoLocSinhVien.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.picBoLocSinhVien.TabIndex = 22;
+            this.picBoLocSinhVien.TabStop = false;
+            this.picBoLocSinhVien.Click += new System.EventHandler(this.picBoLocSinhVien_Click);
+            // 
+            // picBoChon
+            // 
+            this.picBoChon.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.picBoChon.Image = ((System.Drawing.Image)(resources.GetObject("picBoChon.Image")));
+            this.picBoChon.Location = new System.Drawing.Point(472, 278);
+            this.picBoChon.Margin = new System.Windows.Forms.Padding(2);
+            this.picBoChon.Name = "picBoChon";
+            this.picBoChon.Size = new System.Drawing.Size(40, 45);
+            this.picBoChon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.picBoChon.TabIndex = 20;
+            this.picBoChon.TabStop = false;
+            this.picBoChon.Click += new System.EventHandler(this.picBoChon_Click);
+            // 
+            // picChon
+            // 
+            this.picChon.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.picChon.Image = ((System.Drawing.Image)(resources.GetObject("picChon.Image")));
+            this.picChon.Location = new System.Drawing.Point(472, 218);
+            this.picChon.Margin = new System.Windows.Forms.Padding(2);
+            this.picChon.Name = "picChon";
+            this.picChon.Size = new System.Drawing.Size(40, 44);
+            this.picChon.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.picChon.TabIndex = 18;
+            this.picChon.TabStop = false;
+            this.picChon.Click += new System.EventHandler(this.picChon_Click);
+            // 
+            // picDangXuat2
+            // 
+            this.picDangXuat2.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.picDangXuat2.Image = global::PL.Properties.Resources.icons8_triangle_arrow_171;
+            this.picDangXuat2.Location = new System.Drawing.Point(956, 12);
+            this.picDangXuat2.Margin = new System.Windows.Forms.Padding(2);
+            this.picDangXuat2.Name = "picDangXuat2";
+            this.picDangXuat2.Size = new System.Drawing.Size(29, 29);
+            this.picDangXuat2.TabIndex = 41;
+            this.picDangXuat2.TabStop = false;
+            this.picDangXuat2.Click += new System.EventHandler(this.picDangXuat2_Click);
+            // 
+            // picAvatar2
+            // 
+            this.picAvatar2.Image = global::PL.Properties.Resources.icons8_circled_user_male_skin_type_6_48;
+            this.picAvatar2.Location = new System.Drawing.Point(905, 2);
+            this.picAvatar2.Margin = new System.Windows.Forms.Padding(2);
+            this.picAvatar2.Name = "picAvatar2";
+            this.picAvatar2.Size = new System.Drawing.Size(51, 41);
+            this.picAvatar2.TabIndex = 55;
+            this.picAvatar2.TabStop = false;
+            // 
+            // btnQuayLai2
+            // 
+            this.btnQuayLai2.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnQuayLai2.Image = global::PL.Properties.Resources.icons8_log_out_30__1_;
+            this.btnQuayLai2.Location = new System.Drawing.Point(16, 8);
+            this.btnQuayLai2.Margin = new System.Windows.Forms.Padding(2);
+            this.btnQuayLai2.Name = "btnQuayLai2";
+            this.btnQuayLai2.Size = new System.Drawing.Size(28, 32);
+            this.btnQuayLai2.TabIndex = 54;
+            this.btnQuayLai2.TabStop = false;
+            this.btnQuayLai2.Click += new System.EventHandler(this.btnQuayLai2_Click);
+            // 
+            // picLocTaiKhoan
+            // 
+            this.picLocTaiKhoan.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.picLocTaiKhoan.Image = ((System.Drawing.Image)(resources.GetObject("picLocTaiKhoan.Image")));
+            this.picLocTaiKhoan.Location = new System.Drawing.Point(416, 2);
+            this.picLocTaiKhoan.Margin = new System.Windows.Forms.Padding(2);
+            this.picLocTaiKhoan.Name = "picLocTaiKhoan";
+            this.picLocTaiKhoan.Size = new System.Drawing.Size(30, 37);
+            this.picLocTaiKhoan.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.picLocTaiKhoan.TabIndex = 17;
+            this.picLocTaiKhoan.TabStop = false;
+            this.picLocTaiKhoan.Click += new System.EventHandler(this.picLocTaiKhoan_Click);
+            // 
+            // picBoLocTaiKhoan
+            // 
+            this.picBoLocTaiKhoan.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.picBoLocTaiKhoan.Image = ((System.Drawing.Image)(resources.GetObject("picBoLocTaiKhoan.Image")));
+            this.picBoLocTaiKhoan.Location = new System.Drawing.Point(450, 9);
+            this.picBoLocTaiKhoan.Margin = new System.Windows.Forms.Padding(2);
+            this.picBoLocTaiKhoan.Name = "picBoLocTaiKhoan";
+            this.picBoLocTaiKhoan.Size = new System.Drawing.Size(30, 31);
+            this.picBoLocTaiKhoan.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.picBoLocTaiKhoan.TabIndex = 22;
+            this.picBoLocTaiKhoan.TabStop = false;
+            this.picBoLocTaiKhoan.Click += new System.EventHandler(this.picBoLocTaiKhoan_Click);
+            // 
             // Admin
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -780,33 +958,39 @@ namespace PL
             this.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Custom;
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "    Admin";
+            this.Text = "Admin";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Admin_FormClosing);
             this.Load += new System.EventHandler(this.Admin_Load);
             this.tapPgTaiKhoan.ResumeLayout(false);
             this.tapPgTaiKhoan.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.btnQuayLai2)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDSTK)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.pnlThongTinChiTiet)).EndInit();
             this.pnlThongTinChiTiet.ResumeLayout(false);
             this.pnlThongTinChiTiet.PerformLayout();
             this.pnlChucNangTaiKhoan.ResumeLayout(false);
             this.pnlChucNangTaiKhoan.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picLocTaiKhoan)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picBoLocTaiKhoan)).EndInit();
             this.tapPgSinhVien.ResumeLayout(false);
             this.pnlSinhVien.ResumeLayout(false);
             this.pnlSinhVien.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.btnQuayLai1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDSSVDaChon)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDSSVChuaCoTK)).EndInit();
             this.pnlChucNangSinhVien.ResumeLayout(false);
             this.pnlChucNangSinhVien.PerformLayout();
+            this.SinhVien.ResumeLayout(false);
+            this.pnlDangXuat1.ResumeLayout(false);
+            this.pnlDangXuat2.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.imgDangXuat1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picAvatar1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btnQuayLai1)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picLocSinhVien)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picBoLocSinhVien)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picBoChon)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.picChon)).EndInit();
-            this.SinhVien.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.picDangXuat2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picAvatar2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.btnQuayLai2)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picLocTaiKhoan)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picBoLocTaiKhoan)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -840,20 +1024,29 @@ namespace PL
         private ComponentFactory.Krypton.Toolkit.KryptonButton btnThem;
         private ComponentFactory.Krypton.Toolkit.KryptonPalette plt1;
         private ComponentFactory.Krypton.Toolkit.KryptonPalette plt4;
-        private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel2;
+        private ComponentFactory.Krypton.Toolkit.KryptonLabel lblDanhSachSinhVien;
         private ComponentFactory.Krypton.Toolkit.KryptonPalette plt5;
         private ComponentFactory.Krypton.Toolkit.KryptonPalette plt6;
-        private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel3;
+        private ComponentFactory.Krypton.Toolkit.KryptonLabel lblDSTKSVDaChon;
         private ComponentFactory.Krypton.Toolkit.KryptonPalette plt7;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel lblDanhSachTaiKhoan;
         private ComponentFactory.Krypton.Toolkit.KryptonTextBox txtLoaiTK;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel lblLoaiTaiKhoan;
-        private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel5;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel lblThongTinChiTiet;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel lblTaiKhoanSinhVien;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel lblTenDangNhap;
         private System.Windows.Forms.Panel pnlBlock;
         private System.Windows.Forms.PictureBox btnQuayLai1;
         private System.Windows.Forms.PictureBox btnQuayLai2;
+        private System.Windows.Forms.Panel pnlDangXuat1;
+        private ComponentFactory.Krypton.Toolkit.KryptonButton btnDoiMatKhau1;
+        private ComponentFactory.Krypton.Toolkit.KryptonButton btnDangXuat1;
+        private System.Windows.Forms.PictureBox imgDangXuat1;
+        private System.Windows.Forms.PictureBox picAvatar1;
+        private System.Windows.Forms.Panel pnlDangXuat2;
+        private ComponentFactory.Krypton.Toolkit.KryptonButton btnDoiMatKhau2;
+        private ComponentFactory.Krypton.Toolkit.KryptonButton btnDangXuat2;
+        private System.Windows.Forms.PictureBox picDangXuat2;
+        private System.Windows.Forms.PictureBox picAvatar2;
     }
 }

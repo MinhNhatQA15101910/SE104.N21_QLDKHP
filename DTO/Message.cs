@@ -14,4 +14,29 @@ namespace DTO
         Success, 
         Error
     }
+
+    public enum ThemTaiKhoanSVMessage
+    {
+        Success, 
+        Error, 
+        Unable
+    }
+
+    public enum XoaTaiKhoanMessage
+    {
+        Success,
+        Error, 
+        Unable
+    }
+
+    public enum DoiMatKhauMessage
+    {
+        EmptyMatKhauHT,
+        EmptyMatKhauMoi, 
+        EmptyMatKhauNhapLai,
+        InvalidNewPassword, 
+        Success, 
+        Failed,
+        Error
+    }
 }

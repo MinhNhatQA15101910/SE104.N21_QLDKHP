@@ -29,5 +29,50 @@ namespace BLL
         {
             return NguoiDungDAL.LayDSNguoiDung();
         }
+
+        public static ThemTaiKhoanSVMessage ThemTaiKhoanSV(IList<SinhVien> dssv)
+        {
+            if (dssv.Count == 0)
+            {
+                return ThemTaiKhoanSVMessage.Unable;
+            }
+
+            return NguoiDungDAL.ThemTaiKhoanSV(dssv);
+        }
+
+        public static XoaTaiKhoanMessage XoaTaiKhoan(string tenDangNhap)
+        {
+            if (tenDangNhap == GlobalConfig.CurrNguoiDung.TenDangNhap)
+            {
+                return XoaTaiKhoanMessage.Unable;
+            }
+
+            return NguoiDungDAL.XoaTaiKhoan(tenDangNhap);
+        }
+
+        public static DoiMatKhauMessage DoiMatKhau(string matKhauHT, string matKhauMoi, string matKhauNhapLai)
+        {
+            if (matKhauHT == "")
+            {
+                return DoiMatKhauMessage.EmptyMatKhauHT;
+            }
+
+            if (matKhauMoi == "")
+            {
+                return DoiMatKhauMessage.EmptyMatKhauMoi;
+            }
+
+            if (matKhauNhapLai == "")
+            {
+                return DoiMatKhauMessage.EmptyMatKhauNhapLai;
+            }
+
+            if (matKhauNhapLai != matKhauMoi)
+            {
+                return DoiMatKhauMessage.InvalidNewPassword;
+            }
+
+            return NguoiDungDAL.DoiMatKhau(matKhauHT, matKhauMoi);
+        }
     }
 }

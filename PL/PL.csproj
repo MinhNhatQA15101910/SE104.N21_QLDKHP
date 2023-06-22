@@ -130,6 +130,7 @@
     <Compile Include="Interfaces\IThemSuaMonHocRequester.cs" />
     <Compile Include="Interfaces\IThemSuaNganhRequester.cs" />
     <Compile Include="Interfaces\IThemSuaSinhVienRequester.cs" />
+    <Compile Include="Interfaces\IThemSuaTaiKhoanRequester.cs" />
     <Compile Include="Interfaces\IThemSuaTinhRequester.cs" />
     <Compile Include="Interfaces\IThongTinSinhVienRequester.cs" />
     <Compile Include="Interfaces\ITraCuuMonHocMoRequester.cs" />
@@ -221,11 +222,17 @@
     <Compile Include="SuaSinhVien.Designer.cs">
       <DependentUpon>SuaSinhVien.cs</DependentUpon>
     </Compile>
-    <Compile Include="SuaTaiKhoan.cs">
+    <Compile Include="ThemSuaTaiKhoan.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="SuaTaiKhoan.Designer.cs">
-      <DependentUpon>SuaTaiKhoan.cs</DependentUpon>
+    <Compile Include="ThemSuaTaiKhoan.Designer.cs">
+      <DependentUpon>ThemSuaTaiKhoan.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DoiMatKhau.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DoiMatKhau.Designer.cs">
+      <DependentUpon>DoiMatKhau.cs</DependentUpon>
     </Compile>
     <Compile Include="ThanhToanHocPhi.cs">
       <SubType>Form</SubType>
@@ -280,12 +287,6 @@
     </Compile>
     <Compile Include="ThemSuaCTH.Designer.cs">
       <DependentUpon>ThemSuaCTH.cs</DependentUpon>
-    </Compile>
-    <Compile Include="ThemTaiKhoan.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="ThemTaiKhoan.Designer.cs">
-      <DependentUpon>ThemTaiKhoan.cs</DependentUpon>
     </Compile>
     <Compile Include="ThongTinDKHP.cs">
       <SubType>Form</SubType>
@@ -399,8 +400,11 @@
     <EmbeddedResource Include="SuaSinhVien.resx">
       <DependentUpon>SuaSinhVien.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="SuaTaiKhoan.resx">
-      <DependentUpon>SuaTaiKhoan.cs</DependentUpon>
+    <EmbeddedResource Include="ThemSuaTaiKhoan.resx">
+      <DependentUpon>ThemSuaTaiKhoan.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DoiMatKhau.resx">
+      <DependentUpon>DoiMatKhau.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ThanhToanHocPhi.resx">
       <DependentUpon>ThanhToanHocPhi.cs</DependentUpon>
@@ -428,9 +432,6 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ThemSuaCTH.resx">
       <DependentUpon>ThemSuaCTH.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ThemTaiKhoan.resx">
-      <DependentUpon>ThemTaiKhoan.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ThongTinDKHP.resx">
       <DependentUpon>ThongTinDKHP.cs</DependentUpon>

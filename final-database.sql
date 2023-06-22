@@ -2325,3 +2325,27 @@ begin
 	where NamHoc = @NamHocHienTai
 end
 go
+
+--spSINHVIEN_LayDSSVChuaCoTK
+create proc spSINHVIEN_LayDSSVChuaCoTK
+as
+begin
+	select * 
+	from SINHVIEN
+	where MaSV not in
+	(
+		select TenDangNhap
+		from NGUOIDUNG
+	)
+end
+go
+
+--spNGUOIDUNG_LayDSNguoiDung
+create proc spNGUOIDUNG_LayDSNguoiDung
+as
+begin
+	select NGUOIDUNG.*, TenNhom
+	from NGUOIDUNG, NHOMNGUOIDUNG
+	where NGUOIDUNG.MaNhom = NHOMNGUOIDUNG.MaNhom
+end
+go

@@ -8,13 +8,11 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace PL
 {
-    public partial class Admin :  KryptonForm
+    public partial class Admin : KryptonForm, IThemSuaTaiKhoanRequester
     {
         private IAdminRequester adminRequester;
 
@@ -60,9 +58,18 @@ namespace PL
 
         private void Admin_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (adminRequester != null)
+            DialogResult result = MessageBox.Show("Bạn có chắc chắn muốn đăng xuất?", "Cảnh báo", MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            if (result == DialogResult.Yes)
             {
-                adminRequester.OnAdminClosing();
+                e.Cancel = false;
+                if (adminRequester != null)
+                {
+                    adminRequester.OnAdminClosing();
+                }
+            }
+            else
+            {
+                e.Cancel = true;
             }
         }
 
@@ -145,7 +152,234 @@ namespace PL
             if (dgvDSTK.CurrentRow != null)
             {
                 dgvDSTK.CurrentRow.DefaultCellStyle.SelectionBackColor = Color.Yellow;
+
+                CT_NguoiDung nguoiDung = mNguoiDung[dgvDSTK.CurrentRow.Index];
+                if (nguoiDung != null)
+                {
+                    txtTenDangNhap.Text = nguoiDung.TenDangNhap;
+                    txtLoaiTK.Text = nguoiDung.TenNhom;
+                }
             }
+        }
+
+        private void picChon_Click(object sender, EventArgs e)
+        {
+            DTO.SinhVien sinhVien = mSinhVienChuaCoTK[dgvDSSVChuaCoTK.CurrentRow.Index];
+            if (sinhVien != null)
+            {
+                mSinhVienChuaCoTKSelected.Add(sinhVien);
+                mSinhVienChuaCoTK.Remove(sinhVien);
+            }
+            mSinhVienChuaCoTKSource.DataSource = mSinhVienChuaCoTK;
+            mSinhVienChuaCoTKSelectedSource.DataSource = mSinhVienChuaCoTKSelected;
+        }
+
+        private void picBoChon_Click(object sender, EventArgs e)
+        {
+            DTO.SinhVien sinhVien = mSinhVienChuaCoTKSelected[dgvDSSVDaChon.CurrentRow.Index];
+            if (sinhVien != null)
+            {
+                mSinhVienChuaCoTK.Add(sinhVien);
+                mSinhVienChuaCoTKSelected.Remove(sinhVien);
+            }
+            mSinhVienChuaCoTKSource.DataSource = mSinhVienChuaCoTK;
+            mSinhVienChuaCoTKSelectedSource.DataSource = mSinhVienChuaCoTKSelected;
+        }
+
+        private void txtTimKiemSinhVien_Enter(object sender, EventArgs e)
+        {
+            if (txtTimKiemSinhVien.Text.Equals(placeholderText))
+            {
+                txtTimKiemSinhVien.Text = "";
+                txtTimKiemSinhVien.Font = new Font(txtTimKiemSinhVien.Font, FontStyle.Regular);
+                txtTimKiemSinhVien.ForeColor = SystemColors.ControlText;
+            }
+        }
+
+        private void txtTimKiemSinhVien_Leave(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(txtTimKiemSinhVien.Text.Trim()))
+            {
+                txtTimKiemSinhVien.Text = placeholderText;
+                txtTimKiemSinhVien.Font = new Font(txtTimKiemSinhVien.Font, FontStyle.Italic);
+                txtTimKiemSinhVien.ForeColor = SystemColors.GrayText;
+            }
+        }
+
+        private void txtTimKiemTaiKhoan_Enter(object sender, EventArgs e)
+        {
+            if (txtTimKiemTaiKhoan.Text.Equals(placeholderText))
+            {
+                txtTimKiemTaiKhoan.Text = "";
+                txtTimKiemTaiKhoan.Font = new Font(txtTimKiemTaiKhoan.Font, FontStyle.Regular);
+                txtTimKiemTaiKhoan.ForeColor = SystemColors.ControlText;
+            }
+        }
+
+        private void txtTimKiemTaiKhoan_Leave(object sender, EventArgs e)
+        {
+            if (string.IsNullOrEmpty(txtTimKiemTaiKhoan.Text.Trim()))
+            {
+                txtTimKiemTaiKhoan.Text = placeholderText;
+                txtTimKiemTaiKhoan.Font = new Font(txtTimKiemTaiKhoan.Font, FontStyle.Italic);
+                txtTimKiemTaiKhoan.ForeColor = SystemColors.GrayText;
+            }
+        }
+
+        private void picLocTaiKhoan_Click(object sender, EventArgs e)
+        {
+            string searchQuery = txtTimKiemTaiKhoan.Text.Trim().ToLower();
+            if (!string.IsNullOrEmpty(searchQuery))
+            {
+                BindingList<CT_NguoiDung> mDSTimKiem = new BindingList<CT_NguoiDung>(mNguoiDung.Where(d =>
+                    d.TenDangNhap.ToLower().Contains(searchQuery) ||
+                    d.TenNhom.ToLower().Contains(searchQuery)).ToList()
+                );
+                mNguoiDungSource.DataSource = mDSTimKiem;
+            }
+        }
+
+        private void picBoLocTaiKhoan_Click(object sender, EventArgs e)
+        {
+            mNguoiDungSource.DataSource = mNguoiDung;
+            txtTimKiemTaiKhoan.Text = placeholderText;
+        }
+
+        private void picLocSinhVien_Click(object sender, EventArgs e)
+        {
+            string searchQuery = txtTimKiemSinhVien.Text.Trim().ToLower();
+            if (!string.IsNullOrEmpty(searchQuery))
+            {
+                BindingList<DTO.SinhVien> mDSTimKiem = new BindingList<DTO.SinhVien>(mSinhVienChuaCoTK.Where(d =>
+                    d.MaSV.ToLower().Contains(searchQuery) ||
+                    d.HoTen.ToLower().Contains(searchQuery)).ToList()
+                );
+                mSinhVienChuaCoTKSource.DataSource = mDSTimKiem;
+            }
+        }
+
+        private void picBoLocSinhVien_Click(object sender, EventArgs e)
+        {
+            mSinhVienChuaCoTKSource.DataSource = mSinhVienChuaCoTK;
+            txtTimKiemSinhVien.Text = placeholderText;
+        }
+
+        private void btnThemTK_Click(object sender, EventArgs e)
+        {
+            IList<DTO.SinhVien> dssv = mSinhVienChuaCoTKSelected;
+            ThemTaiKhoanSVMessage message = NguoiDungBLL.ThemTaiKhoanSV(dssv);
+            switch (message)
+            {
+                case ThemTaiKhoanSVMessage.Unable:
+                    MessageBox.Show("Vui lòng chọn sinh viên để thêm tài khoản!");
+                    break;
+                case ThemTaiKhoanSVMessage.Error:
+                    MessageBox.Show("Đã có lỗi xảy ra!");
+                    break;
+                case ThemTaiKhoanSVMessage.Success:
+                    MessageBox.Show("Thêm tài khoản thành công!");
+
+                    mSinhVienChuaCoTKSelected.Clear();
+                    mNguoiDung = new BindingList<CT_NguoiDung>(NguoiDungBLL.LayDSNguoiDung());
+                    mNguoiDungSource.DataSource = mNguoiDung;
+
+                    break;
+            }
+        }
+
+        private void btnXoa_Click(object sender, EventArgs e)
+        {
+            DialogResult result = MessageBox.Show("Bạn có muốn xóa tài khoản đã chọn?", "Xác nhận", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if (result == DialogResult.Yes)
+            {
+                string tenDangNhap = txtTenDangNhap.Text.Trim();
+                XoaTaiKhoanMessage message = NguoiDungBLL.XoaTaiKhoan(tenDangNhap);
+                switch (message)
+                {
+                    case XoaTaiKhoanMessage.Unable:
+                        MessageBox.Show("Không thể xóa tài khoản hiện tại!");
+                        break;
+                    case XoaTaiKhoanMessage.Error:
+                        MessageBox.Show("Đã có lỗi xảy ra!");
+                        break;
+                    case XoaTaiKhoanMessage.Success:
+                        mNguoiDung = new BindingList<CT_NguoiDung>(NguoiDungBLL.LayDSNguoiDung());
+                        mNguoiDungSource.DataSource = mNguoiDung;
+
+                        mSinhVienChuaCoTK = new BindingList<DTO.SinhVien>(SinhVienBLL.LayDSSVChuaCoTK());
+                        mSinhVienChuaCoTKSource.DataSource = mSinhVienChuaCoTK;
+
+                        MessageBox.Show("Xóa tài khoản thành công!");
+
+                        break;
+                }
+            }
+        }
+
+        private void imgDangXuat1_Click(object sender, EventArgs e)
+        {
+            pnlDangXuat1.Visible = !pnlDangXuat1.Visible;
+        }
+
+        private void picDangXuat2_Click(object sender, EventArgs e)
+        {
+            pnlDangXuat2.Visible = !pnlDangXuat2.Visible;
+        }
+
+        private void btnDangXuat2_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
+        private void btnDangXuat1_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
+        private void btnDoiMatKhau1_Click(object sender, EventArgs e)
+        {
+            DoiMatKhau doiMatKhau = new DoiMatKhau();
+            doiMatKhau.Show();
+        }
+
+        private void btnDoiMatKhau2_Click(object sender, EventArgs e)
+        {
+            DoiMatKhau doiMatKhau = new DoiMatKhau();
+            doiMatKhau.Show();
+        }
+
+        public void OnThemSuaTaiKhoanClosing()
+        {
+            // Reload DSTK
+            mNguoiDung = new BindingList<CT_NguoiDung>(NguoiDungBLL.LayDSNguoiDung());
+            mNguoiDungSource.DataSource = mNguoiDung;
+        }
+
+        private void btnThem_Click(object sender, EventArgs e)
+        {
+            ThemSuaTaiKhoan themSuaTaiKhoan = new ThemSuaTaiKhoan(this);
+            themSuaTaiKhoan.Show();
+        }
+
+        private void btnSua_Click(object sender, EventArgs e)
+        {
+            CT_NguoiDung nguoiDung = mNguoiDung[dgvDSTK.CurrentRow.Index];
+
+            if (nguoiDung.MaNhom == "sv")
+            {
+                MessageBox.Show("Không thể sửa đổi tài khoản sinh viên!");
+                return;
+            }
+
+            if (nguoiDung.TenDangNhap == GlobalConfig.CurrNguoiDung.TenDangNhap)
+            {
+                MessageBox.Show("Không thể sửa đổi tài khoản admin đang đăng nhập!");
+                return;
+            }
+
+            ThemSuaTaiKhoan themSuaTaiKhoan = new ThemSuaTaiKhoan(this, nguoiDung);
+            themSuaTaiKhoan.Show();
         }
     }
 }

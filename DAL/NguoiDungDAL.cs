@@ -17,7 +17,7 @@ namespace DAL
         {
             byte[] sourceBytes = Encoding.UTF8.GetBytes(source);
             byte[] hashBytes = SHA512.Create().ComputeHash(sourceBytes);
-            string hash = BitConverter.ToString(hashBytes).Replace("-", String.Empty);
+            string hash = BitConverter.ToString(hashBytes).Replace("-", string.Empty);
 
             return hash;
         }
@@ -45,6 +45,76 @@ namespace DAL
             }
 
             return DangNhapMessage.Success;
+        }
+
+        public static XoaTaiKhoanMessage XoaTaiKhoan(string tenDangNhap)
+        {
+            try
+            {
+                using (IDbConnection connection = new SqlConnection(DatabaseConnection.CnnString()))
+                {
+                    var p = new DynamicParameters();
+                    p.Add("@TenDangNhap", tenDangNhap);
+                    connection.Execute("spNGUOIDUNG_XoaTaiKhoan", p, commandType: CommandType.StoredProcedure);
+                }
+            }
+            catch (Exception)
+            {
+                return XoaTaiKhoanMessage.Error;
+            }
+
+            return XoaTaiKhoanMessage.Success;
+        }
+
+        public static DoiMatKhauMessage DoiMatKhau(string matKhauHT, string matKhauMoi)
+        {
+            int rowsAffected = 0;
+
+            try
+            {
+                using (IDbConnection connection = new SqlConnection(DatabaseConnection.CnnString()))
+                {
+                    var p = new DynamicParameters();
+                    p.Add("@TenDangNhap", GlobalConfig.CurrNguoiDung.TenDangNhap);
+                    p.Add("@MatKhauHT", ConvertToSHA512(matKhauHT));
+                    p.Add("@MatKhauMoi", ConvertToSHA512(matKhauMoi));
+                    rowsAffected = connection.Execute("spNGUOIDUNG_DoiMatKhau", p, commandType: CommandType.StoredProcedure);
+                }
+            }
+            catch (Exception)
+            {
+                return DoiMatKhauMessage.Error;
+            }
+
+            if (rowsAffected == 0)
+            {
+                return DoiMatKhauMessage.Failed;
+            }
+
+            GlobalConfig.CurrNguoiDung.MatKhau = matKhauMoi;
+            return DoiMatKhauMessage.Success;
+        }
+
+        public static ThemTaiKhoanSVMessage ThemTaiKhoanSV(IList<SinhVien> dssv)
+        {
+            try
+            {
+                using (IDbConnection connection = new SqlConnection(DatabaseConnection.CnnString()))
+                {
+                    foreach (SinhVien sinhVien in dssv)
+                    {
+                        var p = new DynamicParameters();
+                        p.Add("@MaSV", sinhVien.MaSV);
+                        connection.Execute("spNGUOIDUNG_ThemTaiKhoanSV", p, commandType: CommandType.StoredProcedure);
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                return ThemTaiKhoanSVMessage.Error;
+            }
+
+            return ThemTaiKhoanSVMessage.Success;
         }
 
         public static List<CT_NguoiDung> LayDSNguoiDung()
