@@ -1,0 +1,144 @@
+﻿using BLL;
+using ComponentFactory.Krypton.Toolkit;
+using DTO;
+using PL.Interfaces;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
+
+namespace PL
+{
+    public partial class ThemSuaKhoa : KryptonForm
+    {
+        private IThemSuaKhoaRequester themSuaKhoaRequester;
+        private DTO.Khoa khoa;
+
+        public ThemSuaKhoa(IThemSuaKhoaRequester requester, DTO.Khoa khoa)
+        {
+            InitializeComponent();
+
+            themSuaKhoaRequester = requester;
+            this.khoa = khoa;
+
+            SettingProperties();
+        }
+
+        public ThemSuaKhoa(IThemSuaKhoaRequester requester)
+        {
+            InitializeComponent();
+
+            themSuaKhoaRequester = requester;
+
+            SettingProperties();
+        }
+
+        private void SettingProperties()
+        {
+            if (khoa != null)
+            {
+                Text = "Sửa khoa";
+                lblThemSuaKhoa.Text = "SỬA KHOA";
+
+                txtMaKhoa.Text = khoa.MaKhoa;
+                txtTenKhoa.Text = khoa.TenKhoa;
+                txtMaKhoa.ReadOnly = true;
+            }
+            else
+            {
+                Text = "Thêm khoa";
+                lblThemSuaKhoa.Text = "THÊM KHOA";
+                txtMaKhoa.ReadOnly = false;
+            }
+        }
+
+        protected override void OnFormClosing(FormClosingEventArgs e)
+        {
+            base.OnFormClosing(e);
+
+            if (themSuaKhoaRequester != null)
+            {
+                themSuaKhoaRequester.OnThemSuaKhoaClosing();
+            }
+        }
+
+        private void btnClear_Click(object sender, EventArgs e)
+        {
+            txtMaKhoa.Text = "";
+            txtTenKhoa.Text = "";
+        }
+
+        private void btnXacNhan_Click(object sender, EventArgs e)
+        {
+            if (khoa != null)
+            {
+                string maKhoaBanDau = khoa.MaKhoa;
+                string maKhoaSua = txtMaKhoa.Text.Trim();
+                string tenKhoaSua = txtTenKhoa.Text.Trim();
+
+                SuaKhoaMessage message = KhoaBLL.SuaKhoa(maKhoaBanDau, maKhoaSua, tenKhoaSua);
+                switch (message)
+                {
+                    case SuaKhoaMessage.EmptyMaKhoa:
+                        MessageBox.Show("Mã khoa không được để trống!");
+                        break;
+                    case SuaKhoaMessage.EmptyTenKhoa:
+                        MessageBox.Show("Tên khoa không được để trống!");
+                        break;
+                    case SuaKhoaMessage.DuplicateMaKhoa:
+                        MessageBox.Show("Mã khoa đã tồn tại, vui lòng nhập giá trị khác!");
+                        break;
+                    case SuaKhoaMessage.DuplicateTenKhoa:
+                        MessageBox.Show("Tên khoa đã tồn tại, vui lòng nhập giá trị khác!");
+                        break;
+                    case SuaKhoaMessage.Error:
+                        MessageBox.Show("Đã có lỗi xảy ra!");
+                        break;
+                    case SuaKhoaMessage.Success:
+                        MessageBox.Show("Sửa khoa thành công!");
+                        Close();
+                        break;
+                }
+            }
+            else
+            {
+                string maKhoa = txtMaKhoa.Text.Trim();
+                string tenKhoa = txtTenKhoa.Text.Trim();
+
+                ThemKhoaMessage message = KhoaBLL.ThemKhoa(maKhoa, tenKhoa);
+                switch (message)
+                {
+                    case ThemKhoaMessage.EmptyMaKhoa:
+                        MessageBox.Show("Mã khoa không được để trống!");
+                        break;
+                    case ThemKhoaMessage.EmptyTenKhoa:
+                        MessageBox.Show("Tên khoa không được để trống!");
+                        break;
+                    case ThemKhoaMessage.DuplicateMaKhoa:
+                        MessageBox.Show("Mã khoa đã tồn tại, vui lòng nhập giá trị khác!");
+                        break;
+                    case ThemKhoaMessage.DuplicateTenKhoa:
+                        MessageBox.Show("Tên khoa đã tồn tại, vui lòng nhập giá trị khác!");
+                        break;
+                    case ThemKhoaMessage.Error:
+                        MessageBox.Show("Đã có lỗi xảy ra!");
+                        break;
+                    case ThemKhoaMessage.Success:
+                        MessageBox.Show("Thêm khoa thành công!");
+                        Close();
+                        break;
+                }
+            }
+        }
+
+        private void btnQuayLai_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+    }
+}

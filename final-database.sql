@@ -2596,3 +2596,78 @@ begin
 	values (@TenHuyen, @VungUT, @MaTinh)
 end
 go
+
+--spHUYEN_XoaHuyen
+create proc spHUYEN_XoaHuyen (@MaHuyen int)
+as
+begin
+	delete from HUYEN
+	where MaHuyen = @MaHuyen
+end
+go
+
+--spNGANH_LayDSNganh
+create proc spNGANH_LayDSNganh
+as
+begin
+	select NGANH.*, TenKhoa
+	from NGANH, KHOA
+	where NGANH.MaKhoa = KHOA.MaKhoa
+end
+go
+
+--spKHOA_LayDSKhoa
+create proc spKHOA_LayDSKhoa
+as
+begin
+	select * 
+	from KHOA
+end
+go
+
+--spNGANH_XoaNganh
+create proc spNGANH_XoaNganh (@MaNganh nvarchar(50))
+as
+begin
+	delete from NGANH
+	where MaNganh = @MaNganh
+end
+go
+
+--spKHOA_SuaKhoa
+create proc spKHOA_SuaKhoa (@MaKhoaBanDau nvarchar(20), @MaKhoaSua nvarchar(20), @TenKhoaSua nvarchar(100))
+as
+begin
+	update KHOA
+	set MaKhoa = @MaKhoaSua, TenKhoa = @TenKhoaSua
+	where MaKhoa = @MaKhoaBanDau
+end
+go
+
+--spKHOA_ThemKhoa
+create proc spKHOA_ThemKhoa(@MaKhoa nvarchar(50), @TenKhoa nvarchar(100))
+as
+begin
+	insert into KHOA
+	values (@MaKhoa, @TenKhoa)
+end
+go
+
+--spNGANH_SuaNganh
+create proc spNGANH_SuaNganh (@MaNganhBanDau nvarchar(50), @MaNganh nvarchar(50), @TenNganh nvarchar(100), @MaKhoa nvarchar(50))
+as
+begin
+	update NGANH
+	set MaNganh = @MaNganh, TenNganh = @TenNganh, MaKhoa = @MaKhoa
+	where MaNganh = @MaNganhBanDau
+end
+go
+
+--spNGANH_ThemNganh
+create proc spNGANH_ThemNganh (@MaNganh nvarchar(50), @TenNganh nvarchar(50), @MaKhoa nvarchar(50))
+as
+begin
+	insert into NGANH
+	values (@MaNganh, @TenNganh, @MaKhoa)
+end
+go

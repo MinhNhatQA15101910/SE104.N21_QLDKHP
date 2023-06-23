@@ -115,10 +115,7 @@ namespace PL
                         break;
                     case SuaHuyenMessage.Success:
                         MessageBox.Show("Sửa huyện thành công!");
-                        if (themSuaHuyenRequester != null)
-                        {
-                            themSuaHuyenRequester.OnThemSuaHuyenClosing();
-                        }
+                        Close();
                         break;
                 }
             }
@@ -145,6 +142,11 @@ namespace PL
                         MessageBox.Show("Đã có lỗi xảy ra!");
                         break;
                     case ThemHuyenMessage.Success:
+                        if (themSuaHuyenRequester != null)
+                        {
+                            themSuaHuyenRequester.OnThemSuaHuyenClosing();
+                        }
+
                         MessageBox.Show("Thêm huyện thành công!");
                         break;
                 }

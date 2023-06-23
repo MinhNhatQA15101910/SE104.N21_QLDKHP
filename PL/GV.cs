@@ -125,5 +125,17 @@ namespace PL
             DoiMatKhau doiMatKhau = new DoiMatKhau();
             doiMatKhau.Show();
         }
+
+        private void imgDangXuat_Click(object sender, EventArgs e)
+        {
+            pnlDangXuat.Visible = !pnlDangXuat.Visible;
+        }
+
+        private void btnNganh_Click(object sender, EventArgs e)
+        {
+            QuanLyNganh quanLyNganh = new QuanLyNganh(this);
+            quanLyNganh.Show();
+            Hide();
+        }
     }
 }

@@ -50,14 +50,12 @@ namespace PL
 
         private void kryptonButton1_Click(object sender, EventArgs e)
         {
-            ThemKhoa t = new ThemKhoa();
-            t.ShowDialog();
+            
         }
 
         private void kryptonButton9_Click(object sender, EventArgs e)
         {
-            SuaKhoa k = new SuaKhoa();
-            k.ShowDialog();
+            
         }
 
         private void panel2_Paint(object sender, PaintEventArgs e)

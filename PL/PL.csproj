@@ -154,11 +154,11 @@
     <Compile Include="MonHocMo.Designer.cs">
       <DependentUpon>MonHocMo.cs</DependentUpon>
     </Compile>
-    <Compile Include="Nganh.cs">
+    <Compile Include="QuanLyNganh.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="Nganh.Designer.cs">
-      <DependentUpon>Nganh.cs</DependentUpon>
+    <Compile Include="QuanLyNganh.Designer.cs">
+      <DependentUpon>QuanLyNganh.cs</DependentUpon>
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -186,17 +186,17 @@
     <Compile Include="SinhVien.Designer.cs">
       <DependentUpon>SinhVien.cs</DependentUpon>
     </Compile>
-    <Compile Include="SuaKhoa.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="SuaKhoa.Designer.cs">
-      <DependentUpon>SuaKhoa.cs</DependentUpon>
-    </Compile>
     <Compile Include="ThemSuaHuyen.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="ThemSuaHuyen.Designer.cs">
       <DependentUpon>ThemSuaHuyen.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ThemSuaKhoa.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ThemSuaKhoa.Designer.cs">
+      <DependentUpon>ThemSuaKhoa.cs</DependentUpon>
     </Compile>
     <Compile Include="ThemSuaLoaiMonHoc.cs">
       <SubType>Form</SubType>
@@ -216,17 +216,17 @@
     <Compile Include="SuaMonHoc.Designer.cs">
       <DependentUpon>SuaMonHoc.cs</DependentUpon>
     </Compile>
-    <Compile Include="SuaNganh.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="SuaNganh.Designer.cs">
-      <DependentUpon>SuaNganh.cs</DependentUpon>
-    </Compile>
     <Compile Include="SuaSinhVien.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="SuaSinhVien.Designer.cs">
       <DependentUpon>SuaSinhVien.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ThemSuaNganh.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ThemSuaNganh.Designer.cs">
+      <DependentUpon>ThemSuaNganh.cs</DependentUpon>
     </Compile>
     <Compile Include="ThemSuaTaiKhoan.cs">
       <SubType>Form</SubType>
@@ -246,23 +246,11 @@
     <Compile Include="ThanhToanHocPhi.Designer.cs">
       <DependentUpon>ThanhToanHocPhi.cs</DependentUpon>
     </Compile>
-    <Compile Include="ThemKhoa.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="ThemKhoa.Designer.cs">
-      <DependentUpon>ThemKhoa.cs</DependentUpon>
-    </Compile>
     <Compile Include="ThemMonHoc.cs">
       <SubType>Form</SubType>
     </Compile>
     <Compile Include="ThemMonHoc.Designer.cs">
       <DependentUpon>ThemMonHoc.cs</DependentUpon>
-    </Compile>
-    <Compile Include="ThemNganh.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="ThemNganh.Designer.cs">
-      <DependentUpon>ThemNganh.cs</DependentUpon>
     </Compile>
     <Compile Include="ThemSinhVien.cs">
       <SubType>Form</SubType>
@@ -348,8 +336,8 @@
     <EmbeddedResource Include="MonHocMo.resx">
       <DependentUpon>MonHocMo.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="Nganh.resx">
-      <DependentUpon>Nganh.cs</DependentUpon>
+    <EmbeddedResource Include="QuanLyNganh.resx">
+      <DependentUpon>QuanLyNganh.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -376,11 +364,11 @@
     <EmbeddedResource Include="SinhVien.resx">
       <DependentUpon>SinhVien.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="SuaKhoa.resx">
-      <DependentUpon>SuaKhoa.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="ThemSuaHuyen.resx">
       <DependentUpon>ThemSuaHuyen.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ThemSuaKhoa.resx">
+      <DependentUpon>ThemSuaKhoa.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ThemSuaLoaiMonHoc.resx">
       <DependentUpon>ThemSuaLoaiMonHoc.cs</DependentUpon>
@@ -391,11 +379,11 @@
     <EmbeddedResource Include="SuaMonHoc.resx">
       <DependentUpon>SuaMonHoc.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="SuaNganh.resx">
-      <DependentUpon>SuaNganh.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="SuaSinhVien.resx">
       <DependentUpon>SuaSinhVien.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ThemSuaNganh.resx">
+      <DependentUpon>ThemSuaNganh.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ThemSuaTaiKhoan.resx">
       <DependentUpon>ThemSuaTaiKhoan.cs</DependentUpon>
@@ -406,14 +394,8 @@
     <EmbeddedResource Include="ThanhToanHocPhi.resx">
       <DependentUpon>ThanhToanHocPhi.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ThemKhoa.resx">
-      <DependentUpon>ThemKhoa.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="ThemMonHoc.resx">
       <DependentUpon>ThemMonHoc.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="ThemNganh.resx">
-      <DependentUpon>ThemNganh.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ThemSinhVien.resx">
       <DependentUpon>ThemSinhVien.cs</DependentUpon>

@@ -158,6 +158,7 @@ namespace PL
             this.btnNganh.StateTracking.Back.Color1 = System.Drawing.Color.White;
             this.btnNganh.TabIndex = 14;
             this.btnNganh.Values.Text = "NGÀNH";
+            this.btnNganh.Click += new System.EventHandler(this.btnNganh_Click);
             // 
             // btnKhoa
             // 
@@ -405,6 +406,7 @@ namespace PL
             this.imgDangXuat.Size = new System.Drawing.Size(29, 29);
             this.imgDangXuat.TabIndex = 54;
             this.imgDangXuat.TabStop = false;
+            this.imgDangXuat.Click += new System.EventHandler(this.imgDangXuat_Click);
             // 
             // picAvatar
             // 

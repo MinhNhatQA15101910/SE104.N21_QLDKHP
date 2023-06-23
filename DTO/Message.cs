@@ -168,4 +168,50 @@ namespace DTO
         Success, 
         Error
     }
+
+    public enum XoaNganhMessage
+    {
+        Success,
+        Error
+    }
+
+    public enum SuaKhoaMessage
+    {
+        EmptyMaKhoa,
+        EmptyTenKhoa,
+        DuplicateMaKhoa,
+        DuplicateTenKhoa,
+        Success,
+        Error
+    }
+
+    public enum ThemKhoaMessage
+    {
+        EmptyMaKhoa,
+        EmptyTenKhoa,
+        DuplicateMaKhoa,
+        DuplicateTenKhoa,
+        Success,
+        Error
+    }
+
+    public enum SuaNganhMessage
+    {
+        EmptyMaNganh,
+        EmptyTenNganh,
+        DuplicateMaNganh,
+        DuplicateTenNganh,
+        Success,
+        Error
+    }
+
+    public enum ThemNganhMessage
+    {
+        EmptyMaNganh,
+        EmptyTenNganh,
+        DuplicateMaNganh,
+        DuplicateTenNganh,
+        Success,
+        Error
+    }
 }
