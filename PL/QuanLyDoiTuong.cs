@@ -132,5 +132,19 @@ namespace PL
             quanLyLoaiMonHoc.Show();
             Hide();
         }
+
+        private void btnTinh_Click(object sender, EventArgs e)
+        {
+            QuanLyTinh quanLyTinh = new QuanLyTinh(caiDatRequester);
+            quanLyTinh.Show();
+            Hide();
+        }
+
+        private void btnHuyen_Click(object sender, EventArgs e)
+        {
+            QuanLyHuyen quanLyHuyen = new QuanLyHuyen(caiDatRequester);
+            quanLyHuyen.Show();
+            Hide();
+        }
     }
 }

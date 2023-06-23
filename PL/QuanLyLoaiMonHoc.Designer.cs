@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(QuanLyLoaiMonHoc));
             this.lblTinChiToiThieu = new System.Windows.Forms.Label();
             this.lblTinChiToiDa = new System.Windows.Forms.Label();
@@ -48,26 +48,26 @@
             this.lblSoTien = new System.Windows.Forms.Label();
             this.btnQuayLai = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.pnlCaiDat = new System.Windows.Forms.Panel();
-            this.lblCaiDat = new System.Windows.Forms.Label();
-            this.pnlDoiTuong = new System.Windows.Forms.Panel();
-            this.btnDoiTuong = new ComponentFactory.Krypton.Toolkit.KryptonButton();
-            this.pnlLoaiMon = new System.Windows.Forms.Panel();
-            this.plt1 = new ComponentFactory.Krypton.Toolkit.KryptonPalette(this.components);
-            this.grbThongTinChiTiet = new System.Windows.Forms.GroupBox();
-            this.lblDanhSachLoaiMon = new System.Windows.Forms.Label();
-            this.btnLuuGHTC = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.pnlHuyen = new System.Windows.Forms.Panel();
             this.btnHuyen = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.pnlTinh = new System.Windows.Forms.Panel();
             this.btnTinh = new ComponentFactory.Krypton.Toolkit.KryptonButton();
+            this.lblCaiDat = new System.Windows.Forms.Label();
+            this.pnlDoiTuong = new System.Windows.Forms.Panel();
+            this.btnDoiTuong = new ComponentFactory.Krypton.Toolkit.KryptonButton();
+            this.pnlLoaiMon = new System.Windows.Forms.Panel();
             this.btnLoaiMon = new ComponentFactory.Krypton.Toolkit.KryptonButton();
+            this.plt1 = new ComponentFactory.Krypton.Toolkit.KryptonPalette(this.components);
+            this.grbThongTinChiTiet = new System.Windows.Forms.GroupBox();
+            this.lblDanhSachLoaiMon = new System.Windows.Forms.Label();
+            this.btnLuuGHTC = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDSLoaiMon)).BeginInit();
             this.pnlCaiDat.SuspendLayout();
+            this.pnlHuyen.SuspendLayout();
+            this.pnlTinh.SuspendLayout();
             this.pnlDoiTuong.SuspendLayout();
             this.pnlLoaiMon.SuspendLayout();
             this.grbThongTinChiTiet.SuspendLayout();
-            this.pnlHuyen.SuspendLayout();
-            this.pnlTinh.SuspendLayout();
             this.SuspendLayout();
             // 
             // lblTinChiToiThieu
@@ -309,10 +309,10 @@
             // 
             // dgvDSLoaiMon
             // 
-            dataGridViewCellStyle8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(159)))), ((int)(((byte)(159)))));
-            dataGridViewCellStyle8.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle8.ForeColor = System.Drawing.Color.Black;
-            this.dgvDSLoaiMon.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle8;
+            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(159)))), ((int)(((byte)(159)))));
+            dataGridViewCellStyle2.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black;
+            this.dgvDSLoaiMon.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle2;
             this.dgvDSLoaiMon.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvDSLoaiMon.Cursor = System.Windows.Forms.Cursors.Hand;
             this.dgvDSLoaiMon.Location = new System.Drawing.Point(222, 245);
@@ -378,7 +378,7 @@
             this.btnQuayLai.StateCommon.Content.LongText.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnQuayLai.StateCommon.Content.ShortText.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnQuayLai.TabIndex = 50;
-            this.btnQuayLai.Values.Image = ((System.Drawing.Image)(resources.GetObject("kryptonButton6.Values.Image")));
+            this.btnQuayLai.Values.Image = ((System.Drawing.Image)(resources.GetObject("btnQuayLai.Values.Image")));
             this.btnQuayLai.Values.Text = " ";
             this.btnQuayLai.Click += new System.EventHandler(this.btnQuayLai_Click);
             // 
@@ -397,6 +397,56 @@
             this.pnlCaiDat.Name = "pnlCaiDat";
             this.pnlCaiDat.Size = new System.Drawing.Size(201, 499);
             this.pnlCaiDat.TabIndex = 51;
+            // 
+            // pnlHuyen
+            // 
+            this.pnlHuyen.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.pnlHuyen.Controls.Add(this.btnHuyen);
+            this.pnlHuyen.Location = new System.Drawing.Point(1, 251);
+            this.pnlHuyen.Margin = new System.Windows.Forms.Padding(2);
+            this.pnlHuyen.Name = "pnlHuyen";
+            this.pnlHuyen.Size = new System.Drawing.Size(198, 35);
+            this.pnlHuyen.TabIndex = 12;
+            // 
+            // btnHuyen
+            // 
+            this.btnHuyen.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnHuyen.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnHuyen.Location = new System.Drawing.Point(0, 0);
+            this.btnHuyen.Margin = new System.Windows.Forms.Padding(2);
+            this.btnHuyen.Name = "btnHuyen";
+            this.btnHuyen.Size = new System.Drawing.Size(198, 35);
+            this.btnHuyen.StateCommon.Back.Color1 = System.Drawing.Color.White;
+            this.btnHuyen.StateCommon.Back.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            this.btnHuyen.StateCommon.Content.ShortText.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnHuyen.TabIndex = 8;
+            this.btnHuyen.Values.Text = "Huyện";
+            this.btnHuyen.Click += new System.EventHandler(this.btnHuyen_Click);
+            // 
+            // pnlTinh
+            // 
+            this.pnlTinh.BackColor = System.Drawing.SystemColors.ButtonHighlight;
+            this.pnlTinh.Controls.Add(this.btnTinh);
+            this.pnlTinh.Location = new System.Drawing.Point(1, 193);
+            this.pnlTinh.Margin = new System.Windows.Forms.Padding(2);
+            this.pnlTinh.Name = "pnlTinh";
+            this.pnlTinh.Size = new System.Drawing.Size(198, 35);
+            this.pnlTinh.TabIndex = 11;
+            // 
+            // btnTinh
+            // 
+            this.btnTinh.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnTinh.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnTinh.Location = new System.Drawing.Point(0, 0);
+            this.btnTinh.Margin = new System.Windows.Forms.Padding(2);
+            this.btnTinh.Name = "btnTinh";
+            this.btnTinh.Size = new System.Drawing.Size(198, 35);
+            this.btnTinh.StateCommon.Back.Color1 = System.Drawing.Color.White;
+            this.btnTinh.StateCommon.Back.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            this.btnTinh.StateCommon.Content.ShortText.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnTinh.TabIndex = 8;
+            this.btnTinh.Values.Text = "Tỉnh";
+            this.btnTinh.Click += new System.EventHandler(this.btnTinh_Click);
             // 
             // lblCaiDat
             // 
@@ -443,6 +493,20 @@
             this.pnlLoaiMon.Name = "pnlLoaiMon";
             this.pnlLoaiMon.Size = new System.Drawing.Size(199, 35);
             this.pnlLoaiMon.TabIndex = 0;
+            // 
+            // btnLoaiMon
+            // 
+            this.btnLoaiMon.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnLoaiMon.Enabled = false;
+            this.btnLoaiMon.Location = new System.Drawing.Point(0, 0);
+            this.btnLoaiMon.Margin = new System.Windows.Forms.Padding(2);
+            this.btnLoaiMon.Name = "btnLoaiMon";
+            this.btnLoaiMon.Size = new System.Drawing.Size(199, 35);
+            this.btnLoaiMon.StateCommon.Back.Color1 = System.Drawing.Color.White;
+            this.btnLoaiMon.StateCommon.Back.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
+            this.btnLoaiMon.StateCommon.Content.ShortText.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnLoaiMon.TabIndex = 9;
+            this.btnLoaiMon.Values.Text = "Tín chỉ, loại môn";
             // 
             // plt1
             // 
@@ -530,68 +594,6 @@
             this.btnLuuGHTC.Values.Text = " LƯU";
             this.btnLuuGHTC.Click += new System.EventHandler(this.btnLuuGHTC_Click);
             // 
-            // pnlHuyen
-            // 
-            this.pnlHuyen.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.pnlHuyen.Controls.Add(this.btnHuyen);
-            this.pnlHuyen.Location = new System.Drawing.Point(1, 251);
-            this.pnlHuyen.Margin = new System.Windows.Forms.Padding(2);
-            this.pnlHuyen.Name = "pnlHuyen";
-            this.pnlHuyen.Size = new System.Drawing.Size(198, 35);
-            this.pnlHuyen.TabIndex = 12;
-            // 
-            // btnHuyen
-            // 
-            this.btnHuyen.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnHuyen.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnHuyen.Location = new System.Drawing.Point(0, 0);
-            this.btnHuyen.Margin = new System.Windows.Forms.Padding(2);
-            this.btnHuyen.Name = "btnHuyen";
-            this.btnHuyen.Size = new System.Drawing.Size(198, 35);
-            this.btnHuyen.StateCommon.Back.Color1 = System.Drawing.Color.White;
-            this.btnHuyen.StateCommon.Back.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            this.btnHuyen.StateCommon.Content.ShortText.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnHuyen.TabIndex = 8;
-            this.btnHuyen.Values.Text = "Huyện";
-            // 
-            // pnlTinh
-            // 
-            this.pnlTinh.BackColor = System.Drawing.SystemColors.ButtonHighlight;
-            this.pnlTinh.Controls.Add(this.btnTinh);
-            this.pnlTinh.Location = new System.Drawing.Point(1, 193);
-            this.pnlTinh.Margin = new System.Windows.Forms.Padding(2);
-            this.pnlTinh.Name = "pnlTinh";
-            this.pnlTinh.Size = new System.Drawing.Size(198, 35);
-            this.pnlTinh.TabIndex = 11;
-            // 
-            // btnTinh
-            // 
-            this.btnTinh.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnTinh.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnTinh.Location = new System.Drawing.Point(0, 0);
-            this.btnTinh.Margin = new System.Windows.Forms.Padding(2);
-            this.btnTinh.Name = "btnTinh";
-            this.btnTinh.Size = new System.Drawing.Size(198, 35);
-            this.btnTinh.StateCommon.Back.Color1 = System.Drawing.Color.White;
-            this.btnTinh.StateCommon.Back.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            this.btnTinh.StateCommon.Content.ShortText.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnTinh.TabIndex = 8;
-            this.btnTinh.Values.Text = "Tỉnh";
-            // 
-            // btnLoaiMon
-            // 
-            this.btnLoaiMon.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnLoaiMon.Enabled = false;
-            this.btnLoaiMon.Location = new System.Drawing.Point(0, 0);
-            this.btnLoaiMon.Margin = new System.Windows.Forms.Padding(2);
-            this.btnLoaiMon.Name = "btnLoaiMon";
-            this.btnLoaiMon.Size = new System.Drawing.Size(199, 35);
-            this.btnLoaiMon.StateCommon.Back.Color1 = System.Drawing.Color.White;
-            this.btnLoaiMon.StateCommon.Back.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
-            this.btnLoaiMon.StateCommon.Content.ShortText.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnLoaiMon.TabIndex = 9;
-            this.btnLoaiMon.Values.Text = "Tín chỉ, loại môn";
-            // 
             // QuanLyLoaiMonHoc
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -623,12 +625,12 @@
             this.Load += new System.EventHandler(this.QuanLyLoaiMonHoc_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvDSLoaiMon)).EndInit();
             this.pnlCaiDat.ResumeLayout(false);
+            this.pnlHuyen.ResumeLayout(false);
+            this.pnlTinh.ResumeLayout(false);
             this.pnlDoiTuong.ResumeLayout(false);
             this.pnlLoaiMon.ResumeLayout(false);
             this.grbThongTinChiTiet.ResumeLayout(false);
             this.grbThongTinChiTiet.PerformLayout();
-            this.pnlHuyen.ResumeLayout(false);
-            this.pnlTinh.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 

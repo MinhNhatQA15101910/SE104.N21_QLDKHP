@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle8 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(QuanLyTinh));
             this.pnlCaiDat = new System.Windows.Forms.Panel();
             this.pnlHuyen = new System.Windows.Forms.Panel();
@@ -44,10 +44,10 @@
             this.plt1 = new ComponentFactory.Krypton.Toolkit.KryptonPalette(this.components);
             this.lblDanhSachTinh = new System.Windows.Forms.Label();
             this.grbThongTinChiTiet = new System.Windows.Forms.GroupBox();
-            this.txtTiLeGiamHocPhi = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
+            this.txtTenTinh = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
             this.lblTenTinh = new System.Windows.Forms.Label();
             this.lblMaTinh = new System.Windows.Forms.Label();
-            this.txtTenDoiTuong = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
+            this.txtMaTinh = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
             this.dgvDSTinh = new ComponentFactory.Krypton.Toolkit.KryptonDataGridView();
             this.btnSua = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.btnThem = new ComponentFactory.Krypton.Toolkit.KryptonButton();
@@ -101,6 +101,7 @@
             this.btnHuyen.StateCommon.Content.ShortText.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnHuyen.TabIndex = 8;
             this.btnHuyen.Values.Text = "Huyện";
+            this.btnHuyen.Click += new System.EventHandler(this.btnHuyen_Click);
             // 
             // pnlTinh
             // 
@@ -161,6 +162,7 @@
             this.btnDoiTuong.StateCommon.Content.ShortText.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnDoiTuong.TabIndex = 8;
             this.btnDoiTuong.Values.Text = "Đối tượng";
+            this.btnDoiTuong.Click += new System.EventHandler(this.btnDoiTuong_Click);
             // 
             // pnlLoaiMon
             // 
@@ -185,6 +187,7 @@
             this.btnLoaiMon.StateCommon.Content.ShortText.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnLoaiMon.TabIndex = 9;
             this.btnLoaiMon.Values.Text = "Tín chỉ, loại môn";
+            this.btnLoaiMon.Click += new System.EventHandler(this.btnLoaiMon_Click);
             // 
             // plt1
             // 
@@ -216,10 +219,10 @@
             // 
             // grbThongTinChiTiet
             // 
-            this.grbThongTinChiTiet.Controls.Add(this.txtTiLeGiamHocPhi);
+            this.grbThongTinChiTiet.Controls.Add(this.txtTenTinh);
             this.grbThongTinChiTiet.Controls.Add(this.lblTenTinh);
             this.grbThongTinChiTiet.Controls.Add(this.lblMaTinh);
-            this.grbThongTinChiTiet.Controls.Add(this.txtTenDoiTuong);
+            this.grbThongTinChiTiet.Controls.Add(this.txtMaTinh);
             this.grbThongTinChiTiet.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.grbThongTinChiTiet.Location = new System.Drawing.Point(220, 87);
             this.grbThongTinChiTiet.Margin = new System.Windows.Forms.Padding(2);
@@ -230,22 +233,22 @@
             this.grbThongTinChiTiet.TabStop = false;
             this.grbThongTinChiTiet.Text = "Thông tin chi tiết";
             // 
-            // txtTiLeGiamHocPhi
+            // txtTenTinh
             // 
-            this.txtTiLeGiamHocPhi.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.txtTiLeGiamHocPhi.Location = new System.Drawing.Point(143, 46);
-            this.txtTiLeGiamHocPhi.Margin = new System.Windows.Forms.Padding(2);
-            this.txtTiLeGiamHocPhi.Name = "txtTiLeGiamHocPhi";
-            this.txtTiLeGiamHocPhi.ReadOnly = true;
-            this.txtTiLeGiamHocPhi.Size = new System.Drawing.Size(262, 29);
-            this.txtTiLeGiamHocPhi.StateActive.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
+            this.txtTenTinh.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.txtTenTinh.Location = new System.Drawing.Point(143, 46);
+            this.txtTenTinh.Margin = new System.Windows.Forms.Padding(2);
+            this.txtTenTinh.Name = "txtTenTinh";
+            this.txtTenTinh.ReadOnly = true;
+            this.txtTenTinh.Size = new System.Drawing.Size(262, 29);
+            this.txtTenTinh.StateActive.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
             | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left) 
             | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Right)));
-            this.txtTiLeGiamHocPhi.StateActive.Border.Rounding = 15;
-            this.txtTiLeGiamHocPhi.StateActive.Content.Color1 = System.Drawing.Color.Black;
-            this.txtTiLeGiamHocPhi.StateActive.Content.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtTiLeGiamHocPhi.StateActive.Content.Padding = new System.Windows.Forms.Padding(2, -1, -1, -1);
-            this.txtTiLeGiamHocPhi.TabIndex = 22;
+            this.txtTenTinh.StateActive.Border.Rounding = 15;
+            this.txtTenTinh.StateActive.Content.Color1 = System.Drawing.Color.Black;
+            this.txtTenTinh.StateActive.Content.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtTenTinh.StateActive.Content.Padding = new System.Windows.Forms.Padding(2, -1, -1, -1);
+            this.txtTenTinh.TabIndex = 22;
             // 
             // lblTenTinh
             // 
@@ -265,33 +268,33 @@
             this.lblMaTinh.Location = new System.Drawing.Point(16, 24);
             this.lblMaTinh.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblMaTinh.Name = "lblMaTinh";
-            this.lblMaTinh.Size = new System.Drawing.Size(152, 20);
+            this.lblMaTinh.Size = new System.Drawing.Size(101, 20);
             this.lblMaTinh.TabIndex = 14;
             this.lblMaTinh.Text = "Mã tỉnh:";
             // 
-            // txtTenDoiTuong
+            // txtMaTinh
             // 
-            this.txtTenDoiTuong.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.txtTenDoiTuong.Location = new System.Drawing.Point(10, 47);
-            this.txtTenDoiTuong.Margin = new System.Windows.Forms.Padding(2);
-            this.txtTenDoiTuong.Name = "txtTenDoiTuong";
-            this.txtTenDoiTuong.ReadOnly = true;
-            this.txtTenDoiTuong.Size = new System.Drawing.Size(94, 29);
-            this.txtTenDoiTuong.StateActive.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
+            this.txtMaTinh.Cursor = System.Windows.Forms.Cursors.IBeam;
+            this.txtMaTinh.Location = new System.Drawing.Point(10, 47);
+            this.txtMaTinh.Margin = new System.Windows.Forms.Padding(2);
+            this.txtMaTinh.Name = "txtMaTinh";
+            this.txtMaTinh.ReadOnly = true;
+            this.txtMaTinh.Size = new System.Drawing.Size(94, 29);
+            this.txtMaTinh.StateActive.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
             | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left) 
             | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Right)));
-            this.txtTenDoiTuong.StateActive.Border.Rounding = 15;
-            this.txtTenDoiTuong.StateActive.Content.Color1 = System.Drawing.Color.Black;
-            this.txtTenDoiTuong.StateActive.Content.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txtTenDoiTuong.StateActive.Content.Padding = new System.Windows.Forms.Padding(2, -1, -1, -1);
-            this.txtTenDoiTuong.TabIndex = 21;
+            this.txtMaTinh.StateActive.Border.Rounding = 15;
+            this.txtMaTinh.StateActive.Content.Color1 = System.Drawing.Color.Black;
+            this.txtMaTinh.StateActive.Content.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtMaTinh.StateActive.Content.Padding = new System.Windows.Forms.Padding(2, -1, -1, -1);
+            this.txtMaTinh.TabIndex = 21;
             // 
             // dgvDSTinh
             // 
-            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(159)))), ((int)(((byte)(159)))));
-            dataGridViewCellStyle1.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black;
-            this.dgvDSTinh.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            dataGridViewCellStyle8.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(159)))), ((int)(((byte)(159)))));
+            dataGridViewCellStyle8.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle8.ForeColor = System.Drawing.Color.Black;
+            this.dgvDSTinh.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle8;
             this.dgvDSTinh.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvDSTinh.Cursor = System.Windows.Forms.Cursors.Hand;
             this.dgvDSTinh.Location = new System.Drawing.Point(220, 237);
@@ -311,6 +314,7 @@
             this.dgvDSTinh.StateCommon.HeaderColumn.Content.Padding = new System.Windows.Forms.Padding(2, -1, -1, -1);
             this.dgvDSTinh.StateCommon.HeaderColumn.Content.TextH = ComponentFactory.Krypton.Toolkit.PaletteRelativeAlign.Center;
             this.dgvDSTinh.TabIndex = 62;
+            this.dgvDSTinh.SelectionChanged += new System.EventHandler(this.dgvDSTinh_SelectionChanged);
             // 
             // btnSua
             // 
@@ -350,6 +354,7 @@
             this.btnSua.TabIndex = 61;
             this.btnSua.Values.Image = global::PL.Properties.Resources.icons8_edit_property_25;
             this.btnSua.Values.Text = " SỬA";
+            this.btnSua.Click += new System.EventHandler(this.btnSua_Click);
             // 
             // btnThem
             // 
@@ -389,6 +394,7 @@
             this.btnThem.TabIndex = 59;
             this.btnThem.Values.Image = global::PL.Properties.Resources.icons8_add_properties_25;
             this.btnThem.Values.Text = " THÊM";
+            this.btnThem.Click += new System.EventHandler(this.btnThem_Click);
             // 
             // btnXoa
             // 
@@ -428,6 +434,7 @@
             this.btnXoa.TabIndex = 60;
             this.btnXoa.Values.Image = global::PL.Properties.Resources.icons8_delete_document_25;
             this.btnXoa.Values.Text = " XÓA";
+            this.btnXoa.Click += new System.EventHandler(this.btnXoa_Click);
             // 
             // btnQuayLai
             // 
@@ -448,6 +455,7 @@
             this.btnQuayLai.TabIndex = 67;
             this.btnQuayLai.Values.Image = ((System.Drawing.Image)(resources.GetObject("btnQuayLai.Values.Image")));
             this.btnQuayLai.Values.Text = " ";
+            this.btnQuayLai.Click += new System.EventHandler(this.btnQuayLai_Click);
             // 
             // QuanLyTinh
             // 
@@ -470,7 +478,9 @@
             this.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Custom;
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Đối tượng";
+            this.Text = "Tỉnh";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.QuanLyTinh_FormClosing);
+            this.Load += new System.EventHandler(this.QuanLyTinh_Load);
             this.pnlCaiDat.ResumeLayout(false);
             this.pnlHuyen.ResumeLayout(false);
             this.pnlTinh.ResumeLayout(false);
@@ -496,10 +506,10 @@
         private ComponentFactory.Krypton.Toolkit.KryptonButton btnDoiTuong;
         private System.Windows.Forms.Label lblDanhSachTinh;
         private System.Windows.Forms.GroupBox grbThongTinChiTiet;
-        private ComponentFactory.Krypton.Toolkit.KryptonTextBox txtTiLeGiamHocPhi;
+        private ComponentFactory.Krypton.Toolkit.KryptonTextBox txtTenTinh;
         private System.Windows.Forms.Label lblTenTinh;
         private System.Windows.Forms.Label lblMaTinh;
-        private ComponentFactory.Krypton.Toolkit.KryptonTextBox txtTenDoiTuong;
+        private ComponentFactory.Krypton.Toolkit.KryptonTextBox txtMaTinh;
         private ComponentFactory.Krypton.Toolkit.KryptonDataGridView dgvDSTinh;
         private ComponentFactory.Krypton.Toolkit.KryptonButton btnSua;
         private ComponentFactory.Krypton.Toolkit.KryptonButton btnThem;

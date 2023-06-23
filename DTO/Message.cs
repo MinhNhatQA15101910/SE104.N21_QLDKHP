@@ -124,4 +124,48 @@ namespace DTO
         Success,
         Error
     }
+
+    public enum SuaTinhMessage
+    {
+        EmptyTenTinh,
+        DuplicateTenTinh,
+        Success,
+        Error
+    }
+
+    public enum ThemTinhMessage
+    {
+        EmptyTenTinh,
+        DuplicateTenTinh,
+        Success,
+        Error
+    }
+
+    public enum XoaTinhMessage
+    {
+        Success, 
+        Error
+    }
+
+    public enum SuaHuyenMessage
+    {
+        EmptyTenHuyen,
+        DuplicateTenHuyen,
+        Success,
+        Error
+    }
+
+    public enum ThemHuyenMessage
+    {
+        EmptyTenHuyen,
+        DuplicateTenHuyen,
+        Success,
+        Error
+    }
+
+    public enum XoaHuyenMessage
+    {
+        Success, 
+        Error
+    }
 }

@@ -2300,6 +2300,7 @@ insert into NGUOIDUNG values ('SV21520053', 'FA585D89C851DD338A70DCF535AA2A92FEE
 
 -- Store Procedures
 --spNGUOIDUNG_LayBangTenDangNhapVaMatKhau
+go
 create proc spNGUOIDUNG_LayBangTenDangNhapVaMatKhau (@TenDangNhap nvarchar(10), @MatKhau nvarchar(200))
 as
 begin
@@ -2515,4 +2516,83 @@ go
 create proc spLOAIMONHOC_SuaLoaiMonHoc (@MaLoaiMonHoc int, @TenLoaiMonHoc nvarchar(100), @SoTiet int, @SoTien decimal)
 as
 begin
-	
+	update LOAIMONHOC
+	set TenLoaiMonHoc = @TenLoaiMonHoc, SoTiet = @SoTiet, SoTien = @SoTien
+	where MaLoaiMonHoc = @MaLoaiMonHoc
+end
+go
+
+--spLOAIMONHOC_ThemLoaiMonHoc
+create proc spLOAIMONHOC_ThemLoaiMonHoc(@TenLoaiMonHoc nvarchar(100), @SoTiet int, @SoTien decimal)
+as
+begin
+	insert into LOAIMONHOC
+	values (@TenLoaiMonHoc, @SoTiet, @SoTien)
+end
+go
+
+--spTINH_LayDSTinh
+create proc spTINH_LayDSTinh
+as
+begin
+	select * 
+	from TINH
+end
+go
+
+--spTINH_SuaTinh
+create proc spTINH_SuaTinh (@MaTinh int, @TenTinh nvarchar(100))
+as
+begin
+	update TINH
+	set TenTTP = @TenTinh 
+	where MaTinh = @MaTinh
+end
+go
+
+--spTINH_ThemTinh
+create proc spTINH_ThemTinh (@TenTinh nvarchar(100))
+as
+begin
+	insert into TINH
+	values (@TenTinh)
+end
+go
+
+--spTINH_XoaTinh
+create proc spTINH_XoaTinh (@MaTinh int)
+as
+begin
+	delete from TINH
+	where MaTinh = @MaTinh
+end
+go
+
+--spHUYEN_LayDSHuyen
+create proc spHUYEN_LayDSHuyen
+as
+begin
+	select HUYEN.*, TenTTP
+	from HUYEN, TINH 
+	where HUYEN.MaTinh = TINH.MaTinh
+end
+go
+
+--spHUYEN_SuaHuyen
+create proc spHUYEN_SuaHuyen (@MaHuyen nvarchar(50), @TenHuyen nvarchar(100), @VungUT int, @MaTinh int)
+as
+begin
+	update HUYEN
+	set TenHuyen = @TenHuyen, VungUT = @VungUT, MaTinh = @MaTinh
+	where MaHuyen = @MaHuyen
+end
+go
+
+--spHUYEN_ThemHuyen
+create proc spHUYEN_ThemHuyen (@TenHuyen nvarchar(100), @VungUT int, @MaTinh int) 
+as
+begin
+	insert into HUYEN
+	values (@TenHuyen, @VungUT, @MaTinh)
+end
+go

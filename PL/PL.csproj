@@ -162,6 +162,12 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="QuanLyHuyen.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="QuanLyHuyen.Designer.cs">
+      <DependentUpon>QuanLyHuyen.cs</DependentUpon>
+    </Compile>
     <Compile Include="QuanLyLoaiMonHoc.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -185,6 +191,12 @@
     </Compile>
     <Compile Include="SuaKhoa.Designer.cs">
       <DependentUpon>SuaKhoa.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ThemSuaHuyen.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ThemSuaHuyen.Designer.cs">
+      <DependentUpon>ThemSuaHuyen.cs</DependentUpon>
     </Compile>
     <Compile Include="ThemSuaLoaiMonHoc.cs">
       <SubType>Form</SubType>
@@ -240,12 +252,6 @@
     <Compile Include="ThemKhoa.Designer.cs">
       <DependentUpon>ThemKhoa.cs</DependentUpon>
     </Compile>
-    <Compile Include="ThemKhuVucUT.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="ThemKhuVucUT.Designer.cs">
-      <DependentUpon>ThemKhuVucUT.cs</DependentUpon>
-    </Compile>
     <Compile Include="ThemMonHoc.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -269,6 +275,12 @@
     </Compile>
     <Compile Include="ThemSuaCTH.Designer.cs">
       <DependentUpon>ThemSuaCTH.cs</DependentUpon>
+    </Compile>
+    <Compile Include="ThemSuaTinh.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="ThemSuaTinh.Designer.cs">
+      <DependentUpon>ThemSuaTinh.cs</DependentUpon>
     </Compile>
     <Compile Include="ThongTinDKHP.cs">
       <SubType>Form</SubType>
@@ -349,6 +361,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="QuanLyHuyen.resx">
+      <DependentUpon>QuanLyHuyen.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="QuanLyLoaiMonHoc.resx">
       <DependentUpon>QuanLyLoaiMonHoc.cs</DependentUpon>
     </EmbeddedResource>
@@ -363,6 +378,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="SuaKhoa.resx">
       <DependentUpon>SuaKhoa.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ThemSuaHuyen.resx">
+      <DependentUpon>ThemSuaHuyen.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ThemSuaLoaiMonHoc.resx">
       <DependentUpon>ThemSuaLoaiMonHoc.cs</DependentUpon>
@@ -391,9 +409,6 @@
     <EmbeddedResource Include="ThemKhoa.resx">
       <DependentUpon>ThemKhoa.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ThemKhuVucUT.resx">
-      <DependentUpon>ThemKhuVucUT.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="ThemMonHoc.resx">
       <DependentUpon>ThemMonHoc.cs</DependentUpon>
     </EmbeddedResource>
@@ -405,6 +420,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="ThemSuaCTH.resx">
       <DependentUpon>ThemSuaCTH.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="ThemSuaTinh.resx">
+      <DependentUpon>ThemSuaTinh.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="ThongTinDKHP.resx">
       <DependentUpon>ThongTinDKHP.cs</DependentUpon>
