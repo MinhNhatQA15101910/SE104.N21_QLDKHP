@@ -11,9 +11,9 @@ using System.Windows.Forms;
 
 namespace PL
 {
-    public partial class CaiDatTC_LM : KryptonForm
+    public partial class QuanLyTinh : KryptonForm
     {
-        public CaiDatTC_LM()
+        public QuanLyTinh()
         {
             InitializeComponent();
         }

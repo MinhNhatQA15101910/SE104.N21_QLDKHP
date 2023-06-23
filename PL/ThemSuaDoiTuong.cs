@@ -55,6 +55,14 @@ namespace PL
             }
         }
 
+        private void ThemSuaDoiTuong_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (themSuaDoiTuongRequester != null)
+            {
+                themSuaDoiTuongRequester.OnThemSuaDoiTuongClosing();
+            }
+        }
+
         private void btnQuayLai_Click(object sender, EventArgs e)
         {
             Close();
@@ -86,6 +94,9 @@ namespace PL
                     case SuaDoiTuongMessage.TiLeGiamKhongHopLe:
                         MessageBox.Show("Tỉ lệ giảm học phí không hợp lệ, vui lòng nhập lại!");
                         break;
+                    case SuaDoiTuongMessage.Unable:
+                        MessageBox.Show("Không thể đổi tên đối tượng vùng sâu vùng xa!");
+                        break;
                     case SuaDoiTuongMessage.DuplicateTenDoiTuong:
                         MessageBox.Show("Tên đối tượng đã tồn tại, vui lòng nhập giá trị khác!");
                         break;
@@ -100,40 +111,36 @@ namespace PL
             }
             else
             {
-                //string tenDT = txtTenDoiTuong.Text.Trim();
-                //string tiLeGiam = txtTiLeGiam.Text.Trim();
+                string tenDT = txtTenDoiTuong.Text.Trim();
+                string tiLeGiam = txtTiLeGiam.Text.Trim();
 
-                //ThemDoiTuongMessage message = DoiTuongBLL.ThemDoiTuong(tenDT, tiLeGiam);
-                //switch (message)
-                //{
-                //    case ThemDoiTuongMessage.EmptyTenDoiTuong:
-                //        MessageBox.Show("Tên đối tượng không được để trống!");
-                //        break;
-                //    case ThemDoiTuongMessage.EmptyTiLeGiam:
-                //        MessageBox.Show("Tỉ lệ giảm học phí không được để trống!");
-                //        break;
-                //    case ThemDoiTuongMessage.TiLeGiamKhongHopLe:
-                //        MessageBox.Show("Tỉ lệ giảm học phí không hợp lệ, vui lòng nhập lại!");
-                //        break;
-                //    case ThemDoiTuongMessage.DuplicateTenDoiTuong:
-                //        MessageBox.Show("Tên đối tượng đã tồn tại, vui lòng nhập giá trị khác!");
-                //        break;
-                //    case ThemDoiTuongMessage.Error:
-                //        MessageBox.Show("Đã có lỗi xảy ra!");
-                //        break;
-                //    case ThemDoiTuongMessage.Success:
-                //        MessageBox.Show("Thêm đối tượng thành công!");
-                //        Close();
-                //        break;
-                //}
-            }
-        }
+                ThemDoiTuongMessage message = DoiTuongBLL.ThemDoiTuong(tenDT, tiLeGiam);
+                switch (message)
+                {
+                    case ThemDoiTuongMessage.EmptyTenDoiTuong:
+                        MessageBox.Show("Tên đối tượng không được để trống!");
+                        break;
+                    case ThemDoiTuongMessage.EmptyTiLeGiam:
+                        MessageBox.Show("Tỉ lệ giảm học phí không được để trống!");
+                        break;
+                    case ThemDoiTuongMessage.TiLeGiamKhongHopLe:
+                        MessageBox.Show("Tỉ lệ giảm học phí không hợp lệ, vui lòng nhập lại!");
+                        break;
+                    case ThemDoiTuongMessage.DuplicateTenDoiTuong:
+                        MessageBox.Show("Tên đối tượng đã tồn tại, vui lòng nhập giá trị khác!");
+                        break;
+                    case ThemDoiTuongMessage.Error:
+                        MessageBox.Show("Đã có lỗi xảy ra!");
+                        break;
+                    case ThemDoiTuongMessage.Success:
+                        if (themSuaDoiTuongRequester != null)
+                        {
+                            themSuaDoiTuongRequester.OnThemSuaDoiTuongClosing();
+                        }
 
-        private void ThemSuaDoiTuong_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            if (themSuaDoiTuongRequester != null)
-            {
-                themSuaDoiTuongRequester.OnThemSuaDoiTuongClosing();
+                        MessageBox.Show("Thêm đối tượng thành công!");
+                        break;
+                }
             }
         }
     }

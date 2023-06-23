@@ -83,7 +83,8 @@ namespace PL
 
         private void btnThem_Click(object sender, EventArgs e)
         {
-
+            ThemSuaDoiTuong themSuaDoiTuong = new ThemSuaDoiTuong(this);
+            themSuaDoiTuong.Show();
         }
 
         private void btnSua_Click(object sender, EventArgs e)
@@ -97,6 +98,39 @@ namespace PL
         {
             mDoiTuong = new BindingList<DoiTuong>(DoiTuongBLL.LayDSDoiTuong());
             mDoiTuongSource.DataSource = mDoiTuong;
+        }
+
+        private void btnXoa_Click(object sender, EventArgs e)
+        {
+            DialogResult result = MessageBox.Show("Bạn có muốn xóa đối tượng ưu tiên đã chọn?", "Xác nhận", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+
+            if (result == DialogResult.Yes)
+            {
+                DoiTuong doiTuong = mDoiTuong[dgvDSDoiTuong.CurrentRow.Index];
+                int maDT = mDoiTuong[dgvDSDoiTuong.CurrentRow.Index].MaDT;
+
+                XoaDoiTuongMessage message = DoiTuongBLL.XoaDoiTuong(maDT);
+                switch (message)
+                {
+                    case XoaDoiTuongMessage.Error:
+                        MessageBox.Show("Bạn không thể xóa đối tượng này do có sinh viên đang thuộc đối tượng!");
+                        break;
+                    case XoaDoiTuongMessage.Unable:
+                        MessageBox.Show("Bạn không thể xóa đối tượng vùng sâu vùng xa!");
+                        break;
+                    case XoaDoiTuongMessage.Success:
+                        mDoiTuong.Remove(doiTuong);
+                        MessageBox.Show("Xóa đối tượng thành công!");
+                        break;
+                }
+            }
+        }
+
+        private void btnLoaiMon_Click(object sender, EventArgs e)
+        {
+            QuanLyLoaiMonHoc quanLyLoaiMonHoc = new QuanLyLoaiMonHoc(caiDatRequester);
+            quanLyLoaiMonHoc.Show();
+            Hide();
         }
     }
 }

@@ -1,6 +1,6 @@
 ﻿namespace PL
 {
-    partial class QuanLyDoiTuong
+    partial class QuanLyTinh
     {
         /// <summary>
         /// Required designer variable.
@@ -29,8 +29,8 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(QuanLyDoiTuong));
             System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(QuanLyTinh));
             this.pnlCaiDat = new System.Windows.Forms.Panel();
             this.pnlHuyen = new System.Windows.Forms.Panel();
             this.btnHuyen = new ComponentFactory.Krypton.Toolkit.KryptonButton();
@@ -42,24 +42,24 @@
             this.pnlLoaiMon = new System.Windows.Forms.Panel();
             this.btnLoaiMon = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.plt1 = new ComponentFactory.Krypton.Toolkit.KryptonPalette(this.components);
-            this.lblDanhSachDoiTuong = new System.Windows.Forms.Label();
+            this.lblDanhSachTinh = new System.Windows.Forms.Label();
             this.grbThongTinChiTiet = new System.Windows.Forms.GroupBox();
             this.txtTiLeGiamHocPhi = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
-            this.lblTiLeGiamHocPhi = new System.Windows.Forms.Label();
-            this.lblTenDoiTuong = new System.Windows.Forms.Label();
+            this.lblTenTinh = new System.Windows.Forms.Label();
+            this.lblMaTinh = new System.Windows.Forms.Label();
             this.txtTenDoiTuong = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
-            this.btnQuayLai = new ComponentFactory.Krypton.Toolkit.KryptonButton();
-            this.dgvDSDoiTuong = new ComponentFactory.Krypton.Toolkit.KryptonDataGridView();
+            this.dgvDSTinh = new ComponentFactory.Krypton.Toolkit.KryptonDataGridView();
             this.btnSua = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.btnThem = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.btnXoa = new ComponentFactory.Krypton.Toolkit.KryptonButton();
+            this.btnQuayLai = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.pnlCaiDat.SuspendLayout();
             this.pnlHuyen.SuspendLayout();
             this.pnlTinh.SuspendLayout();
             this.pnlDoiTuong.SuspendLayout();
             this.pnlLoaiMon.SuspendLayout();
             this.grbThongTinChiTiet.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvDSDoiTuong)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvDSTinh)).BeginInit();
             this.SuspendLayout();
             // 
             // pnlCaiDat
@@ -116,6 +116,7 @@
             // 
             this.btnTinh.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnTinh.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.btnTinh.Enabled = false;
             this.btnTinh.Location = new System.Drawing.Point(0, 0);
             this.btnTinh.Margin = new System.Windows.Forms.Padding(2);
             this.btnTinh.Name = "btnTinh";
@@ -151,13 +152,12 @@
             // 
             this.btnDoiTuong.Cursor = System.Windows.Forms.Cursors.Hand;
             this.btnDoiTuong.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.btnDoiTuong.Enabled = false;
             this.btnDoiTuong.Location = new System.Drawing.Point(0, 0);
             this.btnDoiTuong.Margin = new System.Windows.Forms.Padding(2);
             this.btnDoiTuong.Name = "btnDoiTuong";
             this.btnDoiTuong.Size = new System.Drawing.Size(198, 35);
             this.btnDoiTuong.StateCommon.Back.Color1 = System.Drawing.Color.White;
-            this.btnDoiTuong.StateCommon.Back.Color2 = System.Drawing.Color.Yellow;
+            this.btnDoiTuong.StateCommon.Back.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(192)))), ((int)(((byte)(192)))), ((int)(((byte)(255)))));
             this.btnDoiTuong.StateCommon.Content.ShortText.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnDoiTuong.TabIndex = 8;
             this.btnDoiTuong.Values.Text = "Đối tượng";
@@ -185,7 +185,6 @@
             this.btnLoaiMon.StateCommon.Content.ShortText.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnLoaiMon.TabIndex = 9;
             this.btnLoaiMon.Values.Text = "Tín chỉ, loại môn";
-            this.btnLoaiMon.Click += new System.EventHandler(this.btnLoaiMon_Click);
             // 
             // plt1
             // 
@@ -204,22 +203,22 @@
             this.plt1.HeaderStyles.HeaderCommon.StateCommon.Back.Color1 = System.Drawing.Color.White;
             this.plt1.HeaderStyles.HeaderCommon.StateCommon.Back.Color2 = System.Drawing.Color.White;
             // 
-            // lblDanhSachDoiTuong
+            // lblDanhSachTinh
             // 
-            this.lblDanhSachDoiTuong.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblDanhSachDoiTuong.ForeColor = System.Drawing.Color.Black;
-            this.lblDanhSachDoiTuong.Location = new System.Drawing.Point(236, 215);
-            this.lblDanhSachDoiTuong.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.lblDanhSachDoiTuong.Name = "lblDanhSachDoiTuong";
-            this.lblDanhSachDoiTuong.Size = new System.Drawing.Size(135, 20);
-            this.lblDanhSachDoiTuong.TabIndex = 63;
-            this.lblDanhSachDoiTuong.Text = "Danh sách đối tượng:";
+            this.lblDanhSachTinh.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblDanhSachTinh.ForeColor = System.Drawing.Color.Black;
+            this.lblDanhSachTinh.Location = new System.Drawing.Point(236, 215);
+            this.lblDanhSachTinh.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblDanhSachTinh.Name = "lblDanhSachTinh";
+            this.lblDanhSachTinh.Size = new System.Drawing.Size(135, 20);
+            this.lblDanhSachTinh.TabIndex = 63;
+            this.lblDanhSachTinh.Text = "Danh sách tỉnh:";
             // 
             // grbThongTinChiTiet
             // 
             this.grbThongTinChiTiet.Controls.Add(this.txtTiLeGiamHocPhi);
-            this.grbThongTinChiTiet.Controls.Add(this.lblTiLeGiamHocPhi);
-            this.grbThongTinChiTiet.Controls.Add(this.lblTenDoiTuong);
+            this.grbThongTinChiTiet.Controls.Add(this.lblTenTinh);
+            this.grbThongTinChiTiet.Controls.Add(this.lblMaTinh);
             this.grbThongTinChiTiet.Controls.Add(this.txtTenDoiTuong);
             this.grbThongTinChiTiet.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.grbThongTinChiTiet.Location = new System.Drawing.Point(220, 87);
@@ -234,11 +233,11 @@
             // txtTiLeGiamHocPhi
             // 
             this.txtTiLeGiamHocPhi.Cursor = System.Windows.Forms.Cursors.IBeam;
-            this.txtTiLeGiamHocPhi.Location = new System.Drawing.Point(260, 47);
+            this.txtTiLeGiamHocPhi.Location = new System.Drawing.Point(143, 46);
             this.txtTiLeGiamHocPhi.Margin = new System.Windows.Forms.Padding(2);
             this.txtTiLeGiamHocPhi.Name = "txtTiLeGiamHocPhi";
             this.txtTiLeGiamHocPhi.ReadOnly = true;
-            this.txtTiLeGiamHocPhi.Size = new System.Drawing.Size(140, 29);
+            this.txtTiLeGiamHocPhi.Size = new System.Drawing.Size(262, 29);
             this.txtTiLeGiamHocPhi.StateActive.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
             | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left) 
             | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Right)));
@@ -248,27 +247,27 @@
             this.txtTiLeGiamHocPhi.StateActive.Content.Padding = new System.Windows.Forms.Padding(2, -1, -1, -1);
             this.txtTiLeGiamHocPhi.TabIndex = 22;
             // 
-            // lblTiLeGiamHocPhi
+            // lblTenTinh
             // 
-            this.lblTiLeGiamHocPhi.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTiLeGiamHocPhi.ForeColor = System.Drawing.Color.Black;
-            this.lblTiLeGiamHocPhi.Location = new System.Drawing.Point(257, 24);
-            this.lblTiLeGiamHocPhi.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.lblTiLeGiamHocPhi.Name = "lblTiLeGiamHocPhi";
-            this.lblTiLeGiamHocPhi.Size = new System.Drawing.Size(116, 20);
-            this.lblTiLeGiamHocPhi.TabIndex = 12;
-            this.lblTiLeGiamHocPhi.Text = "Tỉ lệ giảm học phí:";
+            this.lblTenTinh.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTenTinh.ForeColor = System.Drawing.Color.Black;
+            this.lblTenTinh.Location = new System.Drawing.Point(146, 24);
+            this.lblTenTinh.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblTenTinh.Name = "lblTenTinh";
+            this.lblTenTinh.Size = new System.Drawing.Size(116, 20);
+            this.lblTenTinh.TabIndex = 12;
+            this.lblTenTinh.Text = "Tên tỉnh:";
             // 
-            // lblTenDoiTuong
+            // lblMaTinh
             // 
-            this.lblTenDoiTuong.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblTenDoiTuong.ForeColor = System.Drawing.Color.Black;
-            this.lblTenDoiTuong.Location = new System.Drawing.Point(16, 24);
-            this.lblTenDoiTuong.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.lblTenDoiTuong.Name = "lblTenDoiTuong";
-            this.lblTenDoiTuong.Size = new System.Drawing.Size(152, 20);
-            this.lblTenDoiTuong.TabIndex = 14;
-            this.lblTenDoiTuong.Text = "Tên đối tượng:";
+            this.lblMaTinh.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblMaTinh.ForeColor = System.Drawing.Color.Black;
+            this.lblMaTinh.Location = new System.Drawing.Point(16, 24);
+            this.lblMaTinh.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblMaTinh.Name = "lblMaTinh";
+            this.lblMaTinh.Size = new System.Drawing.Size(152, 20);
+            this.lblMaTinh.TabIndex = 14;
+            this.lblMaTinh.Text = "Mã tỉnh:";
             // 
             // txtTenDoiTuong
             // 
@@ -277,7 +276,7 @@
             this.txtTenDoiTuong.Margin = new System.Windows.Forms.Padding(2);
             this.txtTenDoiTuong.Name = "txtTenDoiTuong";
             this.txtTenDoiTuong.ReadOnly = true;
-            this.txtTenDoiTuong.Size = new System.Drawing.Size(234, 29);
+            this.txtTenDoiTuong.Size = new System.Drawing.Size(94, 29);
             this.txtTenDoiTuong.StateActive.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
             | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left) 
             | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Right)));
@@ -287,53 +286,31 @@
             this.txtTenDoiTuong.StateActive.Content.Padding = new System.Windows.Forms.Padding(2, -1, -1, -1);
             this.txtTenDoiTuong.TabIndex = 21;
             // 
-            // btnQuayLai
-            // 
-            this.btnQuayLai.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.btnQuayLai.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.btnQuayLai.Location = new System.Drawing.Point(832, -2);
-            this.btnQuayLai.Margin = new System.Windows.Forms.Padding(2);
-            this.btnQuayLai.Name = "btnQuayLai";
-            this.btnQuayLai.Size = new System.Drawing.Size(39, 39);
-            this.btnQuayLai.StateCommon.Back.Color1 = System.Drawing.Color.White;
-            this.btnQuayLai.StateCommon.Back.Color2 = System.Drawing.Color.White;
-            this.btnQuayLai.StateCommon.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
-            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left) 
-            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Right)));
-            this.btnQuayLai.StateCommon.Border.Rounding = 15;
-            this.btnQuayLai.StateCommon.Content.LongText.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnQuayLai.StateCommon.Content.ShortText.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnQuayLai.TabIndex = 64;
-            this.btnQuayLai.Values.Image = ((System.Drawing.Image)(resources.GetObject("btnQuayLai.Values.Image")));
-            this.btnQuayLai.Values.Text = " ";
-            this.btnQuayLai.Click += new System.EventHandler(this.btnQuayLai_Click);
-            // 
-            // dgvDSDoiTuong
+            // dgvDSTinh
             // 
             dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(159)))), ((int)(((byte)(159)))));
             dataGridViewCellStyle1.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black;
-            this.dgvDSDoiTuong.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
-            this.dgvDSDoiTuong.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvDSDoiTuong.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.dgvDSDoiTuong.Location = new System.Drawing.Point(220, 237);
-            this.dgvDSDoiTuong.Margin = new System.Windows.Forms.Padding(2);
-            this.dgvDSDoiTuong.Name = "dgvDSDoiTuong";
-            this.dgvDSDoiTuong.RowHeadersVisible = false;
-            this.dgvDSDoiTuong.RowHeadersWidth = 51;
-            this.dgvDSDoiTuong.RowTemplate.Height = 24;
-            this.dgvDSDoiTuong.Size = new System.Drawing.Size(409, 245);
-            this.dgvDSDoiTuong.StateCommon.Background.Color1 = System.Drawing.Color.White;
-            this.dgvDSDoiTuong.StateCommon.BackStyle = ComponentFactory.Krypton.Toolkit.PaletteBackStyle.GridBackgroundList;
-            this.dgvDSDoiTuong.StateCommon.DataCell.Back.Color1 = System.Drawing.Color.White;
-            this.dgvDSDoiTuong.StateCommon.HeaderColumn.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(196)))), ((int)(((byte)(64)))), ((int)(((byte)(77)))));
-            this.dgvDSDoiTuong.StateCommon.HeaderColumn.Back.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(196)))), ((int)(((byte)(64)))), ((int)(((byte)(77)))));
-            this.dgvDSDoiTuong.StateCommon.HeaderColumn.Content.Color1 = System.Drawing.Color.White;
-            this.dgvDSDoiTuong.StateCommon.HeaderColumn.Content.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dgvDSDoiTuong.StateCommon.HeaderColumn.Content.Padding = new System.Windows.Forms.Padding(2, -1, -1, -1);
-            this.dgvDSDoiTuong.StateCommon.HeaderColumn.Content.TextH = ComponentFactory.Krypton.Toolkit.PaletteRelativeAlign.Center;
-            this.dgvDSDoiTuong.TabIndex = 62;
-            this.dgvDSDoiTuong.SelectionChanged += new System.EventHandler(this.dgvDSDoiTuong_SelectionChanged);
+            this.dgvDSTinh.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
+            this.dgvDSTinh.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgvDSTinh.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.dgvDSTinh.Location = new System.Drawing.Point(220, 237);
+            this.dgvDSTinh.Margin = new System.Windows.Forms.Padding(2);
+            this.dgvDSTinh.Name = "dgvDSTinh";
+            this.dgvDSTinh.RowHeadersVisible = false;
+            this.dgvDSTinh.RowHeadersWidth = 51;
+            this.dgvDSTinh.RowTemplate.Height = 24;
+            this.dgvDSTinh.Size = new System.Drawing.Size(409, 245);
+            this.dgvDSTinh.StateCommon.Background.Color1 = System.Drawing.Color.White;
+            this.dgvDSTinh.StateCommon.BackStyle = ComponentFactory.Krypton.Toolkit.PaletteBackStyle.GridBackgroundList;
+            this.dgvDSTinh.StateCommon.DataCell.Back.Color1 = System.Drawing.Color.White;
+            this.dgvDSTinh.StateCommon.HeaderColumn.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(196)))), ((int)(((byte)(64)))), ((int)(((byte)(77)))));
+            this.dgvDSTinh.StateCommon.HeaderColumn.Back.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(196)))), ((int)(((byte)(64)))), ((int)(((byte)(77)))));
+            this.dgvDSTinh.StateCommon.HeaderColumn.Content.Color1 = System.Drawing.Color.White;
+            this.dgvDSTinh.StateCommon.HeaderColumn.Content.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dgvDSTinh.StateCommon.HeaderColumn.Content.Padding = new System.Windows.Forms.Padding(2, -1, -1, -1);
+            this.dgvDSTinh.StateCommon.HeaderColumn.Content.TextH = ComponentFactory.Krypton.Toolkit.PaletteRelativeAlign.Center;
+            this.dgvDSTinh.TabIndex = 62;
             // 
             // btnSua
             // 
@@ -373,7 +350,6 @@
             this.btnSua.TabIndex = 61;
             this.btnSua.Values.Image = global::PL.Properties.Resources.icons8_edit_property_25;
             this.btnSua.Values.Text = " SỬA";
-            this.btnSua.Click += new System.EventHandler(this.btnSua_Click);
             // 
             // btnThem
             // 
@@ -413,7 +389,6 @@
             this.btnThem.TabIndex = 59;
             this.btnThem.Values.Image = global::PL.Properties.Resources.icons8_add_properties_25;
             this.btnThem.Values.Text = " THÊM";
-            this.btnThem.Click += new System.EventHandler(this.btnThem_Click);
             // 
             // btnXoa
             // 
@@ -453,32 +428,49 @@
             this.btnXoa.TabIndex = 60;
             this.btnXoa.Values.Image = global::PL.Properties.Resources.icons8_delete_document_25;
             this.btnXoa.Values.Text = " XÓA";
-            this.btnXoa.Click += new System.EventHandler(this.btnXoa_Click);
             // 
-            // QuanLyDoiTuong
+            // btnQuayLai
+            // 
+            this.btnQuayLai.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.btnQuayLai.ImeMode = System.Windows.Forms.ImeMode.NoControl;
+            this.btnQuayLai.Location = new System.Drawing.Point(832, 0);
+            this.btnQuayLai.Margin = new System.Windows.Forms.Padding(2);
+            this.btnQuayLai.Name = "btnQuayLai";
+            this.btnQuayLai.Size = new System.Drawing.Size(39, 39);
+            this.btnQuayLai.StateCommon.Back.Color1 = System.Drawing.Color.White;
+            this.btnQuayLai.StateCommon.Back.Color2 = System.Drawing.Color.White;
+            this.btnQuayLai.StateCommon.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
+            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left) 
+            | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Right)));
+            this.btnQuayLai.StateCommon.Border.Rounding = 15;
+            this.btnQuayLai.StateCommon.Content.LongText.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnQuayLai.StateCommon.Content.ShortText.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnQuayLai.TabIndex = 67;
+            this.btnQuayLai.Values.Image = ((System.Drawing.Image)(resources.GetObject("btnQuayLai.Values.Image")));
+            this.btnQuayLai.Values.Text = " ";
+            // 
+            // QuanLyTinh
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(882, 499);
-            this.Controls.Add(this.lblDanhSachDoiTuong);
-            this.Controls.Add(this.grbThongTinChiTiet);
             this.Controls.Add(this.btnQuayLai);
-            this.Controls.Add(this.dgvDSDoiTuong);
+            this.Controls.Add(this.lblDanhSachTinh);
+            this.Controls.Add(this.grbThongTinChiTiet);
+            this.Controls.Add(this.dgvDSTinh);
             this.Controls.Add(this.btnSua);
             this.Controls.Add(this.btnThem);
             this.Controls.Add(this.btnXoa);
             this.Controls.Add(this.pnlCaiDat);
             this.Margin = new System.Windows.Forms.Padding(2);
             this.MaximizeBox = false;
-            this.Name = "QuanLyDoiTuong";
+            this.Name = "QuanLyTinh";
             this.Palette = this.plt1;
             this.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Custom;
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Đối tượng";
-            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.QuanLyDoiTuong_FormClosing);
-            this.Load += new System.EventHandler(this.QuanLyDoiTuong_Load);
             this.pnlCaiDat.ResumeLayout(false);
             this.pnlHuyen.ResumeLayout(false);
             this.pnlTinh.ResumeLayout(false);
@@ -486,7 +478,7 @@
             this.pnlLoaiMon.ResumeLayout(false);
             this.grbThongTinChiTiet.ResumeLayout(false);
             this.grbThongTinChiTiet.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dgvDSDoiTuong)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dgvDSTinh)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -502,17 +494,17 @@
         private System.Windows.Forms.Panel pnlTinh;
         private ComponentFactory.Krypton.Toolkit.KryptonButton btnTinh;
         private ComponentFactory.Krypton.Toolkit.KryptonButton btnDoiTuong;
-        private System.Windows.Forms.Label lblDanhSachDoiTuong;
+        private System.Windows.Forms.Label lblDanhSachTinh;
         private System.Windows.Forms.GroupBox grbThongTinChiTiet;
         private ComponentFactory.Krypton.Toolkit.KryptonTextBox txtTiLeGiamHocPhi;
-        private System.Windows.Forms.Label lblTiLeGiamHocPhi;
-        private System.Windows.Forms.Label lblTenDoiTuong;
+        private System.Windows.Forms.Label lblTenTinh;
+        private System.Windows.Forms.Label lblMaTinh;
         private ComponentFactory.Krypton.Toolkit.KryptonTextBox txtTenDoiTuong;
-        private ComponentFactory.Krypton.Toolkit.KryptonButton btnQuayLai;
-        private ComponentFactory.Krypton.Toolkit.KryptonDataGridView dgvDSDoiTuong;
+        private ComponentFactory.Krypton.Toolkit.KryptonDataGridView dgvDSTinh;
         private ComponentFactory.Krypton.Toolkit.KryptonButton btnSua;
         private ComponentFactory.Krypton.Toolkit.KryptonButton btnThem;
         private ComponentFactory.Krypton.Toolkit.KryptonButton btnXoa;
         private ComponentFactory.Krypton.Toolkit.KryptonButton btnLoaiMon;
+        private ComponentFactory.Krypton.Toolkit.KryptonButton btnQuayLai;
     }
 }

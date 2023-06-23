@@ -110,8 +110,8 @@ namespace PL
 
         private void picCaiDat_Click(object sender, EventArgs e)
         {
-            QuanLyDoiTuong quanLyDoiTuong = new QuanLyDoiTuong(this);
-            quanLyDoiTuong.Show();
+            QuanLyLoaiMonHoc quanLyLoaiMonHoc = new QuanLyLoaiMonHoc(this);
+            quanLyLoaiMonHoc.Show();
             Hide();
         }
 

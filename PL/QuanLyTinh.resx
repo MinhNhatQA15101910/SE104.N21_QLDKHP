@@ -117,17 +117,11 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
-  <metadata name="Manganh.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="Tennganh.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
-  </metadata>
-  <metadata name="Khoa.UserAddedColumn" type="System.Boolean, mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089">
-    <value>True</value>
+  <metadata name="plt1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>17, 17</value>
   </metadata>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="kryptonButton6.Values.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+  <data name="btnQuayLai.Values.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAABkAAAAZCAYAAADE6YVjAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAN
         0AAADdABEGw9BwAAAStJREFUSEvt1bFKA0EUheERjGAhYhFQNASbFAoROwtBREwhCMY3sE+Xl8hDxE5B
@@ -138,22 +132,4 @@
         wxgaHdgj6KO34Jxzv6ckb8z7pmgxAAAAAElFTkSuQmCC
 </value>
   </data>
-  <data name="kryptonButton1.Values.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABkAAAAZCAYAAADE6YVjAAAAIGNIUk0AAHomAACAhAAA+gAAAIDoAAB1
-        MAAA6mAAADqYAAAXcJy6UTwAAAAJcEhZcwAADdAAAA3QARBsPQcAAAAHdElNRQfnBQQJKh9tpWPvAAAA
-        GXRFWHRTb2Z0d2FyZQB3d3cuaW5rc2NhcGUub3Jnm+48GgAAAcpJREFUSEu91kFKHEEUxvHZBcTs1LhK
-        LiF4gKAnMHsRDELWKnqEoEuvIXgBEe/gwk1IjhAQAlmo36/pkh56pntanfngz6O63nvVXfVezYx69CUc
-        hKvwJ/wPT7U19tw8v8FaDYfhLjwGif+G3+G+tsaem+fHX9xM2gw3QYKH4G33w0b4HNZra+y5eX78xYnv
-        1Hb4FQRch63wIXTJPD/+4sTLM1HeoCxwEVbCEPEXVxZqfZG9LFvEcSm8RuLKQvKNnZFDM+GTu77gU/hW
-        22kSX7ZO3krKT3U4PHvbpR9BMNsleeSTtypvda4MVUnfIZ8Ei7Bdkkc+eeWvBgKVY59mXYTk4yt/1bka
-        S9336TgIZPskn7zyV1eEDtZgTa0Fb3wezsLPcBsswhp7bp4f/6bkk1f+KshVoZOb+hr+BfN98OPflHzy
-        mp/6JR/DTvge7O9euAyCWGPPzfPj39TYlww5k6NgEbZPY2eykOoa0ienQSDbpVafDOn43WAL2C61Op5m
-        vbuWg71mp2ni3UULuYVp7r8nRXP/ZSzyBmXrHJ4qUY7OQoO9+Te+yF46NNWhDCVQVTr4Xf6tNKX81Lm3
-        1bmuCIlZY8/Nv5RpW6PRMwFmtcnuphVwAAAAAElFTkSuQmCC
-</value>
-  </data>
-  <metadata name="paleDangNhap.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>17, 17</value>
-  </metadata>
 </root>

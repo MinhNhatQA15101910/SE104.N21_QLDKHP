@@ -61,7 +61,66 @@ namespace DTO
         EmptyTenDoiTuong,
         EmptyTiLeGiam,
         TiLeGiamKhongHopLe,
+        Unable, 
         DuplicateTenDoiTuong,
+        Success,
+        Error
+    }
+
+    public enum ThemDoiTuongMessage
+    {
+        EmptyTenDoiTuong,
+        EmptyTiLeGiam,
+        TiLeGiamKhongHopLe,
+        DuplicateTenDoiTuong,
+        Success,
+        Error
+    }
+
+    public enum XoaDoiTuongMessage
+    {
+        Success, 
+        Error, 
+        Unable
+    }
+
+    public enum SuaGioiHanTinChiMessage
+    {
+        TinChiToiDaRong,
+        TinChiToiThieuRong,
+        TinChiToiDaKhongHopLe, 
+        TinChiToiThieuKhongHopLe, 
+        Unable, 
+        Success, 
+        Error
+    }
+
+    public enum XoaLoaiMonHocMessage
+    {
+        Success, 
+        Error
+    }
+
+    public enum SuaLoaiMonHocMessage
+    {
+        EmptyTenLoaiMonHoc,
+        EmptySoTiet,
+        EmptySoTien,
+        SoTietKhongHopLe,
+        SoTienKhongHopLe,
+        DuplicateTenLoaiMonHoc,
+        Success,
+        Error
+    }
+
+    public enum ThemLoaiMonHocMessage
+    {
+        EmptyTenLoaiMonHoc,
+        EmptySoTiet,
+        EmptySoTien,
+        SoTietKhongHopLe,
+        SoTienKhongHopLe,
+        DuplicateTenLoaiMonHoc,
         Success,
         Error
     }

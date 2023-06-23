@@ -220,8 +220,9 @@ create table CT_PHIEUDKHP
 go
 
 -- 7.2 - Yêu cầu lập phiếu đăng ký học phần - Tính tiến hóa
-alter table LOAIMONHOC add SoTien int not null;
+alter table LOAIMONHOC add SoTien decimal not null;
 go
+
 create function dbo.chk_MaMH(@MaMH nvarchar(50), @MaPhieuDKHP int)
 returns varchar(5)
 as
@@ -1186,6 +1187,8 @@ insert into DOITUONG values
 (N'Vùng sâu vùng xa', 0.3),
 (N'Con thương binh', 0.5),
 (N'Con liệt sĩ', 0.8);
+
+select * from DOITUONG
 
 -- table SINHVIEN
 set dateformat dmy;
@@ -2398,3 +2401,118 @@ begin
 	where TenDangNhap = @TenDangNhapBD
 end
 go
+
+--spNGUOIDUNG_ThemTaiKhoan
+create proc spNGUOIDUNG_ThemTaiKhoan (@TenDangNhap nvarchar(10), @MaNhom nvarchar(20))
+as
+begin
+	insert into NGUOIDUNG
+	values (@TenDangNhap, 'FA585D89C851DD338A70DCF535AA2A92FEE7836DD6AFF1226583E88E0996293F16BC009C652826E0FC5C706695A03CDDCE372F139EFF4D13959DA6F1F5D3EABE', @MaNhom)
+end
+go
+
+--spDOITUONG_LayDSDoiTuong
+create proc spDOITUONG_LayDSDoiTuong
+as
+begin
+	select *
+	from DOITUONG
+	where MaDT <> 1
+end
+go
+
+--spDOITUONG_SuaDoiTuong
+create proc spDOITUONG_SuaDoiTuong (@MaDT int, @TenDT nvarchar(100), @TiLeGiamHocPhi float)
+as
+begin
+	update DOITUONG
+	set TenDT = @TenDT, TiLeGiamHocPhi = @TiLeGiamHocPhi
+	where MaDT = @MaDT
+end
+go
+
+--spDOITUONG_ThemDoiTuong
+create proc spDOITUONG_ThemDoiTuong (@TenDT nvarchar(100), @TiLeGiamHocPhi float)
+as
+begin
+	insert into DOITUONG
+	values (@TenDT, @TiLeGiamHocPhi)
+end
+go
+
+--spDOITUONG_XoaDoiTuong
+create proc spDOITUONG_XoaDoiTuong (@MaDT int)
+as
+begin
+	delete from DOITUONG
+	where MaDT = @MaDT
+end
+go
+
+--spLOAIMONHOC_LayDSLoaiMonHoc
+create proc spLOAIMONHOC_LayDSLoaiMonHoc
+as
+begin
+	select * 
+	from LOAIMONHOC
+end
+go
+
+--spGLOBALCONFIG_LaySoTinChiToiDa
+create proc spGLOBALCONFIG_LaySoTinChiToiDa
+as
+begin
+	select SoTinChiToiDa
+	from THAMSO
+end
+go
+
+--spGLOBALCONFIG_LaySoTinChiToiThieu
+create proc spGLOBALCONFIG_LaySoTinChiToiThieu
+as
+begin
+	select SoTinChiToiThieu
+	from THAMSO
+end
+go
+
+--spGLOBALCONFIG_SuaGioiHanTinChi
+create proc spGLOBALCONFIG_SuaGioiHanTinChi (@SoTinChiToiDa int, @SoTinChiToiThieu int)
+as
+begin
+	update THAMSO
+	set SoTinChiToiDa = @SoTinChiToiDa, SoTinChiToiThieu = @SoTinChiToiThieu
+end
+go
+
+--spLOAIMONHOC_XoaLoaiMonHoc
+create proc spLOAIMONHOC_XoaLoaiMonHoc (@MaLoaiMonHoc int)
+as
+begin
+	delete from LOAIMONHOC
+	where MaLoaiMonHoc = @MaLoaiMonHoc
+end
+go
+
+--trgMONHOC_udt_SuaSoTiet
+create trigger trgMONHOC_udt_SuaSoTiet on LOAIMONHOC
+after update
+as
+begin
+	if update(SoTiet)
+	begin
+		declare @SoTietLoaiMonCu int = (select SoTiet from deleted);
+		declare @SoTietLoaiMonMoi int = (select SoTiet from inserted);
+
+		update MONHOC
+		set SoTiet = SoTiet * @SoTietLoaiMonMoi / @SoTietLoaiMonCu
+		where MaLoaiMonHoc = (select MaLoaiMonHoc from inserted)
+	end
+end
+go
+
+--spLOAIMONHOC_SuaLoaiMonHoc
+create proc spLOAIMONHOC_SuaLoaiMonHoc (@MaLoaiMonHoc int, @TenLoaiMonHoc nvarchar(100), @SoTiet int, @SoTien decimal)
+as
+begin
+	

@@ -52,5 +52,54 @@ namespace DAL
 
             return SuaDoiTuongMessage.Success;
         }
+
+        public static ThemDoiTuongMessage ThemDoiTuong(string tenDT, float tiLeGiam)
+        {
+            try
+            {
+                using (IDbConnection connection = new SqlConnection(DatabaseConnection.CnnString()))
+                {
+                    var p = new DynamicParameters();
+                    p.Add("@TenDT", tenDT);
+                    p.Add("@TiLeGiamHocPhi", tiLeGiam);
+                    connection.Execute("spDOITUONG_ThemDoiTuong", p, commandType: CommandType.StoredProcedure);
+                }
+            }
+            catch (SqlException ex)
+            {
+                if (ex.Number == 2627)
+                {
+                    if (ex.Message.Contains("UQ_DOITUONG_TenDT"))
+                    {
+                        return ThemDoiTuongMessage.DuplicateTenDoiTuong;
+                    }
+                }
+            }
+            catch (Exception)
+            {
+                return ThemDoiTuongMessage.Error;
+            }
+
+            return ThemDoiTuongMessage.Success;
+        }
+
+        public static XoaDoiTuongMessage XoaDoiTuong(int maDT)
+        {
+            try
+            {
+                using (IDbConnection connection = new SqlConnection(DatabaseConnection.CnnString()))
+                {
+                    var p = new DynamicParameters();
+                    p.Add("@MaDT", maDT);
+                    connection.Execute("spDOITUONG_XoaDoiTuong", p, commandType: CommandType.StoredProcedure);
+                }
+            }
+            catch (Exception)
+            {
+                return XoaDoiTuongMessage.Error;
+            }
+
+            return XoaDoiTuongMessage.Success;
+        }
     }
 }

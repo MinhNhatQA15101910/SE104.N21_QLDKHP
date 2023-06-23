@@ -43,6 +43,7 @@
   <ItemGroup>
     <Compile Include="DoiTuongBLL.cs" />
     <Compile Include="GlobalConfigBLL.cs" />
+    <Compile Include="LoaiMonHocBLL.cs" />
     <Compile Include="NguoiDungBLL.cs" />
     <Compile Include="NhomNguoiDungBLL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
