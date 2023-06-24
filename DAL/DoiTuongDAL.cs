@@ -83,6 +83,44 @@ namespace DAL
             return ThemDoiTuongMessage.Success;
         }
 
+        public static List<DoiTuong> LayDSDoiTuong2()
+        {
+            List<DoiTuong> output;
+            using (IDbConnection connection = new SqlConnection(DatabaseConnection.CnnString()))
+            {
+                output = connection.Query<DoiTuong>("spDOITUONG_LayDSDoiTuong2").ToList();
+            }
+            return output;
+        }
+
+        public static List<DoiTuong> LayDSDoiTuongKhongThuocVeMaSV(string maSV)
+        {
+            List<DoiTuong> output;
+
+            using (IDbConnection connection = new SqlConnection(DatabaseConnection.CnnString()))
+            {
+                var p = new DynamicParameters();
+                p.Add("@MaSV", maSV);
+                output = connection.Query<DoiTuong>("spDOITUONG_LayDSDoiTuongKhongThuocVeMaSV", p, commandType: CommandType.StoredProcedure).ToList();
+            }
+
+            return output;
+        }
+
+        public static List<DoiTuong> LayDSDoiTuongBangMaSV(string maSV)
+        {
+            List<DoiTuong> output;
+
+            using (IDbConnection connection = new SqlConnection(DatabaseConnection.CnnString()))
+            {
+                var p = new DynamicParameters();
+                p.Add("@MaSV", maSV);
+                output = connection.Query<DoiTuong>("spDOITUONG_LayDSDoiTuongBangMaSV", p, commandType: CommandType.StoredProcedure).ToList();
+            }
+
+            return output;
+        }
+
         public static XoaDoiTuongMessage XoaDoiTuong(int maDT)
         {
             try

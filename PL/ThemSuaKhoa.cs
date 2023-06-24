@@ -57,16 +57,6 @@ namespace PL
             }
         }
 
-        protected override void OnFormClosing(FormClosingEventArgs e)
-        {
-            base.OnFormClosing(e);
-
-            if (themSuaKhoaRequester != null)
-            {
-                themSuaKhoaRequester.OnThemSuaKhoaClosing();
-            }
-        }
-
         private void btnClear_Click(object sender, EventArgs e)
         {
             txtMaKhoa.Text = "";
@@ -129,8 +119,12 @@ namespace PL
                         MessageBox.Show("Đã có lỗi xảy ra!");
                         break;
                     case ThemKhoaMessage.Success:
+                        if (themSuaKhoaRequester != null)
+                        {
+                            themSuaKhoaRequester.OnThemSuaKhoaClosing();
+                        }
+
                         MessageBox.Show("Thêm khoa thành công!");
-                        Close();
                         break;
                 }
             }
@@ -139,6 +133,14 @@ namespace PL
         private void btnQuayLai_Click(object sender, EventArgs e)
         {
             Close();
+        }
+
+        private void ThemSuaKhoa_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (themSuaKhoaRequester != null)
+            {
+                themSuaKhoaRequester.OnThemSuaKhoaClosing();
+            }
         }
     }
 }

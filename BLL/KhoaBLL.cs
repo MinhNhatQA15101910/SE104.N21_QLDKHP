@@ -44,5 +44,10 @@ namespace BLL
 
             return KhoaDAL.ThemKhoa(maKhoa, tenKhoa);
         }
+
+        public static XoaKhoaMessage XoaKhoa(string maKhoa)
+        {
+            return KhoaDAL.XoaKhoa(maKhoa);
+        }
     }
 }

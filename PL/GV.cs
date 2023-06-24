@@ -137,5 +137,26 @@ namespace PL
             quanLyNganh.Show();
             Hide();
         }
+
+        private void btnKhoa_Click(object sender, EventArgs e)
+        {
+            QuanLyKhoa quanLyKhoa = new QuanLyKhoa(this);
+            quanLyKhoa.Show();
+            Hide();
+        }
+
+        private void btnMonHoc_Click(object sender, EventArgs e)
+        {
+            QuanLyMonHoc quanLyMonHoc = new QuanLyMonHoc(this);
+            quanLyMonHoc.Show();
+            Hide();
+        }
+
+        private void btnDSSV_Click(object sender, EventArgs e)
+        {
+            QuanLySinhVien quanLySinhVien = new QuanLySinhVien(this);
+            quanLySinhVien.Show();
+            Hide();
+        }
     }
 }

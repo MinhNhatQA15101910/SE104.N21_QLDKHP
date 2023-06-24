@@ -214,4 +214,63 @@ namespace DTO
         Success,
         Error
     }
+
+    public enum XoaKhoaMessage
+    {
+        Success,
+        Error
+    }
+
+    public enum XoaMonHocMessage
+    {
+        Success,
+        Error
+    }
+
+    public enum SuaMonHocMessage
+    {
+        Unable,
+        EmptyMaMH,
+        EmptyTenMH,
+        EmptySoTiet,
+        InvalidSoTiet,
+        DuplicateMaMH,
+        Success,
+        Error
+    }
+
+    public enum ThemMonHocMessage
+    {
+        EmptyMaMH,
+        EmptyTenMH,
+        EmptySoTiet,
+        InvalidSoTiet,
+        DuplicateMaMH,
+        Success,
+        Error
+    }
+
+    public enum SuaSinhVienMessage
+    {
+        EmptyMaSV,
+        EmptyTenSV,
+        DuplicateMaSV,
+        Success,
+        Error
+    }
+
+    public enum ThemSinhVienMessage
+    {
+        EmptyMaSV,
+        EmptyTenSV,
+        DuplicateMaSV,
+        Success,
+        Error
+    }
+
+    public enum XoaSinhVienMessage
+    {
+        Success,
+        Error
+    }
 }

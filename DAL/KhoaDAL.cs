@@ -86,5 +86,24 @@ namespace DAL
 
             return ThemKhoaMessage.Success;
         }
+
+        public static XoaKhoaMessage XoaKhoa(string maKhoa)
+        {
+            try
+            {
+                using (IDbConnection connection = new SqlConnection(DatabaseConnection.CnnString()))
+                {
+                    var p = new DynamicParameters();
+                    p.Add("@MaKhoa", maKhoa);
+                    connection.Execute("spKHOA_XoaKhoa", p, commandType: CommandType.StoredProcedure);
+                }
+            }
+            catch (Exception)
+            {
+                return XoaKhoaMessage.Error;
+            }
+
+            return XoaKhoaMessage.Success;
+        }
     }
 }

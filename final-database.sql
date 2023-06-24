@@ -1,6 +1,7 @@
 ﻿--create database QuanLyDangKyHP;
 --use QuanLyDangKyHP;
 --drop database QuanLyDangKyHP;
+use master
 
 -- 1.1. Yêu cầu lập hồ sơ sinh viên - Tính đúng đắn
 create table SINHVIEN
@@ -2669,5 +2670,212 @@ as
 begin
 	insert into NGANH
 	values (@MaNganh, @TenNganh, @MaKhoa)
+end
+go
+
+-- spKHOA_XoaKhoa
+create proc spKHOA_XoaKhoa(@MaKhoa nvarchar(50))
+as 
+begin
+	delete from KHOA
+	where MaKhoa = @MaKhoa
+end
+go
+
+--spMONHOC_LayDSMonHoc
+create proc spMONHOC_LayDSMonHoc
+as
+begin
+	select MONHOC.*, TenLoaiMonHoc, LOAIMONHOC.SoTiet as SoTietLoaiMon, SoTien
+	from MONHOC, LOAIMONHOC 
+	where MONHOC.MaLoaiMonHoc = LOAIMONHOC.MaLoaiMonHoc
+end
+go
+
+--spDANHSACHMONHOCMO_LayDSMonHocMo
+create proc spDANHSACHMONHOCMO_LayDSMonHocMo
+as
+begin
+	declare @NamHoc int = 
+	(
+		select max(NamHoc)
+		from DANHSACHMONHOCMO
+	)
+	declare @MaHocKy int =
+	(
+		select max(MaHocKy)
+		from DANHSACHMONHOCMO
+		where NamHoc = @NamHoc
+	)
+	select MaMH
+	from DANHSACHMONHOCMO
+	where MaHocKy = @MaHocKy
+	and NamHoc = @NamHoc
+end
+go
+
+--spMONHOC_XoaMonHoc
+create proc spMONHOC_XoaMonHoc (@MaMH nvarchar(20))
+as
+begin
+	delete from MONHOC
+	where MaMH = @MaMH
+end
+go
+
+--spMONHOC_SuaMonHoc
+create proc spMONHOC_SuaMonHoc (@MaMH nvarchar(50), @TenMH nvarchar(100), @MaLoaiMonHoc int, @SoTiet int)
+as
+begin
+	update MONHOC
+	set TenMH = @TenMH, MaLoaiMonHoc = @MaLoaiMonHoc, SoTiet = @SoTiet
+	where MaMH = @MaMH
+end
+go
+
+--spMONHOC_ThemMonHoc
+create proc spMONHOC_ThemMonHoc (@MaMH nvarchar(50), @TenMH nvarchar(100), @MaLoaiMonHoc int, @SoTiet int)
+as
+begin
+	insert into MONHOC
+	values (@MaMH, @TenMH, @MaLoaiMonHoc, @SoTiet)
+end
+go
+
+--spSINHVIEN_LayDSSV
+create proc spSINHVIEN_LayDSSV
+as
+begin
+	select SINHVIEN.*, TenHuyen, VungUT, TINH.*, TenNganh, KHOA.*
+	from SINHVIEN, HUYEN, TINH, NGANH, KHOA
+	where SINHVIEN.MaHuyen = HUYEN.MaHuyen
+	and HUYEN.MaTinh = TINH.MaTinh
+	and SINHVIEN.MaNganh = NGANH.MaNganh
+	and NGANH.MaKhoa = KHOA.MaKhoa
+end
+go
+
+--spDOITUONG_LayDSDoiTuongBangMaSV
+create proc spDOITUONG_LayDSDoiTuongBangMaSV (@MaSV nvarchar(10))
+as
+begin
+	select DOITUONG.MaDT, TenDT, TiLeGiamHocPhi
+	from DOITUONG, SINHVIEN_DOITUONG
+	where MaSV = @MaSV
+	and DOITUONG.MaDT = SINHVIEN_DOITUONG.MaDT
+end
+go
+
+--spDOITUONG_GetExceptMaSV
+create proc spDOITUONG_LayDSDoiTuongKhongThuocVeMaSV (@MaSV nvarchar(10))
+as
+begin
+	select *
+	from DOITUONG
+	where MaDT not in
+	(
+		select MaDT
+		from SINHVIEN_DOITUONG
+		where MaSV = @MaSV
+	)
+	and MaDT <> 1
+	and MaDT <> 2
+end
+go
+
+--spSINHVIEN_SuaSinhVien
+create proc spSINHVIEN_SuaSinhVien (@MaSV nvarchar(10), @HoTen nvarchar(200), @NgaySinh date, @GioiTinh nvarchar(5), @MaHuyen int, @MaNganh nvarchar(50))
+as
+begin
+	update SINHVIEN
+	set HoTen = @HoTen, NgaySinh = @NgaySinh, GioiTinh = @GioiTinh, MaHuyen = @MaHuyen, MaNganh = @MaNganh
+	where MaSV = @MaSV
+end
+go
+
+--spSINHVIEN_DOITUONG_XoaSinhVien
+create proc spSINHVIEN_DOITUONG_XoaSinhVien (@MaSV nvarchar(10))
+as
+begin
+	delete from SINHVIEN_DOITUONG
+	where MaSV = @MaSV
+end
+go
+
+--spSINHVIEN_DOITUONG_Them
+create proc spSINHVIEN_DOITUONG_Them (@MaSV nvarchar(100), @MaDT int)
+as
+begin
+	insert into SINHVIEN_DOITUONG
+	values (@MaSV, @MaDT)
+end
+go
+
+--spSINHVIEN_ThemSinhVien
+create proc spSINHVIEN_ThemSinhVien (@MaSV nvarchar(10), @HoTen nvarchar(200), @NgaySinh datetime, @GioiTinh nvarchar(10), @MaHuyen int, @MaNganh nvarchar(50))
+as
+begin
+	insert into SINHVIEN
+	values (@MaSV, @HoTen, @NgaySinh, @GioiTinh, @MaHuyen, @MaNganh)
+
+	declare @VungUT int = 
+	(
+		select VungUT 
+		from HUYEN 
+		where MaHuyen = @MaHuyen
+	)
+
+	if (@VungUT = 1) 
+		insert into SINHVIEN_DOITUONG
+		values (@MaSV, 2)
+end
+go
+
+--spCT_PHIEUDKHP_XoaSinhVien
+create proc spCT_PHIEUDKHP_XoaSinhVien (@MaSV nvarchar(10))
+as
+begin
+	delete ct from CT_PHIEUDKHP ct, PHIEUDKHP p
+	where ct.MaPhieuDKHP = p.MaPhieuDKHP
+	and p.MaSV = @MaSV
+end
+go
+
+--spPHIEUTHUHP_XoaSinhVien
+create proc spPHIEUTHUHP_XoaSinhVien (@MaSV nvarchar(10))
+as
+begin
+	delete hp from PHIEUTHUHP hp, PHIEUDKHP p
+	where hp.MaPhieuDKHP = p.MaPhieuDKHP
+	and p.MaSV = @MaSV
+end
+go
+
+--spPHIEUDKHP_XoaSinhVien
+create proc spPHIEUDKHP_XoaSinhVien (@MaSV nvarchar(10))
+as
+begin
+	delete from PHIEUDKHP
+	where PHIEUDKHP.MaSV = @MaSV
+end
+go
+
+--spSINHVIEN_XoaSinhVien
+create proc spSINHVIEN_XoaSinhVien (@MaSV nvarchar(10))
+as
+begin
+	delete from SINHVIEN
+	where MaSV = @MaSV
+end
+go
+
+--spDOITUONG_LayDSDoiTuong2
+create proc spDOITUONG_LayDSDoiTuong2
+as
+begin
+	select *
+	from DOITUONG
+	where MaDT <> 1
+	and MaDT <> 2
 end
 go

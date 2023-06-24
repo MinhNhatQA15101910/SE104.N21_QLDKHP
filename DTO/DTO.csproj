@@ -42,8 +42,10 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CT_Huyen.cs" />
+    <Compile Include="CT_MonHoc.cs" />
     <Compile Include="CT_Nganh.cs" />
     <Compile Include="CT_NguoiDung.cs" />
+    <Compile Include="CT_SinhVien.cs" />
     <Compile Include="DoiTuong.cs" />
     <Compile Include="HocKy.cs" />
     <Compile Include="Huyen.cs" />

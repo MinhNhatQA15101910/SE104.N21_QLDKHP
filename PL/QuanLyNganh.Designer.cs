@@ -30,7 +30,7 @@ namespace PL
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle3 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(QuanLyNganh));
             this.plt1 = new ComponentFactory.Krypton.Toolkit.KryptonPalette(this.components);
             this.dgvDanhSachNganh = new ComponentFactory.Krypton.Toolkit.KryptonDataGridView();
@@ -46,6 +46,8 @@ namespace PL
             this.lblTenNganh = new System.Windows.Forms.Label();
             this.lblMaNganh = new System.Windows.Forms.Label();
             this.pnlTimKiem = new System.Windows.Forms.Panel();
+            this.picBoLoc = new System.Windows.Forms.PictureBox();
+            this.picLoc = new System.Windows.Forms.PictureBox();
             this.txtTimKiem = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
             this.pnlChucNang = new System.Windows.Forms.Panel();
             this.btnThem = new ComponentFactory.Krypton.Toolkit.KryptonButton();
@@ -54,16 +56,14 @@ namespace PL
             this.grbHienThiDanhSachNganh = new System.Windows.Forms.GroupBox();
             this.plt2 = new ComponentFactory.Krypton.Toolkit.KryptonPalette(this.components);
             this.pnlBlock = new System.Windows.Forms.Panel();
-            this.picLoc = new System.Windows.Forms.PictureBox();
-            this.picBoLoc = new System.Windows.Forms.PictureBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDanhSachNganh)).BeginInit();
             this.pnlDeMuc.SuspendLayout();
             this.grbThongTinChiTiet.SuspendLayout();
             this.pnlTimKiem.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picBoLoc)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picLoc)).BeginInit();
             this.pnlChucNang.SuspendLayout();
             this.grbHienThiDanhSachNganh.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.picLoc)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picBoLoc)).BeginInit();
             this.SuspendLayout();
             // 
             // plt1
@@ -77,10 +77,10 @@ namespace PL
             // 
             // dgvDanhSachNganh
             // 
-            dataGridViewCellStyle3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(159)))), ((int)(((byte)(159)))));
-            dataGridViewCellStyle3.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle3.ForeColor = System.Drawing.Color.Black;
-            this.dgvDanhSachNganh.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle3;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(159)))), ((int)(((byte)(159)))));
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black;
+            this.dgvDanhSachNganh.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvDanhSachNganh.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvDanhSachNganh.Cursor = System.Windows.Forms.Cursors.Hand;
             this.dgvDanhSachNganh.Dock = System.Windows.Forms.DockStyle.Fill;
@@ -263,6 +263,32 @@ namespace PL
             this.pnlTimKiem.Size = new System.Drawing.Size(393, 93);
             this.pnlTimKiem.TabIndex = 49;
             // 
+            // picBoLoc
+            // 
+            this.picBoLoc.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.picBoLoc.Image = ((System.Drawing.Image)(resources.GetObject("picBoLoc.Image")));
+            this.picBoLoc.Location = new System.Drawing.Point(343, 25);
+            this.picBoLoc.Margin = new System.Windows.Forms.Padding(2);
+            this.picBoLoc.Name = "picBoLoc";
+            this.picBoLoc.Size = new System.Drawing.Size(30, 31);
+            this.picBoLoc.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.picBoLoc.TabIndex = 24;
+            this.picBoLoc.TabStop = false;
+            this.picBoLoc.Click += new System.EventHandler(this.picBoLoc_Click);
+            // 
+            // picLoc
+            // 
+            this.picLoc.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.picLoc.Image = ((System.Drawing.Image)(resources.GetObject("picLoc.Image")));
+            this.picLoc.Location = new System.Drawing.Point(309, 19);
+            this.picLoc.Margin = new System.Windows.Forms.Padding(2);
+            this.picLoc.Name = "picLoc";
+            this.picLoc.Size = new System.Drawing.Size(30, 37);
+            this.picLoc.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.picLoc.TabIndex = 23;
+            this.picLoc.TabStop = false;
+            this.picLoc.Click += new System.EventHandler(this.picLoc_Click);
+            // 
             // txtTimKiem
             // 
             this.txtTimKiem.Location = new System.Drawing.Point(19, 29);
@@ -437,33 +463,7 @@ namespace PL
             this.pnlBlock.Size = new System.Drawing.Size(2, 85);
             this.pnlBlock.TabIndex = 46;
             // 
-            // picLoc
-            // 
-            this.picLoc.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.picLoc.Image = ((System.Drawing.Image)(resources.GetObject("picLoc.Image")));
-            this.picLoc.Location = new System.Drawing.Point(309, 19);
-            this.picLoc.Margin = new System.Windows.Forms.Padding(2);
-            this.picLoc.Name = "picLoc";
-            this.picLoc.Size = new System.Drawing.Size(30, 37);
-            this.picLoc.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.picLoc.TabIndex = 23;
-            this.picLoc.TabStop = false;
-            this.picLoc.Click += new System.EventHandler(this.picLoc_Click);
-            // 
-            // picBoLoc
-            // 
-            this.picBoLoc.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.picBoLoc.Image = ((System.Drawing.Image)(resources.GetObject("picBoLoc.Image")));
-            this.picBoLoc.Location = new System.Drawing.Point(343, 25);
-            this.picBoLoc.Margin = new System.Windows.Forms.Padding(2);
-            this.picBoLoc.Name = "picBoLoc";
-            this.picBoLoc.Size = new System.Drawing.Size(30, 31);
-            this.picBoLoc.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.picBoLoc.TabIndex = 24;
-            this.picBoLoc.TabStop = false;
-            this.picBoLoc.Click += new System.EventHandler(this.picBoLoc_Click);
-            // 
-            // Nganh
+            // QuanLyNganh
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -477,11 +477,12 @@ namespace PL
             this.Controls.Add(this.pnlDeMuc);
             this.Margin = new System.Windows.Forms.Padding(2);
             this.MaximizeBox = false;
-            this.Name = "Nganh";
+            this.Name = "QuanLyNganh";
             this.Palette = this.plt2;
             this.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Custom;
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.Text = "Ngành";
             this.Load += new System.EventHandler(this.Nganh_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgvDanhSachNganh)).EndInit();
             this.pnlDeMuc.ResumeLayout(false);
@@ -489,10 +490,10 @@ namespace PL
             this.grbThongTinChiTiet.PerformLayout();
             this.pnlTimKiem.ResumeLayout(false);
             this.pnlTimKiem.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picBoLoc)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picLoc)).EndInit();
             this.pnlChucNang.ResumeLayout(false);
             this.grbHienThiDanhSachNganh.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.picLoc)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.picBoLoc)).EndInit();
             this.ResumeLayout(false);
 
         }

@@ -183,6 +183,7 @@ namespace PL
             this.btnKhoa.StateTracking.Back.Color1 = System.Drawing.Color.White;
             this.btnKhoa.TabIndex = 15;
             this.btnKhoa.Values.Text = "KHOA";
+            this.btnKhoa.Click += new System.EventHandler(this.btnKhoa_Click);
             // 
             // btnChuongTrinhHoc
             // 
@@ -231,6 +232,7 @@ namespace PL
             this.btnMonHoc.StateTracking.Back.Color1 = System.Drawing.Color.White;
             this.btnMonHoc.TabIndex = 17;
             this.btnMonHoc.Values.Text = "MÔN HỌC";
+            this.btnMonHoc.Click += new System.EventHandler(this.btnMonHoc_Click);
             // 
             // pnlBlock
             // 
@@ -273,6 +275,7 @@ namespace PL
             this.btnDSSV.StatePressed.Back.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
             this.btnDSSV.TabIndex = 20;
             this.btnDSSV.Values.Text = "DANH SÁCH SINH VIÊN";
+            this.btnDSSV.Click += new System.EventHandler(this.btnDSSV_Click);
             // 
             // btnXacNhanThanhToanHP
             // 

@@ -81,5 +81,20 @@ namespace BLL
 
             return DoiTuongDAL.XoaDoiTuong(maDT);
         }
+
+        public static List<DoiTuong> LayDSDoiTuongBangMaSV(string maSV)
+        {
+            return DoiTuongDAL.LayDSDoiTuongBangMaSV(maSV);
+        }
+
+        public static List<DoiTuong> LayDSDoiTuongKhongThuocVeMaSV(string maSV)
+        {
+            return DoiTuongDAL.LayDSDoiTuongKhongThuocVeMaSV(maSV);
+        }
+
+        public static List<DoiTuong> LayDSDoiTuong2()
+        {
+            return DoiTuongDAL.LayDSDoiTuong2();
+        }
     }
 }

@@ -13,5 +13,12 @@ namespace DTO
         public int VungUT { get; set; }
         public int MaTinh { get; set; }
         public string TenTTP { get; set; }
+        public string DisplayHuyen
+        {
+            get
+            {
+                return TenTTP + ", " + TenHuyen;
+            }
+        }
     }
 }

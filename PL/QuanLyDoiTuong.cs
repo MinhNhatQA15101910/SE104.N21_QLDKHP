@@ -45,7 +45,7 @@ namespace PL
 
         private void QuanLyDoiTuong_Load(object sender, EventArgs e)
         {
-            mDoiTuong = new BindingList<DoiTuong>(DoiTuongBLL.LayDSDoiTuong());
+            mDoiTuong = new BindingList<DoiTuong>(DoiTuongBLL.LayDSDoiTuong2());
             mDoiTuongSource = new BindingSource(mDoiTuong, null);
             dgvDSDoiTuong.DataSource = mDoiTuongSource;
 
@@ -96,7 +96,7 @@ namespace PL
 
         public void OnThemSuaDoiTuongClosing()
         {
-            mDoiTuong = new BindingList<DoiTuong>(DoiTuongBLL.LayDSDoiTuong());
+            mDoiTuong = new BindingList<DoiTuong>(DoiTuongBLL.LayDSDoiTuong2());
             mDoiTuongSource.DataSource = mDoiTuong;
         }
 
