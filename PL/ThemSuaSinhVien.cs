@@ -16,8 +16,8 @@ namespace PL
 {
     public partial class ThemSuaSinhVien : KryptonForm, IThemSuaNganhRequester, IThemSuaHuyenRequester, IThemSuaDoiTuongRequester
     {
-        private IThemSuaSinhVienRequester themSuaSinhVienRequester;
-        private CT_SinhVien sinhVien;
+        private readonly IThemSuaSinhVienRequester themSuaSinhVienRequester;
+        private readonly CT_SinhVien sinhVien;
 
         private BindingList<DoiTuong> mDoiTuongSelected;
         private BindingList<DoiTuong> mDoiTuongAll;
@@ -143,12 +143,14 @@ namespace PL
                 cmbNganh.ValueMember = "MaNganh";
 
                 // DoiTuongSelected
-                mDoiTuongSelected = new BindingList<DoiTuong>();
-                mDoiTuongSelected.Add(new DoiTuong
+                mDoiTuongSelected = new BindingList<DoiTuong>
                 {
-                    MaDT = 1,
-                    TenDT = "Không thuộc đối tượng ưu tiên"
-                });
+                    new DoiTuong
+                    {
+                        MaDT = 1,
+                        TenDT = "Không thuộc đối tượng ưu tiên"
+                    }
+                };
                 mDoiTuongSelectedSource = new BindingSource(mDoiTuongSelected, null);
                 lbSelectedDoiTuong.DataSource = mDoiTuongSelectedSource;
                 lbSelectedDoiTuong.DisplayMember = "TenDT";
@@ -201,12 +203,14 @@ namespace PL
             }
             else
             {
-                mDoiTuongSelected = new BindingList<DoiTuong>();
-                mDoiTuongSelected.Add(new DoiTuong
+                mDoiTuongSelected = new BindingList<DoiTuong>
                 {
-                    MaDT = 1,
-                    TenDT = "Không thuộc đối tượng ưu tiên"
-                });
+                    new DoiTuong
+                    {
+                        MaDT = 1,
+                        TenDT = "Không thuộc đối tượng ưu tiên"
+                    }
+                };
                 mDoiTuongSelectedSource.DataSource = mDoiTuongSelected;
             }
         }

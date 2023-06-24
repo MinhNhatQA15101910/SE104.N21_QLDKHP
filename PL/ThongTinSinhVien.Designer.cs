@@ -31,560 +31,584 @@ namespace PL
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ThongTinSinhVien));
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.kryptonTextBox11 = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
-            this.groupBox8 = new System.Windows.Forms.GroupBox();
-            this.kryptonButton3 = new ComponentFactory.Krypton.Toolkit.KryptonButton();
-            this.kryptonButton2 = new ComponentFactory.Krypton.Toolkit.KryptonButton();
-            this.kryptonLabel2 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.kryptonLabel1 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.kryptonLabel3 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.panel2 = new System.Windows.Forms.Panel();
+            this.pnlXemThem = new System.Windows.Forms.Panel();
+            this.txtMssv = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
+            this.grbXemThem = new System.Windows.Forms.GroupBox();
+            this.btnThongTinHocPhi = new ComponentFactory.Krypton.Toolkit.KryptonButton();
+            this.btnThongTinDKHP = new ComponentFactory.Krypton.Toolkit.KryptonButton();
+            this.lblThongTinHocPhi = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.lblThongTinDKHP = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.lblMSSV = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.pnlThongTinSinhVien = new System.Windows.Forms.Panel();
             this.groupBox9 = new System.Windows.Forms.GroupBox();
-            this.kryptonTextBox3 = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
-            this.groupBox7 = new System.Windows.Forms.GroupBox();
-            this.kryptonTextBox2 = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
-            this.groupBox6 = new System.Windows.Forms.GroupBox();
-            this.listBox1 = new System.Windows.Forms.ListBox();
-            this.groupBox5 = new System.Windows.Forms.GroupBox();
-            this.kryptonTextBox1 = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.kryptonTextBox4 = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
-            this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.kryptonTextBox8 = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.radioButton2 = new System.Windows.Forms.RadioButton();
-            this.radioButton1 = new System.Windows.Forms.RadioButton();
-            this.label1 = new System.Windows.Forms.Label();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
-            this.panel3 = new System.Windows.Forms.Panel();
-            this.kryptonLabel4 = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
-            this.paleHeader = new ComponentFactory.Krypton.Toolkit.KryptonPalette(this.components);
-            this.kryptonButton6 = new ComponentFactory.Krypton.Toolkit.KryptonButton();
+            this.txtNganh = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
+            this.grbKhoa = new System.Windows.Forms.GroupBox();
+            this.txtKhoa = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
+            this.grbDoiTuong = new System.Windows.Forms.GroupBox();
+            this.listDoiTuong = new System.Windows.Forms.ListBox();
+            this.grbQueQuan = new System.Windows.Forms.GroupBox();
+            this.txtQueQuan = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
+            this.grbNgaySinh = new System.Windows.Forms.GroupBox();
+            this.txtNgaySinh = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
+            this.grbHoTen = new System.Windows.Forms.GroupBox();
+            this.txtHoTen = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
+            this.grbGioiTinh = new System.Windows.Forms.GroupBox();
+            this.rbtnNu = new System.Windows.Forms.RadioButton();
+            this.rbtnNam = new System.Windows.Forms.RadioButton();
+            this.picAvatar = new System.Windows.Forms.PictureBox();
+            this.pnlDeMuc = new System.Windows.Forms.Panel();
+            this.btnQuayLai = new ComponentFactory.Krypton.Toolkit.KryptonButton();
+            this.lblThongTinSinhVien = new ComponentFactory.Krypton.Toolkit.KryptonLabel();
+            this.plt1 = new ComponentFactory.Krypton.Toolkit.KryptonPalette(this.components);
             this.lblQLMB = new System.Windows.Forms.Label();
-            this.paleDangNhap = new ComponentFactory.Krypton.Toolkit.KryptonPalette(this.components);
-            this.panel1.SuspendLayout();
-            this.groupBox8.SuspendLayout();
-            this.panel2.SuspendLayout();
+            this.plt2 = new ComponentFactory.Krypton.Toolkit.KryptonPalette(this.components);
+            this.pnlXemThem.SuspendLayout();
+            this.grbXemThem.SuspendLayout();
+            this.pnlThongTinSinhVien.SuspendLayout();
             this.groupBox9.SuspendLayout();
-            this.groupBox7.SuspendLayout();
-            this.groupBox6.SuspendLayout();
-            this.groupBox5.SuspendLayout();
-            this.groupBox2.SuspendLayout();
-            this.groupBox4.SuspendLayout();
-            this.groupBox3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
-            this.panel3.SuspendLayout();
+            this.grbKhoa.SuspendLayout();
+            this.grbDoiTuong.SuspendLayout();
+            this.grbQueQuan.SuspendLayout();
+            this.grbNgaySinh.SuspendLayout();
+            this.grbHoTen.SuspendLayout();
+            this.grbGioiTinh.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picAvatar)).BeginInit();
+            this.pnlDeMuc.SuspendLayout();
             this.SuspendLayout();
             // 
-            // panel1
+            // pnlXemThem
             // 
-            this.panel1.Controls.Add(this.kryptonTextBox11);
-            this.panel1.Controls.Add(this.groupBox8);
-            this.panel1.Controls.Add(this.kryptonLabel3);
-            this.panel1.Controls.Add(this.panel2);
-            this.panel1.Controls.Add(this.pictureBox1);
-            this.panel1.Location = new System.Drawing.Point(12, 61);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(818, 608);
-            this.panel1.TabIndex = 0;
+            this.pnlXemThem.Controls.Add(this.txtMssv);
+            this.pnlXemThem.Controls.Add(this.grbXemThem);
+            this.pnlXemThem.Controls.Add(this.lblMSSV);
+            this.pnlXemThem.Controls.Add(this.pnlThongTinSinhVien);
+            this.pnlXemThem.Controls.Add(this.picAvatar);
+            this.pnlXemThem.Location = new System.Drawing.Point(9, 50);
+            this.pnlXemThem.Margin = new System.Windows.Forms.Padding(2);
+            this.pnlXemThem.Name = "pnlXemThem";
+            this.pnlXemThem.Size = new System.Drawing.Size(614, 494);
+            this.pnlXemThem.TabIndex = 0;
             // 
-            // kryptonTextBox11
+            // txtMssv
             // 
-            this.kryptonTextBox11.Location = new System.Drawing.Point(286, 78);
-            this.kryptonTextBox11.Name = "kryptonTextBox11";
-            this.kryptonTextBox11.ReadOnly = true;
-            this.kryptonTextBox11.Size = new System.Drawing.Size(193, 33);
-            this.kryptonTextBox11.StateActive.Content.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.kryptonTextBox11.StateActive.Content.Padding = new System.Windows.Forms.Padding(2, -1, -1, -1);
-            this.kryptonTextBox11.StateCommon.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
+            this.txtMssv.Location = new System.Drawing.Point(214, 63);
+            this.txtMssv.Margin = new System.Windows.Forms.Padding(2);
+            this.txtMssv.Name = "txtMssv";
+            this.txtMssv.ReadOnly = true;
+            this.txtMssv.Size = new System.Drawing.Size(145, 29);
+            this.txtMssv.StateActive.Content.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtMssv.StateActive.Content.Padding = new System.Windows.Forms.Padding(2, -1, -1, -1);
+            this.txtMssv.StateCommon.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
             | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left) 
             | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Right)));
-            this.kryptonTextBox11.StateCommon.Border.Rounding = 15;
-            this.kryptonTextBox11.StateCommon.Content.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.kryptonTextBox11.TabIndex = 1;
-            this.kryptonTextBox11.Text = "SV21520190";
-            this.kryptonTextBox11.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.txtMssv.StateCommon.Border.Rounding = 15;
+            this.txtMssv.StateCommon.Content.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtMssv.TabIndex = 1;
+            this.txtMssv.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
-            // groupBox8
+            // grbXemThem
             // 
-            this.groupBox8.Controls.Add(this.kryptonButton3);
-            this.groupBox8.Controls.Add(this.kryptonButton2);
-            this.groupBox8.Controls.Add(this.kryptonLabel2);
-            this.groupBox8.Controls.Add(this.kryptonLabel1);
-            this.groupBox8.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox8.ForeColor = System.Drawing.Color.IndianRed;
-            this.groupBox8.Location = new System.Drawing.Point(538, 44);
-            this.groupBox8.Name = "groupBox8";
-            this.groupBox8.Size = new System.Drawing.Size(261, 112);
-            this.groupBox8.TabIndex = 8;
-            this.groupBox8.TabStop = false;
-            this.groupBox8.Text = "Xem thêm";
+            this.grbXemThem.Controls.Add(this.btnThongTinHocPhi);
+            this.grbXemThem.Controls.Add(this.btnThongTinDKHP);
+            this.grbXemThem.Controls.Add(this.lblThongTinHocPhi);
+            this.grbXemThem.Controls.Add(this.lblThongTinDKHP);
+            this.grbXemThem.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.grbXemThem.ForeColor = System.Drawing.Color.IndianRed;
+            this.grbXemThem.Location = new System.Drawing.Point(404, 36);
+            this.grbXemThem.Margin = new System.Windows.Forms.Padding(2);
+            this.grbXemThem.Name = "grbXemThem";
+            this.grbXemThem.Padding = new System.Windows.Forms.Padding(2);
+            this.grbXemThem.Size = new System.Drawing.Size(196, 91);
+            this.grbXemThem.TabIndex = 8;
+            this.grbXemThem.TabStop = false;
+            this.grbXemThem.Text = "Xem thêm";
             // 
-            // kryptonButton3
+            // btnThongTinHocPhi
             // 
-            this.kryptonButton3.Location = new System.Drawing.Point(187, 66);
-            this.kryptonButton3.Name = "kryptonButton3";
-            this.kryptonButton3.OverrideDefault.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
-            this.kryptonButton3.OverrideDefault.Back.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(114)))), ((int)(((byte)(123)))));
-            this.kryptonButton3.Size = new System.Drawing.Size(53, 37);
-            this.kryptonButton3.StateCommon.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
-            this.kryptonButton3.StateCommon.Back.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(114)))), ((int)(((byte)(123)))));
-            this.kryptonButton3.StateCommon.Border.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(114)))), ((int)(((byte)(123)))));
-            this.kryptonButton3.StateCommon.Border.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
-            this.kryptonButton3.StateCommon.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
+            this.btnThongTinHocPhi.Location = new System.Drawing.Point(140, 54);
+            this.btnThongTinHocPhi.Margin = new System.Windows.Forms.Padding(2);
+            this.btnThongTinHocPhi.Name = "btnThongTinHocPhi";
+            this.btnThongTinHocPhi.OverrideDefault.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            this.btnThongTinHocPhi.OverrideDefault.Back.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(114)))), ((int)(((byte)(123)))));
+            this.btnThongTinHocPhi.Size = new System.Drawing.Size(40, 30);
+            this.btnThongTinHocPhi.StateCommon.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            this.btnThongTinHocPhi.StateCommon.Back.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(114)))), ((int)(((byte)(123)))));
+            this.btnThongTinHocPhi.StateCommon.Border.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(114)))), ((int)(((byte)(123)))));
+            this.btnThongTinHocPhi.StateCommon.Border.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            this.btnThongTinHocPhi.StateCommon.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
             | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left) 
             | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Right)));
-            this.kryptonButton3.StateCommon.Content.ShortText.Color1 = System.Drawing.Color.Black;
-            this.kryptonButton3.StateCommon.Content.ShortText.Color2 = System.Drawing.Color.Black;
-            this.kryptonButton3.StateCommon.Content.ShortText.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.kryptonButton3.StatePressed.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
-            this.kryptonButton3.StatePressed.Back.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(114)))), ((int)(((byte)(123)))));
-            this.kryptonButton3.TabIndex = 5;
-            this.kryptonButton3.Values.Text = "...";
-            this.kryptonButton3.Click += new System.EventHandler(this.kryptonButton3_Click);
+            this.btnThongTinHocPhi.StateCommon.Content.ShortText.Color1 = System.Drawing.Color.Black;
+            this.btnThongTinHocPhi.StateCommon.Content.ShortText.Color2 = System.Drawing.Color.Black;
+            this.btnThongTinHocPhi.StateCommon.Content.ShortText.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnThongTinHocPhi.StatePressed.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(192)))));
+            this.btnThongTinHocPhi.StatePressed.Back.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(223)))), ((int)(((byte)(114)))), ((int)(((byte)(123)))));
+            this.btnThongTinHocPhi.TabIndex = 5;
+            this.btnThongTinHocPhi.Values.Text = "...";
+            this.btnThongTinHocPhi.Click += new System.EventHandler(this.btnThongTinHocPhi_Click);
             // 
-            // kryptonButton2
+            // btnThongTinDKHP
             // 
-            this.kryptonButton2.Location = new System.Drawing.Point(187, 18);
-            this.kryptonButton2.Name = "kryptonButton2";
-            this.kryptonButton2.OverrideDefault.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
-            this.kryptonButton2.OverrideDefault.Back.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(202)))), ((int)(((byte)(92)))), ((int)(((byte)(101)))));
-            this.kryptonButton2.OverrideDefault.Border.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
-            this.kryptonButton2.OverrideDefault.Border.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
-            this.kryptonButton2.OverrideDefault.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
+            this.btnThongTinDKHP.Location = new System.Drawing.Point(140, 15);
+            this.btnThongTinDKHP.Margin = new System.Windows.Forms.Padding(2);
+            this.btnThongTinDKHP.Name = "btnThongTinDKHP";
+            this.btnThongTinDKHP.OverrideDefault.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
+            this.btnThongTinDKHP.OverrideDefault.Back.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(202)))), ((int)(((byte)(92)))), ((int)(((byte)(101)))));
+            this.btnThongTinDKHP.OverrideDefault.Border.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
+            this.btnThongTinDKHP.OverrideDefault.Border.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
+            this.btnThongTinDKHP.OverrideDefault.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
             | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left) 
             | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Right)));
-            this.kryptonButton2.Size = new System.Drawing.Size(53, 37);
-            this.kryptonButton2.StateCommon.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
-            this.kryptonButton2.StateCommon.Back.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(202)))), ((int)(((byte)(92)))), ((int)(((byte)(101)))));
-            this.kryptonButton2.StateCommon.Border.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
-            this.kryptonButton2.StateCommon.Border.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
-            this.kryptonButton2.StateCommon.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
+            this.btnThongTinDKHP.Size = new System.Drawing.Size(40, 30);
+            this.btnThongTinDKHP.StateCommon.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
+            this.btnThongTinDKHP.StateCommon.Back.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(202)))), ((int)(((byte)(92)))), ((int)(((byte)(101)))));
+            this.btnThongTinDKHP.StateCommon.Border.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
+            this.btnThongTinDKHP.StateCommon.Border.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
+            this.btnThongTinDKHP.StateCommon.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
             | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left) 
             | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Right)));
-            this.kryptonButton2.StateCommon.Content.ShortText.Color1 = System.Drawing.Color.Black;
-            this.kryptonButton2.StateCommon.Content.ShortText.Color2 = System.Drawing.Color.Black;
-            this.kryptonButton2.StateCommon.Content.ShortText.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.kryptonButton2.StatePressed.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
-            this.kryptonButton2.StatePressed.Back.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
-            this.kryptonButton2.StatePressed.Border.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
-            this.kryptonButton2.StatePressed.Border.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
-            this.kryptonButton2.StatePressed.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
+            this.btnThongTinDKHP.StateCommon.Content.ShortText.Color1 = System.Drawing.Color.Black;
+            this.btnThongTinDKHP.StateCommon.Content.ShortText.Color2 = System.Drawing.Color.Black;
+            this.btnThongTinDKHP.StateCommon.Content.ShortText.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnThongTinDKHP.StatePressed.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
+            this.btnThongTinDKHP.StatePressed.Back.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
+            this.btnThongTinDKHP.StatePressed.Border.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
+            this.btnThongTinDKHP.StatePressed.Border.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(192)))), ((int)(((byte)(128)))));
+            this.btnThongTinDKHP.StatePressed.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
             | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left) 
             | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Right)));
-            this.kryptonButton2.TabIndex = 4;
-            this.kryptonButton2.Values.Text = "...";
-            this.kryptonButton2.Click += new System.EventHandler(this.kryptonButton2_Click);
+            this.btnThongTinDKHP.TabIndex = 4;
+            this.btnThongTinDKHP.Values.Text = "...";
+            this.btnThongTinDKHP.Click += new System.EventHandler(this.btnThongTinDKHP_Click);
             // 
-            // kryptonLabel2
+            // lblThongTinHocPhi
             // 
-            this.kryptonLabel2.AutoSize = false;
-            this.kryptonLabel2.Location = new System.Drawing.Point(17, 71);
-            this.kryptonLabel2.Name = "kryptonLabel2";
-            this.kryptonLabel2.Size = new System.Drawing.Size(164, 25);
-            this.kryptonLabel2.StateCommon.ShortText.Color1 = System.Drawing.Color.Black;
-            this.kryptonLabel2.StateCommon.ShortText.Color2 = System.Drawing.Color.Black;
-            this.kryptonLabel2.StateCommon.ShortText.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.kryptonLabel2.TabIndex = 1;
-            this.kryptonLabel2.Values.Text = "Thông tin học phí";
+            this.lblThongTinHocPhi.AutoSize = false;
+            this.lblThongTinHocPhi.Location = new System.Drawing.Point(13, 58);
+            this.lblThongTinHocPhi.Margin = new System.Windows.Forms.Padding(2);
+            this.lblThongTinHocPhi.Name = "lblThongTinHocPhi";
+            this.lblThongTinHocPhi.Size = new System.Drawing.Size(123, 20);
+            this.lblThongTinHocPhi.StateCommon.ShortText.Color1 = System.Drawing.Color.Black;
+            this.lblThongTinHocPhi.StateCommon.ShortText.Color2 = System.Drawing.Color.Black;
+            this.lblThongTinHocPhi.StateCommon.ShortText.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblThongTinHocPhi.TabIndex = 1;
+            this.lblThongTinHocPhi.Values.Text = "Thông tin học phí";
             // 
-            // kryptonLabel1
+            // lblThongTinDKHP
             // 
-            this.kryptonLabel1.AutoSize = false;
-            this.kryptonLabel1.Location = new System.Drawing.Point(17, 29);
-            this.kryptonLabel1.Name = "kryptonLabel1";
-            this.kryptonLabel1.Size = new System.Drawing.Size(164, 25);
-            this.kryptonLabel1.StateCommon.ShortText.Color1 = System.Drawing.Color.Black;
-            this.kryptonLabel1.StateCommon.ShortText.Color2 = System.Drawing.Color.Black;
-            this.kryptonLabel1.StateCommon.ShortText.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.kryptonLabel1.TabIndex = 0;
-            this.kryptonLabel1.Values.Text = "Thông tin ĐKHP";
+            this.lblThongTinDKHP.AutoSize = false;
+            this.lblThongTinDKHP.Location = new System.Drawing.Point(13, 24);
+            this.lblThongTinDKHP.Margin = new System.Windows.Forms.Padding(2);
+            this.lblThongTinDKHP.Name = "lblThongTinDKHP";
+            this.lblThongTinDKHP.Size = new System.Drawing.Size(123, 20);
+            this.lblThongTinDKHP.StateCommon.ShortText.Color1 = System.Drawing.Color.Black;
+            this.lblThongTinDKHP.StateCommon.ShortText.Color2 = System.Drawing.Color.Black;
+            this.lblThongTinDKHP.StateCommon.ShortText.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblThongTinDKHP.TabIndex = 0;
+            this.lblThongTinDKHP.Values.Text = "Thông tin ĐKHP";
             // 
-            // kryptonLabel3
+            // lblMSSV
             // 
-            this.kryptonLabel3.Location = new System.Drawing.Point(295, 45);
-            this.kryptonLabel3.Name = "kryptonLabel3";
-            this.kryptonLabel3.Size = new System.Drawing.Size(69, 27);
-            this.kryptonLabel3.StateCommon.ShortText.Color1 = System.Drawing.Color.Black;
-            this.kryptonLabel3.StateCommon.ShortText.Color2 = System.Drawing.Color.Black;
-            this.kryptonLabel3.StateCommon.ShortText.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.kryptonLabel3.TabIndex = 2;
-            this.kryptonLabel3.Values.Text = "MSSV";
+            this.lblMSSV.Location = new System.Drawing.Point(221, 37);
+            this.lblMSSV.Margin = new System.Windows.Forms.Padding(2);
+            this.lblMSSV.Name = "lblMSSV";
+            this.lblMSSV.Size = new System.Drawing.Size(57, 22);
+            this.lblMSSV.StateCommon.ShortText.Color1 = System.Drawing.Color.Black;
+            this.lblMSSV.StateCommon.ShortText.Color2 = System.Drawing.Color.Black;
+            this.lblMSSV.StateCommon.ShortText.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblMSSV.TabIndex = 2;
+            this.lblMSSV.Values.Text = "MSSV";
             // 
-            // panel2
+            // pnlThongTinSinhVien
             // 
-            this.panel2.Controls.Add(this.groupBox9);
-            this.panel2.Controls.Add(this.groupBox7);
-            this.panel2.Controls.Add(this.groupBox6);
-            this.panel2.Controls.Add(this.groupBox5);
-            this.panel2.Controls.Add(this.groupBox2);
-            this.panel2.Controls.Add(this.groupBox4);
-            this.panel2.Controls.Add(this.groupBox3);
-            this.panel2.Controls.Add(this.label1);
-            this.panel2.Location = new System.Drawing.Point(16, 181);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(783, 408);
-            this.panel2.TabIndex = 1;
+            this.pnlThongTinSinhVien.Controls.Add(this.groupBox9);
+            this.pnlThongTinSinhVien.Controls.Add(this.grbKhoa);
+            this.pnlThongTinSinhVien.Controls.Add(this.grbDoiTuong);
+            this.pnlThongTinSinhVien.Controls.Add(this.grbQueQuan);
+            this.pnlThongTinSinhVien.Controls.Add(this.grbNgaySinh);
+            this.pnlThongTinSinhVien.Controls.Add(this.grbHoTen);
+            this.pnlThongTinSinhVien.Controls.Add(this.grbGioiTinh);
+            this.pnlThongTinSinhVien.Location = new System.Drawing.Point(12, 147);
+            this.pnlThongTinSinhVien.Margin = new System.Windows.Forms.Padding(2);
+            this.pnlThongTinSinhVien.Name = "pnlThongTinSinhVien";
+            this.pnlThongTinSinhVien.Size = new System.Drawing.Size(587, 332);
+            this.pnlThongTinSinhVien.TabIndex = 1;
             // 
             // groupBox9
             // 
-            this.groupBox9.Controls.Add(this.kryptonTextBox3);
+            this.groupBox9.Controls.Add(this.txtNganh);
             this.groupBox9.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox9.Location = new System.Drawing.Point(26, 318);
+            this.groupBox9.Location = new System.Drawing.Point(20, 258);
+            this.groupBox9.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox9.Name = "groupBox9";
-            this.groupBox9.Size = new System.Drawing.Size(459, 66);
+            this.groupBox9.Padding = new System.Windows.Forms.Padding(2);
+            this.groupBox9.Size = new System.Drawing.Size(344, 54);
             this.groupBox9.TabIndex = 6;
             this.groupBox9.TabStop = false;
             this.groupBox9.Text = "Ngành học";
             // 
-            // kryptonTextBox3
+            // txtNganh
             // 
-            this.kryptonTextBox3.Location = new System.Drawing.Point(53, 24);
-            this.kryptonTextBox3.Name = "kryptonTextBox3";
-            this.kryptonTextBox3.ReadOnly = true;
-            this.kryptonTextBox3.Size = new System.Drawing.Size(384, 33);
-            this.kryptonTextBox3.StateActive.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
+            this.txtNganh.Location = new System.Drawing.Point(40, 20);
+            this.txtNganh.Margin = new System.Windows.Forms.Padding(2);
+            this.txtNganh.Name = "txtNganh";
+            this.txtNganh.ReadOnly = true;
+            this.txtNganh.Size = new System.Drawing.Size(288, 29);
+            this.txtNganh.StateActive.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
             | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left) 
             | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Right)));
-            this.kryptonTextBox3.StateActive.Border.Rounding = 15;
-            this.kryptonTextBox3.StateActive.Content.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.kryptonTextBox3.StateActive.Content.Padding = new System.Windows.Forms.Padding(2, -1, -1, -1);
-            this.kryptonTextBox3.StateCommon.Content.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.kryptonTextBox3.TabIndex = 15;
-            this.kryptonTextBox3.Text = "Kỹ thuật phần mềm";
+            this.txtNganh.StateActive.Border.Rounding = 15;
+            this.txtNganh.StateActive.Content.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtNganh.StateActive.Content.Padding = new System.Windows.Forms.Padding(2, -1, -1, -1);
+            this.txtNganh.StateCommon.Content.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtNganh.TabIndex = 15;
+            this.txtNganh.Text = "Kỹ thuật phần mềm";
             // 
-            // groupBox7
+            // grbKhoa
             // 
-            this.groupBox7.Controls.Add(this.kryptonTextBox2);
-            this.groupBox7.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox7.Location = new System.Drawing.Point(26, 216);
-            this.groupBox7.Name = "groupBox7";
-            this.groupBox7.Size = new System.Drawing.Size(459, 71);
-            this.groupBox7.TabIndex = 5;
-            this.groupBox7.TabStop = false;
-            this.groupBox7.Text = "Khoa";
+            this.grbKhoa.Controls.Add(this.txtKhoa);
+            this.grbKhoa.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.grbKhoa.Location = new System.Drawing.Point(20, 176);
+            this.grbKhoa.Margin = new System.Windows.Forms.Padding(2);
+            this.grbKhoa.Name = "grbKhoa";
+            this.grbKhoa.Padding = new System.Windows.Forms.Padding(2);
+            this.grbKhoa.Size = new System.Drawing.Size(344, 58);
+            this.grbKhoa.TabIndex = 5;
+            this.grbKhoa.TabStop = false;
+            this.grbKhoa.Text = "Khoa";
             // 
-            // kryptonTextBox2
+            // txtKhoa
             // 
-            this.kryptonTextBox2.Location = new System.Drawing.Point(53, 29);
-            this.kryptonTextBox2.Name = "kryptonTextBox2";
-            this.kryptonTextBox2.ReadOnly = true;
-            this.kryptonTextBox2.Size = new System.Drawing.Size(384, 33);
-            this.kryptonTextBox2.StateActive.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
+            this.txtKhoa.Location = new System.Drawing.Point(40, 24);
+            this.txtKhoa.Margin = new System.Windows.Forms.Padding(2);
+            this.txtKhoa.Name = "txtKhoa";
+            this.txtKhoa.ReadOnly = true;
+            this.txtKhoa.Size = new System.Drawing.Size(288, 29);
+            this.txtKhoa.StateActive.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
             | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left) 
             | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Right)));
-            this.kryptonTextBox2.StateActive.Border.Rounding = 15;
-            this.kryptonTextBox2.StateActive.Content.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.kryptonTextBox2.StateActive.Content.Padding = new System.Windows.Forms.Padding(2, -1, -1, -1);
-            this.kryptonTextBox2.StateCommon.Content.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.kryptonTextBox2.TabIndex = 15;
-            this.kryptonTextBox2.Text = "Công nghệ phần mềm";
+            this.txtKhoa.StateActive.Border.Rounding = 15;
+            this.txtKhoa.StateActive.Content.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtKhoa.StateActive.Content.Padding = new System.Windows.Forms.Padding(2, -1, -1, -1);
+            this.txtKhoa.StateCommon.Content.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtKhoa.TabIndex = 15;
+            this.txtKhoa.Text = "Công nghệ phần mềm";
             // 
-            // groupBox6
+            // grbDoiTuong
             // 
-            this.groupBox6.Controls.Add(this.listBox1);
-            this.groupBox6.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox6.Location = new System.Drawing.Point(502, 216);
-            this.groupBox6.Name = "groupBox6";
-            this.groupBox6.Size = new System.Drawing.Size(248, 166);
-            this.groupBox6.TabIndex = 5;
-            this.groupBox6.TabStop = false;
-            this.groupBox6.Text = "Đối tượng";
+            this.grbDoiTuong.Controls.Add(this.listDoiTuong);
+            this.grbDoiTuong.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.grbDoiTuong.Location = new System.Drawing.Point(376, 176);
+            this.grbDoiTuong.Margin = new System.Windows.Forms.Padding(2);
+            this.grbDoiTuong.Name = "grbDoiTuong";
+            this.grbDoiTuong.Padding = new System.Windows.Forms.Padding(2);
+            this.grbDoiTuong.Size = new System.Drawing.Size(186, 135);
+            this.grbDoiTuong.TabIndex = 5;
+            this.grbDoiTuong.TabStop = false;
+            this.grbDoiTuong.Text = "Đối tượng";
             // 
-            // listBox1
+            // listDoiTuong
             // 
-            this.listBox1.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.listBox1.FormattingEnabled = true;
-            this.listBox1.ItemHeight = 22;
-            this.listBox1.Items.AddRange(new object[] {
-            "Vung sau ",
-            "Thuong binh",
-            "Dan toc thieu so",
-            "Không"});
-            this.listBox1.Location = new System.Drawing.Point(20, 29);
-            this.listBox1.Name = "listBox1";
-            this.listBox1.ScrollAlwaysVisible = true;
-            this.listBox1.Size = new System.Drawing.Size(222, 136);
-            this.listBox1.TabIndex = 0;
+            this.listDoiTuong.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.listDoiTuong.FormattingEnabled = true;
+            this.listDoiTuong.ItemHeight = 19;
+            this.listDoiTuong.Location = new System.Drawing.Point(15, 24);
+            this.listDoiTuong.Margin = new System.Windows.Forms.Padding(2);
+            this.listDoiTuong.Name = "listDoiTuong";
+            this.listDoiTuong.ScrollAlwaysVisible = true;
+            this.listDoiTuong.Size = new System.Drawing.Size(168, 99);
+            this.listDoiTuong.TabIndex = 0;
             // 
-            // groupBox5
+            // grbQueQuan
             // 
-            this.groupBox5.Controls.Add(this.kryptonTextBox1);
-            this.groupBox5.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox5.Location = new System.Drawing.Point(26, 122);
-            this.groupBox5.Name = "groupBox5";
-            this.groupBox5.Size = new System.Drawing.Size(459, 69);
-            this.groupBox5.TabIndex = 4;
-            this.groupBox5.TabStop = false;
-            this.groupBox5.Text = "Quê quán";
+            this.grbQueQuan.Controls.Add(this.txtQueQuan);
+            this.grbQueQuan.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.grbQueQuan.Location = new System.Drawing.Point(20, 94);
+            this.grbQueQuan.Margin = new System.Windows.Forms.Padding(2);
+            this.grbQueQuan.Name = "grbQueQuan";
+            this.grbQueQuan.Padding = new System.Windows.Forms.Padding(2);
+            this.grbQueQuan.Size = new System.Drawing.Size(344, 56);
+            this.grbQueQuan.TabIndex = 4;
+            this.grbQueQuan.TabStop = false;
+            this.grbQueQuan.Text = "Quê quán";
             // 
-            // kryptonTextBox1
+            // txtQueQuan
             // 
-            this.kryptonTextBox1.Location = new System.Drawing.Point(53, 27);
-            this.kryptonTextBox1.Name = "kryptonTextBox1";
-            this.kryptonTextBox1.ReadOnly = true;
-            this.kryptonTextBox1.Size = new System.Drawing.Size(384, 33);
-            this.kryptonTextBox1.StateActive.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
+            this.txtQueQuan.Location = new System.Drawing.Point(40, 22);
+            this.txtQueQuan.Margin = new System.Windows.Forms.Padding(2);
+            this.txtQueQuan.Name = "txtQueQuan";
+            this.txtQueQuan.ReadOnly = true;
+            this.txtQueQuan.Size = new System.Drawing.Size(288, 29);
+            this.txtQueQuan.StateActive.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
             | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left) 
             | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Right)));
-            this.kryptonTextBox1.StateActive.Border.Rounding = 15;
-            this.kryptonTextBox1.StateActive.Content.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.kryptonTextBox1.StateActive.Content.Padding = new System.Windows.Forms.Padding(2, -1, -1, -1);
-            this.kryptonTextBox1.StateCommon.Content.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.kryptonTextBox1.TabIndex = 15;
-            this.kryptonTextBox1.Text = "Bình Sơn- Quảng Ngãi";
+            this.txtQueQuan.StateActive.Border.Rounding = 15;
+            this.txtQueQuan.StateActive.Content.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtQueQuan.StateActive.Content.Padding = new System.Windows.Forms.Padding(2, -1, -1, -1);
+            this.txtQueQuan.StateCommon.Content.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtQueQuan.TabIndex = 15;
+            this.txtQueQuan.Text = "Bình Sơn- Quảng Ngãi";
             // 
-            // groupBox2
+            // grbNgaySinh
             // 
-            this.groupBox2.Controls.Add(this.kryptonTextBox4);
-            this.groupBox2.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox2.Location = new System.Drawing.Point(502, 122);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(248, 69);
-            this.groupBox2.TabIndex = 4;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Ngày sinh";
+            this.grbNgaySinh.Controls.Add(this.txtNgaySinh);
+            this.grbNgaySinh.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.grbNgaySinh.Location = new System.Drawing.Point(376, 99);
+            this.grbNgaySinh.Margin = new System.Windows.Forms.Padding(2);
+            this.grbNgaySinh.Name = "grbNgaySinh";
+            this.grbNgaySinh.Padding = new System.Windows.Forms.Padding(2);
+            this.grbNgaySinh.Size = new System.Drawing.Size(186, 56);
+            this.grbNgaySinh.TabIndex = 4;
+            this.grbNgaySinh.TabStop = false;
+            this.grbNgaySinh.Text = "Ngày sinh";
             // 
-            // kryptonTextBox4
+            // txtNgaySinh
             // 
-            this.kryptonTextBox4.Location = new System.Drawing.Point(37, 27);
-            this.kryptonTextBox4.Name = "kryptonTextBox4";
-            this.kryptonTextBox4.ReadOnly = true;
-            this.kryptonTextBox4.Size = new System.Drawing.Size(192, 33);
-            this.kryptonTextBox4.StateActive.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
+            this.txtNgaySinh.Location = new System.Drawing.Point(28, 22);
+            this.txtNgaySinh.Margin = new System.Windows.Forms.Padding(2);
+            this.txtNgaySinh.Name = "txtNgaySinh";
+            this.txtNgaySinh.ReadOnly = true;
+            this.txtNgaySinh.Size = new System.Drawing.Size(144, 29);
+            this.txtNgaySinh.StateActive.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
             | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left) 
             | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Right)));
-            this.kryptonTextBox4.StateActive.Border.Rounding = 15;
-            this.kryptonTextBox4.StateActive.Content.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.kryptonTextBox4.StateActive.Content.Padding = new System.Windows.Forms.Padding(2, -1, -1, -1);
-            this.kryptonTextBox4.StateCommon.Content.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.kryptonTextBox4.TabIndex = 16;
-            this.kryptonTextBox4.Text = "16/03/2003";
+            this.txtNgaySinh.StateActive.Border.Rounding = 15;
+            this.txtNgaySinh.StateActive.Content.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtNgaySinh.StateActive.Content.Padding = new System.Windows.Forms.Padding(2, -1, -1, -1);
+            this.txtNgaySinh.StateCommon.Content.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtNgaySinh.TabIndex = 16;
+            this.txtNgaySinh.Text = "16/03/2003";
             // 
-            // groupBox4
+            // grbHoTen
             // 
-            this.groupBox4.Controls.Add(this.kryptonTextBox8);
-            this.groupBox4.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox4.Location = new System.Drawing.Point(26, 29);
-            this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Size = new System.Drawing.Size(459, 71);
-            this.groupBox4.TabIndex = 3;
-            this.groupBox4.TabStop = false;
-            this.groupBox4.Text = "Họ tên";
+            this.grbHoTen.Controls.Add(this.txtHoTen);
+            this.grbHoTen.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.grbHoTen.Location = new System.Drawing.Point(20, 24);
+            this.grbHoTen.Margin = new System.Windows.Forms.Padding(2);
+            this.grbHoTen.Name = "grbHoTen";
+            this.grbHoTen.Padding = new System.Windows.Forms.Padding(2);
+            this.grbHoTen.Size = new System.Drawing.Size(344, 58);
+            this.grbHoTen.TabIndex = 3;
+            this.grbHoTen.TabStop = false;
+            this.grbHoTen.Text = "Họ tên";
             // 
-            // kryptonTextBox8
+            // txtHoTen
             // 
-            this.kryptonTextBox8.Location = new System.Drawing.Point(53, 26);
-            this.kryptonTextBox8.Name = "kryptonTextBox8";
-            this.kryptonTextBox8.ReadOnly = true;
-            this.kryptonTextBox8.Size = new System.Drawing.Size(384, 33);
-            this.kryptonTextBox8.StateActive.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
+            this.txtHoTen.Location = new System.Drawing.Point(40, 21);
+            this.txtHoTen.Margin = new System.Windows.Forms.Padding(2);
+            this.txtHoTen.Name = "txtHoTen";
+            this.txtHoTen.ReadOnly = true;
+            this.txtHoTen.Size = new System.Drawing.Size(288, 29);
+            this.txtHoTen.StateActive.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
             | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left) 
             | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Right)));
-            this.kryptonTextBox8.StateActive.Border.Rounding = 15;
-            this.kryptonTextBox8.StateActive.Content.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.kryptonTextBox8.StateActive.Content.Padding = new System.Windows.Forms.Padding(2, -1, -1, -1);
-            this.kryptonTextBox8.StateCommon.Content.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.kryptonTextBox8.TabIndex = 15;
-            this.kryptonTextBox8.Text = "Nguyễn Thị Thùy Trinh";
+            this.txtHoTen.StateActive.Border.Rounding = 15;
+            this.txtHoTen.StateActive.Content.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtHoTen.StateActive.Content.Padding = new System.Windows.Forms.Padding(2, -1, -1, -1);
+            this.txtHoTen.StateCommon.Content.Font = new System.Drawing.Font("Times New Roman", 13.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtHoTen.TabIndex = 15;
+            this.txtHoTen.Text = "Nguyễn Thị Thùy Trinh";
             // 
-            // groupBox3
+            // grbGioiTinh
             // 
-            this.groupBox3.Controls.Add(this.radioButton2);
-            this.groupBox3.Controls.Add(this.radioButton1);
-            this.groupBox3.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox3.Location = new System.Drawing.Point(502, 29);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(248, 71);
-            this.groupBox3.TabIndex = 2;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "Giới tính";
+            this.grbGioiTinh.Controls.Add(this.rbtnNu);
+            this.grbGioiTinh.Controls.Add(this.rbtnNam);
+            this.grbGioiTinh.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.grbGioiTinh.Location = new System.Drawing.Point(376, 24);
+            this.grbGioiTinh.Margin = new System.Windows.Forms.Padding(2);
+            this.grbGioiTinh.Name = "grbGioiTinh";
+            this.grbGioiTinh.Padding = new System.Windows.Forms.Padding(2);
+            this.grbGioiTinh.Size = new System.Drawing.Size(186, 58);
+            this.grbGioiTinh.TabIndex = 2;
+            this.grbGioiTinh.TabStop = false;
+            this.grbGioiTinh.Text = "Giới tính";
             // 
-            // radioButton2
+            // rbtnNu
             // 
-            this.radioButton2.AutoSize = true;
-            this.radioButton2.Location = new System.Drawing.Point(155, 29);
-            this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(51, 23);
-            this.radioButton2.TabIndex = 10;
-            this.radioButton2.TabStop = true;
-            this.radioButton2.Text = "Nữ";
-            this.radioButton2.UseVisualStyleBackColor = true;
+            this.rbtnNu.AutoSize = true;
+            this.rbtnNu.Enabled = false;
+            this.rbtnNu.Location = new System.Drawing.Point(116, 24);
+            this.rbtnNu.Margin = new System.Windows.Forms.Padding(2);
+            this.rbtnNu.Name = "rbtnNu";
+            this.rbtnNu.Size = new System.Drawing.Size(43, 20);
+            this.rbtnNu.TabIndex = 10;
+            this.rbtnNu.TabStop = true;
+            this.rbtnNu.Text = "Nữ";
+            this.rbtnNu.UseVisualStyleBackColor = true;
             // 
-            // radioButton1
+            // rbtnNam
             // 
-            this.radioButton1.AutoSize = true;
-            this.radioButton1.Location = new System.Drawing.Point(43, 29);
-            this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(62, 23);
-            this.radioButton1.TabIndex = 9;
-            this.radioButton1.TabStop = true;
-            this.radioButton1.Text = "Nam";
-            this.radioButton1.UseVisualStyleBackColor = true;
+            this.rbtnNam.AutoSize = true;
+            this.rbtnNam.Enabled = false;
+            this.rbtnNam.Location = new System.Drawing.Point(32, 24);
+            this.rbtnNam.Margin = new System.Windows.Forms.Padding(2);
+            this.rbtnNam.Name = "rbtnNam";
+            this.rbtnNam.Size = new System.Drawing.Size(52, 20);
+            this.rbtnNam.TabIndex = 9;
+            this.rbtnNam.TabStop = true;
+            this.rbtnNam.Text = "Nam";
+            this.rbtnNam.UseVisualStyleBackColor = true;
             // 
-            // label1
+            // picAvatar
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(44, 50);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(0, 16);
-            this.label1.TabIndex = 0;
+            this.picAvatar.Image = ((System.Drawing.Image)(resources.GetObject("picAvatar.Image")));
+            this.picAvatar.Location = new System.Drawing.Point(40, 2);
+            this.picAvatar.Margin = new System.Windows.Forms.Padding(2);
+            this.picAvatar.Name = "picAvatar";
+            this.picAvatar.Size = new System.Drawing.Size(145, 140);
+            this.picAvatar.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.picAvatar.TabIndex = 0;
+            this.picAvatar.TabStop = false;
             // 
-            // pictureBox1
+            // pnlDeMuc
             // 
-            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(53, 3);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(193, 172);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox1.TabIndex = 0;
-            this.pictureBox1.TabStop = false;
+            this.pnlDeMuc.Controls.Add(this.btnQuayLai);
+            this.pnlDeMuc.Controls.Add(this.lblThongTinSinhVien);
+            this.pnlDeMuc.Controls.Add(this.lblQLMB);
+            this.pnlDeMuc.Location = new System.Drawing.Point(1, 1);
+            this.pnlDeMuc.Margin = new System.Windows.Forms.Padding(2);
+            this.pnlDeMuc.Name = "pnlDeMuc";
+            this.pnlDeMuc.Size = new System.Drawing.Size(631, 44);
+            this.pnlDeMuc.TabIndex = 48;
             // 
-            // panel3
+            // btnQuayLai
             // 
-            this.panel3.Controls.Add(this.kryptonLabel4);
-            this.panel3.Controls.Add(this.kryptonButton6);
-            this.panel3.Controls.Add(this.lblQLMB);
-            this.panel3.Location = new System.Drawing.Point(1, 1);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(841, 54);
-            this.panel3.TabIndex = 48;
-            // 
-            // kryptonLabel4
-            // 
-            this.kryptonLabel4.Location = new System.Drawing.Point(265, 11);
-            this.kryptonLabel4.Name = "kryptonLabel4";
-            this.kryptonLabel4.Palette = this.paleHeader;
-            this.kryptonLabel4.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Custom;
-            this.kryptonLabel4.Size = new System.Drawing.Size(311, 36);
-            this.kryptonLabel4.StateCommon.ShortText.Font = new System.Drawing.Font("Times New Roman", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.kryptonLabel4.TabIndex = 49;
-            this.kryptonLabel4.Values.Text = "THÔNG TIN SINH VIÊN";
-            // 
-            // paleHeader
-            // 
-            this.paleHeader.Common.StateCommon.Content.LongText.Color1 = System.Drawing.Color.White;
-            this.paleHeader.Common.StateCommon.Content.ShortText.Color1 = System.Drawing.Color.Black;
-            this.paleHeader.Common.StateCommon.Content.ShortText.Color2 = System.Drawing.Color.Black;
-            this.paleHeader.Common.StateCommon.Content.ShortText.Font = new System.Drawing.Font("Times New Roman", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            // 
-            // kryptonButton6
-            // 
-            this.kryptonButton6.Location = new System.Drawing.Point(12, 5);
-            this.kryptonButton6.Name = "kryptonButton6";
-            this.kryptonButton6.Size = new System.Drawing.Size(52, 48);
-            this.kryptonButton6.StateCommon.Back.Color1 = System.Drawing.Color.White;
-            this.kryptonButton6.StateCommon.Back.Color2 = System.Drawing.Color.White;
-            this.kryptonButton6.StateCommon.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
+            this.btnQuayLai.Location = new System.Drawing.Point(10, 2);
+            this.btnQuayLai.Margin = new System.Windows.Forms.Padding(2);
+            this.btnQuayLai.Name = "btnQuayLai";
+            this.btnQuayLai.Size = new System.Drawing.Size(39, 39);
+            this.btnQuayLai.StateCommon.Back.Color1 = System.Drawing.Color.White;
+            this.btnQuayLai.StateCommon.Back.Color2 = System.Drawing.Color.White;
+            this.btnQuayLai.StateCommon.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
             | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left) 
             | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Right)));
-            this.kryptonButton6.StateCommon.Border.Rounding = 15;
-            this.kryptonButton6.StateCommon.Content.LongText.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.kryptonButton6.StateCommon.Content.ShortText.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.kryptonButton6.TabIndex = 48;
-            this.kryptonButton6.Values.Image = ((System.Drawing.Image)(resources.GetObject("kryptonButton6.Values.Image")));
-            this.kryptonButton6.Values.Text = " QUAY LẠI";
+            this.btnQuayLai.StateCommon.Border.Rounding = 15;
+            this.btnQuayLai.StateCommon.Content.LongText.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnQuayLai.StateCommon.Content.ShortText.Font = new System.Drawing.Font("Microsoft Sans Serif", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnQuayLai.TabIndex = 50;
+            this.btnQuayLai.Values.Image = ((System.Drawing.Image)(resources.GetObject("btnQuayLai.Values.Image")));
+            this.btnQuayLai.Values.Text = " QUAY LẠI";
+            this.btnQuayLai.Click += new System.EventHandler(this.btnQuayLai_Click);
+            // 
+            // lblThongTinSinhVien
+            // 
+            this.lblThongTinSinhVien.Location = new System.Drawing.Point(199, 9);
+            this.lblThongTinSinhVien.Margin = new System.Windows.Forms.Padding(2);
+            this.lblThongTinSinhVien.Name = "lblThongTinSinhVien";
+            this.lblThongTinSinhVien.Palette = this.plt1;
+            this.lblThongTinSinhVien.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Custom;
+            this.lblThongTinSinhVien.Size = new System.Drawing.Size(250, 29);
+            this.lblThongTinSinhVien.StateCommon.ShortText.Font = new System.Drawing.Font("Times New Roman", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblThongTinSinhVien.TabIndex = 49;
+            this.lblThongTinSinhVien.Values.Text = "THÔNG TIN SINH VIÊN";
+            // 
+            // plt1
+            // 
+            this.plt1.Common.StateCommon.Content.LongText.Color1 = System.Drawing.Color.White;
+            this.plt1.Common.StateCommon.Content.ShortText.Color1 = System.Drawing.Color.Black;
+            this.plt1.Common.StateCommon.Content.ShortText.Color2 = System.Drawing.Color.Black;
+            this.plt1.Common.StateCommon.Content.ShortText.Font = new System.Drawing.Font("Times New Roman", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             // 
             // lblQLMB
             // 
             this.lblQLMB.AutoSize = true;
             this.lblQLMB.Font = new System.Drawing.Font("Times New Roman", 18F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblQLMB.Location = new System.Drawing.Point(269, 8);
+            this.lblQLMB.Location = new System.Drawing.Point(202, 6);
+            this.lblQLMB.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblQLMB.Name = "lblQLMB";
-            this.lblQLMB.Size = new System.Drawing.Size(0, 34);
+            this.lblQLMB.Size = new System.Drawing.Size(0, 27);
             this.lblQLMB.TabIndex = 0;
             // 
-            // paleDangNhap
+            // plt2
             // 
-            this.paleDangNhap.ButtonSpecs.FormClose.Image = global::PL.Properties.Resources.icons8_orange_circle_20;
-            this.paleDangNhap.ButtonSpecs.FormClose.ImageStates.ImageTracking = global::PL.Properties.Resources.icons8_orange_circle_201;
-            this.paleDangNhap.ButtonSpecs.FormMax.Image = global::PL.Properties.Resources.icons8_yellow_circle_20;
-            this.paleDangNhap.ButtonSpecs.FormMax.ImageStates.ImageTracking = global::PL.Properties.Resources.icons8_yellow_circle_20;
-            this.paleDangNhap.ButtonSpecs.FormMin.Image = global::PL.Properties.Resources.icons8_green_circle_20;
-            this.paleDangNhap.ButtonSpecs.FormMin.ImageStates.ImageTracking = global::PL.Properties.Resources.icons8_green_circle_20;
-            this.paleDangNhap.FormStyles.FormMain.StateCommon.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(250)))), ((int)(((byte)(252)))));
-            this.paleDangNhap.FormStyles.FormMain.StateCommon.Back.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(250)))), ((int)(((byte)(252)))));
-            this.paleDangNhap.FormStyles.FormMain.StateCommon.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
+            this.plt2.ButtonSpecs.FormClose.Image = global::PL.Properties.Resources.icons8_orange_circle_20;
+            this.plt2.ButtonSpecs.FormClose.ImageStates.ImageTracking = global::PL.Properties.Resources.icons8_orange_circle_201;
+            this.plt2.ButtonSpecs.FormMax.Image = global::PL.Properties.Resources.icons8_yellow_circle_20;
+            this.plt2.ButtonSpecs.FormMax.ImageStates.ImageTracking = global::PL.Properties.Resources.icons8_yellow_circle_20;
+            this.plt2.ButtonSpecs.FormMin.Image = global::PL.Properties.Resources.icons8_green_circle_20;
+            this.plt2.ButtonSpecs.FormMin.ImageStates.ImageTracking = global::PL.Properties.Resources.icons8_green_circle_20;
+            this.plt2.FormStyles.FormMain.StateCommon.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(250)))), ((int)(((byte)(252)))));
+            this.plt2.FormStyles.FormMain.StateCommon.Back.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(250)))), ((int)(((byte)(252)))));
+            this.plt2.FormStyles.FormMain.StateCommon.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
             | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left) 
             | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Right)));
-            this.paleDangNhap.FormStyles.FormMain.StateCommon.Border.Rounding = 20;
-            this.paleDangNhap.HeaderStyles.HeaderCommon.StateCommon.Back.Color1 = System.Drawing.Color.White;
-            this.paleDangNhap.HeaderStyles.HeaderCommon.StateCommon.Back.Color2 = System.Drawing.Color.White;
+            this.plt2.FormStyles.FormMain.StateCommon.Border.Rounding = 20;
+            this.plt2.HeaderStyles.HeaderCommon.StateCommon.Back.Color1 = System.Drawing.Color.White;
+            this.plt2.HeaderStyles.HeaderCommon.StateCommon.Back.Color2 = System.Drawing.Color.White;
             // 
             // ThongTinSinhVien
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.White;
-            this.ClientSize = new System.Drawing.Size(845, 701);
-            this.Controls.Add(this.panel3);
-            this.Controls.Add(this.panel1);
+            this.ClientSize = new System.Drawing.Size(634, 570);
+            this.Controls.Add(this.pnlDeMuc);
+            this.Controls.Add(this.pnlXemThem);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.MaximizeBox = false;
             this.Name = "ThongTinSinhVien";
-            this.Palette = this.paleDangNhap;
+            this.Palette = this.plt2;
             this.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Custom;
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ThongTinSinhVien_FormClosing);
             this.Load += new System.EventHandler(this.ThongTinSinhVien_Load);
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
-            this.groupBox8.ResumeLayout(false);
-            this.panel2.ResumeLayout(false);
-            this.panel2.PerformLayout();
+            this.pnlXemThem.ResumeLayout(false);
+            this.pnlXemThem.PerformLayout();
+            this.grbXemThem.ResumeLayout(false);
+            this.pnlThongTinSinhVien.ResumeLayout(false);
             this.groupBox9.ResumeLayout(false);
             this.groupBox9.PerformLayout();
-            this.groupBox7.ResumeLayout(false);
-            this.groupBox7.PerformLayout();
-            this.groupBox6.ResumeLayout(false);
-            this.groupBox5.ResumeLayout(false);
-            this.groupBox5.PerformLayout();
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
-            this.groupBox4.ResumeLayout(false);
-            this.groupBox4.PerformLayout();
-            this.groupBox3.ResumeLayout(false);
-            this.groupBox3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
-            this.panel3.ResumeLayout(false);
-            this.panel3.PerformLayout();
+            this.grbKhoa.ResumeLayout(false);
+            this.grbKhoa.PerformLayout();
+            this.grbDoiTuong.ResumeLayout(false);
+            this.grbQueQuan.ResumeLayout(false);
+            this.grbQueQuan.PerformLayout();
+            this.grbNgaySinh.ResumeLayout(false);
+            this.grbNgaySinh.PerformLayout();
+            this.grbHoTen.ResumeLayout(false);
+            this.grbHoTen.PerformLayout();
+            this.grbGioiTinh.ResumeLayout(false);
+            this.grbGioiTinh.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.picAvatar)).EndInit();
+            this.pnlDeMuc.ResumeLayout(false);
+            this.pnlDeMuc.PerformLayout();
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.PictureBox pictureBox1;
-        private System.Windows.Forms.GroupBox groupBox7;
-        private System.Windows.Forms.GroupBox groupBox6;
-        private System.Windows.Forms.GroupBox groupBox5;
-        private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.GroupBox groupBox4;
-        private System.Windows.Forms.GroupBox groupBox8;
-        private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel2;
-        private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel1;
+        private System.Windows.Forms.Panel pnlXemThem;
+        private System.Windows.Forms.Panel pnlThongTinSinhVien;
+        private System.Windows.Forms.GroupBox grbGioiTinh;
+        private System.Windows.Forms.PictureBox picAvatar;
+        private System.Windows.Forms.GroupBox grbKhoa;
+        private System.Windows.Forms.GroupBox grbDoiTuong;
+        private System.Windows.Forms.GroupBox grbQueQuan;
+        private System.Windows.Forms.GroupBox grbNgaySinh;
+        private System.Windows.Forms.GroupBox grbHoTen;
+        private System.Windows.Forms.GroupBox grbXemThem;
+        private ComponentFactory.Krypton.Toolkit.KryptonLabel lblThongTinHocPhi;
+        private ComponentFactory.Krypton.Toolkit.KryptonLabel lblThongTinDKHP;
         private System.Windows.Forms.GroupBox groupBox9;
-        private ComponentFactory.Krypton.Toolkit.KryptonTextBox kryptonTextBox11;
-        private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel3;
-        private System.Windows.Forms.RadioButton radioButton2;
-        private System.Windows.Forms.RadioButton radioButton1;
-        private ComponentFactory.Krypton.Toolkit.KryptonButton kryptonButton3;
-        private ComponentFactory.Krypton.Toolkit.KryptonButton kryptonButton2;
-        private System.Windows.Forms.Panel panel3;
-        private ComponentFactory.Krypton.Toolkit.KryptonButton kryptonButton6;
+        private ComponentFactory.Krypton.Toolkit.KryptonTextBox txtMssv;
+        private ComponentFactory.Krypton.Toolkit.KryptonLabel lblMSSV;
+        private System.Windows.Forms.RadioButton rbtnNu;
+        private System.Windows.Forms.RadioButton rbtnNam;
+        private ComponentFactory.Krypton.Toolkit.KryptonButton btnThongTinHocPhi;
+        private ComponentFactory.Krypton.Toolkit.KryptonButton btnThongTinDKHP;
+        private System.Windows.Forms.Panel pnlDeMuc;
         private System.Windows.Forms.Label lblQLMB;
-        private System.Windows.Forms.ListBox listBox1;
-        private ComponentFactory.Krypton.Toolkit.KryptonTextBox kryptonTextBox3;
-        private ComponentFactory.Krypton.Toolkit.KryptonTextBox kryptonTextBox2;
-        private ComponentFactory.Krypton.Toolkit.KryptonTextBox kryptonTextBox1;
-        private ComponentFactory.Krypton.Toolkit.KryptonTextBox kryptonTextBox8;
-        private ComponentFactory.Krypton.Toolkit.KryptonLabel kryptonLabel4;
-        private ComponentFactory.Krypton.Toolkit.KryptonPalette paleHeader;
-        private ComponentFactory.Krypton.Toolkit.KryptonTextBox kryptonTextBox4;
-        private ComponentFactory.Krypton.Toolkit.KryptonPalette paleDangNhap;
+        private System.Windows.Forms.ListBox listDoiTuong;
+        private ComponentFactory.Krypton.Toolkit.KryptonTextBox txtNganh;
+        private ComponentFactory.Krypton.Toolkit.KryptonTextBox txtKhoa;
+        private ComponentFactory.Krypton.Toolkit.KryptonTextBox txtQueQuan;
+        private ComponentFactory.Krypton.Toolkit.KryptonTextBox txtHoTen;
+        private ComponentFactory.Krypton.Toolkit.KryptonLabel lblThongTinSinhVien;
+        private ComponentFactory.Krypton.Toolkit.KryptonPalette plt1;
+        private ComponentFactory.Krypton.Toolkit.KryptonTextBox txtNgaySinh;
+        private ComponentFactory.Krypton.Toolkit.KryptonPalette plt2;
+        private ComponentFactory.Krypton.Toolkit.KryptonButton btnQuayLai;
     }
 }

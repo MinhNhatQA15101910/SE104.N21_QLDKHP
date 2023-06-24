@@ -1,7 +1,7 @@
 ﻿
 namespace PL
 {
-    partial class GV
+    partial class GiaoVien
     {
         /// <summary>
         /// Required designer variable.
@@ -30,7 +30,7 @@ namespace PL
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GV));
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(GiaoVien));
             this.lblHome = new System.Windows.Forms.Label();
             this.btnQuanLyMonHocMo = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.btnXacNhanDKHP = new ComponentFactory.Krypton.Toolkit.KryptonButton();

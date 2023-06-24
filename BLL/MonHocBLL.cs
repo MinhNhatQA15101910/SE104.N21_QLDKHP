@@ -59,7 +59,7 @@ namespace BLL
                 return SuaMonHocMessage.InvalidSoTiet;
             }
 
-            return MonHocDAL.SuaMonHoc(maMHBanDau, maMH, tenMH, maLoaiMonHoc, soTietValue);
+            return MonHocDAL.SuaMonHoc(maMHBanDau, tenMH, maLoaiMonHoc, soTietValue);
         }
 
         public static ThemMonHocMessage ThemMonHoc(string maMH, string tenMH, int maLoaiMonHoc, string soTiet, int soTietLoaiMon)

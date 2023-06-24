@@ -13,7 +13,7 @@ using System.Windows.Forms;
 
 namespace PL
 {
-    public partial class GV :
+    public partial class GiaoVien :
         KryptonForm,
         ICaiDatRequester,
         IMonHocMoRequester,
@@ -22,14 +22,14 @@ namespace PL
         IKhoaRequester,
         IChuongTrinhHocRequester,
         IMonHocRequester,
-        IDSSVRequester,
+        IDanhSachSinhVienRequester,
         IXacNhanHocPhiRequester,
         IBaoCaoRequester,
         IThanhToanHocPhiRequester
     {
-        private IGVRequester gvRequester;
+        private readonly IGVRequester gvRequester;
 
-        public GV (IGVRequester requester)
+        public GiaoVien (IGVRequester requester)
         {
             InitializeComponent();
 

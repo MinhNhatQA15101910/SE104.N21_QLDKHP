@@ -273,4 +273,18 @@ namespace DTO
         Success,
         Error
     }
+
+    public enum TimKiemPhieuDKHPMessage
+    {
+        EmptyNamHoc,
+        InvalidNamHoc,
+        Sucess
+    }
+
+    public enum TimKiemTTHocPhiMessage
+    {
+        EmptyNamHoc,
+        InvalidNamHoc,
+        Sucess
+    }
 }

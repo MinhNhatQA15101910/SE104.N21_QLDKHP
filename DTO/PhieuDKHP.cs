@@ -13,5 +13,6 @@ namespace DTO
         public DateTime NgayLap { get; set; }
         public int MaHocKy { get; set; }
         public int NamHoc { get; set; }
+        public int MaTinhTrang { get; set; }
     }
 }

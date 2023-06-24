@@ -32,7 +32,7 @@ namespace DAL
             return output;
         }
 
-        public static object LaySoTinChiToiThieu()
+        public static int LaySoTinChiToiThieu()
         {
             int output;
             using (IDbConnection connection = new SqlConnection(DatabaseConnection.CnnString()))

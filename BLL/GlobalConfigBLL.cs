@@ -25,7 +25,7 @@ namespace BLL
             return GlobalConfigDAL.LaySoTinChiToiDa();
         }
 
-        public static object LaySoTinChiToiThieu()
+        public static int LaySoTinChiToiThieu()
         {
             return GlobalConfigDAL.LaySoTinChiToiThieu();
         }

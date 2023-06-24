@@ -54,5 +54,15 @@ namespace BLL
         {
             return SinhVienDAL.XoaSinhVien(maSV);
         }
+
+        public static string LayTenSV(string mssv)
+        {
+            return SinhVienDAL.LayTenSV(mssv);
+        }
+
+        public static List<dynamic> LayThongTinSV(string mssv)
+        {
+            return SinhVienDAL.LayThongTinSV(mssv);
+        }
     }
 }

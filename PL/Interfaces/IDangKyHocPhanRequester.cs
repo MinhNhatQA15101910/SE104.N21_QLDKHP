@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace PL.Interfaces
 {
-    public interface IDKHPRequester
+    public interface IDangKyHocPhanRequester
     {
         void OnDKHPClosing();
     }

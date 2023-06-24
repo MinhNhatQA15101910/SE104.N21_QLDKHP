@@ -8,36 +8,86 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using DTO;
+using BLL;
+using PL.Interfaces;
 
 namespace PL
 {
-    public partial class ThongTinSinhVien : KryptonForm 
+    public partial class ThongTinSinhVien : KryptonForm
     {
-        public ThongTinSinhVien()
+        private readonly IThongTinSinhVienRequester thongTinSinhVienRequester;
+
+        public ThongTinSinhVien(IThongTinSinhVienRequester requester)
         {
             InitializeComponent();
-        }
 
-        private void kryptonTextBox10_TextChanged(object sender, EventArgs e)
-        {
-
+            thongTinSinhVienRequester = requester;
         }
 
         private void ThongTinSinhVien_Load(object sender, EventArgs e)
         {
-
+            LoadTTSV();
         }
 
-        private void kryptonButton2_Click(object sender, EventArgs e)
+        private void LoadTTSV()
+        {
+            List<dynamic> stu = SinhVienBLL.LayThongTinSV(GlobalConfig.CurrNguoiDung.TenDangNhap);
+            if (stu.Count > 0)
+            {
+                dynamic tt = stu[0];
+                if (tt != null)
+                {
+                    txtMssv.Text = GlobalConfig.CurrNguoiDung.TenDangNhap;
+                    txtHoTen.Text = tt.HoTen;
+                    txtNgaySinh.Text = tt.NgaySinh.ToString("dd/MM/yyyy");
+                    txtQueQuan.Text = tt.TenHuyen + "-" + tt.TenTTP;
+                    txtNganh.Text = tt.TenNganh;
+                    txtKhoa.Text = tt.TenKhoa;
+
+                    if (tt.GioiTinh == "Nam")
+                    {
+                        rbtnNam.Checked = true;
+                        rbtnNu.Checked = false;
+                    }
+                    else
+                    {
+                        rbtnNu.Checked = true;
+                        rbtnNam.Checked = false;
+                    }
+
+                    List<DoiTuong> dt = DoiTuongBLL.LayDSDoiTuongBangMaSV(GlobalConfig.CurrNguoiDung.TenDangNhap);
+                    foreach (var i in dt)
+                    {
+                        listDoiTuong.Items.Add(i.TenDT);
+                    }
+                }
+            }
+        }
+
+        private void ThongTinSinhVien_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            if (thongTinSinhVienRequester != null)
+            {
+                thongTinSinhVienRequester.OnThongTinSinhVienClosing();
+            }
+        }
+
+        private void btnQuayLai_Click(object sender, EventArgs e)
+        {
+            Close();
+        }
+
+        private void btnThongTinDKHP_Click(object sender, EventArgs e)
         {
             ThongTinDKHP ttdk = new ThongTinDKHP();
-            ttdk.ShowDialog();
+            ttdk.Show();
         }
 
-        private void kryptonButton3_Click(object sender, EventArgs e)
+        private void btnThongTinHocPhi_Click(object sender, EventArgs e)
         {
             ThongTinHocPhi t = new ThongTinHocPhi();
-            t.ShowDialog();
+            t.Show();
         }
     }
 }

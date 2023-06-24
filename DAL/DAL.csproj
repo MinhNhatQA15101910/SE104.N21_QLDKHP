@@ -45,10 +45,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CT_PhieuDKHPDAL.cs" />
     <Compile Include="DanhSachMonHocMoDAL.cs" />
     <Compile Include="DatabaseConnection.cs" />
     <Compile Include="DoiTuongDAL.cs" />
     <Compile Include="GlobalConfigDAL.cs" />
+    <Compile Include="HocKyDAL.cs" />
     <Compile Include="HuyenDAL.cs" />
     <Compile Include="KhoaDAL.cs" />
     <Compile Include="LoaiMonHocDAL.cs" />
@@ -56,6 +58,8 @@
     <Compile Include="NganhDAL.cs" />
     <Compile Include="NguoiDungDAL.cs" />
     <Compile Include="NhomNguoiDungDAL.cs" />
+    <Compile Include="PhieuDKHPDAL.cs" />
+    <Compile Include="PhieuThuHPDAL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SinhVienDAL.cs" />
     <Compile Include="TinhDAL.cs" />

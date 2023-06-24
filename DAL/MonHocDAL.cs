@@ -41,7 +41,7 @@ namespace DAL
             return XoaMonHocMessage.Success;
         }
 
-        public static SuaMonHocMessage SuaMonHoc(string maMHBanDau, string maMH, string tenMH, int maLoaiMonHoc, int soTiet)
+        public static SuaMonHocMessage SuaMonHoc(string maMHBanDau, string tenMH, int maLoaiMonHoc, int soTiet)
         {
             try
             {

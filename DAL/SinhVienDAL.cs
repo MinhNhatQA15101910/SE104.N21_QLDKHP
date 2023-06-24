@@ -133,5 +133,33 @@ namespace DAL
 
             return XoaSinhVienMessage.Success;
         }
+
+        public static string LayTenSV(string mssv)
+        {
+            string output;
+
+            using (IDbConnection connection = new SqlConnection(DatabaseConnection.CnnString()))
+            {
+                var parameters = new DynamicParameters();
+                parameters.Add("@mssv", mssv);
+                output = connection.QueryFirstOrDefault<string>("spSINHVIEN_LayTenSV", parameters, commandType: CommandType.StoredProcedure).ToString();
+            }
+
+            return output;
+        }
+
+        public static List<dynamic> LayThongTinSV(string mssv)
+        {
+            List<dynamic> output;
+
+            using (IDbConnection connection = new SqlConnection(DatabaseConnection.CnnString()))
+            {
+                var parameters = new DynamicParameters();
+                parameters.Add("@mssv", mssv);
+                output = connection.Query<dynamic>("spSINHVIEN_LayThongTinSV", parameters, commandType: CommandType.StoredProcedure).ToList();
+            }
+
+            return output;
+        }
     }
 }

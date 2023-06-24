@@ -1189,8 +1189,6 @@ insert into DOITUONG values
 (N'Con thương binh', 0.5),
 (N'Con liệt sĩ', 0.8);
 
-select * from DOITUONG
-
 -- table SINHVIEN
 set dateformat dmy;
 insert into SINHVIEN(MaSV, HoTen, NgaySinh, GioiTinh, MaHuyen, MaNganh) values
@@ -2282,7 +2280,7 @@ insert into THAMSO(SoTinChiToiDa, SoTinChiToiThieu) values (25, 8);
 -- table TINHTRANG
 insert into TINHTRANG values
 (N'Chờ xác nhận'), 
-(N'Chờ thanh toán'), 
+(N'Đã xác nhận'), 
 (N'Đã thanh toán'),
 (N'Đã hủy');
 
@@ -2763,6 +2761,7 @@ begin
 	from DOITUONG, SINHVIEN_DOITUONG
 	where MaSV = @MaSV
 	and DOITUONG.MaDT = SINHVIEN_DOITUONG.MaDT
+	order by TiLeGiamHocPhi desc
 end
 go
 
@@ -2878,4 +2877,317 @@ begin
 	where MaDT <> 1
 	and MaDT <> 2
 end
+go
+
+--spSINHVIEN_LayTenSV
+CREATE proc spSINHVIEN_LayTenSV (@mssv varchar(10))
+as
+begin 
+	select HoTen
+	from SINHVIEN
+	where MaSV = @mssv
+end
+go
+
+--spPHIEUDKHP_LayTTPhieuDKHP
+CREATE proc spPHIEUDKHP_LayTTPhieuDKHP
+@MaHocKy int, @NamHoc int, @mssv varchar(10) 
+as
+begin 
+	select MaPhieuDKHP, NgayLap, MaTinhTrang from PHIEUDKHP
+	where MaSV= @mssv and MaHocKy= @MaHocKy and NamHoc = @NamHoc
+end 
+go
+
+--spSINHVIEN_LayThongTinSV
+CREATE proc spSINHVIEN_LayThongTinSV
+@mssv varchar(10)
+as
+begin 
+ select s.MaSV, s.HoTen, s.NgaySinh, s.GioiTinh, n.TenNganh,k.TenKhoa,  h.TenHuyen, t.TenTTP from SINHVIEN s
+ INNER JOIN HUYEN h
+ on h.MaHuyen = s.MaHuyen
+ INNER JOIN TINH t
+ on t.MaTinh = h.MaTinh
+ INNER JOIN NGANH n 
+ on n.MaNganh = s.MaNganh
+ INNER JOIN KHOA k
+ on k.MaKhoa = n.MaKhoa
+ where s.MaSV = @mssv
+
+end
+go
+
+--spHOCKY_LayDanhSachHK
+CREATE proc spHOCKY_LayDanhSachHK
+as 
+begin 
+select * from HOCKY
+
+end
+go
+
+--fcMONHOC_TinhSoTinChi
+CREATE FUNCTION fcMONHOC_TinhSoTinChi
+(
+    -- các tham số đầu vào của hàm
+    @maMH nvarchar(50)
+)
+RETURNS int 
+AS
+BEGIN
+ 
+	declare @a int = (select SoTiet from MONHOC
+	where MaMH = @maMH)
+	declare @b int =(select l.SoTiet from MONHOC m 
+					inner join LOAIMONHOC l
+					on m.MaLoaiMonHoc = l.MaLoaiMonHoc
+					where m.MaMH = @maMH
+					)
+    RETURN @a/@b
+END
+go
+
+--spPHIEUDKHP_layDSMHThuocHP
+CREATE proc spPHIEUDKHP_LayDSMHThuocHP
+ @ma int
+ as
+ begin 
+select m.MaMH  , m.TenMH , dbo.fcMONHOC_TinhSoTinChi(m.MaMH) as 'SoTC' 
+from PHIEUDKHP p
+inner join CT_PHIEUDKHP ct
+on p.MaPhieuDKHP = ct.MaPhieuDKHP
+inner join MONHOC m
+on m.MaMH = ct.MaMH
+where p.MaPhieuDKHP = @ma
+end
+go
+
+--fcPHIEUDKHP_TinhHocPhi
+CREATE FUNCTION fcPHIEUDKHP_TinhHocPhi
+(
+    -- các tham số đầu vào của hàm
+    @maPhieuDKHP int
+)
+RETURNS int 
+AS
+BEGIN
+-- nếu thêm xóa loại môn học sẽ ảnh hưởng 
+	-- *********
+	declare @tienLT int = (select SoTien from LOAIMONHOC where MaLoaiMonHoc = 1) 
+	declare @tienTH int = (select SoTien from LOAIMONHOC where MaLoaiMonHoc = 2) 
+	-- *********
+	declare @tong int =0 
+	   SELECT @tong = @tong + 
+        CASE 
+            WHEN m.MaLoaiMonHoc = 1 THEN (dbo.fcMONHOC_TinhSoTinChi(ct.MaMH) * @tienLT)
+            ELSE (dbo.fcMONHOC_TinhSoTinChi(ct.MaMH) * @tienTH)
+        END
+    FROM PHIEUDKHP p
+    INNER JOIN CT_PHIEUDKHP ct ON p.MaPhieuDKHP = ct.MaPhieuDKHP
+    INNER JOIN MONHOC m ON m.MaMH = ct.MaMH
+    WHERE p.MaPhieuDKHP = @maPhieuDKHP
+			
+    RETURN @tong
+END
+go
+
+--spPHIEUDKHP_TinhHocPhi
+CREATE proc spPHIEUDKHP_TinhHocPhi
+ @maPhieuDKHP int
+as
+begin
+SELECT COALESCE((dbo.fcPHIEUDKHP_TinhHocPhi (@maPhieuDKHP)), 0)
+end
+go
+
+--fcPHIEUDKHP_TinhHocPhiPhaiDong
+CREATE FUNCTION fcPHIEUDKHP_TinhHocPhiPhaiDong
+(
+    -- các tham số đầu vào của hàm
+    @maPhieuDKHP int
+)
+RETURNS float 
+AS
+BEGIN
+	declare @tiLeGiam float =(1- (select  top 1 TiLeGiamHocPhi  from PHIEUDKHP p 
+	inner join SINHVIEN_DOITUONG sv
+	on p.MaSV = sv.MaSV
+	inner join DOITUONG d
+	on d.MaDT = sv.MaDT
+	where p.MaPhieuDKHP = @maPhieuDKHP
+	order by d.TiLeGiamHocPhi desc))
+	return (dbo.fcPHIEUDKHP_TinhHocPhi (@maPhieuDKHP) * @tiLeGiam)
+END
+go
+
+--spPHIEUDKHP_TinhHocPhiPhaiDong
+CREATE proc spPHIEUDKHP_TinhHocPhiPhaiDong
+ @maPhieuDKHP int
+as
+begin 
+SELECT COALESCE((select dbo.fcPHIEUDKHP_TinhHocPhiPhaiDong  (@maPhieuDKHP)	), 0)
+end 
+go
+
+--spPHIEUTHUHP_LayThoiGianDongHPGanNhat
+CREATE proc spPHIEUTHUHP_LayThoiGianDongHPGanNhat
+@ma int 
+as 
+begin 
+
+select  top 1 NgayLap from PHIEUTHUHP
+where MaPhieuDKHP = @ma
+order by  NgayLap  desc
+end 
+go
+
+--spPHIEUDKHP_TinhHocPhiDaDong
+CREATE proc spPHIEUDKHP_TinhHocPhiDaDong
+ @maPhieuDKHP int
+as
+begin 
+	SELECT COALESCE((select sum (SoTienThu) from PHIEUTHUHP
+    where MaPhieuDKHP = @maPhieuDKHP ), 0)
+end 
+go
+
+--fcPHIEUDKHP_TinhSoTienConNo
+CREATE FUNCTION fcPHIEUDKHP_TinhSoTienConNo
+(
+    -- các tham số đầu vào của hàm
+    @maPhieuDKHP int
+)
+RETURNS float 
+AS
+BEGIN
+-- nếu thêm xóa loại môn học sẽ ảnh hưởng 
+	declare @hocPhiPhaiDong float  = (dbo.fcPHIEUDKHP_TinhHocPhiPhaiDong (@maPhieuDKHP))
+	declare @hocPhiDaDong float  = (SELECT COALESCE((select sum (SoTienThu) from PHIEUTHUHP
+where MaPhieuDKHP = @maPhieuDKHP), 0))
+
+
+	return (@hocPhiPhaiDong-@hocPhiDaDong)
+
+END
+go
+
+--spPHIEUDKHP_TinhHocPhiConThieu
+CREATE proc spPHIEUDKHP_TinhHocPhiConThieu
+ @maPhieuDKHP int
+as
+begin 
+SELECT COALESCE((SELECT dbo.fcPHIEUDKHP_TinhSoTienConNo (@maPhieuDKHP)), 0)
+end
+go
+
+--spDANHSACHMONHOCMO_layDSMH
+CREATE  proc spDANHSACHMONHOCMO_layDSMH
+@hocKy int, @namHoc int
+as
+begin 
+select m.MaMH, m.TenMH,dbo.fcMONHOC_TinhSoTinChi(m.MaMH) 'SoTinChi',m.SoTiet, l.TenLoaiMonHoc from DANHSACHMONHOCMO ds
+inner join MONHOC m
+on ds.MaMH = m.MaMH
+inner join LOAIMONHOC l
+on l.MaLoaiMonHoc = m.MaLoaiMonHoc
+where MaHocKy =@hocKy and NamHoc= @namHoc
+
+end 
+go
+
+--spPHIEUDKHP_LayDSMHThuocHP2
+CREATE proc spPHIEUDKHP_LayDSMHThuocHP2
+ @ma int
+ as
+ begin 
+select m.MaMH  , m.TenMH , dbo.fcMONHOC_TinhSoTinChi(m.MaMH) as 'SoTC', m.SoTiet, l.TenLoaiMonHoc
+from PHIEUDKHP p
+inner join CT_PHIEUDKHP ct
+on p.MaPhieuDKHP = ct.MaPhieuDKHP
+inner join MONHOC m
+on m.MaMH = ct.MaMH
+inner join LOAIMONHOC l
+on l.MaLoaiMonHoc = m.MaLoaiMonHoc
+where p.MaPhieuDKHP = @ma
+end
+go
+
+--spHOCKY_LayHKByMaHK
+create proc spHOCKY_LayHKByMaHK(@MaHocKy int)
+as
+begin
+	select TenHocKy 
+	from HOCKY
+	where MaHocKy = @MaHocKy
+end
+go
+
+--spPHIEUDKHP_TaoPhieuDKHP
+CREATE proc spPHIEUDKHP_TaoPhieuDKHP
+@maSV varchar(10),
+@hocKy int ,
+@namHoc int
+as
+begin 
+
+insert into PHIEUDKHP
+values ( @maSV, GETDATE(), @hocKy, @namHoc, 1)
+
+end
+go
+
+--spPHIEUDKHP_LayMaPhieuDKHP
+CREATE proc spPHIEUDKHP_LayMaPhieuDKHP
+@maHocKy int, @namHoc int 
+as
+begin 
+select max(MaPhieuDKHP) from PHIEUDKHP
+where MaHocKy =@maHocKy and NamHoc = @namHoc
+end
+go
+
+--spPHIEUDKHP_TaoCT_PhieuDKHP
+CREATE proc spPHIEUDKHP_TaoCT_PhieuDKHP 
+@maPhieuDKHP varchar(10),
+@maMH nvarchar(50) 
+as
+begin 
+
+insert into CT_PHIEUDKHP
+values ( @maPhieuDKHP, @maMH)
+
+end
+go
+
+--spPHIEUDKHP_xoaCT_PhieuDKHP
+CREATE proc spPHIEUDKHP_xoaCT_PhieuDKHP
+@maPhieuDKHP varchar(10)
+as
+begin 
+
+delete from CT_PhieuDKHP
+where maPhieuDKHP = @maPhieuDKHP
+
+end
+go
+
+--spDANHSACHMONHOCMO_timKiemDSMH
+CREATE   proc spDANHSACHMONHOCMO_timKiemDSMH
+@monHoc nvarchar(100),
+@hocKy int ,
+@namHoc int
+as
+begin 
+	declare @s nvarchar(100)
+	set @s='%'+@monHoc+'%'
+
+select m.MaMH, m.TenMH,dbo.fcMONHOC_TinhSoTinChi(m.MaMH) 'SoTinChi',m.SoTiet, l.TenLoaiMonHoc from DANHSACHMONHOCMO ds
+inner join MONHOC m
+on ds.MaMH = m.MaMH
+inner join LOAIMONHOC l
+on l.MaLoaiMonHoc = m.MaLoaiMonHoc
+where( m.TenMH like  @s or m.MaMH like @s) and ds.MaHocKy = @hocKy and NamHoc = @namHoc
+
+end 
 go

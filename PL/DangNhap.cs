@@ -85,7 +85,7 @@ namespace PL
 
                     if (GlobalConfig.CurrNguoiDung.MaNhom == "gv")
                     {
-                        GV gv = new GV(this);
+                        GiaoVien gv = new GiaoVien(this);
                         gv.Show();
                         Hide();
                     }

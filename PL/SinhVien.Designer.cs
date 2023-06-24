@@ -30,7 +30,7 @@ namespace PL
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.kryptonPalette1 = new ComponentFactory.Krypton.Toolkit.KryptonPalette(this.components);
+            this.plt2 = new ComponentFactory.Krypton.Toolkit.KryptonPalette(this.components);
             this.btnTTSV = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.btnDKHP = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.btnThanhToanHP = new ComponentFactory.Krypton.Toolkit.KryptonButton();
@@ -40,12 +40,12 @@ namespace PL
             this.pnlDangXuat = new System.Windows.Forms.Panel();
             this.btnDoiMatKhau = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.btnDangXuat = new ComponentFactory.Krypton.Toolkit.KryptonButton();
-            this.paleDangNhap = new ComponentFactory.Krypton.Toolkit.KryptonPalette(this.components);
+            this.plt1 = new ComponentFactory.Krypton.Toolkit.KryptonPalette(this.components);
             this.imgDangXuat = new System.Windows.Forms.PictureBox();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            this.picAvatar = new System.Windows.Forms.PictureBox();
             this.pnlDangXuat.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.imgDangXuat)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picAvatar)).BeginInit();
             this.SuspendLayout();
             // 
             // btnTTSV
@@ -75,6 +75,7 @@ namespace PL
             this.btnTTSV.StateTracking.Back.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
             this.btnTTSV.TabIndex = 0;
             this.btnTTSV.Values.Text = "THÔNG TIN SINH VIÊN";
+            this.btnTTSV.Click += new System.EventHandler(this.btnTTSV_Click);
             // 
             // btnDKHP
             // 
@@ -99,6 +100,7 @@ namespace PL
             this.btnDKHP.StatePressed.Back.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(255)))), ((int)(((byte)(224)))), ((int)(((byte)(192)))));
             this.btnDKHP.TabIndex = 2;
             this.btnDKHP.Values.Text = "ĐĂNG KÝ \r\nHỌC PHẦN";
+            this.btnDKHP.Click += new System.EventHandler(this.btnDKHP_Click);
             // 
             // btnThanhToanHP
             // 
@@ -123,6 +125,7 @@ namespace PL
             this.btnThanhToanHP.StatePressed.Back.Color2 = System.Drawing.Color.LightSteelBlue;
             this.btnThanhToanHP.TabIndex = 3;
             this.btnThanhToanHP.Values.Text = "THANH TOÁN\r\n     HỌC PHÍ";
+            this.btnThanhToanHP.Click += new System.EventHandler(this.btnThanhToanHP_Click);
             // 
             // lblHome
             // 
@@ -187,6 +190,7 @@ namespace PL
             this.btnDoiMatKhau.StateTracking.Back.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(196)))), ((int)(((byte)(64)))), ((int)(((byte)(77)))));
             this.btnDoiMatKhau.TabIndex = 1;
             this.btnDoiMatKhau.Values.Text = "Đổi mật khẩu";
+            this.btnDoiMatKhau.Click += new System.EventHandler(this.btnDoiMatKhau_Click);
             // 
             // btnDangXuat
             // 
@@ -208,23 +212,24 @@ namespace PL
             this.btnDangXuat.StateTracking.Back.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(196)))), ((int)(((byte)(64)))), ((int)(((byte)(77)))));
             this.btnDangXuat.TabIndex = 0;
             this.btnDangXuat.Values.Text = "Đăng xuất";
+            this.btnDangXuat.Click += new System.EventHandler(this.btnDangXuat_Click);
             // 
-            // paleDangNhap
+            // plt1
             // 
-            this.paleDangNhap.ButtonSpecs.FormClose.Image = global::PL.Properties.Resources.icons8_orange_circle_20;
-            this.paleDangNhap.ButtonSpecs.FormClose.ImageStates.ImageTracking = global::PL.Properties.Resources.icons8_orange_circle_201;
-            this.paleDangNhap.ButtonSpecs.FormMax.Image = global::PL.Properties.Resources.icons8_yellow_circle_20;
-            this.paleDangNhap.ButtonSpecs.FormMax.ImageStates.ImageTracking = global::PL.Properties.Resources.icons8_yellow_circle_20;
-            this.paleDangNhap.ButtonSpecs.FormMin.Image = global::PL.Properties.Resources.icons8_green_circle_20;
-            this.paleDangNhap.ButtonSpecs.FormMin.ImageStates.ImageTracking = global::PL.Properties.Resources.icons8_green_circle_20;
-            this.paleDangNhap.FormStyles.FormMain.StateCommon.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(250)))), ((int)(((byte)(252)))));
-            this.paleDangNhap.FormStyles.FormMain.StateCommon.Back.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(250)))), ((int)(((byte)(252)))));
-            this.paleDangNhap.FormStyles.FormMain.StateCommon.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
+            this.plt1.ButtonSpecs.FormClose.Image = global::PL.Properties.Resources.icons8_orange_circle_20;
+            this.plt1.ButtonSpecs.FormClose.ImageStates.ImageTracking = global::PL.Properties.Resources.icons8_orange_circle_201;
+            this.plt1.ButtonSpecs.FormMax.Image = global::PL.Properties.Resources.icons8_yellow_circle_20;
+            this.plt1.ButtonSpecs.FormMax.ImageStates.ImageTracking = global::PL.Properties.Resources.icons8_yellow_circle_20;
+            this.plt1.ButtonSpecs.FormMin.Image = global::PL.Properties.Resources.icons8_green_circle_20;
+            this.plt1.ButtonSpecs.FormMin.ImageStates.ImageTracking = global::PL.Properties.Resources.icons8_green_circle_20;
+            this.plt1.FormStyles.FormMain.StateCommon.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(250)))), ((int)(((byte)(252)))));
+            this.plt1.FormStyles.FormMain.StateCommon.Back.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(250)))), ((int)(((byte)(252)))));
+            this.plt1.FormStyles.FormMain.StateCommon.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
             | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left) 
             | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Right)));
-            this.paleDangNhap.FormStyles.FormMain.StateCommon.Border.Rounding = 20;
-            this.paleDangNhap.HeaderStyles.HeaderCommon.StateCommon.Back.Color1 = System.Drawing.Color.White;
-            this.paleDangNhap.HeaderStyles.HeaderCommon.StateCommon.Back.Color2 = System.Drawing.Color.White;
+            this.plt1.FormStyles.FormMain.StateCommon.Border.Rounding = 20;
+            this.plt1.HeaderStyles.HeaderCommon.StateCommon.Back.Color1 = System.Drawing.Color.White;
+            this.plt1.HeaderStyles.HeaderCommon.StateCommon.Back.Color2 = System.Drawing.Color.White;
             // 
             // imgDangXuat
             // 
@@ -236,16 +241,17 @@ namespace PL
             this.imgDangXuat.Size = new System.Drawing.Size(29, 29);
             this.imgDangXuat.TabIndex = 40;
             this.imgDangXuat.TabStop = false;
+            this.imgDangXuat.Click += new System.EventHandler(this.imgDangXuat_Click);
             // 
-            // pictureBox1
+            // picAvatar
             // 
-            this.pictureBox1.Image = global::PL.Properties.Resources.icons8_circled_user_male_skin_type_6_48;
-            this.pictureBox1.Location = new System.Drawing.Point(389, 4);
-            this.pictureBox1.Margin = new System.Windows.Forms.Padding(2);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(51, 41);
-            this.pictureBox1.TabIndex = 37;
-            this.pictureBox1.TabStop = false;
+            this.picAvatar.Image = global::PL.Properties.Resources.icons8_circled_user_male_skin_type_6_48;
+            this.picAvatar.Location = new System.Drawing.Point(389, 4);
+            this.picAvatar.Margin = new System.Windows.Forms.Padding(2);
+            this.picAvatar.Name = "picAvatar";
+            this.picAvatar.Size = new System.Drawing.Size(51, 41);
+            this.picAvatar.TabIndex = 37;
+            this.picAvatar.TabStop = false;
             // 
             // SinhVien
             // 
@@ -256,7 +262,7 @@ namespace PL
             this.Controls.Add(this.pnlDangXuat);
             this.Controls.Add(this.imgDangXuat);
             this.Controls.Add(this.lblMSSV);
-            this.Controls.Add(this.pictureBox1);
+            this.Controls.Add(this.picAvatar);
             this.Controls.Add(this.lblHoTen);
             this.Controls.Add(this.lblHome);
             this.Controls.Add(this.btnThanhToanHP);
@@ -265,15 +271,16 @@ namespace PL
             this.Margin = new System.Windows.Forms.Padding(2);
             this.MaximizeBox = false;
             this.Name = "SinhVien";
-            this.Palette = this.paleDangNhap;
+            this.Palette = this.plt1;
             this.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Custom;
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = " ";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.SinhVien_FormClosing);
+            this.Load += new System.EventHandler(this.SinhVien_Load);
             this.pnlDangXuat.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.imgDangXuat)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.picAvatar)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -281,18 +288,18 @@ namespace PL
 
         #endregion
 
-        private ComponentFactory.Krypton.Toolkit.KryptonPalette kryptonPalette1;
+        private ComponentFactory.Krypton.Toolkit.KryptonPalette plt2;
         private ComponentFactory.Krypton.Toolkit.KryptonButton btnTTSV;
         private ComponentFactory.Krypton.Toolkit.KryptonButton btnDKHP;
         private ComponentFactory.Krypton.Toolkit.KryptonButton btnThanhToanHP;
         private System.Windows.Forms.Label lblHome;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel lblHoTen;
-        private System.Windows.Forms.PictureBox pictureBox1;
+        private System.Windows.Forms.PictureBox picAvatar;
         private ComponentFactory.Krypton.Toolkit.KryptonLabel lblMSSV;
         private System.Windows.Forms.PictureBox imgDangXuat;
         private System.Windows.Forms.Panel pnlDangXuat;
         private ComponentFactory.Krypton.Toolkit.KryptonButton btnDangXuat;
-        private ComponentFactory.Krypton.Toolkit.KryptonPalette paleDangNhap;
+        private ComponentFactory.Krypton.Toolkit.KryptonPalette plt1;
         private ComponentFactory.Krypton.Toolkit.KryptonButton btnDoiMatKhau;
     }
 }

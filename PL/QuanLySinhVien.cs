@@ -16,15 +16,15 @@ namespace PL
 {
     public partial class QuanLySinhVien : KryptonForm, IThemSuaSinhVienRequester
     {
-        private IDSSVRequester dssvRequester;
+        private readonly IDanhSachSinhVienRequester dssvRequester;
         private BindingList<CT_SinhVien> mSinhVien;
         private BindingList<DoiTuong> mDoiTuong;
         private BindingSource mSinhVienSource;
         private BindingSource mDoiTuongSource;
 
-        private string placeholderText = "🔎 Tìm kiếm";
+        private readonly string placeholderText = "🔎 Tìm kiếm";
 
-        public QuanLySinhVien(IDSSVRequester requester)
+        public QuanLySinhVien(IDanhSachSinhVienRequester requester)
         {
             InitializeComponent();
 
