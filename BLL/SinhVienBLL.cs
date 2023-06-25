@@ -64,5 +64,10 @@ namespace BLL
         {
             return SinhVienDAL.LayThongTinSV(mssv);
         }
+
+        public static List<dynamic> BaoCaoSinhVienChuaDongHocPhi(int hocKy, int namHoc)
+        {
+            return SinhVienDAL.BaoCaoSinhVienChuaDongHocPhi(hocKy, namHoc);
+        }
     }
 }

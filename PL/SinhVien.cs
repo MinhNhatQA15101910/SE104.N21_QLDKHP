@@ -89,9 +89,9 @@ namespace PL
 
         private void btnThanhToanHP_Click(object sender, EventArgs e)
         {
-            //ThanhToanHocPhi t = new ThanhToanHocPhi(this);
-            //t.Show();
-            //Hide();
+            ThanhToanHocPhi t = new ThanhToanHocPhi(this);
+            t.Show();
+            Hide();
         }
 
         public void OnThongTinSinhVienClosing()

@@ -73,5 +73,21 @@ namespace DAL
 
             return SuaGioiHanTinChiMessage.Success;
         }
+
+        public static int LayKhoangTGDongHP(int hocKy, int namHoc)
+        {
+            int output;
+
+            using (IDbConnection connection = new SqlConnection(DatabaseConnection.CnnString()))
+            {
+                var parameters = new DynamicParameters();
+                parameters.Add("@hocKy", hocKy);
+                parameters.Add("@namHoc", namHoc);
+
+                output = connection.QueryFirstOrDefault<int>("spGLOBALCONFIG_LayKhoangTGDongHP", parameters, commandType: CommandType.StoredProcedure);
+            }
+
+            return output;
+        }
     }
 }

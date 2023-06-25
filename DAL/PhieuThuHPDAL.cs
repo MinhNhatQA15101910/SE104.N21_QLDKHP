@@ -23,9 +23,23 @@ namespace DAL
             }
 
             return output;
+        }
 
+        public static bool TaoPhieuThu_ChoXacNhan(int soTienThu, int soPhieuDKHP)
+        {
+            int numRowsAffected;
+            using (IDbConnection connection = new SqlConnection(DatabaseConnection.CnnString()))
+            {
+                var parameters = new DynamicParameters();
+                parameters.Add("@soTienThu", soTienThu);
+                parameters.Add("@maPhieuDKHP", soPhieuDKHP);
+                numRowsAffected = connection.Execute("spPHIEUTHUHP_TaoPhieuThu_ChoXacNhan ", parameters, commandType: CommandType.StoredProcedure);
+            }
 
-
+            if (numRowsAffected > 0)
+                return true;
+            else
+                return false;
         }
     }
 }

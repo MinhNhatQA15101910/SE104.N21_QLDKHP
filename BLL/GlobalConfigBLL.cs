@@ -71,5 +71,10 @@ namespace BLL
 
             return GlobalConfigDAL.SuaGioiHanTinChi(tinChiToiDaValue, tinChiToiThieuValue);
         }
+
+        public static int LayKhoangTGDongHP(int hocKy, int namHoc)
+        {
+            return GlobalConfigDAL.LayKhoangTGDongHP(hocKy, namHoc);
+        }
     }
 }

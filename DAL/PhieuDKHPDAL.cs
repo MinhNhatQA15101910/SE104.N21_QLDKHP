@@ -141,7 +141,21 @@ namespace DAL
             }
 
             return output;
+        }
 
+        public static List<PhieuDKHP> LayDanhSachDKHPDaXacNhan(string mssv)
+        {
+            List<PhieuDKHP> output;
+
+            using (IDbConnection connection = new SqlConnection(DatabaseConnection.CnnString()))
+            {
+                var parameters = new DynamicParameters();
+                parameters.Add("@mssv", mssv);
+
+                output = connection.Query<PhieuDKHP>("spPHIEUDKHP_LayDanhSachDKHPChoThanhToan", parameters, commandType: CommandType.StoredProcedure).ToList();
+            }
+
+            return output;
         }
     }
 }

@@ -28,5 +28,24 @@ namespace BLL
         {
             return PhieuThuHPDAL.LayThoiGianDongHPGanNhat(maPhieuDKHP);
         }
+
+        public static TimKiemPhieuDKHPMessage KtTimKiemSoTienThu(string t)
+        {
+            if (t == "")
+            {
+                return TimKiemPhieuDKHPMessage.EmptyNamHoc;
+            }
+            int kq;
+            if (!int.TryParse(t, out kq))
+            {
+                return TimKiemPhieuDKHPMessage.InvalidNamHoc;
+            }
+            return TimKiemPhieuDKHPMessage.Sucess;
+        }
+
+        public static bool TaoPhieuThu_ChoXacNhan(int soTienThu, int soPhieuDKHP)
+        {
+            return PhieuThuHPDAL.TaoPhieuThu_ChoXacNhan(soTienThu, soPhieuDKHP);
+        }
     }
 }

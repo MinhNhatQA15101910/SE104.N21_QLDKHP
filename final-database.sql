@@ -318,6 +318,10 @@ alter table PHIEUDKHP add MaTinhTrang int not null;
 go
 alter table PHIEUDKHP add constraint FK_PHIEUDKHP_MaTinhTrang foreign key (MaTinhTrang) references TINHTRANG(MaTinhTrang);
 go
+alter table PHIEUTHUHP add MaTinhTrang int not null
+go
+alter table PHIEUTHUHP add constraint FK_PHIEUTHUHP_MaTinhTrang foreign key (MaTinhTrang) references TINHTRANG(MaTinhTrang)
+go
 
 -- 9.1 - Yêu cầu lập báo cáo sinh viên chưa đóng học phí - Tính đúng đắn
 
@@ -3190,4 +3194,59 @@ on l.MaLoaiMonHoc = m.MaLoaiMonHoc
 where( m.TenMH like  @s or m.MaMH like @s) and ds.MaHocKy = @hocKy and NamHoc = @namHoc
 
 end 
+go
+
+--spPHIEUDKHP_LayDanhSachDKHPChoThanhToan
+CREATE proc spPHIEUDKHP_LayDanhSachDKHPChoThanhToan
+@mssv varchar(10)
+as
+begin
+	select * from PHIEUDKHP
+	where MaTinhTrang = 2 and MaSV = @mssv
+
+end 
+go
+
+--spGLOBALCONFIG_LayKhoangTGDongHP
+CREATE proc spGLOBALCONFIG_LayKhoangTGDongHP
+@hocKy int , @namHoc int
+as
+begin 
+select khoangTG
+ from KHOANGTGDONGHP
+ where MaHocKy = @hocKy and NamHoc = @namHoc
+end
+go
+
+--spPHIEUTHUHP_taoPhieuThu_ChoXacNhan
+CREATE proc spPHIEUTHUHP_taoPhieuThu_ChoXacNhan 
+@soTienThu int ,
+@maPhieuDKHP int
+as
+begin 
+	insert into PHIEUTHUHP 
+	values (@maPhieuDKHP, GETDATE(), @soTienThu, 1 )
+end 
+go
+
+--spSINHVIEN_BaoCao
+create PROC spSINHVIEN_BaoCao
+@hocKy int , @namHoc int
+as
+begin 
+
+select MaSV as MSSV, dbo.fcPHIEUDKHP_TinhHocPhi (MaPhieuDKHP) as 'TienDK' , dbo.fcPHIEUDKHP_TinhHocPhiPhaiDong (MaPhieuDKHP) as 'TienPhaiDong', dbo.fcPHIEUDKHP_TinhSoTienConNo  (MaPhieuDKHP) as 'TienConLai' from PHIEUDKHP 
+where MaTinhTrang = 2 and MaHocKy = @hocKy and NamHoc = @namHoc
+end
+go
+
+--sp_SINHVIEN_baoCao
+create PROC sp_SINHVIEN_baoCao
+@hocKy int , @namHoc int
+as
+begin 
+
+select MaSV as MSSV, dbo.fcPHIEUDKHP_TinhHocPhi (MaPhieuDKHP) as 'TienDK' , dbo.fcPHIEUDKHP_TinhHocPhiPhaiDong (MaPhieuDKHP) as 'TienPhaiDong', dbo.fcPHIEUDKHP_TinhSoTienConNo  (MaPhieuDKHP) as 'TienConLai' from PHIEUDKHP 
+where MaTinhTrang = 2 and MaHocKy = @hocKy and NamHoc = @namHoc
+end
 go

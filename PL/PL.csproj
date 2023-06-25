@@ -48,6 +48,24 @@
     <Reference Include="ComponentFactory.Krypton.Workspace">
       <HintPath>..\..\Nhập môn công nghệ phần mềm\Krypton-master\Krypton-master\Bin\ComponentFactory.Krypton.Workspace.dll</HintPath>
     </Reference>
+    <Reference Include="Microsoft.ReportViewer.Common, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.150.1576.0\lib\net40\Microsoft.ReportViewer.Common.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.DataVisualization, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.150.1576.0\lib\net40\Microsoft.ReportViewer.DataVisualization.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.Design, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.150.1576.0\lib\net40\Microsoft.ReportViewer.Design.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.ProcessingObjectModel, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.150.1576.0\lib\net40\Microsoft.ReportViewer.ProcessingObjectModel.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.ReportViewer.WinForms, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.150.1576.0\lib\net40\Microsoft.ReportViewer.WinForms.dll</HintPath>
+    </Reference>
+    <Reference Include="Microsoft.SqlServer.Types, Version=14.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
+      <HintPath>..\packages\Microsoft.SqlServer.Types.14.0.314.76\lib\net40\Microsoft.SqlServer.Types.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Design" />
@@ -68,6 +86,12 @@
     <Compile Include="Admin.Designer.cs">
       <DependentUpon>Admin.cs</DependentUpon>
     </Compile>
+    <Compile Include="BaoCao.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="BaoCao.Designer.cs">
+      <DependentUpon>BaoCao.cs</DependentUpon>
+    </Compile>
     <Compile Include="ChuongTrinhHoc.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -85,6 +109,17 @@
     </Compile>
     <Compile Include="DangKyHocPhan.Designer.cs">
       <DependentUpon>DangKyHocPhan.cs</DependentUpon>
+    </Compile>
+    <Compile Include="InBaoCao.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="InBaoCao.Designer.cs">
+      <DependentUpon>InBaoCao.cs</DependentUpon>
+    </Compile>
+    <Compile Include="QuanLyDangKyHPDataSet1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>QuanLyDangKyHPDataSet1.xsd</DependentUpon>
     </Compile>
     <Compile Include="QuanLySinhVien.cs">
       <SubType>Form</SubType>
@@ -186,6 +221,7 @@
     <Compile Include="SinhVien.Designer.cs">
       <DependentUpon>SinhVien.cs</DependentUpon>
     </Compile>
+    <Compile Include="SqlServerTypes\Loader.cs" />
     <Compile Include="ThemSuaHuyen.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -297,6 +333,9 @@
     <EmbeddedResource Include="Admin.resx">
       <DependentUpon>Admin.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="BaoCao.resx">
+      <DependentUpon>BaoCao.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ChuongTrinhHoc.resx">
       <DependentUpon>ChuongTrinhHoc.cs</DependentUpon>
     </EmbeddedResource>
@@ -305,6 +344,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="DangKyHocPhan.resx">
       <DependentUpon>DangKyHocPhan.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="InBaoCao.resx">
+      <DependentUpon>InBaoCao.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="QuanLySinhVien.resx">
       <DependentUpon>QuanLySinhVien.cs</DependentUpon>
@@ -348,6 +390,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="QuanLyTinh.resx">
       <DependentUpon>QuanLyTinh.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Report1.rdlc">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
     </EmbeddedResource>
     <EmbeddedResource Include="SinhVien.resx">
       <DependentUpon>SinhVien.cs</DependentUpon>
@@ -406,6 +451,7 @@
     <EmbeddedResource Include="XacNhanHocPhi.resx">
       <DependentUpon>XacNhanHocPhi.cs</DependentUpon>
     </EmbeddedResource>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -420,6 +466,17 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="QuanLyDangKyHPDataSet1.xsc">
+      <DependentUpon>QuanLyDangKyHPDataSet1.xsd</DependentUpon>
+    </None>
+    <None Include="QuanLyDangKyHPDataSet1.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>QuanLyDangKyHPDataSet1.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="QuanLyDangKyHPDataSet1.xss">
+      <DependentUpon>QuanLyDangKyHPDataSet1.xsd</DependentUpon>
+    </None>
     <None Include="Resources\icons8-close-window-48.png" />
   </ItemGroup>
   <ItemGroup>
@@ -614,6 +671,21 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\icons8-report-30.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="SqlServerTypes\readme.htm" />
+    <Content Include="SqlServerTypes\x64\msvcr120.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SqlServerTypes\x64\SqlServerSpatial140.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SqlServerTypes\x86\msvcr120.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
+    <Content Include="SqlServerTypes\x86\SqlServerSpatial140.dll">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </Content>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

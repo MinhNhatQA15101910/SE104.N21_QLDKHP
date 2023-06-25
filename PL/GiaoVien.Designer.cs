@@ -330,6 +330,7 @@ namespace PL
             this.picBaoCao.TabIndex = 23;
             this.picBaoCao.TabStop = false;
             this.picBaoCao.Tag = "Báo cáo";
+            this.picBaoCao.Click += new System.EventHandler(this.picBaoCao_Click);
             // 
             // picCaiDat
             // 
@@ -421,7 +422,7 @@ namespace PL
             this.picAvatar.TabIndex = 53;
             this.picAvatar.TabStop = false;
             // 
-            // GV
+            // GiaoVien
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -447,7 +448,7 @@ namespace PL
             this.Controls.Add(this.lblHome);
             this.Margin = new System.Windows.Forms.Padding(2);
             this.MaximizeBox = false;
-            this.Name = "GV";
+            this.Name = "GiaoVien";
             this.Palette = this.plt1;
             this.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Custom;
             this.ShowIcon = false;

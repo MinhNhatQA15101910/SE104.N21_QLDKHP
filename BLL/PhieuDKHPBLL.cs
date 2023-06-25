@@ -69,5 +69,10 @@ namespace BLL
         {
             return PhieuDKHPDAL.LayMaPhieuDKHP(hocKy, namHoc);
         }
+
+        public static List<PhieuDKHP> LayDanhSachDKHPDaXacNhan(string mssv)
+        {
+            return PhieuDKHPDAL.LayDanhSachDKHPDaXacNhan(mssv);
+        }
     }
 }

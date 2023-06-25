@@ -161,5 +161,21 @@ namespace DAL
 
             return output;
         }
+
+        public static List<dynamic> BaoCaoSinhVienChuaDongHocPhi(int hocKy, int namHoc)
+        {
+            List<dynamic> output;
+
+            using (IDbConnection connection = new SqlConnection(DatabaseConnection.CnnString()))
+            {
+                var parameters = new DynamicParameters();
+                parameters.Add("@hocKy", hocKy);
+                parameters.Add("@namHoc", namHoc);
+
+                output = connection.Query<dynamic>("spSINHVIEN_BaoCao", parameters, commandType: CommandType.StoredProcedure).ToList();
+            }
+
+            return output;
+        }
     }
 }

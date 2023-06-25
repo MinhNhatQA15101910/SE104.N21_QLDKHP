@@ -158,5 +158,12 @@ namespace PL
             quanLySinhVien.Show();
             Hide();
         }
+
+        private void picBaoCao_Click(object sender, EventArgs e)
+        {
+            BaoCao baoCao = new BaoCao(this);
+            baoCao.Show();
+            Hide();
+        }
     }
 }
