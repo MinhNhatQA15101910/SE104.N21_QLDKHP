@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ChuongTrinhHoc.cs" />
     <Compile Include="CT_Huyen.cs" />
     <Compile Include="CT_MonHoc.cs" />
     <Compile Include="CT_Nganh.cs" />
@@ -48,12 +49,14 @@
     <Compile Include="CT_SinhVien.cs" />
     <Compile Include="DoiTuong.cs" />
     <Compile Include="HocKy.cs" />
+    <Compile Include="HocKyNamHoc.cs" />
     <Compile Include="Huyen.cs" />
     <Compile Include="Khoa.cs" />
     <Compile Include="LoaiMonHoc.cs" />
     <Compile Include="Message.cs" />
     <Compile Include="GlobalConfig.cs" />
     <Compile Include="MonHoc.cs" />
+    <Compile Include="MonHocMo.cs" />
     <Compile Include="Nganh.cs" />
     <Compile Include="NguoiDung.cs" />
     <Compile Include="NhomNguoiDung.cs" />

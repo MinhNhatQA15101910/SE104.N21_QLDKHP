@@ -287,4 +287,56 @@ namespace DTO
         InvalidNamHoc,
         Sucess
     }
+
+    public enum MessageKhoangTGDongHP
+    {
+        Success,
+        Failed
+    }
+
+    public enum MessageAddMonHocMo
+    {
+        Success,
+        Failed,
+        ErrorData
+    }
+
+    public enum MessageDeleteHocKyNamHocMHM
+    {
+        Success,
+        Failed
+    }
+
+    public enum MessageDeleteListCTHoc
+    {
+        Success,
+        Failed,
+        ErrorData
+    }
+
+    public enum MessageAddCTHoc
+    {
+        Success,
+        Failed,
+        ErrorData
+    }
+
+    public enum MessageDeleteCTHoc
+    {
+        Success,
+        Failed,
+        ErrorData
+    }
+
+    public enum MessagePhieuDKHPUpdateTinhTrang
+    {
+        Success,
+        Failed
+    }
+
+    public enum MessagePhieuThuHPUpdateTinhTrang
+    {
+        Success,
+        Failed
+    }
 }

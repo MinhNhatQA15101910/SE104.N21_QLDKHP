@@ -1,4 +1,5 @@
 ﻿using Dapper;
+using DTO;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -40,6 +41,38 @@ namespace DAL
                 return true;
             else
                 return false;
+        }
+
+        public static List<PhieuThuHP> GetPhieuThuHP(int MaTinhTrang)
+        {
+            List<PhieuThuHP> PhieuThuHP;
+            using (IDbConnection connection = new SqlConnection(DatabaseConnection.CnnString()))
+            {
+                var p = new DynamicParameters();
+                p.Add("@MaTinhTrang", MaTinhTrang);
+                PhieuThuHP = connection.Query<PhieuThuHP>("spPHIEUTHUHP_GetPhieuThuHP", p, commandType: CommandType.StoredProcedure).ToList();
+            }
+
+            return PhieuThuHP;
+        }
+
+        public static MessagePhieuThuHPUpdateTinhTrang PhieuThuHPUpdateTinhTrang(int MaPhieuThuHP, int MaTinhTrang)
+        {
+            try
+            {
+                using (IDbConnection connection = new SqlConnection(DatabaseConnection.CnnString()))
+                {
+                    var p = new DynamicParameters();
+                    p.Add("@MaPhieuThuHP", MaPhieuThuHP);
+                    p.Add("@MaTinhTrang", MaTinhTrang);
+                    connection.Execute("spPHIEUTHUHP_UpdateTinhTrang", p, commandType: CommandType.StoredProcedure);
+                }
+            }
+            catch (Exception)
+            {
+                return MessagePhieuThuHPUpdateTinhTrang.Failed;
+            }
+            return MessagePhieuThuHPUpdateTinhTrang.Success;
         }
     }
 }

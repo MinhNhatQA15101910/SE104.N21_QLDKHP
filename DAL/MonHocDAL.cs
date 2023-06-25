@@ -94,5 +94,81 @@ namespace DAL
 
             return ThemMonHocMessage.Success;
         }
+
+        public static List<MonHoc> LayDSMonHoc2()
+        {
+            List<MonHoc> output;
+            using (IDbConnection connection = new SqlConnection(DatabaseConnection.CnnString()))
+            {
+                output = connection.Query<MonHoc>("spMONHOC_LayDSMonHoc2").ToList();
+            }
+            return output;
+        }
+
+        public static List<MonHoc> GetTermMonHoc(int HocKy)
+        {
+            List<MonHoc> output;
+            using (IDbConnection connection = new SqlConnection(DatabaseConnection.CnnString()))
+            {
+                if (HocKy == 1)
+                {
+                    output = connection.Query<MonHoc>("spMONHOC_GetOddCTMonHoc").ToList();
+                }
+                else if (HocKy == 2)
+                {
+                    output = connection.Query<MonHoc>("spMONHOC_GetEvenCTMonHoc").ToList();
+                }
+                else output = connection.Query<MonHoc>("spMONHOC_GetAllCTMonHoc").ToList();
+            }
+            return output;
+        }
+
+        public static List<MonHoc> GetTermMonHocMo(int HocKy, int NamHoc)
+        {
+            List<MonHoc> output;
+            using (IDbConnection connection = new SqlConnection(DatabaseConnection.CnnString()))
+            {
+                var p = new DynamicParameters();
+                p.Add("@HocKy", HocKy);
+                p.Add("@NamHoc", NamHoc);
+                output = connection.Query<MonHoc>("spMONHOC_GetTermMonHocMo", p, commandType: CommandType.StoredProcedure).ToList();
+            }
+            return output;
+        }
+
+        public static List<MonHoc> GetChuongTrinhHoc(string MaNganh, int HocKy)
+        {
+            List<MonHoc> ListMonHoc;
+            using (IDbConnection connection = new SqlConnection(DatabaseConnection.CnnString()))
+            {
+                if (HocKy != 0)
+                {
+                    var p = new DynamicParameters();
+                    p.Add("@MaNganh", MaNganh);
+                    p.Add("@HocKy", HocKy);
+                    ListMonHoc = connection.Query<MonHoc>("spMONHOC_GetCTHHocKyMaNganh", p, commandType: CommandType.StoredProcedure).ToList();
+                }
+                else
+                {
+                    var p = new DynamicParameters();
+                    p.Add("@MaNganh", MaNganh);
+                    ListMonHoc = connection.Query<MonHoc>("spMONHOC_GetCTHHocKy", p, commandType: CommandType.StoredProcedure).ToList();
+                }
+
+            }
+            return ListMonHoc;
+        }
+
+        public static List<MonHoc> GetMonHocPhieuDKHP(int MaPhieuDKHP)
+        {
+            List<MonHoc> ListMonHoc;
+            using (IDbConnection connection = new SqlConnection(DatabaseConnection.CnnString()))
+            {
+                var p = new DynamicParameters();
+                p.Add("@MaPhieuDKHP", MaPhieuDKHP);
+                ListMonHoc = connection.Query<MonHoc>("spMONHOC_GetMonHocPhieuDKHP", p, commandType: CommandType.StoredProcedure).ToList();
+            }
+            return ListMonHoc;
+        }
     }
 }

@@ -157,5 +157,49 @@ namespace DAL
 
             return output;
         }
+
+        public static List<PhieuDKHP> GetPhieuDKHP(int MaHocKy, int NamHoc, int MaTinhTrang)
+        {
+            List<PhieuDKHP> ListPhieuDKHP;
+            using (IDbConnection connection = new SqlConnection(DatabaseConnection.CnnString()))
+            {
+                var p = new DynamicParameters();
+                p.Add("@MaHocKy", MaHocKy);
+                p.Add("@NamHoc", NamHoc);
+                p.Add("@MaTinhTrang", MaTinhTrang);
+                ListPhieuDKHP = connection.Query<PhieuDKHP>("spPHIEUDKHP_GetPhieuDKHP", p, commandType: CommandType.StoredProcedure).ToList();
+            }
+
+            return ListPhieuDKHP;
+        }
+
+        public static MessagePhieuDKHPUpdateTinhTrang PhieuDKHPUpdateTinhTrang(int MaPhieuDKHP, int MaTinhTrang)
+        {
+            try
+            {
+                using (IDbConnection connection = new SqlConnection(DatabaseConnection.CnnString()))
+                {
+                    var p = new DynamicParameters();
+                    p.Add("@MaPhieuDKHP", MaPhieuDKHP);
+                    p.Add("@MaTinhTrang", MaTinhTrang);
+                    connection.Execute("spPHIEUDKHP_UpdateTinhTrang", p, commandType: CommandType.StoredProcedure);
+                }
+            }
+            catch (Exception)
+            {
+                return MessagePhieuDKHPUpdateTinhTrang.Failed;
+            }
+            return MessagePhieuDKHPUpdateTinhTrang.Success;
+        }
+
+        public static List<PhieuDKHP> GetAllPhieuDKHP()
+        {
+            List<PhieuDKHP> ListPhieuDKHP;
+            using (IDbConnection connection = new SqlConnection(DatabaseConnection.CnnString()))
+            {
+                ListPhieuDKHP = connection.Query<PhieuDKHP>("spPHIEUDKHP_GetAllPhieuDKHP").ToList();
+            }
+            return ListPhieuDKHP;
+        }
     }
 }

@@ -74,5 +74,20 @@ namespace BLL
         {
             return PhieuDKHPDAL.LayDanhSachDKHPDaXacNhan(mssv);
         }
+
+        public static List<PhieuDKHP> GetPhieuDKHP(int MaHocKy, int NamHoc, int MaTinhTrang)
+        {
+            return PhieuDKHPDAL.GetPhieuDKHP(MaHocKy, NamHoc, MaTinhTrang);
+        }
+
+        public static MessagePhieuDKHPUpdateTinhTrang PhieuDKHPUpdateTinhTrang(int MaPhieuDKHP, int MaTinhTrang)
+        {
+            return PhieuDKHPDAL.PhieuDKHPUpdateTinhTrang(MaPhieuDKHP, MaTinhTrang);
+        }
+
+        public static List<PhieuDKHP> GetAllPhieuDKHP()
+        {
+            return PhieuDKHPDAL.GetAllPhieuDKHP();
+        }
     }
 }

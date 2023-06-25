@@ -125,5 +125,13 @@ namespace PL
                 MessageBox.Show("Vui lòng chọn chọn học kì");
             }
         }
+
+        private void dgvDSMH_SelectionChanged(object sender, EventArgs e)
+        {
+            if (dgvDSMH.CurrentRow != null)
+            {
+                dgvDSMH.CurrentRow.DefaultCellStyle.SelectionBackColor = Color.Yellow;
+            }
+        }
     }
 }

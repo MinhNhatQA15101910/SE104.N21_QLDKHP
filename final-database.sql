@@ -1,7 +1,6 @@
 ﻿--create database QuanLyDangKyHP;
 --use QuanLyDangKyHP;
 --drop database QuanLyDangKyHP;
-use master
 
 -- 1.1. Yêu cầu lập hồ sơ sinh viên - Tính đúng đắn
 create table SINHVIEN
@@ -3081,7 +3080,25 @@ CREATE proc spPHIEUDKHP_TinhHocPhiConThieu
  @maPhieuDKHP int
 as
 begin 
-SELECT COALESCE((SELECT dbo.fcPHIEUDKHP_TinhSoTienConNo (@maPhieuDKHP)), 0)
+	declare @TongTienPhieuDKHP decimal = 
+	(
+		select sum(SoTien)
+		from LOAIMONHOC, MONHOC, PHIEUDKHP, CT_PHIEUDKHP
+		where LOAIMONHOC.MaLoaiMonHoc = MONHOC.MaLoaiMonHoc
+		and MONHOC.MaMH = CT_PHIEUDKHP.MaMH
+		and CT_PHIEUDKHP.MaPhieuDKHP = PHIEUDKHP.MaPhieuDKHP
+		and PHIEUDKHP.MaPhieuDKHP = @maPhieuDKHP
+	)
+
+	declare @TongTienDaThu decimal = 
+	(
+		select sum(SoTienThu)
+		from PHIEUTHUHP
+		where MaTinhTrang = 2
+		and MaPhieuDKHP = @maPhieuDKHP
+	)
+
+	select @TongTienPhieuDKHP - @TongTienDaThu
 end
 go
 
@@ -3248,5 +3265,292 @@ begin
 
 select MaSV as MSSV, dbo.fcPHIEUDKHP_TinhHocPhi (MaPhieuDKHP) as 'TienDK' , dbo.fcPHIEUDKHP_TinhHocPhiPhaiDong (MaPhieuDKHP) as 'TienPhaiDong', dbo.fcPHIEUDKHP_TinhSoTienConNo  (MaPhieuDKHP) as 'TienConLai' from PHIEUDKHP 
 where MaTinhTrang = 2 and MaHocKy = @hocKy and NamHoc = @namHoc
+end
+go
+
+--spDANHSACHMONHOCMO_GetHocKyNamHoc
+create proc spDANHSACHMONHOCMO_GetHocKyNamHoc
+as
+begin
+	select DISTINCT MaHocKy,NamHoc from DANHSACHMONHOCMO
+	ORDER BY NamHoc ASC
+end
+go
+
+--spMONHOC_GetOddCTMonHoc
+create proc spMONHOC_GetOddCTMonHoc
+as
+begin
+	SELECT * FROM MONHOC
+	WHERE MONHOC.MaMH IN (
+		SELECT CHUONGTRINHHOC.MaMH FROM CHUONGTRINHHOC
+		WHERE CHUONGTRINHHOC.HOCKY IN (1,3,5,7)
+	)
+	OR MONHOC.MaMH NOT IN (
+		SELECT CHUONGTRINHHOC.MaMH FROM CHUONGTRINHHOC
+	)
+end
+go
+
+--spMONHOC_GetEvenCTMonHoc
+create proc spMONHOC_GetEvenCTMonHoc
+as
+begin
+	SELECT * FROM MONHOC
+	WHERE MONHOC.MaMH IN (
+		SELECT CHUONGTRINHHOC.MaMH FROM CHUONGTRINHHOC
+		WHERE CHUONGTRINHHOC.HOCKY IN (2,4,6,8)
+	)
+	OR MONHOC.MaMH NOT IN (
+		SELECT CHUONGTRINHHOC.MaMH FROM CHUONGTRINHHOC
+	)
+end
+go
+
+--spMONHOC_GetAllCTMonHoc
+create proc spMONHOC_GetAllCTMonHoc
+as
+begin
+	SELECT * FROM MONHOC
+end
+go
+
+--spKHOANGTGDONGHP_Add
+create proc spKHOANGTGDONGHP_Add
+(
+	@MaHocKy int,
+	@NamHoc int,
+	@KhoangTG int
+)
+as
+begin
+	INSERT INTO KHOANGTGDONGHP VALUES(@MaHocKy,@NamHoc,@KhoangTG)
+end
+go
+
+--spDANHSACHMONHOCMO_GetNam
+create proc spDANHSACHMONHOCMO_GetNam
+as
+begin
+	SELECT DISTINCT NamHoc 
+	FROM DANHSACHMONHOCMO 
+	ORDER BY NamHoc ASC
+end
+go
+
+--spDANHSACHMONHOCMO_XoaDanhSach
+create proc spDANHSACHMONHOCMO_XoaDanhSach
+(
+	@MaHocKy int,
+	@NamHoc int
+)
+as
+begin
+	DELETE FROM DANHSACHMONHOCMO WHERE MaHocKy=@MaHocKy AND NamHoc=@NamHoc;
+end
+go
+
+--spMONHOC_GetTermMonHocMo
+create proc spMONHOC_GetTermMonHocMo
+    @HocKy int,
+    @NamHoc int
+AS
+BEGIN
+    SELECT mh.MaMH, mh.TenMH, mh.MaLoaiMonHoc, mh.SoTiet
+    FROM DANHSACHMONHOCMO dsm
+    JOIN MONHOC mh ON dsm.MaMH = mh.MaMH
+    WHERE dsm.MaHocKy = @HocKy AND dsm.NamHoc = @NamHoc;
+END
+go
+
+--spDANHSACHMONHOCMO_AddMonHocMo
+create proc spDANHSACHMONHOCMO_AddMonHocMo
+(
+	@MaMH nvarchar(50),
+	@MaHocKy int,
+	@NamHoc int
+)
+as
+begin
+	INSERT INTO DANHSACHMONHOCMO (MaMH, MaHocKy, NamHoc) VALUES (@MaMH, @MaHocKy, @NamHoc);
+end
+go
+
+--spNGANH_LayNganhBangMaKhoa
+create proc spNGANH_LayNganhBangMaKhoa (@MaKhoa nvarchar(50))
+as
+begin
+	select * 
+	from NGANH
+	where MaKhoa = @MaKhoa
+end
+go
+
+--spCHUONGTRINHHOC_DeleteListCTHoc
+create proc spCHUONGTRINHHOC_DeleteListCTHoc
+(
+	@MaNganh nvarchar(50),
+	@HocKy int
+)
+as
+begin
+	DELETE FROM CHUONGTRINHHOC WHERE MaNganh=@MaNganh AND HocKy=@HocKy
+end
+go
+
+--spMONHOC_GetCTHHocKyMaNganh
+create proc spMONHOC_GetCTHHocKyMaNganh
+(
+	@MaNganh nvarchar(50),
+	@HocKy int
+)
+as
+begin
+	SELECT mh.MaMH, mh.TenMH, mh.MaLoaiMonHoc, mh.SoTiet
+	from CHUONGTRINHHOC cth
+	JOIN MONHOC mh ON cth.MaMH = mh.MaMH
+	WHERE cth.HocKy=@HocKy AND cth.MaNganh=@MaNganh;
+end
+go
+
+--spMONHOC_GetCTHHocKy
+create proc spMONHOC_GetCTHHocKy
+(
+	@MaNganh nvarchar(50)
+)
+as
+begin
+	SELECT mh.MaMH, mh.TenMH, mh.MaLoaiMonHoc, mh.SoTiet
+	from CHUONGTRINHHOC cth
+	JOIN MONHOC mh ON cth.MaMH = mh.MaMH
+	WHERE cth.MaNganh=@MaNganh;
+end
+go
+
+--spCHUONGTRINHHOC_GetAll
+create proc spCHUONGTRINHHOC_GetAll
+as
+begin
+	SELECT * FROM CHUONGTRINHHOC
+end
+go
+
+--spMONHOC_LayDSMonHoc2
+create proc spMONHOC_LayDSMonHoc2
+as
+begin
+	select * 
+	from MONHOC
+end
+go
+
+--spCHUONGTRINHHOC_AddCTHoc
+create proc spCHUONGTRINHHOC_AddCTHoc
+(
+	@MaNganh nvarchar(50),
+	@MaMH nvarchar(50),
+	@HocKy int
+)
+as
+begin
+	INSERT INTO CHUONGTRINHHOC(MaNganh, MaMH, HocKy) VALUES (@MaNganh, @MaMH, @HocKy);
+end
+go
+
+--spCHUONGTRINHHOC_DeleteCTHoc
+create proc spCHUONGTRINHHOC_DeleteCTHoc
+(
+	@MaNganh nvarchar(50),
+	@MaMH nvarchar(50),
+	@HocKy int
+)
+as
+begin
+	DELETE FROM CHUONGTRINHHOC WHERE MaNganh=@MaNganh AND MaMH=@MaMH AND HocKy=@HocKy
+end
+go
+
+--spPHIEUDKHP_GetPhieuDKHPCanXacNhan
+create proc spPHIEUDKHP_GetPhieuDKHPCanXacNhan
+as
+begin
+	SELECT * FROM PHIEUDKHP
+	WHERE MaTinhTrang=1
+end
+go
+
+--spMONHOC_GetMonHocPhieuDKHP
+create proc spMONHOC_GetMonHocPhieuDKHP
+(
+	@MaPhieuDKHP int
+)
+as
+begin
+	SELECT * FROM MONHOC
+	WHERE MaMH IN(
+		SELECT MaMH FROM CT_PHIEUDKHP
+		WHERE MaPhieuDKHP=@MaPhieuDKHP
+	)
+end
+go
+
+--spPHIEUDKHP_UpdateTinhTrang
+create proc spPHIEUDKHP_UpdateTinhTrang
+(
+	@MaPhieuDKHP int, 
+	@MaTinhTrang int
+)
+as
+begin
+	update PHIEUDKHP
+	set MaTinhTrang=@MaTinhTrang, NgayLap = getdate()
+	where MaPhieuDKHP=@MaPhieuDKHP
+end
+go
+
+--spPHIEUDKHP_GetPhieuDKHP
+create proc spPHIEUDKHP_GetPhieuDKHP
+(
+	@MaHocKy int,
+	@NamHoc int,
+	@MaTinhTrang int
+)
+as
+begin
+	SELECT * FROM PHIEUDKHP
+	WHERE MaHocKy=@MaHocKy AND NamHoc=@NamHoc AND MaTinhTrang=@MaTinhTrang
+end
+go
+
+--spPHIEUDKHP_GetAllPhieuDKHP
+create proc spPHIEUDKHP_GetAllPhieuDKHP
+as
+begin
+	SELECT * FROM PHIEUDKHP
+end
+go
+
+--spPHIEUTHUHP_GetPhieuThuHP
+create proc spPHIEUTHUHP_GetPhieuThuHP
+(
+	@MaTinhTrang int
+)
+as
+begin
+	SELECT * FROM PHIEUTHUHP WHERE MaTinhTrang=@MaTinhTrang
+end
+go
+
+--spPHIEUTHUHP_UpdateTinhTrang
+create proc spPHIEUTHUHP_UpdateTinhTrang
+(
+	@MaPhieuThuHP int, 
+	@MaTinhTrang int
+)
+as
+begin
+	update PHIEUTHUHP
+	set MaTinhTrang=@MaTinhTrang, NgayLap = getdate()
+	where MaPhieuThuHP=@MaPhieuThuHP
 end
 go

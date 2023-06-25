@@ -76,5 +76,10 @@ namespace BLL
         {
             return GlobalConfigDAL.LayKhoangTGDongHP(hocKy, namHoc);
         }
+
+        public static MessageKhoangTGDongHP KhoangTGDongHP(int MaHocKy, int NamHoc, int KhoangTG)
+        {
+            return GlobalConfigDAL.KhoangTGDongHP(MaHocKy, NamHoc, KhoangTG);
+        }
     }
 }

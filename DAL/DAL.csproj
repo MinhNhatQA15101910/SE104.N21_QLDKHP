@@ -45,6 +45,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ChuongTrinhHocDAL.cs" />
     <Compile Include="CT_PhieuDKHPDAL.cs" />
     <Compile Include="DanhSachMonHocMoDAL.cs" />
     <Compile Include="DatabaseConnection.cs" />
@@ -55,6 +56,7 @@
     <Compile Include="KhoaDAL.cs" />
     <Compile Include="LoaiMonHocDAL.cs" />
     <Compile Include="MonHocDAL.cs" />
+    <Compile Include="MonHocMoDAL.cs" />
     <Compile Include="NganhDAL.cs" />
     <Compile Include="NguoiDungDAL.cs" />
     <Compile Include="NhomNguoiDungDAL.cs" />

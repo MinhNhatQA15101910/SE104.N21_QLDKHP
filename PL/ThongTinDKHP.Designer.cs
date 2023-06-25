@@ -30,7 +30,7 @@ namespace PL
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle2 = new System.Windows.Forms.DataGridViewCellStyle();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ThongTinDKHP));
             this.pnlPhieuDKHP = new System.Windows.Forms.Panel();
             this.txtTongSoTC = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
@@ -42,6 +42,7 @@ namespace PL
             this.txtSoPhieuDKHP = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
             this.menu1 = new ComponentFactory.Krypton.Toolkit.KryptonContextMenu();
             this.pnlTimKiem = new System.Windows.Forms.Panel();
+            this.imgTimKiem = new System.Windows.Forms.PictureBox();
             this.grbHocKy = new System.Windows.Forms.GroupBox();
             this.cmbHocKy = new ComponentFactory.Krypton.Toolkit.KryptonComboBox();
             this.grbNamHoc = new System.Windows.Forms.GroupBox();
@@ -50,17 +51,16 @@ namespace PL
             this.btnQuayLai = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.lblQLMB = new System.Windows.Forms.Label();
             this.plt1 = new ComponentFactory.Krypton.Toolkit.KryptonPalette(this.components);
-            this.imgTimKiem = new System.Windows.Forms.PictureBox();
             this.pnlPhieuDKHP.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDSMH)).BeginInit();
             this.grbNgayLap.SuspendLayout();
             this.grbSoPhieu.SuspendLayout();
             this.pnlTimKiem.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.imgTimKiem)).BeginInit();
             this.grbHocKy.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.cmbHocKy)).BeginInit();
             this.grbNamHoc.SuspendLayout();
             this.pnlDeMuc.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.imgTimKiem)).BeginInit();
             this.SuspendLayout();
             // 
             // pnlPhieuDKHP
@@ -96,10 +96,10 @@ namespace PL
             // 
             // dgvDSMH
             // 
-            dataGridViewCellStyle2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(159)))), ((int)(((byte)(159)))));
-            dataGridViewCellStyle2.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle2.ForeColor = System.Drawing.Color.Black;
-            this.dgvDSMH.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle2;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(159)))), ((int)(((byte)(159)))));
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black;
+            this.dgvDSMH.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvDSMH.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvDSMH.Cursor = System.Windows.Forms.Cursors.Hand;
             this.dgvDSMH.Location = new System.Drawing.Point(11, 84);
@@ -118,6 +118,7 @@ namespace PL
             this.dgvDSMH.StateCommon.HeaderColumn.Content.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dgvDSMH.StateCommon.HeaderColumn.Content.TextH = ComponentFactory.Krypton.Toolkit.PaletteRelativeAlign.Center;
             this.dgvDSMH.TabIndex = 46;
+            this.dgvDSMH.SelectionChanged += new System.EventHandler(this.dgvDSMH_SelectionChanged);
             // 
             // lblTongSoTinChi
             // 
@@ -200,6 +201,19 @@ namespace PL
             this.pnlTimKiem.Name = "pnlTimKiem";
             this.pnlTimKiem.Size = new System.Drawing.Size(448, 79);
             this.pnlTimKiem.TabIndex = 50;
+            // 
+            // imgTimKiem
+            // 
+            this.imgTimKiem.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.imgTimKiem.Image = ((System.Drawing.Image)(resources.GetObject("imgTimKiem.Image")));
+            this.imgTimKiem.Location = new System.Drawing.Point(377, 18);
+            this.imgTimKiem.Margin = new System.Windows.Forms.Padding(2);
+            this.imgTimKiem.Name = "imgTimKiem";
+            this.imgTimKiem.Size = new System.Drawing.Size(30, 37);
+            this.imgTimKiem.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
+            this.imgTimKiem.TabIndex = 25;
+            this.imgTimKiem.TabStop = false;
+            this.imgTimKiem.Click += new System.EventHandler(this.imgTimKiem_Click);
             // 
             // grbHocKy
             // 
@@ -317,19 +331,6 @@ namespace PL
             this.plt1.HeaderStyles.HeaderCommon.StateCommon.Back.Color1 = System.Drawing.Color.White;
             this.plt1.HeaderStyles.HeaderCommon.StateCommon.Back.Color2 = System.Drawing.Color.White;
             // 
-            // imgTimKiem
-            // 
-            this.imgTimKiem.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.imgTimKiem.Image = ((System.Drawing.Image)(resources.GetObject("imgTimKiem.Image")));
-            this.imgTimKiem.Location = new System.Drawing.Point(377, 18);
-            this.imgTimKiem.Margin = new System.Windows.Forms.Padding(2);
-            this.imgTimKiem.Name = "imgTimKiem";
-            this.imgTimKiem.Size = new System.Drawing.Size(30, 37);
-            this.imgTimKiem.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.imgTimKiem.TabIndex = 25;
-            this.imgTimKiem.TabStop = false;
-            this.imgTimKiem.Click += new System.EventHandler(this.imgTimKiem_Click);
-            // 
             // ThongTinDKHP
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -355,12 +356,12 @@ namespace PL
             this.grbSoPhieu.ResumeLayout(false);
             this.grbSoPhieu.PerformLayout();
             this.pnlTimKiem.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.imgTimKiem)).EndInit();
             this.grbHocKy.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.cmbHocKy)).EndInit();
             this.grbNamHoc.ResumeLayout(false);
             this.grbNamHoc.PerformLayout();
             this.pnlDeMuc.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.imgTimKiem)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

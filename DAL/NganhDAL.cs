@@ -107,5 +107,29 @@ namespace DAL
 
             return ThemNganhMessage.Success;
         }
+
+        public static List<Nganh> GetNganh(string MaKhoa)
+        {
+            List<Nganh> ListNganh;
+            if (MaKhoa != null)
+            {
+                using (IDbConnection connection = new SqlConnection(DatabaseConnection.CnnString()))
+                {
+                    var p = new DynamicParameters();
+                    p.Add("@MaKhoa", MaKhoa);
+                    ListNganh = connection.Query<Nganh>("spNGANH_LayNganhBangMaKhoa", p, commandType: CommandType.StoredProcedure).ToList();
+                }
+                return ListNganh;
+            }
+            else
+            {
+                using (IDbConnection connection = new SqlConnection(DatabaseConnection.CnnString()))
+                {
+                    ListNganh = connection.Query<Nganh>("spNGANH_LayDSNganh").ToList();
+                }
+                return ListNganh;
+            }
+
+        }
     }
 }

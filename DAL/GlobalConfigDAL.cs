@@ -89,5 +89,26 @@ namespace DAL
 
             return output;
         }
+
+        public static MessageKhoangTGDongHP KhoangTGDongHP(int MaHocKy, int NamHoc, int KhoangTG)
+        {
+            try
+            {
+                using (IDbConnection connection = new SqlConnection(DatabaseConnection.CnnString()))
+                {
+                    var p = new DynamicParameters();
+                    p.Add("@MaHocKy", MaHocKy);
+                    p.Add("@NamHoc", NamHoc);
+                    p.Add("@KhoangTG", KhoangTG);
+                    connection.Execute("spKHOANGTGDONGHP_Add", p, commandType: CommandType.StoredProcedure);
+                }
+            }
+            catch (Exception)
+            {
+                return MessageKhoangTGDongHP.Failed;
+            }
+            return MessageKhoangTGDongHP.Success;
+
+        }
     }
 }

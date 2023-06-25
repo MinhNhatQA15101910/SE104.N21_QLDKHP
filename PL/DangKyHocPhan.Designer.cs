@@ -48,7 +48,7 @@ namespace PL
             this.dgvDSMonHocMo = new ComponentFactory.Krypton.Toolkit.KryptonDataGridView();
             this.dgvDSMHDaChon = new ComponentFactory.Krypton.Toolkit.KryptonDataGridView();
             this.txtNamHoc = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
-            this.paleDangNhap = new ComponentFactory.Krypton.Toolkit.KryptonPalette(this.components);
+            this.plt1 = new ComponentFactory.Krypton.Toolkit.KryptonPalette(this.components);
             this.txtHocKy = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
             this.imgChon = new System.Windows.Forms.PictureBox();
             this.imgXoa = new System.Windows.Forms.PictureBox();
@@ -315,22 +315,22 @@ namespace PL
             this.txtNamHoc.StateActive.Content.Padding = new System.Windows.Forms.Padding(2, -1, -1, -1);
             this.txtNamHoc.TabIndex = 57;
             // 
-            // paleDangNhap
+            // plt1
             // 
-            this.paleDangNhap.ButtonSpecs.FormClose.Image = global::PL.Properties.Resources.icons8_orange_circle_20;
-            this.paleDangNhap.ButtonSpecs.FormClose.ImageStates.ImageTracking = global::PL.Properties.Resources.icons8_orange_circle_201;
-            this.paleDangNhap.ButtonSpecs.FormMax.Image = global::PL.Properties.Resources.icons8_yellow_circle_20;
-            this.paleDangNhap.ButtonSpecs.FormMax.ImageStates.ImageTracking = global::PL.Properties.Resources.icons8_yellow_circle_20;
-            this.paleDangNhap.ButtonSpecs.FormMin.Image = global::PL.Properties.Resources.icons8_green_circle_20;
-            this.paleDangNhap.ButtonSpecs.FormMin.ImageStates.ImageTracking = global::PL.Properties.Resources.icons8_green_circle_20;
-            this.paleDangNhap.FormStyles.FormMain.StateCommon.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(250)))), ((int)(((byte)(252)))));
-            this.paleDangNhap.FormStyles.FormMain.StateCommon.Back.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(250)))), ((int)(((byte)(252)))));
-            this.paleDangNhap.FormStyles.FormMain.StateCommon.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
+            this.plt1.ButtonSpecs.FormClose.Image = global::PL.Properties.Resources.icons8_orange_circle_20;
+            this.plt1.ButtonSpecs.FormClose.ImageStates.ImageTracking = global::PL.Properties.Resources.icons8_orange_circle_201;
+            this.plt1.ButtonSpecs.FormMax.Image = global::PL.Properties.Resources.icons8_yellow_circle_20;
+            this.plt1.ButtonSpecs.FormMax.ImageStates.ImageTracking = global::PL.Properties.Resources.icons8_yellow_circle_20;
+            this.plt1.ButtonSpecs.FormMin.Image = global::PL.Properties.Resources.icons8_green_circle_20;
+            this.plt1.ButtonSpecs.FormMin.ImageStates.ImageTracking = global::PL.Properties.Resources.icons8_green_circle_20;
+            this.plt1.FormStyles.FormMain.StateCommon.Back.Color1 = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(250)))), ((int)(((byte)(252)))));
+            this.plt1.FormStyles.FormMain.StateCommon.Back.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(250)))), ((int)(((byte)(250)))), ((int)(((byte)(252)))));
+            this.plt1.FormStyles.FormMain.StateCommon.Border.DrawBorders = ((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders)((((ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Top | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Bottom) 
             | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Left) 
             | ComponentFactory.Krypton.Toolkit.PaletteDrawBorders.Right)));
-            this.paleDangNhap.FormStyles.FormMain.StateCommon.Border.Rounding = 20;
-            this.paleDangNhap.HeaderStyles.HeaderCommon.StateCommon.Back.Color1 = System.Drawing.Color.White;
-            this.paleDangNhap.HeaderStyles.HeaderCommon.StateCommon.Back.Color2 = System.Drawing.Color.White;
+            this.plt1.FormStyles.FormMain.StateCommon.Border.Rounding = 20;
+            this.plt1.HeaderStyles.HeaderCommon.StateCommon.Back.Color1 = System.Drawing.Color.White;
+            this.plt1.HeaderStyles.HeaderCommon.StateCommon.Back.Color2 = System.Drawing.Color.White;
             // 
             // txtHocKy
             // 
@@ -395,7 +395,7 @@ namespace PL
             this.Margin = new System.Windows.Forms.Padding(2);
             this.MaximizeBox = false;
             this.Name = "DangKyHocPhan";
-            this.Palette = this.paleDangNhap;
+            this.Palette = this.plt1;
             this.PaletteMode = ComponentFactory.Krypton.Toolkit.PaletteMode.Custom;
             this.ShowIcon = false;
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
@@ -427,7 +427,7 @@ namespace PL
         private ComponentFactory.Krypton.Toolkit.KryptonDataGridView dgvDSMonHocMo;
         private ComponentFactory.Krypton.Toolkit.KryptonDataGridView dgvDSMHDaChon;
         private ComponentFactory.Krypton.Toolkit.KryptonTextBox txtNamHoc;
-        private ComponentFactory.Krypton.Toolkit.KryptonPalette paleDangNhap;
+        private ComponentFactory.Krypton.Toolkit.KryptonPalette plt1;
         private ComponentFactory.Krypton.Toolkit.KryptonTextBox txtTimKiem;
         private ComponentFactory.Krypton.Toolkit.KryptonTextBox txtHocKy;
         private ComponentFactory.Krypton.Toolkit.KryptonButton btnQuayLai;

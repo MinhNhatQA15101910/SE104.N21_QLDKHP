@@ -121,20 +121,6 @@
     <value>17, 17</value>
   </metadata>
   <assembly alias="System.Drawing" name="System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a" />
-  <data name="btnQuayLai.Values.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
-    <value>
-        iVBORw0KGgoAAAANSUhEUgAAABkAAAAZCAYAAADE6YVjAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAN
-        0AAADdABEGw9BwAAAStJREFUSEvt1bFKA0EUheERjGAhYhFQNASbFAoROwtBREwhCMY3sE+Xl8hDxE5B
-        CfoAmtZaMVUUJYpgGtFCFFGI/ykWtnCdO2GrkANfM+Rylp3MrDNkG10cIKOFtLOBO/RwiDGkGhXcQwVN
-        zCPVDFbBGfJINfFNbmEdc1DRf2YxAW8KaEMF8oYOHg30YBeoYQmJWcQDopIPvEJlPu+I5p5QQeJ52sEz
-        9ONrbKGIZY8V7OEcmv1CFSP4M2VERQ1kYc0k9Mp+8II1JCZedIppWDOOY2hWN8QoEhMvOkFIkf6l2lPt
-        sfeM9Vs0gxt8YlULvsSL6rDcwlO4wjc2tWDJLm6xD8strJJLqKSkBWty0LAlfZeEZFgSlGFJUKISXZTm
-        wxgaHdgj6KO34Jxzv6ckb8z7pmgxAAAAAElFTkSuQmCC
-</value>
-  </data>
-  <metadata name="plt1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
-    <value>280, 16</value>
-  </metadata>
   <data name="imgTimKiem.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
     <value>
         iVBORw0KGgoAAAANSUhEUgAAAGAAAABgCAYAAADimHc4AAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAL
@@ -158,4 +144,18 @@
         lptGU8cALDdRIDEAy02UVBmA5cYEbEA3lhsAAAAAgHQixD9zfTXM9vNAbQAAAABJRU5ErkJggg==
 </value>
   </data>
+  <data name="btnQuayLai.Values.Image" type="System.Drawing.Bitmap, System.Drawing" mimetype="application/x-microsoft.net.object.bytearray.base64">
+    <value>
+        iVBORw0KGgoAAAANSUhEUgAAABkAAAAZCAYAAADE6YVjAAAABGdBTUEAALGPC/xhBQAAAAlwSFlzAAAN
+        0AAADdABEGw9BwAAAStJREFUSEvt1bFKA0EUheERjGAhYhFQNASbFAoROwtBREwhCMY3sE+Xl8hDxE5B
+        CfoAmtZaMVUUJYpgGtFCFFGI/ykWtnCdO2GrkANfM+Rylp3MrDNkG10cIKOFtLOBO/RwiDGkGhXcQwVN
+        zCPVDFbBGfJINfFNbmEdc1DRf2YxAW8KaEMF8oYOHg30YBeoYQmJWcQDopIPvEJlPu+I5p5QQeJ52sEz
+        9ONrbKGIZY8V7OEcmv1CFSP4M2VERQ1kYc0k9Mp+8II1JCZedIppWDOOY2hWN8QoEhMvOkFIkf6l2lPt
+        sfeM9Vs0gxt8YlULvsSL6rDcwlO4wjc2tWDJLm6xD8strJJLqKSkBWty0LAlfZeEZFgSlGFJUKISXZTm
+        wxgaHdgj6KO34Jxzv6ckb8z7pmgxAAAAAElFTkSuQmCC
+</value>
+  </data>
+  <metadata name="plt1.TrayLocation" type="System.Drawing.Point, System.Drawing, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
+    <value>280, 16</value>
+  </metadata>
 </root>

@@ -31,37 +31,37 @@ namespace PL
         {
             this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(BaoCao));
-            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle4 = new System.Windows.Forms.DataGridViewCellStyle();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
+            System.Windows.Forms.DataGridViewCellStyle dataGridViewCellStyle1 = new System.Windows.Forms.DataGridViewCellStyle();
+            this.grbHocKy = new System.Windows.Forms.GroupBox();
             this.cmbHocKy = new ComponentFactory.Krypton.Toolkit.KryptonComboBox();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.grbNamHoc = new System.Windows.Forms.GroupBox();
             this.txtNamHoc = new ComponentFactory.Krypton.Toolkit.KryptonTextBox();
-            this.panel2 = new System.Windows.Forms.Panel();
+            this.pnlDeMuc = new System.Windows.Forms.Panel();
             this.btnQuayLai = new ComponentFactory.Krypton.Toolkit.KryptonButton();
-            this.lblQLMB = new System.Windows.Forms.Label();
+            this.lblBaoCao = new System.Windows.Forms.Label();
             this.dgvDSSV = new ComponentFactory.Krypton.Toolkit.KryptonDataGridView();
             this.btnThongKe = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.btnInBaoCao = new ComponentFactory.Krypton.Toolkit.KryptonButton();
             this.plt1 = new ComponentFactory.Krypton.Toolkit.KryptonPalette(this.components);
-            this.groupBox2.SuspendLayout();
+            this.grbHocKy.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.cmbHocKy)).BeginInit();
-            this.groupBox1.SuspendLayout();
-            this.panel2.SuspendLayout();
+            this.grbNamHoc.SuspendLayout();
+            this.pnlDeMuc.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvDSSV)).BeginInit();
             this.SuspendLayout();
             // 
-            // groupBox2
+            // grbHocKy
             // 
-            this.groupBox2.Controls.Add(this.cmbHocKy);
-            this.groupBox2.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox2.Location = new System.Drawing.Point(52, 70);
-            this.groupBox2.Margin = new System.Windows.Forms.Padding(2);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBox2.Size = new System.Drawing.Size(170, 64);
-            this.groupBox2.TabIndex = 27;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Học Kỳ";
+            this.grbHocKy.Controls.Add(this.cmbHocKy);
+            this.grbHocKy.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.grbHocKy.Location = new System.Drawing.Point(52, 70);
+            this.grbHocKy.Margin = new System.Windows.Forms.Padding(2);
+            this.grbHocKy.Name = "grbHocKy";
+            this.grbHocKy.Padding = new System.Windows.Forms.Padding(2);
+            this.grbHocKy.Size = new System.Drawing.Size(170, 64);
+            this.grbHocKy.TabIndex = 27;
+            this.grbHocKy.TabStop = false;
+            this.grbHocKy.Text = "Học Kỳ";
             // 
             // cmbHocKy
             // 
@@ -79,18 +79,18 @@ namespace PL
             this.cmbHocKy.StateCommon.ComboBox.Content.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbHocKy.TabIndex = 4;
             // 
-            // groupBox1
+            // grbNamHoc
             // 
-            this.groupBox1.Controls.Add(this.txtNamHoc);
-            this.groupBox1.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox1.Location = new System.Drawing.Point(243, 70);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(2);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(2);
-            this.groupBox1.Size = new System.Drawing.Size(170, 64);
-            this.groupBox1.TabIndex = 26;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Năm học";
+            this.grbNamHoc.Controls.Add(this.txtNamHoc);
+            this.grbNamHoc.Font = new System.Drawing.Font("Times New Roman", 10.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.grbNamHoc.Location = new System.Drawing.Point(243, 70);
+            this.grbNamHoc.Margin = new System.Windows.Forms.Padding(2);
+            this.grbNamHoc.Name = "grbNamHoc";
+            this.grbNamHoc.Padding = new System.Windows.Forms.Padding(2);
+            this.grbNamHoc.Size = new System.Drawing.Size(170, 64);
+            this.grbNamHoc.TabIndex = 26;
+            this.grbNamHoc.TabStop = false;
+            this.grbNamHoc.Text = "Năm học";
             // 
             // txtNamHoc
             // 
@@ -107,16 +107,16 @@ namespace PL
             this.txtNamHoc.StateCommon.Content.Padding = new System.Windows.Forms.Padding(2, -1, -1, -1);
             this.txtNamHoc.TabIndex = 12;
             // 
-            // panel2
+            // pnlDeMuc
             // 
-            this.panel2.Controls.Add(this.btnQuayLai);
-            this.panel2.Controls.Add(this.lblQLMB);
-            this.panel2.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel2.Location = new System.Drawing.Point(0, 0);
-            this.panel2.Margin = new System.Windows.Forms.Padding(2);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(859, 54);
-            this.panel2.TabIndex = 52;
+            this.pnlDeMuc.Controls.Add(this.btnQuayLai);
+            this.pnlDeMuc.Controls.Add(this.lblBaoCao);
+            this.pnlDeMuc.Dock = System.Windows.Forms.DockStyle.Top;
+            this.pnlDeMuc.Location = new System.Drawing.Point(0, 0);
+            this.pnlDeMuc.Margin = new System.Windows.Forms.Padding(2);
+            this.pnlDeMuc.Name = "pnlDeMuc";
+            this.pnlDeMuc.Size = new System.Drawing.Size(859, 54);
+            this.pnlDeMuc.TabIndex = 52;
             // 
             // btnQuayLai
             // 
@@ -137,23 +137,23 @@ namespace PL
             this.btnQuayLai.Values.Text = " QUAY LẠI";
             this.btnQuayLai.Click += new System.EventHandler(this.btnQuayLai_Click);
             // 
-            // lblQLMB
+            // lblBaoCao
             // 
-            this.lblQLMB.AutoEllipsis = true;
-            this.lblQLMB.Font = new System.Drawing.Font("Times New Roman", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lblQLMB.Location = new System.Drawing.Point(104, 12);
-            this.lblQLMB.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
-            this.lblQLMB.Name = "lblQLMB";
-            this.lblQLMB.Size = new System.Drawing.Size(716, 32);
-            this.lblQLMB.TabIndex = 0;
-            this.lblQLMB.Text = "DANH SÁCH SINH VIÊN CHƯA HOÀN THÀNH VIỆC ĐÓNG HỌC PHÍ ";
+            this.lblBaoCao.AutoEllipsis = true;
+            this.lblBaoCao.Font = new System.Drawing.Font("Times New Roman", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblBaoCao.Location = new System.Drawing.Point(104, 12);
+            this.lblBaoCao.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
+            this.lblBaoCao.Name = "lblBaoCao";
+            this.lblBaoCao.Size = new System.Drawing.Size(716, 32);
+            this.lblBaoCao.TabIndex = 0;
+            this.lblBaoCao.Text = "DANH SÁCH SINH VIÊN CHƯA HOÀN THÀNH VIỆC ĐÓNG HỌC PHÍ ";
             // 
             // dgvDSSV
             // 
-            dataGridViewCellStyle4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(159)))), ((int)(((byte)(159)))));
-            dataGridViewCellStyle4.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            dataGridViewCellStyle4.ForeColor = System.Drawing.Color.Black;
-            this.dgvDSSV.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle4;
+            dataGridViewCellStyle1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(159)))), ((int)(((byte)(159)))));
+            dataGridViewCellStyle1.Font = new System.Drawing.Font("Times New Roman", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            dataGridViewCellStyle1.ForeColor = System.Drawing.Color.Black;
+            this.dgvDSSV.AlternatingRowsDefaultCellStyle = dataGridViewCellStyle1;
             this.dgvDSSV.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvDSSV.Cursor = System.Windows.Forms.Cursors.Hand;
             this.dgvDSSV.Location = new System.Drawing.Point(33, 157);
@@ -268,9 +268,9 @@ namespace PL
             this.Controls.Add(this.btnInBaoCao);
             this.Controls.Add(this.btnThongKe);
             this.Controls.Add(this.dgvDSSV);
-            this.Controls.Add(this.panel2);
-            this.Controls.Add(this.groupBox2);
-            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.pnlDeMuc);
+            this.Controls.Add(this.grbHocKy);
+            this.Controls.Add(this.grbNamHoc);
             this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "BaoCao";
             this.Palette = this.plt1;
@@ -279,23 +279,23 @@ namespace PL
             this.Text = "Báo cáo";
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.BaoCao_FormClosing);
             this.Load += new System.EventHandler(this.BaoCao_Load);
-            this.groupBox2.ResumeLayout(false);
+            this.grbHocKy.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.cmbHocKy)).EndInit();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
-            this.panel2.ResumeLayout(false);
+            this.grbNamHoc.ResumeLayout(false);
+            this.grbNamHoc.PerformLayout();
+            this.pnlDeMuc.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.dgvDSSV)).EndInit();
             this.ResumeLayout(false);
 
         }
 
         #endregion
-        private System.Windows.Forms.GroupBox groupBox2;
+        private System.Windows.Forms.GroupBox grbHocKy;
         private ComponentFactory.Krypton.Toolkit.KryptonComboBox cmbHocKy;
-        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.GroupBox grbNamHoc;
         private ComponentFactory.Krypton.Toolkit.KryptonTextBox txtNamHoc;
-        private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.Label lblQLMB;
+        private System.Windows.Forms.Panel pnlDeMuc;
+        private System.Windows.Forms.Label lblBaoCao;
         private ComponentFactory.Krypton.Toolkit.KryptonDataGridView dgvDSSV;
         private ComponentFactory.Krypton.Toolkit.KryptonButton btnThongKe;
         private ComponentFactory.Krypton.Toolkit.KryptonButton btnInBaoCao;

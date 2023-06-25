@@ -92,11 +92,11 @@
     <Compile Include="BaoCao.Designer.cs">
       <DependentUpon>BaoCao.cs</DependentUpon>
     </Compile>
-    <Compile Include="ChuongTrinhHoc.cs">
+    <Compile Include="QuanLyChuongTrinhHoc.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="ChuongTrinhHoc.Designer.cs">
-      <DependentUpon>ChuongTrinhHoc.cs</DependentUpon>
+    <Compile Include="QuanLyChuongTrinhHoc.Designer.cs">
+      <DependentUpon>QuanLyChuongTrinhHoc.cs</DependentUpon>
     </Compile>
     <Compile Include="CT_ThanhToanHocPhi.cs">
       <SubType>Form</SubType>
@@ -183,11 +183,11 @@
     <Compile Include="QuanLyMonHoc.Designer.cs">
       <DependentUpon>QuanLyMonHoc.cs</DependentUpon>
     </Compile>
-    <Compile Include="MonHocMo.cs">
+    <Compile Include="QuanLyMonHocMo.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="MonHocMo.Designer.cs">
-      <DependentUpon>MonHocMo.cs</DependentUpon>
+    <Compile Include="QuanLyMonHocMo.Designer.cs">
+      <DependentUpon>QuanLyMonHocMo.cs</DependentUpon>
     </Compile>
     <Compile Include="QuanLyNganh.cs">
       <SubType>Form</SubType>
@@ -336,8 +336,8 @@
     <EmbeddedResource Include="BaoCao.resx">
       <DependentUpon>BaoCao.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="ChuongTrinhHoc.resx">
-      <DependentUpon>ChuongTrinhHoc.cs</DependentUpon>
+    <EmbeddedResource Include="QuanLyChuongTrinhHoc.resx">
+      <DependentUpon>QuanLyChuongTrinhHoc.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="CT_ThanhToanHocPhi.resx">
       <DependentUpon>CT_ThanhToanHocPhi.cs</DependentUpon>
@@ -363,8 +363,8 @@
     <EmbeddedResource Include="QuanLyMonHoc.resx">
       <DependentUpon>QuanLyMonHoc.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="MonHocMo.resx">
-      <DependentUpon>MonHocMo.cs</DependentUpon>
+    <EmbeddedResource Include="QuanLyMonHocMo.resx">
+      <DependentUpon>QuanLyMonHocMo.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="QuanLyNganh.resx">
       <DependentUpon>QuanLyNganh.cs</DependentUpon>

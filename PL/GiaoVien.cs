@@ -165,5 +165,33 @@ namespace PL
             baoCao.Show();
             Hide();
         }
+
+        private void btnQuanLyMonHocMo_Click(object sender, EventArgs e)
+        {
+            QuanLyMonHocMo quanLyMonHocMo = new QuanLyMonHocMo(this);
+            quanLyMonHocMo.Show();
+            Hide();
+        }
+
+        private void btnChuongTrinhHoc_Click(object sender, EventArgs e)
+        {
+            QuanLyChuongTrinhHoc quanLyChuongTrinhHoc = new QuanLyChuongTrinhHoc(this);
+            quanLyChuongTrinhHoc.Show();
+            Hide();
+        }
+
+        private void btnXacNhanDKHP_Click(object sender, EventArgs e)
+        {
+            XacNhanDKHP xacNhanDKHP = new XacNhanDKHP(this);
+            xacNhanDKHP.Show();
+            Hide();
+        }
+
+        private void btnXacNhanThanhToanHP_Click(object sender, EventArgs e)
+        {
+            XacNhanHocPhi xacNhanHocPhi = new XacNhanHocPhi(this);
+            xacNhanHocPhi.Show();
+            Hide();
+        }
     }
 }

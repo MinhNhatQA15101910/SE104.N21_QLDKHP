@@ -47,5 +47,15 @@ namespace BLL
         {
             return PhieuThuHPDAL.TaoPhieuThu_ChoXacNhan(soTienThu, soPhieuDKHP);
         }
+
+        public static List<DTO.PhieuThuHP> GetPhieuThuHP(int MaTinhTrang)
+        {
+            return PhieuThuHPDAL.GetPhieuThuHP(MaTinhTrang);
+        }
+
+        public static MessagePhieuThuHPUpdateTinhTrang PhieuThuHPUpdateTinhTrang(int MaPhieuThuHP, int MaTinhTrang)
+        {
+            return PhieuThuHPDAL.PhieuThuHPUpdateTinhTrang(MaPhieuThuHP, MaTinhTrang);
+        }
     }
 }

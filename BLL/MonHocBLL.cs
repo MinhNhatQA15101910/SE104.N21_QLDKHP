@@ -92,5 +92,30 @@ namespace BLL
 
             return MonHocDAL.ThemMonHoc(maMH, tenMH, maLoaiMonHoc, soTietValue);
         }
+
+        public static List<MonHoc> GetTermMonHoc(int HocKy)
+        {
+            return MonHocDAL.GetTermMonHoc(HocKy);
+        }
+
+        public static List<MonHoc> GetTermMonHocMo(int HocKy, int NamHoc)
+        {
+            return MonHocDAL.GetTermMonHocMo(HocKy, NamHoc);
+        }
+
+        public static List<MonHoc> GetChuongTrinhHoc(string Nganh, int HocKy)
+        {
+            return MonHocDAL.GetChuongTrinhHoc(Nganh, HocKy);
+        }
+
+        public static List<MonHoc> LayDSMonHoc2()
+        {
+            return MonHocDAL.LayDSMonHoc2();
+        }
+
+        public static List<MonHoc> GetMonHocPhieuDKHP(int MaPhieuDKHP)
+        {
+            return MonHocDAL.GetMonHocPhieuDKHP(MaPhieuDKHP);
+        }
     }
 }

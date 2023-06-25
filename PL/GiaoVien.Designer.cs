@@ -90,6 +90,7 @@ namespace PL
             this.btnQuanLyMonHocMo.StatePressed.Back.Color2 = System.Drawing.Color.FromArgb(((int)(((byte)(77)))), ((int)(((byte)(178)))), ((int)(((byte)(255)))));
             this.btnQuanLyMonHocMo.TabIndex = 7;
             this.btnQuanLyMonHocMo.Values.Text = "QUẢN LÝ MÔN HỌC MỞ";
+            this.btnQuanLyMonHocMo.Click += new System.EventHandler(this.btnQuanLyMonHocMo_Click);
             // 
             // btnXacNhanDKHP
             // 
@@ -114,6 +115,7 @@ namespace PL
             this.btnXacNhanDKHP.StateTracking.Back.Color1 = System.Drawing.Color.White;
             this.btnXacNhanDKHP.TabIndex = 9;
             this.btnXacNhanDKHP.Values.Text = "XÁC NHẬN ĐKHP";
+            this.btnXacNhanDKHP.Click += new System.EventHandler(this.btnXacNhanDKHP_Click);
             // 
             // lblQuanLyHocPhan
             // 
@@ -208,6 +210,7 @@ namespace PL
             this.btnChuongTrinhHoc.StateTracking.Back.Color1 = System.Drawing.Color.White;
             this.btnChuongTrinhHoc.TabIndex = 16;
             this.btnChuongTrinhHoc.Values.Text = "CHƯƠNG\r\n  TRÌNH \r\n   HỌC";
+            this.btnChuongTrinhHoc.Click += new System.EventHandler(this.btnChuongTrinhHoc_Click);
             // 
             // btnMonHoc
             // 
@@ -299,6 +302,7 @@ namespace PL
             this.btnXacNhanThanhToanHP.StateTracking.Back.Color1 = System.Drawing.Color.White;
             this.btnXacNhanThanhToanHP.TabIndex = 21;
             this.btnXacNhanThanhToanHP.Values.Text = "           XÁC NHẬN\r\nTHANH TOÁN HỌC PHÍ";
+            this.btnXacNhanThanhToanHP.Click += new System.EventHandler(this.btnXacNhanThanhToanHP_Click);
             // 
             // plt1
             // 

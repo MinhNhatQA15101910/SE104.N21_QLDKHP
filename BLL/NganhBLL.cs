@@ -49,5 +49,10 @@ namespace BLL
 
             return NganhDAL.ThemNganh(maNganh, tenNganh, maKhoa);
         }
+
+        public static List<Nganh> GetNganh(string MaKhoa)
+        {
+            return NganhDAL.GetNganh(MaKhoa);
+        }
     }
 }

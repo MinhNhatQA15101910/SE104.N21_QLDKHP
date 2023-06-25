@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ChuongTrinhHocBLL.cs" />
     <Compile Include="CT_PhieuDKHPBLL.cs" />
     <Compile Include="DanhSachMonHocMoBLL.cs" />
     <Compile Include="DoiTuongBLL.cs" />
@@ -50,6 +51,7 @@
     <Compile Include="KhoaBLL.cs" />
     <Compile Include="LoaiMonHocBLL.cs" />
     <Compile Include="MonHocBLL.cs" />
+    <Compile Include="MonHocMoBLL.cs" />
     <Compile Include="NganhBLL.cs" />
     <Compile Include="NguoiDungBLL.cs" />
     <Compile Include="NhomNguoiDungBLL.cs" />
