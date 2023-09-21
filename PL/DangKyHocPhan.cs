@@ -1,12 +1,11 @@
-﻿using ComponentFactory.Krypton.Toolkit;
+﻿using BLL;
+using ComponentFactory.Krypton.Toolkit;
+using DTO;
+using PL.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
-using DTO;
-using BLL;
-using System.ComponentModel;
-using PL.Interfaces;
 
 namespace PL
 {
