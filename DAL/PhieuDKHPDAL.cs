@@ -182,12 +182,13 @@ namespace DAL
                     p.Add("@MaTinhTrang", MaTinhTrang);
                     connection.Execute("spPHIEUDKHP_UpdateTinhTrang", p, commandType: CommandType.StoredProcedure);
                 }
+
+                return MessagePhieuDKHPUpdateTinhTrang.Success;
             }
             catch (Exception)
             {
                 return MessagePhieuDKHPUpdateTinhTrang.Failed;
             }
-            return MessagePhieuDKHPUpdateTinhTrang.Success;
         }
 
         public static List<PhieuDKHP> GetAllPhieuDKHP()

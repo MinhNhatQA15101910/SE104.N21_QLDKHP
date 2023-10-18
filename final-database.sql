@@ -3098,7 +3098,10 @@ begin
 		and MaPhieuDKHP = @maPhieuDKHP
 	)
 
-	select @TongTienPhieuDKHP - @TongTienDaThu
+	if @TongTienDaThu <> NULL
+		select @TongTienPhieuDKHP - @TongTienDaThu
+	else
+		select @TongTienPhieuDKHP
 end
 go
 
@@ -3554,3 +3557,5 @@ begin
 	where MaPhieuThuHP=@MaPhieuThuHP
 end
 go
+
+select * from NGUOIDUNG;

@@ -173,7 +173,7 @@ namespace PL
             {
                 if (KtSoTC())
                 {
-                    if (dangKy == false)
+                    if (!dangKy)
                     {
                         // tạo ra phiếu đkhp
                         if (PhieuDKHPBLL.TaoPhieuDKHP(GlobalConfig.CurrNguoiDung.TenDangNhap, GlobalConfig.CurrMaHocKy, GlobalConfig.CurrNamHoc))
@@ -184,7 +184,8 @@ namespace PL
                             for (int i = 0; i < dgvDSMHDaChon.Rows.Count - 1; i++)
                                 dsMaMH.Add(dgvDSMHDaChon.Rows[i].Cells["MaMH"].Value.ToString());
                             CT_PhieuDKHPBLL.TaoCT_PhieuDKHP(maPhieu, dsMaMH);
-                            MessageBox.Show("Đăng kí thành công");
+                            MessageBox.Show("Đăng ký thành công");
+                            Close();
                         }
                     }
                     else
@@ -198,6 +199,7 @@ namespace PL
                             dsMaMH.Add(dgvDSMHDaChon.Rows[i].Cells["MaMH"].Value.ToString());
                         CT_PhieuDKHPBLL.TaoCT_PhieuDKHP(maPhieu, dsMaMH);
                         MessageBox.Show("Lưu thành công");
+                        Close();
                     }
 
                 }
