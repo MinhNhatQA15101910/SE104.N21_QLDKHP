@@ -1,34 +1,42 @@
-﻿using Dapper;
+﻿using DAL.IServices;
+using Dapper;
 using DTO;
-using System;
 using System.Collections.Generic;
-using System.Data;
 using System.Data.SqlClient;
+using System.Data;
+using System;
 using System.Linq;
 
-namespace DAL
+namespace DAL.Services
 {
-    public class NganhDAL
+    public class NganhDALService : INganhDALService
     {
-        public static List<CT_Nganh> LayDSNganh()
+        private readonly IDapperService _dapperService;
+        private readonly string _dbConnection;
+
+        public NganhDALService(IDapperService dapperService, string dbConnection)
         {
-            List<CT_Nganh> output;
-            using (IDbConnection connection = new SqlConnection(DatabaseConnection.CnnString()))
-            {
-                output = connection.Query<CT_Nganh>("spNGANH_LayDSNganh").ToList();
-            }
-            return output;
+            _dapperService = dapperService;
+            _dbConnection = dbConnection;
         }
 
-        public static XoaNganhMessage XoaNganh(string maNganh)
+        public List<CT_Nganh> LayDSNganh()
+        {
+            using (IDbConnection connection = new SqlConnection(_dbConnection))
+            {
+                return _dapperService.Query<CT_Nganh>(connection, "spNGANH_LayDSNganh").ToList();
+            }
+        }
+
+        public XoaNganhMessage XoaNganh(string maNganh)
         {
             try
             {
-                using (IDbConnection connection = new SqlConnection(DatabaseConnection.CnnString()))
+                using (IDbConnection connection = new SqlConnection(_dbConnection))
                 {
                     var p = new DynamicParameters();
                     p.Add("@MaNganh", maNganh);
-                    connection.Execute("spNGANH_XoaNganh", p, commandType: CommandType.StoredProcedure);
+                    _dapperService.Execute(connection, "spNGANH_XoaNganh", p, CommandType.StoredProcedure);
                 }
             }
             catch (Exception)
@@ -39,7 +47,7 @@ namespace DAL
             return XoaNganhMessage.Success;
         }
 
-        public static SuaNganhMessage SuaNganh(string maNganhBanDau, string maNganhSua, string tenNganhSua, string maKhoaSua)
+        public SuaNganhMessage SuaNganh(string maNganhBanDau, string maNganhSua, string tenNganhSua, string maKhoaSua)
         {
             try
             {
@@ -71,7 +79,7 @@ namespace DAL
             return SuaNganhMessage.Success;
         }
 
-        public static ThemNganhMessage ThemNganh(string maNganh, string tenNganh, string maKhoa)
+        public ThemNganhMessage ThemNganh(string maNganh, string tenNganh, string maKhoa)
         {
             try
             {
@@ -106,7 +114,7 @@ namespace DAL
             return ThemNganhMessage.Success;
         }
 
-        public static List<Nganh> GetNganh(string MaKhoa)
+        public List<Nganh> GetNganh(string MaKhoa)
         {
             List<Nganh> ListNganh;
             if (MaKhoa != null)

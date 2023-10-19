@@ -1,9 +1,13 @@
 ﻿using BLL;
+using BLL.IServices;
+using BLL.Services;
 using ComponentFactory.Krypton.Toolkit;
+using DAL.Services;
 using DTO;
 using PL.Interfaces;
 using System;
 using System.ComponentModel;
+using System.Configuration;
 using System.Data;
 using System.Drawing;
 using System.Linq;
@@ -13,6 +17,8 @@ namespace PL
 {
     public partial class QuanLyNganh : KryptonForm, IThemSuaNganhRequester
     {
+        private readonly INganhBLLService _nganhBLLService = new NganhBLLService(new NganhDALService(new DapperService(), ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString));
+
         private INganhRequester nganhRequester;
         private BindingList<CT_Nganh> mNganh;
         private BindingSource mNganhSource;
@@ -54,7 +60,7 @@ namespace PL
 
         private void Nganh_Load(object sender, EventArgs e)
         {
-            mNganh = new BindingList<CT_Nganh>(NganhBLL.LayDSNganh());
+            mNganh = new BindingList<CT_Nganh>(_nganhBLLService.LayDSNganh());
             mNganhSource = new BindingSource(mNganh, null);
             dgvDanhSachNganh.DataSource = mNganhSource;
 
@@ -108,7 +114,7 @@ namespace PL
 
         public void OnThemSuaNganhClosing()
         {
-            mNganh = new BindingList<CT_Nganh>(NganhBLL.LayDSNganh());
+            mNganh = new BindingList<CT_Nganh>(_nganhBLLService.LayDSNganh());
             mNganhSource.DataSource = mNganh;
         }
 
@@ -135,7 +141,7 @@ namespace PL
                 string maNganh = dgvDanhSachNganh.CurrentRow.Cells["MaNganh"].Value as string;
                 CT_Nganh nganh = mNganh[dgvDanhSachNganh.CurrentRow.Index];
 
-                XoaNganhMessage message = NganhBLL.XoaNganh(maNganh);
+                XoaNganhMessage message = _nganhBLLService.XoaNganh(maNganh);
                 switch (message)
                 {
                     case XoaNganhMessage.Error:

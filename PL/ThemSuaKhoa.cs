@@ -1,16 +1,22 @@
 ﻿using BLL;
+using BLL.IServices;
+using BLL.Services;
 using ComponentFactory.Krypton.Toolkit;
+using DAL.Services;
 using DTO;
 using PL.Interfaces;
 using System;
+using System.Configuration;
 using System.Windows.Forms;
 
 namespace PL
 {
     public partial class ThemSuaKhoa : KryptonForm
     {
+        private readonly IKhoaBLLService _khoaBLLService = new KhoaBLLService(new KhoaDALService(new DapperService(), ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString));
+
         private IThemSuaKhoaRequester themSuaKhoaRequester;
-        private DTO.Khoa khoa;
+        private Khoa khoa;
 
         public ThemSuaKhoa(IThemSuaKhoaRequester requester, DTO.Khoa khoa)
         {
@@ -64,7 +70,7 @@ namespace PL
                 string maKhoaSua = txtMaKhoa.Text.Trim();
                 string tenKhoaSua = txtTenKhoa.Text.Trim();
 
-                SuaKhoaMessage message = KhoaBLL.SuaKhoa(maKhoaBanDau, maKhoaSua, tenKhoaSua);
+                SuaKhoaMessage message = _khoaBLLService.SuaKhoa(maKhoaBanDau, maKhoaSua, tenKhoaSua);
                 switch (message)
                 {
                     case SuaKhoaMessage.EmptyMaKhoa:
@@ -93,7 +99,7 @@ namespace PL
                 string maKhoa = txtMaKhoa.Text.Trim();
                 string tenKhoa = txtTenKhoa.Text.Trim();
 
-                ThemKhoaMessage message = KhoaBLL.ThemKhoa(maKhoa, tenKhoa);
+                ThemKhoaMessage message = _khoaBLLService.ThemKhoa(maKhoa, tenKhoa);
                 switch (message)
                 {
                     case ThemKhoaMessage.EmptyMaKhoa:

@@ -1,15 +1,22 @@
 ﻿using BLL;
+using BLL.IServices;
+using BLL.Services;
 using ComponentFactory.Krypton.Toolkit;
+using DAL.Services;
 using DTO;
 using PL.Interfaces;
 using System;
 using System.ComponentModel;
+using System.Configuration;
 using System.Windows.Forms;
 
 namespace PL
 {
     public partial class ThemSuaNganh : KryptonForm, IThemSuaKhoaRequester
     {
+        private readonly IKhoaBLLService _khoaBLLService = new KhoaBLLService(new KhoaDALService(new DapperService(), ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString));
+        private readonly INganhBLLService _nganhBLLService = new NganhBLLService(new NganhDALService(new DapperService(), ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString));
+
         private IThemSuaNganhRequester themSuaNganhRequester;
         private CT_Nganh nganh;
         private BindingList<DTO.Khoa> mKhoa;
@@ -53,13 +60,13 @@ namespace PL
 
         public void OnThemSuaKhoaClosing()
         {
-            mKhoa = new BindingList<DTO.Khoa>(KhoaBLL.LayDSKhoa());
+            mKhoa = new BindingList<DTO.Khoa>(_khoaBLLService.LayDSKhoa());
             mKhoaSource.DataSource = mKhoa;
         }
 
         private void ThemSuaNganh_Load(object sender, EventArgs e)
         {
-            mKhoa = new BindingList<DTO.Khoa>(KhoaBLL.LayDSKhoa());
+            mKhoa = new BindingList<DTO.Khoa>(_khoaBLLService.LayDSKhoa());
             mKhoaSource = new BindingSource(mKhoa, null);
             cmbKhoa.DataSource = mKhoaSource;
             cmbKhoa.DisplayMember = "DisplayKhoa";
@@ -102,7 +109,7 @@ namespace PL
                 string tenNganhSua = txtTenNganh.Text.Trim();
                 string maKhoaSua = cmbKhoa.Text.Trim().Split(' ')[0];
 
-                SuaNganhMessage message = NganhBLL.SuaNganh(maNganhBanDau, maNganhSua, tenNganhSua, maKhoaSua);
+                SuaNganhMessage message = _nganhBLLService.SuaNganh(maNganhBanDau, maNganhSua, tenNganhSua, maKhoaSua);
                 switch (message)
                 {
                     case SuaNganhMessage.EmptyMaNganh:
@@ -132,7 +139,7 @@ namespace PL
                 string tenNganh = txtTenNganh.Text.Trim();
                 string maKhoa = cmbKhoa.Text.Trim().Split(' ')[0];
 
-                ThemNganhMessage message = NganhBLL.ThemNganh(maNganh, tenNganh, maKhoa);
+                ThemNganhMessage message = _nganhBLLService.ThemNganh(maNganh, tenNganh, maKhoa);
                 switch (message)
                 {
                     case ThemNganhMessage.EmptyMaNganh:

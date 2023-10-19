@@ -1,8 +1,12 @@
 ﻿using BLL;
+using BLL.IServices;
+using BLL.Services;
 using ComponentFactory.Krypton.Toolkit;
+using DAL.Services;
 using DTO;
 using System;
 using System.ComponentModel;
+using System.Configuration;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -10,6 +14,9 @@ namespace PL
 {
     public partial class ThemSuaCTH : KryptonForm
     {
+        private readonly IKhoaBLLService _khoaBLLService = new KhoaBLLService(new KhoaDALService(new DapperService(), ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString));
+        private readonly INganhBLLService _nganhBLLService = new NganhBLLService(new NganhDALService(new DapperService(), ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString));
+
         BindingList<Khoa> mKhoa;
         BindingList<Nganh> mNganh;
         BindingList<MonHoc> mMonHoc;
@@ -92,7 +99,7 @@ namespace PL
         public void GetCbKhoaItems()
         {
             cb_Khoa.Items.Clear();
-            mKhoa = new BindingList<DTO.Khoa>(KhoaBLL.LayDSKhoa());
+            mKhoa = new BindingList<DTO.Khoa>(_khoaBLLService.LayDSKhoa());
             foreach (var item in mKhoa)
             {
                 cb_Khoa.Items.Add(item.TenKhoa);
@@ -108,14 +115,14 @@ namespace PL
                 {
                     if (cb_Khoa.Text.ToString() == item.TenKhoa.ToString())
                     {
-                        mNganh = new BindingList<DTO.Nganh>(NganhBLL.GetNganh(item.MaKhoa));
+                        mNganh = new BindingList<DTO.Nganh>(_nganhBLLService.GetNganh(item.MaKhoa));
                         break;
                     }
                 }
             }
             else
             {
-                mNganh = new BindingList<DTO.Nganh>(NganhBLL.GetNganh(null));
+                mNganh = new BindingList<DTO.Nganh>(_nganhBLLService.GetNganh(null));
             }
             foreach (var item in mNganh)
             {
@@ -147,7 +154,7 @@ namespace PL
             if (cb_HocKy.Text != "" && cb_Nganh.Text != "")
             {
                 int x = cb_HocKy.SelectedIndex + 1;
-                mNganh = new BindingList<DTO.Nganh>(NganhBLL.GetNganh(null));
+                mNganh = new BindingList<DTO.Nganh>(_nganhBLLService.GetNganh(null));
                 foreach (var item in mNganh)
                 {
                     if (item.TenNganh == cb_Nganh.Text)

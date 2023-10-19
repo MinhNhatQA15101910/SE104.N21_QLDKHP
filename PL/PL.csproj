@@ -73,6 +73,7 @@
       <HintPath>..\packages\Microsoft.SqlServer.Types.160.1000.6\lib\net462\Microsoft.SqlServer.Types.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.Configuration" />
     <Reference Include="System.Core" />
     <Reference Include="System.Design" />
     <Reference Include="System.Xml.Linq" />
@@ -524,6 +525,10 @@
     <ProjectReference Include="..\BLL\BLL.csproj">
       <Project>{a15964a5-7a30-4a74-b38c-6ad4b8a5a7bd}</Project>
       <Name>BLL</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\DAL\DAL.csproj">
+      <Project>{b5b2fe4e-0086-4baf-a7be-cbee03ed2128}</Project>
+      <Name>DAL</Name>
     </ProjectReference>
     <ProjectReference Include="..\DTO\DTO.csproj">
       <Project>{58a8629b-1bcb-46bc-84bd-47495352c6c0}</Project>

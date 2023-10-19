@@ -1,9 +1,13 @@
 ﻿using BLL;
+using BLL.IServices;
+using BLL.Services;
 using ComponentFactory.Krypton.Toolkit;
+using DAL.Services;
 using DTO;
 using PL.Interfaces;
 using System;
 using System.ComponentModel;
+using System.Configuration;
 using System.Data;
 using System.Drawing;
 using System.Linq;
@@ -13,6 +17,8 @@ namespace PL
 {
     public partial class QuanLyKhoa : KryptonForm, IThemSuaKhoaRequester
     {
+        private readonly IKhoaBLLService _khoaBLLService = new KhoaBLLService(new KhoaDALService(new DapperService(), ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString));
+
         private IKhoaRequester khoaRequester;
         private BindingList<Khoa> mKhoa;
         private BindingSource mKhoaSource;
@@ -40,13 +46,13 @@ namespace PL
 
         public void OnThemSuaKhoaClosing()
         {
-            mKhoa = new BindingList<Khoa>(KhoaBLL.LayDSKhoa());
+            mKhoa = new BindingList<Khoa>(_khoaBLLService.LayDSKhoa());
             mKhoaSource.DataSource = mKhoa;
         }
 
         private void Khoa_Load(object sender, EventArgs e)
         {
-            mKhoa = new BindingList<Khoa>(KhoaBLL.LayDSKhoa());
+            mKhoa = new BindingList<Khoa>(_khoaBLLService.LayDSKhoa());
             mKhoaSource = new BindingSource(mKhoa, null);
             dgvDanhSachKhoa.DataSource = mKhoaSource;
 
@@ -115,7 +121,7 @@ namespace PL
                 string maKhoa = dgvDanhSachKhoa.CurrentRow.Cells["MaKhoa"].Value as string;
                 Khoa khoa = mKhoa[dgvDanhSachKhoa.CurrentRow.Index];
 
-                XoaKhoaMessage message = KhoaBLL.XoaKhoa(maKhoa);
+                XoaKhoaMessage message = _khoaBLLService.XoaKhoa(maKhoa);
                 switch (message)
                 {
                     case XoaKhoaMessage.Error:

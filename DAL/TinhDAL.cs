@@ -34,12 +34,9 @@ namespace DAL
             }
             catch (SqlException ex)
             {
-                if (ex.Number == 2627)
+                if (ex.Number == 2627 && ex.Message.Contains("UQ_TINH_TenTinh"))
                 {
-                    if (ex.Message.Contains("UQ_TINH_TenTinh"))
-                    {
-                        return SuaTinhMessage.DuplicateTenTinh;
-                    }
+                    return SuaTinhMessage.DuplicateTenTinh;
                 }
             }
             catch (Exception)
@@ -82,12 +79,9 @@ namespace DAL
             }
             catch (SqlException ex)
             {
-                if (ex.Number == 2627)
+                if (ex.Number == 2627 && ex.Message.Contains("UQ_TINH_TenTTP"))
                 {
-                    if (ex.Message.Contains("UQ_TINH_TenTTP"))
-                    {
-                        return ThemTinhMessage.DuplicateTenTinh;
-                    }
+                    return ThemTinhMessage.DuplicateTenTinh;
                 }
             }
             catch (Exception)

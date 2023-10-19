@@ -1,5 +1,8 @@
-﻿namespace DTO
+﻿using System.Diagnostics.CodeAnalysis;
+
+namespace DTO
 {
+    [ExcludeFromCodeCoverage]
     public class CT_Huyen
     {
         public int MaHuyen { get; set; }

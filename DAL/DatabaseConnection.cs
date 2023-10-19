@@ -2,7 +2,7 @@
 
 namespace DAL
 {
-    public class DatabaseConnection
+    public static class DatabaseConnection
     {
         public static string CnnString()
         {

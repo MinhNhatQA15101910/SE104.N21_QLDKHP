@@ -1,16 +1,22 @@
 ﻿using BLL;
+using BLL.IServices;
+using BLL.Services;
 using ComponentFactory.Krypton.Toolkit;
+using DAL.Services;
 using DTO;
 using PL.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Configuration;
 using System.Windows.Forms;
 
 namespace PL
 {
     public partial class ThemSuaSinhVien : KryptonForm, IThemSuaNganhRequester, IThemSuaHuyenRequester, IThemSuaDoiTuongRequester
     {
+        private readonly INganhBLLService _nganhBLLService = new NganhBLLService(new NganhDALService(new DapperService(), ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString));
+
         private readonly IThemSuaSinhVienRequester themSuaSinhVienRequester;
         private readonly CT_SinhVien sinhVien;
 
@@ -97,7 +103,7 @@ namespace PL
             if (sinhVien != null)
             {
                 // Nganh
-                mNganh = new BindingList<CT_Nganh>(NganhBLL.LayDSNganh());
+                mNganh = new BindingList<CT_Nganh>(_nganhBLLService.LayDSNganh());
                 mNganhSource = new BindingSource(mNganh, null);
                 cmbNganh.DataSource = mNganhSource;
                 cmbNganh.DisplayMember = "DisplayNganh";
@@ -131,7 +137,7 @@ namespace PL
             else
             {
                 // Nganh
-                mNganh = new BindingList<CT_Nganh>(NganhBLL.LayDSNganh());
+                mNganh = new BindingList<CT_Nganh>(_nganhBLLService.LayDSNganh());
                 mNganhSource = new BindingSource(mNganh, null);
                 cmbNganh.DataSource = mNganhSource;
                 cmbNganh.DisplayMember = "DisplayNganh";
@@ -212,7 +218,7 @@ namespace PL
 
         private void RefreshNganhList()
         {
-            mNganh = new BindingList<CT_Nganh>(NganhBLL.LayDSNganh());
+            mNganh = new BindingList<CT_Nganh>(_nganhBLLService.LayDSNganh());
             mNganhSource.DataSource = mNganh;
         }
 

@@ -171,6 +171,7 @@
 
     public enum SuaKhoaMessage
     {
+        None,
         EmptyMaKhoa,
         EmptyTenKhoa,
         DuplicateMaKhoa,
@@ -191,6 +192,7 @@
 
     public enum SuaNganhMessage
     {
+        None,
         EmptyMaNganh,
         EmptyTenNganh,
         DuplicateMaNganh,

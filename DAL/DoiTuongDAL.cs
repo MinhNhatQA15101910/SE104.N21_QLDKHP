@@ -2,6 +2,7 @@
 using DTO;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
@@ -13,7 +14,7 @@ namespace DAL
         public static List<DoiTuong> LayDSDoiTuong()
         {
             List<DoiTuong> output;
-            using (IDbConnection connection = new SqlConnection(DatabaseConnection.CnnString()))
+            using (IDbConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString))
             {
                 output = connection.Query<DoiTuong>("spDOITUONG_LayDSDoiTuong").ToList();
             }

@@ -1,4 +1,5 @@
-﻿using Dapper;
+﻿using DAL.IServices;
+using Dapper;
 using DTO;
 using System;
 using System.Collections.Generic;
@@ -6,32 +7,42 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 
-namespace DAL
+namespace DAL.Services
 {
-    public class KhoaDAL
+    public class KhoaDALService : IKhoaDALService
     {
-        public static List<Khoa> LayDSKhoa()
+        private readonly IDapperService _dapperService;
+        private readonly string _dbConnectionString;
+
+        public KhoaDALService(IDapperService dapperService, string dbConnectionString)
         {
-            List<Khoa> output;
-            using (IDbConnection connection = new SqlConnection(DatabaseConnection.CnnString()))
-            {
-                output = connection.Query<Khoa>("spKHOA_LayDSKhoa").ToList();
-            }
-            return output;
+            _dapperService = dapperService;
+            _dbConnectionString = dbConnectionString;
         }
 
-        public static SuaKhoaMessage SuaKhoa(string maKhoaBanDau, string maKhoaSua, string tenKhoaSua)
+        public List<Khoa> LayDSKhoa()
+        {
+            using (var connection = new SqlConnection(_dbConnectionString))
+            {
+                List<Khoa> result = _dapperService.Query<Khoa>(connection, "spKHOA_LayDSKhoa").ToList();
+                return result;
+            }
+        }
+
+        public SuaKhoaMessage SuaKhoa(string maKhoaBanDau, string maKhoaSua, string tenKhoaSua)
         {
             try
             {
-                using (IDbConnection connection = new SqlConnection(DatabaseConnection.CnnString()))
+                using (var connection = new SqlConnection(_dbConnectionString))
                 {
                     var p = new DynamicParameters();
                     p.Add("@MaKhoaBanDau", maKhoaBanDau);
                     p.Add("@MaKhoaSua", maKhoaSua);
                     p.Add("@TenKhoaSua", tenKhoaSua);
-                    connection.Execute("spKHOA_SuaKhoa", p, commandType: CommandType.StoredProcedure);
+                    _dapperService.Execute(connection, "spKHOA_SuaKhoa", p, CommandType.StoredProcedure);
                 }
+
+                return SuaKhoaMessage.Success;
             }
             catch (SqlException ex)
             {
@@ -41,21 +52,19 @@ namespace DAL
                     {
                         return SuaKhoaMessage.DuplicateTenKhoa;
                     }
+                       
+                    return SuaKhoaMessage.DuplicateMaKhoa;
                 }
-            }
-            catch (Exception)
-            {
+
                 return SuaKhoaMessage.Error;
             }
-
-            return SuaKhoaMessage.Success;
         }
 
-        public static ThemKhoaMessage ThemKhoa(string maKhoa, string tenKhoa)
+        public ThemKhoaMessage ThemKhoa(string maKhoa, string tenKhoa)
         {
             try
             {
-                using (IDbConnection connection = new SqlConnection(DatabaseConnection.CnnString()))
+                using (var connection = new SqlConnection(DatabaseConnection.CnnString()))
                 {
                     var p = new DynamicParameters();
                     p.Add("@MaKhoa", maKhoa);
@@ -85,11 +94,11 @@ namespace DAL
             return ThemKhoaMessage.Success;
         }
 
-        public static XoaKhoaMessage XoaKhoa(string maKhoa)
+        public XoaKhoaMessage XoaKhoa(string maKhoa)
         {
             try
             {
-                using (IDbConnection connection = new SqlConnection(DatabaseConnection.CnnString()))
+                using (var connection = new SqlConnection(DatabaseConnection.CnnString()))
                 {
                     var p = new DynamicParameters();
                     p.Add("@MaKhoa", maKhoa);
