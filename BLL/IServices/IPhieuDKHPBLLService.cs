@@ -23,5 +23,6 @@ namespace BLL.IServices
 		MessagePhieuDKHPUpdateTinhTrang PhieuDKHPUpdateTinhTrang(int MaPhieuDKHP, int MaTinhTrang);
 		List<PhieuDKHP> GetAllPhieuDKHP();
 		TimKiemPhieuDKHPMessage KtTimKiemPhieuDKHP(string namHoc);
+
 	}
 }
