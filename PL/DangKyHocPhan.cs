@@ -1,9 +1,13 @@
 ﻿using BLL;
+using BLL.IServices;
+using BLL.Services;
 using ComponentFactory.Krypton.Toolkit;
+using DAL.Services;
 using DTO;
 using PL.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -11,7 +15,8 @@ namespace PL
 {
     public partial class DangKyHocPhan : KryptonForm
     {
-        private IDangKyHocPhanRequester dangKyHocPhanRequester;
+		private readonly IPhieuDKHPBLLService _phieuDKHPBLLService = new PhieuDKHPBLLService(new PhieuDKHPDALService(new DapperService(), ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString));
+		private IDangKyHocPhanRequester dangKyHocPhanRequester;
         private bool dangKy = false;
         private int selectedIndex1 = -1;
         private int selectedIndex2 = -1;
@@ -47,7 +52,7 @@ namespace PL
 
         private void KtDangKyHocPhan()
         {
-            List<PhieuDKHP> list = PhieuDKHPBLL.LayTTPhieuDKHP(GlobalConfig.CurrNguoiDung.TenDangNhap, GlobalConfig.CurrMaHocKy, GlobalConfig.CurrNamHoc);
+            List<PhieuDKHP> list = _phieuDKHPBLLService.LayTTPhieuDKHP(GlobalConfig.CurrNguoiDung.TenDangNhap, GlobalConfig.CurrMaHocKy, GlobalConfig.CurrNamHoc);
             if (list.Count > 0)
             {
                 if (list[0].MaTinhTrang == 1)
@@ -87,7 +92,7 @@ namespace PL
 
         private void LoadDataDSMonHocDaChon(int maPhieuDangKyHocPhan)
         {
-            List<dynamic> listMH = PhieuDKHPBLL.LayDSMHThuocHP2(maPhieuDangKyHocPhan);
+            List<dynamic> listMH = _phieuDKHPBLLService.LayDSMHThuocHP2(maPhieuDangKyHocPhan);
 
             if (listMH.Count > 0)
             {
@@ -176,9 +181,9 @@ namespace PL
                     if (!dangKy)
                     {
                         // tạo ra phiếu đkhp
-                        if (PhieuDKHPBLL.TaoPhieuDKHP(GlobalConfig.CurrNguoiDung.TenDangNhap, GlobalConfig.CurrMaHocKy, GlobalConfig.CurrNamHoc))
+                        if (_phieuDKHPBLLService.TaoPhieuDKHP(GlobalConfig.CurrNguoiDung.TenDangNhap, GlobalConfig.CurrMaHocKy, GlobalConfig.CurrNamHoc))
                         {
-                            int maPhieu = PhieuDKHPBLL.LayMaPhieuDKHP(GlobalConfig.CurrMaHocKy, GlobalConfig.CurrNamHoc); // next: lấy ma Phieu
+                            int maPhieu = _phieuDKHPBLLService.LayMaPhieuDKHP(GlobalConfig.CurrMaHocKy, GlobalConfig.CurrNamHoc); // next: lấy ma Phieu
                             List<string> dsMaMH = new List<string>();
                             // tạo ra ct_phiếu đkhp
                             for (int i = 0; i < dgvDSMHDaChon.Rows.Count - 1; i++)
@@ -191,7 +196,7 @@ namespace PL
                     else
                     {
                         // update 
-                        int maPhieu = PhieuDKHPBLL.LayMaPhieuDKHP(GlobalConfig.CurrMaHocKy, GlobalConfig.CurrNamHoc); // next: lấy ma Phieu
+                        int maPhieu = _phieuDKHPBLLService.LayMaPhieuDKHP(GlobalConfig.CurrMaHocKy, GlobalConfig.CurrNamHoc); // next: lấy ma Phieu
                         CT_PhieuDKHPBLL.XoaDSMHDKHP(maPhieu);
                         // tạo ra ct_phiếu đkhp
                         List<string> dsMaMH = new List<string>();

@@ -1,14 +1,20 @@
 ﻿using BLL;
+using BLL.IServices;
+using BLL.Services;
 using ComponentFactory.Krypton.Toolkit;
+using DAL.Services;
 using DTO;
 using System;
+using System.Configuration;
 using System.Windows.Forms;
 
 namespace PL
 {
     public partial class DoiMatKhau : KryptonForm
     {
-        public DoiMatKhau()
+		private readonly INguoiDungBLLService _nguoiDungBLLService = new NguoiDungBLLService(new NguoiDungDALService(new DapperService(), ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString));
+
+		public DoiMatKhau()
         {
             InitializeComponent();
         }
@@ -25,7 +31,7 @@ namespace PL
             string matKhauNhapLai = txtMatKhauNhapLai.Text.Trim();
 
             errProv1.Clear();
-            DoiMatKhauMessage message = NguoiDungBLL.DoiMatKhau(matKhauHT, matKhauMoi, matKhauNhapLai);
+            DoiMatKhauMessage message = _nguoiDungBLLService.DoiMatKhau(matKhauHT, matKhauMoi, matKhauNhapLai);
             switch (message)
             {
                 case DoiMatKhauMessage.EmptyMatKhauHT:

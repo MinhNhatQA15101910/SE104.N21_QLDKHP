@@ -1,17 +1,23 @@
 ﻿using BLL;
+using BLL.IServices;
+using BLL.Services;
 using ComponentFactory.Krypton.Toolkit;
+using DAL.Services;
 using DTO;
 using PL.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Configuration;
 using System.Windows.Forms;
 
 namespace PL
 {
     public partial class ThemSuaHuyen : KryptonForm, IThemSuaTinhRequester
     {
-        private IThemSuaHuyenRequester themSuaHuyenRequester;
+		private readonly ITinhBLLService _tinhBLLService = new TinhBLLService(new TinhDALService(new DapperService(), ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString));
+
+		private IThemSuaHuyenRequester themSuaHuyenRequester;
         private Huyen huyen;
         private BindingList<Tinh> mTinh;
         private List<string> mUT;
@@ -60,13 +66,13 @@ namespace PL
 
         public void OnThemSuaTinhClosing()
         {
-            mTinh = new BindingList<Tinh>(TinhBLL.LayDSTinh());
+            mTinh = new BindingList<Tinh>(_tinhBLLService.LayDSTinh());
             mSource.DataSource = mTinh;
         }
 
         private void ThemSuaHuyen_Load(object sender, EventArgs e)
         {
-            mTinh = new BindingList<Tinh>(TinhBLL.LayDSTinh());
+            mTinh = new BindingList<Tinh>(_tinhBLLService.LayDSTinh());
             mSource = new BindingSource(mTinh, null);
             cmbTinh.DataSource = mSource;
             cmbTinh.DisplayMember = "TenTTP";

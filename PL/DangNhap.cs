@@ -1,15 +1,21 @@
 ﻿using BLL;
+using BLL.IServices;
+using BLL.Services;
 using ComponentFactory.Krypton.Toolkit;
+using DAL.Services;
 using DTO;
 using PL.Interfaces;
 using System;
+using System.Configuration;
 using System.Windows.Forms;
 
 namespace PL
 {
     public partial class DangNhap : KryptonForm, IAdminRequester, IGVRequester, ISinhVienRequester
     {
-        public DangNhap()
+		private readonly INguoiDungBLLService _nguoiDungBLLService = new NguoiDungBLLService(new NguoiDungDALService(new DapperService(), ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString));
+
+		public DangNhap()
         {
             InitializeComponent();
         }
@@ -55,7 +61,7 @@ namespace PL
             string tenDangNhap = txtTenDangNhap.Text.Trim();
             string matKhau = txtMatKhau.Text.Trim();
 
-            DangNhapMessage message = NguoiDungBLL.DangNhap(tenDangNhap, matKhau);
+            DangNhapMessage message = _nguoiDungBLLService.DangNhap(tenDangNhap, matKhau);
             switch (message)
             {
                 case DangNhapMessage.EmptyTenDangNhap:

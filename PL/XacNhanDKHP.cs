@@ -1,9 +1,13 @@
 ﻿using BLL;
+using BLL.IServices;
+using BLL.Services;
 using ComponentFactory.Krypton.Toolkit;
+using DAL.Services;
 using DTO;
 using PL.Interfaces;
 using System;
 using System.ComponentModel;
+using System.Configuration;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -11,7 +15,8 @@ namespace PL
 {
     public partial class XacNhanDKHP : KryptonForm
     {
-        private IXacNhanDKHPRequester xacNhanDKHPRequester;
+		private readonly IPhieuDKHPBLLService _phieuDKHPBLLService = new PhieuDKHPBLLService(new PhieuDKHPDALService(new DapperService(), ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString));
+		private IXacNhanDKHPRequester xacNhanDKHPRequester;
         int thisTerm = 3;
         int thisYear = 2024;
         BindingList<PhieuDKHP> mPhieuDKHP;
@@ -120,7 +125,7 @@ namespace PL
         public void SetUpDgvPhieuDKHP()
         {
             dgv_PhieuDKHP.Rows.Clear();
-            mPhieuDKHP = new BindingList<PhieuDKHP>(PhieuDKHPBLL.GetPhieuDKHP(thisTerm, thisYear, 1));
+            mPhieuDKHP = new BindingList<PhieuDKHP>(_phieuDKHPBLLService.GetPhieuDKHP(thisTerm, thisYear, 1));
             foreach (var item in mPhieuDKHP)
             {
                 string date = item.NgayLap.ToString("dd/MM/yyyy");
@@ -176,7 +181,7 @@ namespace PL
             {
                 DataGridViewRow selectedRow = dgv_PhieuDKHP.SelectedRows[0];
                 int x = Int32.Parse(selectedRow.Cells[0].Value.ToString());
-                MessagePhieuDKHPUpdateTinhTrang message = PhieuDKHPBLL.PhieuDKHPUpdateTinhTrang(x, 2);
+                MessagePhieuDKHPUpdateTinhTrang message = _phieuDKHPBLLService.PhieuDKHPUpdateTinhTrang(x, 2);
                 switch (message)
                 {
                     case MessagePhieuDKHPUpdateTinhTrang.Failed:
@@ -192,7 +197,7 @@ namespace PL
 
         private void img_Sort_Click(object sender, EventArgs e)
         {
-            mPhieuDKHP = new BindingList<PhieuDKHP>(PhieuDKHPBLL.GetPhieuDKHP(thisTerm, thisYear, 1));
+            mPhieuDKHP = new BindingList<PhieuDKHP>(_phieuDKHPBLLService.GetPhieuDKHP(thisTerm, thisYear, 1));
             dgv_PhieuDKHP.Rows.Clear();
             foreach (var item in mPhieuDKHP)
             {

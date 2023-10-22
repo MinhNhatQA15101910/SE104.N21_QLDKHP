@@ -1,16 +1,23 @@
 ﻿using BLL;
+using BLL.IServices;
+using BLL.Services;
 using ComponentFactory.Krypton.Toolkit;
+using DAL.Services;
 using DTO;
 using PL.Interfaces;
 using System;
 using System.ComponentModel;
+using System.Configuration;
 using System.Windows.Forms;
 
 namespace PL
 {
     public partial class ThemSuaTaiKhoan : KryptonForm
     {
-        private IThemSuaTaiKhoanRequester themSuaTaiKhoanRequester;
+		private readonly INhomNguoiDungBLLService _nhomNguoiDungBLLService = new NhomNguoiDungBLLService(new NhomNguoiDungDALService(new DapperService(), ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString));
+
+		private readonly INguoiDungBLLService _nguoiDungBLLService = new NguoiDungBLLService(new NguoiDungDALService(new DapperService(), ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString));
+		private IThemSuaTaiKhoanRequester themSuaTaiKhoanRequester;
         private CT_NguoiDung nguoiDung;
 
         private BindingList<NhomNguoiDung> mNhomNguoiDung;
@@ -61,7 +68,7 @@ namespace PL
 
         private void ThemSuaTaiKhoan_Load(object sender, EventArgs e)
         {
-            mNhomNguoiDung = new BindingList<NhomNguoiDung>(NhomNguoiDungBLL.LayDSNhomNguoiDung());
+            mNhomNguoiDung = new BindingList<NhomNguoiDung>(_nhomNguoiDungBLLService.LayDSNhomNguoiDung());
             mNhomNguoiDungSource = new BindingSource(mNhomNguoiDung, null);
             cmbLoaiTaiKhoan.DataSource = mNhomNguoiDungSource;
             cmbLoaiTaiKhoan.DisplayMember = "TenNhom";
@@ -81,7 +88,7 @@ namespace PL
         private void btnClear_Click(object sender, EventArgs e)
         {
             txtTenDangNhap.Clear();
-            mNhomNguoiDung = new BindingList<NhomNguoiDung>(NhomNguoiDungBLL.LayDSNhomNguoiDung());
+            mNhomNguoiDung = new BindingList<NhomNguoiDung>(_nhomNguoiDungBLLService.LayDSNhomNguoiDung());
             mNhomNguoiDungSource.DataSource = mNhomNguoiDung;
         }
 
@@ -93,7 +100,7 @@ namespace PL
                 string tenDangNhap = txtTenDangNhap.Text.Trim();
                 string maNhom = (string)cmbLoaiTaiKhoan.SelectedValue;
 
-                SuaTaiKhoanMessage message = NguoiDungBLL.SuaTaiKhoan(tenDangNhapBD, tenDangNhap, maNhom);
+                SuaTaiKhoanMessage message = _nguoiDungBLLService.SuaTaiKhoan(tenDangNhapBD, tenDangNhap, maNhom);
                 switch (message)
                 {
                     case SuaTaiKhoanMessage.EmptyTenDangNhap:
@@ -116,7 +123,7 @@ namespace PL
                 string tenDangNhap = txtTenDangNhap.Text.Trim();
                 string maNhom = (string)cmbLoaiTaiKhoan.SelectedValue;
 
-                ThemTaiKhoanMessage message = NguoiDungBLL.ThemTaiKhoan(tenDangNhap, maNhom);
+                ThemTaiKhoanMessage message = _nguoiDungBLLService.ThemTaiKhoan(tenDangNhap, maNhom);
                 switch (message)
                 {
                     case ThemTaiKhoanMessage.EmptyTenDangNhap:

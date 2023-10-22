@@ -1,9 +1,13 @@
 ﻿using BLL;
+using BLL.IServices;
+using BLL.Services;
 using ComponentFactory.Krypton.Toolkit;
+using DAL.Services;
 using DTO;
 using PL.Interfaces;
 using System;
 using System.ComponentModel;
+using System.Configuration;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -11,7 +15,10 @@ namespace PL
 {
     public partial class XacNhanHocPhi : KryptonForm
     {
-        private IThanhToanHocPhiRequester thanhToanHocPhiRequester;
+		private readonly IPhieuDKHPBLLService _phieuDKHPBLLService = new PhieuDKHPBLLService(new PhieuDKHPDALService(new DapperService(), ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString));
+		private readonly IPhieuThuHPBLLService _phieuThuHPBLLService = new PhieuThuHPBLLService(new PhieuThuHPDALService(new DapperService(), ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString));
+
+		private IThanhToanHocPhiRequester thanhToanHocPhiRequester;
         BindingList<PhieuThuHP> mPhieuThuHP;
         BindingList<PhieuDKHP> mPhieuDKHP;
 
@@ -81,8 +88,8 @@ namespace PL
 
         public void SetUpDgvPhieuDKHP()
         {
-            mPhieuDKHP = new BindingList<PhieuDKHP>(PhieuDKHPBLL.GetAllPhieuDKHP());
-            mPhieuThuHP = new BindingList<DTO.PhieuThuHP>(PhieuThuHPBLL.GetPhieuThuHP(1));
+            mPhieuDKHP = new BindingList<PhieuDKHP>(_phieuDKHPBLLService.GetAllPhieuDKHP());
+            mPhieuThuHP = new BindingList<DTO.PhieuThuHP>(_phieuThuHPBLLService.GetPhieuThuHP(1));
             dgv_PhieuThuHP.Rows.Clear();
             foreach (var item1 in mPhieuThuHP)
             {
@@ -103,7 +110,7 @@ namespace PL
         {
             DataGridViewRow selectedRow = dgv_PhieuThuHP.SelectedRows[0];
             int maphieuthuhp = Int32.Parse(selectedRow.Cells[0].Value.ToString());
-            MessagePhieuThuHPUpdateTinhTrang message = PhieuThuHPBLL.PhieuThuHPUpdateTinhTrang(maphieuthuhp, 2);
+            MessagePhieuThuHPUpdateTinhTrang message = _phieuThuHPBLLService.PhieuThuHPUpdateTinhTrang(maphieuthuhp, 2);
             switch (message)
             {
                 case MessagePhieuThuHPUpdateTinhTrang.Failed:
