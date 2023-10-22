@@ -42,15 +42,16 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="ChuongTrinhHocBLL.cs" />
     <Compile Include="CT_PhieuDKHPBLL.cs" />
     <Compile Include="DanhSachMonHocMoBLL.cs" />
     <Compile Include="DoiTuongBLL.cs" />
     <Compile Include="GlobalConfigBLL.cs" />
     <Compile Include="HocKyBLL.cs" />
     <Compile Include="HuyenBLL.cs" />
+    <Compile Include="IServices\IChuongTrinhHocBLLService.cs" />
     <Compile Include="IServices\IKhoaBLLService.cs" />
     <Compile Include="IServices\INganhBLLService.cs" />
+    <Compile Include="Services\ChuongTrinhHocBLLService.cs" />
     <Compile Include="Services\KhoaBLLService.cs" />
     <Compile Include="LoaiMonHocBLL.cs" />
     <Compile Include="MonHocBLL.cs" />

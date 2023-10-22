@@ -16,6 +16,8 @@ namespace PL
     {
         private readonly IKhoaBLLService _khoaBLLService = new KhoaBLLService(new KhoaDALService(new DapperService(), ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString));
         private readonly INganhBLLService _nganhBLLService = new NganhBLLService(new NganhDALService(new DapperService(), ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString));
+        private readonly IChuongTrinhHocBLLService _chuongtrinhhocBLLService = new ChuongTrinhHocBLLService(new ChuongTrinhHocDALService(new DapperService(), ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString));
+
 
         BindingList<Khoa> mKhoa;
         BindingList<Nganh> mNganh;
@@ -237,7 +239,7 @@ namespace PL
                 {
                     if (item != null)
                     {
-                        MessageAddCTHoc message = ChuongTrinhHocBLL.AddCTHoc(item.MaMH, item.MaNganh, item.HocKy);
+                        MessageAddCTHoc message = _chuongtrinhhocBLLService.AddCTHoc(item.MaMH, item.MaNganh, item.HocKy);
                         switch (message)
                         {
                             case MessageAddCTHoc.Failed:
@@ -259,7 +261,7 @@ namespace PL
 
                     if (item != null)
                     {
-                        MessageDeleteCTHoc message = ChuongTrinhHocBLL.DeleteCTHoc(item.MaMH, item.MaNganh, item.HocKy);
+                        MessageDeleteCTHoc message = _chuongtrinhhocBLLService.DeleteCTHoc(item.MaMH, item.MaNganh, item.HocKy);
                         switch (message)
                         {
                             case MessageDeleteCTHoc.Failed:
