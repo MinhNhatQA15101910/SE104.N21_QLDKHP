@@ -18,7 +18,7 @@ namespace PL
 {
     public partial class DangKyHocPhan : KryptonForm
     {
-        private readonly ICT_PhieuDKHPBLLService _phieuDKHPBLLService = new CT_DKHPBLLService(new CT_PhieuDKHPDALService(new DapperService(), ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString));
+        private readonly ICT_PhieuDKHPBLLService _CT_phieuDKHPBLLService = new CT_DKHPBLLService(new CT_PhieuDKHPDALService(new DapperService(), ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString));
         private readonly IDanhSachMonHocMoBLLService _danhSachMonHocMoBLLService = new DanhSachMonHocMoBLLService(new DanhSachMonHocMoDALService(new DapperService(), ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString));
         private readonly IHocKyBLLService _hocKyBLLService = new HocKyBLLService(new HocKyDALService(new DapperService(), ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString));
 
@@ -194,7 +194,7 @@ namespace PL
                             // tạo ra ct_phiếu đkhp
                             for (int i = 0; i < dgvDSMHDaChon.Rows.Count - 1; i++)
                                 dsMaMH.Add(dgvDSMHDaChon.Rows[i].Cells["MaMH"].Value.ToString());
-                            _phieuDKHPBLLService.TaoCT_PhieuDKHP(maPhieu, dsMaMH);
+                            _CT_phieuDKHPBLLService.TaoCT_PhieuDKHP(maPhieu, dsMaMH);
                             MessageBox.Show("Đăng ký thành công");
                             Close();
                         }
@@ -203,12 +203,12 @@ namespace PL
                     {
                         // update 
                         int maPhieu = PhieuDKHPBLL.LayMaPhieuDKHP(GlobalConfig.CurrMaHocKy, GlobalConfig.CurrNamHoc); // next: lấy ma Phieu
-                        _phieuDKHPBLLService.XoaDSMHDKHP(maPhieu);
+                        _CT_phieuDKHPBLLService.XoaDSMHDKHP(maPhieu);
                         // tạo ra ct_phiếu đkhp
                         List<string> dsMaMH = new List<string>();
                         for (int i = 0; i < dgvDSMHDaChon.Rows.Count - 1; i++)
                             dsMaMH.Add(dgvDSMHDaChon.Rows[i].Cells["MaMH"].Value.ToString());
-                        _phieuDKHPBLLService.TaoCT_PhieuDKHP(maPhieu, dsMaMH);
+                        _CT_phieuDKHPBLLService.TaoCT_PhieuDKHP(maPhieu, dsMaMH);
                         MessageBox.Show("Lưu thành công");
                         Close();
                     }
