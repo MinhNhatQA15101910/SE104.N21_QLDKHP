@@ -1,9 +1,13 @@
 ﻿using BLL;
+using BLL.IServices;
+using BLL.Services;
 using ComponentFactory.Krypton.Toolkit;
+using DAL.Services;
 using DTO;
 using PL.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Drawing;
 using System.Globalization;
 using System.Windows.Forms;
@@ -12,7 +16,8 @@ namespace PL
 {
     public partial class ThanhToanHocPhi : KryptonForm
     {
-        private IThanhToanHocPhiRequester thanhToanHocPhiRequester;
+		private readonly IPhieuDKHPBLLService _phieuDKHPBLLService = new PhieuDKHPBLLService(new PhieuDKHPDALService(new DapperService(), ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString));
+		private IThanhToanHocPhiRequester thanhToanHocPhiRequester;
         CultureInfo cultureInfo = new CultureInfo("vi-VN");
 
         public ThanhToanHocPhi(IThanhToanHocPhiRequester requester)
@@ -31,11 +36,11 @@ namespace PL
         private void LoadDSHP()
         {
             dgvDSHPChuaThanhToan.Rows.Clear();
-            List<PhieuDKHP> ds = PhieuDKHPBLL.LayDanhSachDKHPDaXacNhan(GlobalConfig.CurrNguoiDung.TenDangNhap);
+            List<PhieuDKHP> ds = _phieuDKHPBLLService.LayDanhSachDKHPDaXacNhan(GlobalConfig.CurrNguoiDung.TenDangNhap);
 
             foreach (var i in ds)
             {
-                float tienConThieu = PhieuDKHPBLL.TinhHocPhiConThieu(i.MaPhieuDKHP);
+                float tienConThieu = _phieuDKHPBLLService.TinhHocPhiConThieu(i.MaPhieuDKHP);
                 if (i.MaHocKy == 3)
                     dgvDSHPChuaThanhToan.Rows.Add(i.MaPhieuDKHP, "Hè", i.NamHoc, i.NgayLap.ToString("dd/MM/yyyy"), tienConThieu.ToString("c", cultureInfo));
                 else

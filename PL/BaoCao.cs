@@ -2,21 +2,27 @@
 using BLL.IServices;
 using BLL.Services;
 using ComponentFactory.Krypton.Toolkit;
+using DAL.IServices;
 using DAL.Services;
 using DTO;
 using PL.Interfaces;
 using System;
 using System.Configuration;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Windows.Forms;
 
 namespace PL
 {
     public partial class BaoCao : KryptonForm
     {
+
         private readonly IHocKyBLLService _hocKyBLLService = new HocKyBLLService(new HocKyDALService(new DapperService(), ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString));
+        private readonly ISinhVienBLLService _sinhVienBLLService = new SinhVienBLLService(new SinhVienDALService(new DapperService(), ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString));
+        private readonly IPhieuDKHPBLLService _phieuDKHPBLLService = new PhieuDKHPBLLService(new PhieuDKHPDALService(new DapperService(), ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString));
 
         private IBaoCaoRequester baoCaoRequester;
+
 
         public BaoCao(IBaoCaoRequester requester)
         {
@@ -64,7 +70,7 @@ namespace PL
             if (cmbHocKy.SelectedItem != null)
             {
                 string namHocS = txtNamHoc.Text.Trim();
-                TimKiemPhieuDKHPMessage message = PhieuDKHPBLL.KtTimKiemPhieuDKHP(namHocS);
+                TimKiemPhieuDKHPMessage message = _phieuDKHPBLLService.KtTimKiemPhieuDKHP(namHocS);
                 switch (message)
                 {
                     case TimKiemPhieuDKHPMessage.EmptyNamHoc:
@@ -93,7 +99,7 @@ namespace PL
 
         private void LoadDataDSSV(int hocKy, int namHoc)
         {
-            List<dynamic> ds = SinhVienBLL.BaoCaoSinhVienChuaDongHocPhi(hocKy, namHoc);
+            List<dynamic> ds = _sinhVienBLLService.BaoCaoSinhVienChuaDongHocPhi(hocKy, namHoc);
 
             foreach (var i in ds)
             {
@@ -107,7 +113,7 @@ namespace PL
             if (cmbHocKy.SelectedItem != null)
             {
                 string namHocS = txtNamHoc.Text.Trim();
-                TimKiemPhieuDKHPMessage message = PhieuDKHPBLL.KtTimKiemPhieuDKHP(namHocS);
+                TimKiemPhieuDKHPMessage message = _phieuDKHPBLLService.KtTimKiemPhieuDKHP(namHocS);
                 switch (message)
                 {
                     case TimKiemPhieuDKHPMessage.EmptyNamHoc:

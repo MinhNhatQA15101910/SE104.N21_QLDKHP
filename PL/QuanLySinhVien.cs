@@ -15,10 +15,12 @@ using System.Windows.Forms;
 
 namespace PL
 {
-    public partial class QuanLySinhVien : KryptonForm, IThemSuaSinhVienRequester
+	public partial class QuanLySinhVien : KryptonForm, IThemSuaSinhVienRequester
     {
-        private readonly IDoiTuongBLLService _doiTuongBLLService = new DoiTuongBLLService(new DoiTuongDALService(new DapperService(), ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString));
 
+        private readonly IDoiTuongBLLService _doiTuongBLLService = new DoiTuongBLLService(new DoiTuongDALService(new DapperService(), ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString));
+        private readonly ISinhVienBLLService _sinhVienBLLService = new SinhVienBLLService(new SinhVienDALService(new DapperService(), ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString));
+        
         private readonly IDanhSachSinhVienRequester dssvRequester;
         private BindingList<CT_SinhVien> mSinhVien;
         private BindingList<DoiTuong> mDoiTuong;
@@ -58,7 +60,7 @@ namespace PL
 
         private void DSSV_Load(object sender, EventArgs e)
         {
-            mSinhVien = new BindingList<CT_SinhVien>(SinhVienBLL.LayDSSV());
+            mSinhVien = new BindingList<CT_SinhVien>(_sinhVienBLLService.LayDSSV());
             mSinhVienSource = new BindingSource(mSinhVien, null);
             dgvDanhSachSinhVien.DataSource = mSinhVienSource;
 
@@ -137,7 +139,7 @@ namespace PL
 
         public void OnThemSuaSinhVienClosing()
         {
-            mSinhVien = new BindingList<CT_SinhVien>(SinhVienBLL.LayDSSV());
+            mSinhVien = new BindingList<CT_SinhVien>(_sinhVienBLLService.LayDSSV());
             mSinhVienSource.DataSource = mSinhVien;
         }
 
@@ -180,7 +182,7 @@ namespace PL
                 string maSV = dgvDanhSachSinhVien.CurrentRow.Cells["MaSV"].Value as string;
                 CT_SinhVien sinhVien = mSinhVien[dgvDanhSachSinhVien.CurrentRow.Index];
 
-                XoaSinhVienMessage message = SinhVienBLL.XoaSinhVien(maSV);
+                XoaSinhVienMessage message = _sinhVienBLLService.XoaSinhVien(maSV);
                 switch (message)
                 {
                     case XoaSinhVienMessage.Error:

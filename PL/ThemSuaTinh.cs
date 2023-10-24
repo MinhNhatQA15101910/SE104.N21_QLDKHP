@@ -1,15 +1,21 @@
 ﻿using BLL;
+using BLL.IServices;
+using BLL.Services;
 using ComponentFactory.Krypton.Toolkit;
+using DAL.Services;
 using DTO;
 using PL.Interfaces;
 using System;
+using System.Configuration;
 using System.Windows.Forms;
 
 namespace PL
 {
     public partial class ThemSuaTinh : KryptonForm
     {
-        private IThemSuaTinhRequester themSuaTinhRequester;
+		private readonly ITinhBLLService _tinhBLLService = new TinhBLLService(new TinhDALService(new DapperService(), ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString));
+
+		private IThemSuaTinhRequester themSuaTinhRequester;
         private Tinh tinh;
 
         public ThemSuaTinh(IThemSuaTinhRequester requester, Tinh tinh)
@@ -59,7 +65,7 @@ namespace PL
                 int maTinh = tinh.MaTinh;
                 string tenTinh = txtTenTinh.Text.Trim();
 
-                SuaTinhMessage message = TinhBLL.SuaTinh(maTinh, tenTinh);
+                SuaTinhMessage message = _tinhBLLService.SuaTinh(maTinh, tenTinh);
                 switch (message)
                 {
                     case SuaTinhMessage.EmptyTenTinh:
@@ -81,7 +87,7 @@ namespace PL
             {
                 string tenTinh = txtTenTinh.Text.Trim();
 
-                ThemTinhMessage message = TinhBLL.ThemTinh(tenTinh);
+                ThemTinhMessage message = _tinhBLLService.ThemTinh(tenTinh);
                 switch (message)
                 {
                     case ThemTinhMessage.EmptyTenTinh:

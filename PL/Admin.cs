@@ -1,10 +1,14 @@
 ﻿using BLL;
+using BLL.IServices;
+using BLL.Services;
 using ComponentFactory.Krypton.Toolkit;
+using DAL.Services;
 using DTO;
 using PL.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Configuration;
 using System.Data;
 using System.Drawing;
 using System.Linq;
@@ -14,7 +18,10 @@ namespace PL
 {
     public partial class Admin : KryptonForm, IThemSuaTaiKhoanRequester
     {
-        private IAdminRequester adminRequester;
+		private readonly INguoiDungBLLService _nguoiDungBLLService = new NguoiDungBLLService(new NguoiDungDALService(new DapperService(), ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString));
+		private readonly ISinhVienBLLService _sinhVienBLLService = new SinhVienBLLService(new SinhVienDALService(new DapperService(), ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString));
+
+		private IAdminRequester adminRequester;
 
         private BindingList<DTO.SinhVien> mSinhVienChuaCoTK;
         private BindingList<DTO.SinhVien> mSinhVienChuaCoTKSelected;
@@ -75,7 +82,7 @@ namespace PL
 
         private void Admin_Load(object sender, EventArgs e)
         {
-            mSinhVienChuaCoTK = new BindingList<DTO.SinhVien>(SinhVienBLL.LayDSSVChuaCoTK());
+            mSinhVienChuaCoTK = new BindingList<DTO.SinhVien>(_sinhVienBLLService.LayDSSVChuaCoTK());
             mSinhVienChuaCoTKSource = new BindingSource(mSinhVienChuaCoTK, null);
             dgvDSSVChuaCoTK.DataSource = mSinhVienChuaCoTKSource;
 
@@ -107,7 +114,7 @@ namespace PL
             dgvDSSVDaChon.Columns["MaNganh"].Visible = false;
 
 
-            mNguoiDung = new BindingList<CT_NguoiDung>(NguoiDungBLL.LayDSNguoiDung());
+            mNguoiDung = new BindingList<CT_NguoiDung>(_nguoiDungBLLService.LayDSNguoiDung());
             mNguoiDungSource = new BindingSource(mNguoiDung, null);
             dgvDSTK.DataSource = mNguoiDungSource;
 
@@ -257,7 +264,7 @@ namespace PL
         private void btnThemTK_Click(object sender, EventArgs e)
         {
             IList<DTO.SinhVien> dssv = mSinhVienChuaCoTKSelected;
-            ThemTaiKhoanSVMessage message = NguoiDungBLL.ThemTaiKhoanSV(dssv);
+            ThemTaiKhoanSVMessage message = _nguoiDungBLLService.ThemTaiKhoanSV(dssv);
             switch (message)
             {
                 case ThemTaiKhoanSVMessage.Unable:
@@ -270,7 +277,7 @@ namespace PL
                     MessageBox.Show("Thêm tài khoản thành công!");
 
                     mSinhVienChuaCoTKSelected.Clear();
-                    mNguoiDung = new BindingList<CT_NguoiDung>(NguoiDungBLL.LayDSNguoiDung());
+                    mNguoiDung = new BindingList<CT_NguoiDung>(_nguoiDungBLLService.LayDSNguoiDung());
                     mNguoiDungSource.DataSource = mNguoiDung;
 
                     break;
@@ -284,7 +291,7 @@ namespace PL
             if (result == DialogResult.Yes)
             {
                 string tenDangNhap = txtTenDangNhap.Text.Trim();
-                XoaTaiKhoanMessage message = NguoiDungBLL.XoaTaiKhoan(tenDangNhap);
+                XoaTaiKhoanMessage message = _nguoiDungBLLService.XoaTaiKhoan(tenDangNhap);
                 switch (message)
                 {
                     case XoaTaiKhoanMessage.Unable:
@@ -294,10 +301,10 @@ namespace PL
                         MessageBox.Show("Đã có lỗi xảy ra!");
                         break;
                     case XoaTaiKhoanMessage.Success:
-                        mNguoiDung = new BindingList<CT_NguoiDung>(NguoiDungBLL.LayDSNguoiDung());
+                        mNguoiDung = new BindingList<CT_NguoiDung>(_nguoiDungBLLService.LayDSNguoiDung());
                         mNguoiDungSource.DataSource = mNguoiDung;
 
-                        mSinhVienChuaCoTK = new BindingList<DTO.SinhVien>(SinhVienBLL.LayDSSVChuaCoTK());
+                        mSinhVienChuaCoTK = new BindingList<DTO.SinhVien>(_sinhVienBLLService.LayDSSVChuaCoTK());
                         mSinhVienChuaCoTKSource.DataSource = mSinhVienChuaCoTK;
 
                         MessageBox.Show("Xóa tài khoản thành công!");
@@ -342,7 +349,7 @@ namespace PL
         public void OnThemSuaTaiKhoanClosing()
         {
             // Reload DSTK
-            mNguoiDung = new BindingList<CT_NguoiDung>(NguoiDungBLL.LayDSNguoiDung());
+            mNguoiDung = new BindingList<CT_NguoiDung>(_nguoiDungBLLService.LayDSNguoiDung());
             mNguoiDungSource.DataSource = mNguoiDung;
         }
 

@@ -15,6 +15,7 @@ namespace PL
     public partial class ThongTinSinhVien : KryptonForm
     {
         private readonly IDoiTuongBLLService _doiTuongBLLService = new DoiTuongBLLService(new DoiTuongDALService(new DapperService(), ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString));
+        private readonly ISinhVienBLLService _sinhVienBLLService = new SinhVienBLLService(new SinhVienDALService(new DapperService(), ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString));
 
         private readonly IThongTinSinhVienRequester thongTinSinhVienRequester;
 
@@ -32,7 +33,7 @@ namespace PL
 
         private void LoadTTSV()
         {
-            List<dynamic> stu = SinhVienBLL.LayThongTinSV(GlobalConfig.CurrNguoiDung.TenDangNhap);
+            List<dynamic> stu = _sinhVienBLLService.LayThongTinSV(GlobalConfig.CurrNguoiDung.TenDangNhap);
             if (stu.Count > 0)
             {
                 dynamic tt = stu[0];

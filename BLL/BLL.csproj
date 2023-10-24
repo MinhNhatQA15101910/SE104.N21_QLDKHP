@@ -57,18 +57,24 @@
     <Compile Include="Services\DanhSachMonHocMoBLLService.cs" />
     <Compile Include="Services\DoiTuongBLLService.cs" />
     <Compile Include="Services\HocKyBLLService.cs" />
+    <Compile Include="IServices\INguoiDungBLLService.cs" />
+    <Compile Include="IServices\INhomNguoiDungBLLService.cs" />
+    <Compile Include="IServices\IPhieuDKHPBLLService.cs" />
+    <Compile Include="IServices\IPhieuThuHPBLLService.cs" />
+    <Compile Include="IServices\ISinhVienBLLService.cs" />
+    <Compile Include="IServices\ITinhBLLService.cs" />
     <Compile Include="Services\KhoaBLLService.cs" />
     <Compile Include="LoaiMonHocBLL.cs" />
     <Compile Include="MonHocMoBLL.cs" />
-    <Compile Include="NguoiDungBLL.cs" />
-    <Compile Include="NhomNguoiDungBLL.cs" />
-    <Compile Include="PhieuDKHPBLL.cs" />
-    <Compile Include="PhieuThuHPBLL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\MonHocBLLService.cs" />
     <Compile Include="Services\NganhBLLService.cs" />
-    <Compile Include="SinhVienBLL.cs" />
-    <Compile Include="TinhBLL.cs" />
+    <Compile Include="Services\NguoiDungBLLService.cs" />
+    <Compile Include="Services\NhomNguoiDungBLLService.cs" />
+    <Compile Include="Services\PhieuDKHPBLLService.cs" />
+    <Compile Include="Services\PhieuThuHPBLLService.cs" />
+    <Compile Include="Services\SinhVienBLLService.cs" />
+    <Compile Include="Services\TinhBLLService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DAL\DAL.csproj">

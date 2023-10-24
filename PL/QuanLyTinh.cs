@@ -1,9 +1,13 @@
 ﻿using BLL;
+using BLL.IServices;
+using BLL.Services;
 using ComponentFactory.Krypton.Toolkit;
+using DAL.Services;
 using DTO;
 using PL.Interfaces;
 using System;
 using System.ComponentModel;
+using System.Configuration;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -11,7 +15,9 @@ namespace PL
 {
     public partial class QuanLyTinh : KryptonForm, IThemSuaTinhRequester
     {
-        private ICaiDatRequester caiDatRequester;
+		private readonly ITinhBLLService _tinhBLLService = new TinhBLLService(new TinhDALService(new DapperService(), ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString));
+
+		private ICaiDatRequester caiDatRequester;
         private BindingList<Tinh> mTinh;
         private BindingSource mTinhSource;
 
@@ -40,7 +46,7 @@ namespace PL
 
         private void QuanLyTinh_Load(object sender, EventArgs e)
         {
-            mTinh = new BindingList<Tinh>(TinhBLL.LayDSTinh());
+            mTinh = new BindingList<Tinh>(_tinhBLLService.LayDSTinh());
             mTinhSource = new BindingSource(mTinh, null);
             dgvDSTinh.DataSource = mTinhSource;
 
@@ -89,7 +95,7 @@ namespace PL
 
         public void OnThemSuaTinhClosing()
         {
-            mTinh = new BindingList<Tinh>(TinhBLL.LayDSTinh());
+            mTinh = new BindingList<Tinh>(_tinhBLLService.LayDSTinh());
             mTinhSource.DataSource = mTinh;
         }
 
@@ -102,7 +108,7 @@ namespace PL
                 Tinh tinh = mTinh[dgvDSTinh.CurrentRow.Index];
                 int maTinh = mTinh[dgvDSTinh.CurrentRow.Index].MaTinh;
 
-                XoaTinhMessage message = TinhBLL.XoaTinh(maTinh);
+                XoaTinhMessage message = _tinhBLLService.XoaTinh(maTinh);
                 switch (message)
                 {
                     case XoaTinhMessage.Error:

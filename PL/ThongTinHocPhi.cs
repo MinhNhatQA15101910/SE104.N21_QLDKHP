@@ -7,6 +7,7 @@ using DTO;
 using System;
 using System.Configuration;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Globalization;
 using System.Windows.Forms;
 
@@ -17,6 +18,8 @@ namespace PL
     {
         private readonly IDoiTuongBLLService _doiTuongBLLService = new DoiTuongBLLService(new DoiTuongDALService(new DapperService(), ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString));
         private readonly IHocKyBLLService _hocKyBLLService = new HocKyBLLService(new HocKyDALService(new DapperService(), ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString));
+        private readonly IPhieuDKHPBLLService _phieuDKHPBLLService = new PhieuDKHPBLLService(new PhieuDKHPDALService(new DapperService(), ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString));
+        private readonly IPhieuThuHPBLLService _phieuThuHPBLLService = new PhieuThuHPBLLService(new PhieuThuHPDALService(new DapperService(), ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString));
 
         CultureInfo cultureInfo = new CultureInfo("vi-VN");
 
@@ -68,7 +71,7 @@ namespace PL
             if (cmbHocKy.SelectedItem != null)
             {
                 string namHocS = txtNamHoc.Text.Trim();
-                TimKiemTTHocPhiMessage message = PhieuThuHPBLL.KtTimKiemTTHocPhi(namHocS);
+                TimKiemTTHocPhiMessage message = _phieuThuHPBLLService.KtTimKiemTTHocPhi(namHocS);
                 switch (message)
                 {
                     case TimKiemTTHocPhiMessage.EmptyNamHoc:
@@ -80,23 +83,23 @@ namespace PL
                     case TimKiemTTHocPhiMessage.Sucess:
                         int namHoc = int.Parse(txtNamHoc.Text.Trim());
                         int hocKy = int.Parse(cmbHocKy.SelectedValue.ToString());
-                        List<PhieuDKHP> ds = PhieuDKHPBLL.LayTTPhieuDKHP(GlobalConfig.CurrNguoiDung.TenDangNhap, hocKy, namHoc);
+                        List<PhieuDKHP> ds = _phieuDKHPBLLService.LayTTPhieuDKHP(GlobalConfig.CurrNguoiDung.TenDangNhap, hocKy, namHoc);
                         if (ds.Count > 0 && ds[0] != null)
                         {
                             PhieuDKHP kq = ds[0];
                             int maPhieuDKHP = int.Parse(kq.MaPhieuDKHP.ToString().Trim());
                             if (kq != null)
                             {
-                                int hocPhi = PhieuDKHPBLL.TinhHocPhi(maPhieuDKHP);
-                                float hocPhiPhaiDong = PhieuDKHPBLL.TinhHocPhiPhaiDong(maPhieuDKHP);
+                                int hocPhi = _phieuDKHPBLLService.TinhHocPhi(maPhieuDKHP);
+                                float hocPhiPhaiDong = _phieuDKHPBLLService.TinhHocPhiPhaiDong(maPhieuDKHP);
                                 txtSoPhieuDKHP.Text = maPhieuDKHP.ToString();
-                                txtTGDongGanNhat.Text = PhieuThuHPBLL.LayThoiGianDongHPGanNhat(maPhieuDKHP).ToString("dd/MM/yyyy"); // lấy tgian đóng gần nhất 
+                                txtTGDongGanNhat.Text = _phieuThuHPBLLService.LayThoiGianDongHPGanNhat(maPhieuDKHP).ToString("dd/MM/yyyy"); // lấy tgian đóng gần nhất 
 
 
                                 txtHocPhi.Text = hocPhi.ToString("c", cultureInfo);
                                 txtHocPhiPhaiDong.Text = hocPhiPhaiDong.ToString("c", cultureInfo);
-                                txtHocPhiDaDong.Text = PhieuDKHPBLL.TinhHocPhiDaDong(maPhieuDKHP).ToString("c", cultureInfo);
-                                txtConNo.Text = PhieuDKHPBLL.TinhHocPhiConThieu(maPhieuDKHP).ToString("c", cultureInfo);
+                                txtHocPhiDaDong.Text = _phieuDKHPBLLService.TinhHocPhiDaDong(maPhieuDKHP).ToString("c", cultureInfo);
+                                txtConNo.Text = _phieuDKHPBLLService.TinhHocPhiConThieu(maPhieuDKHP).ToString("c", cultureInfo);
                                 HienThiTinhTrang(kq.MaTinhTrang);
                                 List<DoiTuong> dt = _doiTuongBLLService.LayDSDoiTuongBangMaSV(GlobalConfig.CurrNguoiDung.TenDangNhap);
                                 DoiTuong dt1 = dt[0];

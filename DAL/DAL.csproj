@@ -80,19 +80,25 @@
     <Compile Include="Services\DanhSachMonHocMoDALService.cs.cs" />
     <Compile Include="Services\DoiTuongDALService.cs" />
     <Compile Include="Services\HocKyDALService.cs" />
+    <Compile Include="IServices\INguoiDungDALService.cs" />
+    <Compile Include="IServices\INhomNguoiDungDALService.cs" />
+    <Compile Include="IServices\IPhieuDKHPDALService.cs" />
+    <Compile Include="IServices\IPhieuThuHPDALService.cs" />
+    <Compile Include="IServices\ISinhVienDALService.cs" />
+    <Compile Include="IServices\ITinhDALService.cs" />
     <Compile Include="Services\KhoaDALService.cs" />
     <Compile Include="LoaiMonHocDAL.cs" />
     <Compile Include="MonHocMoDAL.cs" />
-    <Compile Include="NguoiDungDAL.cs" />
-    <Compile Include="NhomNguoiDungDAL.cs" />
-    <Compile Include="PhieuDKHPDAL.cs" />
-    <Compile Include="PhieuThuHPDAL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\DapperService.cs" />
     <Compile Include="Services\MonHocDALService.cs" />
     <Compile Include="Services\NganhDALService.cs" />
-    <Compile Include="SinhVienDAL.cs" />
-    <Compile Include="TinhDAL.cs" />
+    <Compile Include="Services\NguoiDungDALService.cs" />
+    <Compile Include="Services\NhomNguoiDungDALService.cs" />
+    <Compile Include="Services\PhieuDKHPDALService.cs" />
+    <Compile Include="Services\PhieuThuHPDALService.cs" />
+    <Compile Include="Services\SinhVienDALService.cs" />
+    <Compile Include="Services\TinhDALService.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DTO\DTO.csproj">

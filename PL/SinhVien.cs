@@ -1,16 +1,23 @@
 ﻿using BLL;
+using BLL.IServices;
+using BLL.Services;
 using ComponentFactory.Krypton.Toolkit;
+using DAL.Services;
 using DTO;
 using PL.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Windows.Forms;
 
 namespace PL
 {
     public partial class SinhVien : KryptonForm, IThongTinSinhVienRequester, IDangKyHocPhanRequester, IThanhToanHocPhiRequester
     {
-        private readonly ISinhVienRequester sinhVienRequester;
+		private readonly IPhieuDKHPBLLService _phieuDKHPBLLService = new PhieuDKHPBLLService(new PhieuDKHPDALService(new DapperService(), ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString));
+		private readonly ISinhVienBLLService _sinhVienBLLService = new SinhVienBLLService(new SinhVienDALService(new DapperService(), ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString));
+
+		private readonly ISinhVienRequester sinhVienRequester;
 
         public SinhVien(ISinhVienRequester requester)
         {
@@ -22,7 +29,7 @@ namespace PL
         private void SinhVien_Load(object sender, EventArgs e)
         {
             lblMSSV.Text = GlobalConfig.CurrNguoiDung.TenDangNhap;
-            lblHoTen.Text = "Xin chào " + SinhVienBLL.LayTenSV(GlobalConfig.CurrNguoiDung.TenDangNhap).Trim() + " !!!";
+            lblHoTen.Text = "Xin chào " + _sinhVienBLLService.LayTenSV(GlobalConfig.CurrNguoiDung.TenDangNhap).Trim() + " !!!";
         }
 
         private void imgDangXuat_Click(object sender, EventArgs e)
@@ -68,7 +75,7 @@ namespace PL
 
         private void btnDKHP_Click(object sender, EventArgs e)
         {
-            List<PhieuDKHP> list = PhieuDKHPBLL.LayTTPhieuDKHP(GlobalConfig.CurrNguoiDung.TenDangNhap, GlobalConfig.CurrMaHocKy, GlobalConfig.CurrNamHoc);
+            List<PhieuDKHP> list = _phieuDKHPBLLService.LayTTPhieuDKHP(GlobalConfig.CurrNguoiDung.TenDangNhap, GlobalConfig.CurrMaHocKy, GlobalConfig.CurrNamHoc);
             if (list.Count > 0 && list[0].MaTinhTrang != 1)
             {
                 MessageBox.Show("Bạn đã đăng kí học phần cho kì học này rồi.");

@@ -17,8 +17,9 @@ namespace PL
     {
         private readonly INganhBLLService _nganhBLLService = new NganhBLLService(new NganhDALService(new DapperService(), ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString));
         private readonly IDoiTuongBLLService _doiTuongBLLService = new DoiTuongBLLService(new DoiTuongDALService(new DapperService(), ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString));
+		    private readonly ISinhVienBLLService _sinhVienBLLService = new SinhVienBLLService(new SinhVienDALService(new DapperService(), ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString));
 
-        private readonly IThemSuaSinhVienRequester themSuaSinhVienRequester;
+		    private readonly IThemSuaSinhVienRequester themSuaSinhVienRequester;
         private readonly CT_SinhVien sinhVien;
 
         private BindingList<DoiTuong> mDoiTuongSelected;
@@ -250,7 +251,7 @@ namespace PL
                     maDTList.Add(doiTuong.MaDT);
                 }
 
-                SuaSinhVienMessage message = SinhVienBLL.SuaSinhVien(mssvBanDau, mssv, hoTen, ngaySinh, gioiTinh, maHuyen, maNganh, maDTList);
+                SuaSinhVienMessage message = _sinhVienBLLService.SuaSinhVien(mssvBanDau, mssv, hoTen, ngaySinh, gioiTinh, maHuyen, maNganh, maDTList);
                 switch (message)
                 {
                     case SuaSinhVienMessage.EmptyMaSV:
@@ -289,7 +290,7 @@ namespace PL
                     maDTList.Add(doiTuong.MaDT);
                 }
 
-                ThemSinhVienMessage message = SinhVienBLL.ThemSinhVien(mssv, hoTen, ngaySinh, gioiTinh, maHuyen, maNganh, maDTList);
+                ThemSinhVienMessage message = _sinhVienBLLService.ThemSinhVien(mssv, hoTen, ngaySinh, gioiTinh, maHuyen, maNganh, maDTList);
                 switch (message)
                 {
                     case ThemSinhVienMessage.EmptyMaSV:

@@ -14,7 +14,9 @@ namespace PL
 {
     public partial class ThongTinDKHP : KryptonForm
     {
+
         private readonly IHocKyBLLService _hocKyBLLService = new HocKyBLLService(new HocKyDALService(new DapperService(), ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString));
+        private readonly IPhieuDKHPBLLService _phieuDKHPBLLService = new PhieuDKHPBLLService(new PhieuDKHPDALService(new DapperService(), ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString));
 
         public ThongTinDKHP()
         {
@@ -79,7 +81,7 @@ namespace PL
             if (cmbHocKy.SelectedItem != null)
             {
                 string namHocS = txtNamHoc.Text.Trim();
-                TimKiemPhieuDKHPMessage message = PhieuDKHPBLL.KtTimKiemPhieuDKHP(namHocS);
+                TimKiemPhieuDKHPMessage message = _phieuDKHPBLLService.KtTimKiemPhieuDKHP(namHocS);
                 switch (message)
                 {
                     case TimKiemPhieuDKHPMessage.EmptyNamHoc:
@@ -93,7 +95,7 @@ namespace PL
                             // kt đk năm học 
                             int namHoc = int.Parse(txtNamHoc.Text.Trim());
                             int hocKy = int.Parse(cmbHocKy.SelectedValue.ToString());
-                            List<PhieuDKHP> ds = PhieuDKHPBLL.LayTTPhieuDKHP(GlobalConfig.CurrNguoiDung.TenDangNhap, hocKy, namHoc);
+                            List<PhieuDKHP> ds = _phieuDKHPBLLService.LayTTPhieuDKHP(GlobalConfig.CurrNguoiDung.TenDangNhap, hocKy, namHoc);
                             if (ds.Count > 0 && ds[0] != null)
                             {
                                 PhieuDKHP kq = ds[0];
@@ -105,7 +107,7 @@ namespace PL
                                     txtNgayLap.Text = kq.NgayLap.ToString("dd/MM/yyyy");
                                 }
 
-                                List<dynamic> dsMonHoc = PhieuDKHPBLL.LayDSMHThuocHP(maPhieuDKHP);
+                                List<dynamic> dsMonHoc = _phieuDKHPBLLService.LayDSMHThuocHP(maPhieuDKHP);
                                 foreach (var mh in dsMonHoc)
                                 {
                                     dgvDSMH.Rows.Add(mh.MaMH, mh.TenMH, mh.SoTC);
