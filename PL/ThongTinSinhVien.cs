@@ -13,10 +13,11 @@ using System.Windows.Forms;
 namespace PL
 {
     public partial class ThongTinSinhVien : KryptonForm
-	{
-		private readonly ISinhVienBLLService _sinhVienBLLService = new SinhVienBLLService(new SinhVienDALService(new DapperService(), ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString));
+    {
+        private readonly IDoiTuongBLLService _doiTuongBLLService = new DoiTuongBLLService(new DoiTuongDALService(new DapperService(), ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString));
+        private readonly ISinhVienBLLService _sinhVienBLLService = new SinhVienBLLService(new SinhVienDALService(new DapperService(), ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString));
 
-		private readonly IThongTinSinhVienRequester thongTinSinhVienRequester;
+        private readonly IThongTinSinhVienRequester thongTinSinhVienRequester;
 
         public ThongTinSinhVien(IThongTinSinhVienRequester requester)
         {
@@ -56,7 +57,7 @@ namespace PL
                         rbtnNam.Checked = false;
                     }
 
-                    List<DoiTuong> dt = DoiTuongBLL.LayDSDoiTuongBangMaSV(GlobalConfig.CurrNguoiDung.TenDangNhap);
+                    List<DoiTuong> dt = _doiTuongBLLService.LayDSDoiTuongBangMaSV(GlobalConfig.CurrNguoiDung.TenDangNhap);
                     foreach (var i in dt)
                     {
                         listDoiTuong.Items.Add(i.TenDT);

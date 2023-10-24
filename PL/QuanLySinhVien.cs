@@ -17,8 +17,11 @@ namespace PL
 {
 	public partial class QuanLySinhVien : KryptonForm, IThemSuaSinhVienRequester
     {
-		private readonly ISinhVienBLLService _sinhVienBLLService = new SinhVienBLLService(new SinhVienDALService(new DapperService(), ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString));
-		private readonly IDanhSachSinhVienRequester dssvRequester;
+
+        private readonly IDoiTuongBLLService _doiTuongBLLService = new DoiTuongBLLService(new DoiTuongDALService(new DapperService(), ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString));
+        private readonly ISinhVienBLLService _sinhVienBLLService = new SinhVienBLLService(new SinhVienDALService(new DapperService(), ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString));
+        
+        private readonly IDanhSachSinhVienRequester dssvRequester;
         private BindingList<CT_SinhVien> mSinhVien;
         private BindingList<DoiTuong> mDoiTuong;
         private BindingSource mSinhVienSource;
@@ -105,7 +108,7 @@ namespace PL
                         rbtnNam.Checked = false;
                         rbtnNu.Checked = true;
                     }
-                    mDoiTuong = new BindingList<DoiTuong>(DoiTuongBLL.LayDSDoiTuongBangMaSV(sinhVien.MaSV));
+                    mDoiTuong = new BindingList<DoiTuong>(_doiTuongBLLService.LayDSDoiTuongBangMaSV(sinhVien.MaSV));
                     mDoiTuongSource = new BindingSource(mDoiTuong, null);
                     lbDoiTuong.DataSource = mDoiTuongSource;
                     lbDoiTuong.DisplayMember = "TenDT";

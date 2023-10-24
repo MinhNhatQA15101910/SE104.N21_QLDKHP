@@ -1,17 +1,25 @@
-﻿using DAL;
+﻿using BLL.IServices;
+using DAL;
+using DAL.IServices;
 using DTO;
 using System.Collections.Generic;
 
-namespace BLL
+namespace BLL.Services
 {
-    public class DoiTuongBLL
+    public class DoiTuongBLLService: IDoiTuongBLLService
     {
-        public static List<DoiTuong> LayDSDoiTuong()
+        private readonly IDoiTuongDALService _doiTuongDALService;
+
+        public DoiTuongBLLService(IDoiTuongDALService doiTuongDALService)
         {
-            return DoiTuongDAL.LayDSDoiTuong();
+            _doiTuongDALService = doiTuongDALService;
+        }
+        public List<DoiTuong> LayDSDoiTuong()
+        {
+            return _doiTuongDALService.LayDSDoiTuong();
         }
 
-        public static SuaDoiTuongMessage SuaDoiTuong(int maDTBanDau, string tenDT, string tiLeGiam)
+        public SuaDoiTuongMessage SuaDoiTuong(int maDTBanDau, string tenDT, string tiLeGiam)
         {
             if (tenDT.Equals(""))
             {
@@ -39,10 +47,10 @@ namespace BLL
                 return SuaDoiTuongMessage.Unable;
             }
 
-            return DoiTuongDAL.SuaDoiTuong(maDTBanDau, tenDT, tiLeGiamValue);
+            return _doiTuongDALService.SuaDoiTuong(maDTBanDau, tenDT, tiLeGiamValue);
         }
 
-        public static ThemDoiTuongMessage ThemDoiTuong(string tenDT, string tiLeGiam)
+        public ThemDoiTuongMessage ThemDoiTuong(string tenDT, string tiLeGiam)
         {
             if (tenDT.Equals(""))
             {
@@ -65,32 +73,32 @@ namespace BLL
                 return ThemDoiTuongMessage.TiLeGiamKhongHopLe;
             }
 
-            return DoiTuongDAL.ThemDoiTuong(tenDT, tiLeGiamValue);
+            return _doiTuongDALService.ThemDoiTuong(tenDT, tiLeGiamValue);
         }
 
-        public static XoaDoiTuongMessage XoaDoiTuong(int maDT)
+        public XoaDoiTuongMessage XoaDoiTuong(int maDT)
         {
             if (maDT == 2)
             {
                 return XoaDoiTuongMessage.Unable;
             }
 
-            return DoiTuongDAL.XoaDoiTuong(maDT);
+            return _doiTuongDALService.XoaDoiTuong(maDT);
         }
 
-        public static List<DoiTuong> LayDSDoiTuongBangMaSV(string maSV)
+        public List<DoiTuong> LayDSDoiTuongBangMaSV(string maSV)
         {
-            return DoiTuongDAL.LayDSDoiTuongBangMaSV(maSV);
+            return _doiTuongDALService.LayDSDoiTuongBangMaSV(maSV);
         }
 
-        public static List<DoiTuong> LayDSDoiTuongKhongThuocVeMaSV(string maSV)
+        public List<DoiTuong> LayDSDoiTuongKhongThuocVeMaSV(string maSV)
         {
-            return DoiTuongDAL.LayDSDoiTuongKhongThuocVeMaSV(maSV);
+            return _doiTuongDALService.LayDSDoiTuongKhongThuocVeMaSV(maSV);
         }
 
-        public static List<DoiTuong> LayDSDoiTuong2()
+        public List<DoiTuong> LayDSDoiTuong2()
         {
-            return DoiTuongDAL.LayDSDoiTuong2();
+            return _doiTuongDALService.LayDSDoiTuong2();
         }
     }
 }

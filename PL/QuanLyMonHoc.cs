@@ -1,8 +1,11 @@
-﻿using BLL;
+﻿using BLL.IServices;
+using BLL.Services;
+using DAL.Services;
 using ComponentFactory.Krypton.Toolkit;
 using DTO;
 using PL.Interfaces;
 using System;
+using System.Configuration;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
@@ -13,6 +16,8 @@ namespace PL
 {
     public partial class QuanLyMonHoc : KryptonForm, IThemSuaMonHocRequester
     {
+        private readonly IMonHocBLLService _monHocBLLService = new MonHocBLLService(new MonHocDALService(new DapperService(), ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString));
+        
         private IMonHocRequester monHocRequester;
         private BindingList<CT_MonHoc> mMonHoc;
         private BindingSource mMonHocSource;
@@ -40,7 +45,7 @@ namespace PL
 
         private void MonHoc_Load(object sender, EventArgs e)
         {
-            mMonHoc = new BindingList<CT_MonHoc>(MonHocBLL.LayDSMonHoc());
+            mMonHoc = new BindingList<CT_MonHoc>(_monHocBLLService.LayDSMonHoc());
             mMonHocSource = new BindingSource(mMonHoc, null);
             dgvDanhSachMonHoc.DataSource = mMonHocSource;
 
@@ -100,7 +105,7 @@ namespace PL
 
         public void OnThemSuaMonHocClosing()
         {
-            mMonHoc = new BindingList<CT_MonHoc>(MonHocBLL.LayDSMonHoc());
+            mMonHoc = new BindingList<CT_MonHoc>(_monHocBLLService.LayDSMonHoc());
             mMonHocSource.DataSource = mMonHoc;
         }
 
@@ -127,7 +132,7 @@ namespace PL
                 string maMH = dgvDanhSachMonHoc.CurrentRow.Cells["MaMH"].Value as string;
                 CT_MonHoc monHoc = mMonHoc[dgvDanhSachMonHoc.CurrentRow.Index];
 
-                XoaMonHocMessage message = MonHocBLL.XoaMonHoc(maMH);
+                XoaMonHocMessage message = _monHocBLLService.XoaMonHoc(maMH);
                 switch (message)
                 {
                     case XoaMonHocMessage.Error:

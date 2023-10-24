@@ -7,6 +7,7 @@ using DAL.Services;
 using DTO;
 using PL.Interfaces;
 using System;
+using System.Configuration;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Windows.Forms;
@@ -15,10 +16,13 @@ namespace PL
 {
     public partial class BaoCao : KryptonForm
     {
-		private readonly ISinhVienBLLService _sinhVienBLLService = new SinhVienBLLService(new SinhVienDALService(new DapperService(), ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString));
-		private readonly IPhieuDKHPBLLService _phieuDKHPBLLService = new PhieuDKHPBLLService(new PhieuDKHPDALService(new DapperService(), ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString));
 
-		private IBaoCaoRequester baoCaoRequester;
+        private readonly IHocKyBLLService _hocKyBLLService = new HocKyBLLService(new HocKyDALService(new DapperService(), ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString));
+        private readonly ISinhVienBLLService _sinhVienBLLService = new SinhVienBLLService(new SinhVienDALService(new DapperService(), ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString));
+        private readonly IPhieuDKHPBLLService _phieuDKHPBLLService = new PhieuDKHPBLLService(new PhieuDKHPDALService(new DapperService(), ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString));
+
+        private IBaoCaoRequester baoCaoRequester;
+
 
         public BaoCao(IBaoCaoRequester requester)
         {
@@ -53,7 +57,7 @@ namespace PL
 
         private void LoadHocKy()
         {
-            List<HocKy> ds = HocKyBLL.LayDanhSachHK();
+            List<HocKy> ds = _hocKyBLLService.LayDanhSachHK();
             cmbHocKy.DisplayMember = "TenHocKy";
             cmbHocKy.ValueMember = "MaHocKy";
             cmbHocKy.DataSource = ds;

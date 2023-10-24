@@ -1,6 +1,11 @@
 ﻿using BLL;
+using BLL.IServices;
+using BLL.Services;
+using DAL.IServices;
+using DAL.Services;
 using ComponentFactory.Krypton.Toolkit;
 using DTO;
+using System.Configuration;
 using PL.Interfaces;
 using System;
 using System.ComponentModel;
@@ -10,6 +15,8 @@ namespace PL
 {
     public partial class ThemSuaMonHoc : KryptonForm, IThemSuaLoaiMonHocRequester
     {
+        private readonly IMonHocBLLService _monHocBLLService = new MonHocBLLService(new MonHocDALService(new DapperService(), ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString));
+
         private IThemSuaMonHocRequester themSuaMonHocRequester;
         private CT_MonHoc monHoc;
         private BindingList<LoaiMonHoc> mLoaiMonHoc;
@@ -106,7 +113,7 @@ namespace PL
                 string soTiet = txtSoTiet.Text.Trim();
                 int soTietLoaiMon = monHoc.SoTietLoaiMon;
 
-                SuaMonHocMessage message = MonHocBLL.SuaMonHoc(maMHBanDau, maMH, tenMH, maLoaiMonHoc, soTiet, soTietLoaiMon);
+                SuaMonHocMessage message = _monHocBLLService.SuaMonHoc(maMHBanDau, maMH, tenMH, maLoaiMonHoc, soTiet, soTietLoaiMon);
                 switch (message)
                 {
                     case SuaMonHocMessage.Unable:
@@ -144,7 +151,7 @@ namespace PL
                 string soTiet = txtSoTiet.Text.Trim();
                 int soTietLoaiMon = monHoc.SoTietLoaiMon;
 
-                ThemMonHocMessage message = MonHocBLL.ThemMonHoc(maMH, tenMH, maLoaiMonHoc, soTiet, soTietLoaiMon);
+                ThemMonHocMessage message = _monHocBLLService.ThemMonHoc(maMH, tenMH, maLoaiMonHoc, soTiet, soTietLoaiMon);
                 switch (message)
                 {
                     case ThemMonHocMessage.EmptyMaMH:

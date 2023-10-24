@@ -1,8 +1,11 @@
-﻿using BLL;
+﻿using BLL.Services;
+using BLL.IServices;
+using DAL.Services;
 using ComponentFactory.Krypton.Toolkit;
 using DTO;
 using PL.Interfaces;
 using System;
+using System.Configuration;
 using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
@@ -11,6 +14,8 @@ namespace PL
 {
     public partial class QuanLyDoiTuong : KryptonForm, IThemSuaDoiTuongRequester
     {
+        private readonly IDoiTuongBLLService _doiTuongBLLService = new DoiTuongBLLService(new DoiTuongDALService(new DapperService(), ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString));
+
         private ICaiDatRequester caiDatRequester;
         private BindingList<DoiTuong> mDoiTuong;
         private BindingSource mDoiTuongSource;
@@ -40,7 +45,7 @@ namespace PL
 
         private void QuanLyDoiTuong_Load(object sender, EventArgs e)
         {
-            mDoiTuong = new BindingList<DoiTuong>(DoiTuongBLL.LayDSDoiTuong2());
+            mDoiTuong = new BindingList<DoiTuong>(_doiTuongBLLService.LayDSDoiTuong2());
             mDoiTuongSource = new BindingSource(mDoiTuong, null);
             dgvDSDoiTuong.DataSource = mDoiTuongSource;
 
@@ -91,7 +96,7 @@ namespace PL
 
         public void OnThemSuaDoiTuongClosing()
         {
-            mDoiTuong = new BindingList<DoiTuong>(DoiTuongBLL.LayDSDoiTuong2());
+            mDoiTuong = new BindingList<DoiTuong>(_doiTuongBLLService.LayDSDoiTuong2());
             mDoiTuongSource.DataSource = mDoiTuong;
         }
 
@@ -104,7 +109,7 @@ namespace PL
                 DoiTuong doiTuong = mDoiTuong[dgvDSDoiTuong.CurrentRow.Index];
                 int maDT = mDoiTuong[dgvDSDoiTuong.CurrentRow.Index].MaDT;
 
-                XoaDoiTuongMessage message = DoiTuongBLL.XoaDoiTuong(maDT);
+                XoaDoiTuongMessage message = _doiTuongBLLService.XoaDoiTuong(maDT);
                 switch (message)
                 {
                     case XoaDoiTuongMessage.Error:

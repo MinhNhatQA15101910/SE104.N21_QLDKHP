@@ -6,17 +6,24 @@ using DAL.Services;
 using DTO;
 using PL.Interfaces;
 using System;
+using System.ComponentModel;
+using System.Configuration;
+using System.Data;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
 
 namespace PL
 {
     public partial class DangKyHocPhan : KryptonForm
     {
-		private readonly IPhieuDKHPBLLService _phieuDKHPBLLService = new PhieuDKHPBLLService(new PhieuDKHPDALService(new DapperService(), ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString));
-		private IDangKyHocPhanRequester dangKyHocPhanRequester;
+        private readonly ICT_PhieuDKHPBLLService _CT_phieuDKHPBLLService = new CT_DKHPBLLService(new CT_PhieuDKHPDALService(new DapperService(), ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString));
+        private readonly IDanhSachMonHocMoBLLService _danhSachMonHocMoBLLService = new DanhSachMonHocMoBLLService(new DanhSachMonHocMoDALService(new DapperService(), ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString));
+        private readonly IHocKyBLLService _hocKyBLLService = new HocKyBLLService(new HocKyDALService(new DapperService(), ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString));
+        private readonly IPhieuDKHPBLLService _phieuDKHPBLLService = new PhieuDKHPBLLService(new PhieuDKHPDALService(new DapperService(), ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString));
+        private IDangKyHocPhanRequester dangKyHocPhanRequester;>>>>>>> master
         private bool dangKy = false;
         private int selectedIndex1 = -1;
         private int selectedIndex2 = -1;
@@ -42,7 +49,7 @@ namespace PL
             dgvDSMHDaChon.AllowUserToAddRows = false;
             dgvDSMHDaChon.AllowUserToDeleteRows = false;
 
-            List<dynamic> listMH = DanhSachMonHocMoBLL.LayDanhSachMonHocMo(GlobalConfig.CurrMaHocKy, GlobalConfig.CurrNamHoc);
+            List<dynamic> listMH = _danhSachMonHocMoBLLService.LayDanhSachMonHocMo(GlobalConfig.CurrMaHocKy, GlobalConfig.CurrNamHoc);
             LoadHocKyNamHoc();
             LoadDSMHDaChon();
             LoadDSMonHocMo();
@@ -151,7 +158,7 @@ namespace PL
 
         private void LoadHocKyNamHoc()
         {
-            txtHocKy.Text = HocKyBLL.LayHKByMaHK(GlobalConfig.CurrMaHocKy);
+            txtHocKy.Text = _hocKyBLLService.LayHKByMaHK(GlobalConfig.CurrMaHocKy);
             txtNamHoc.Text = GlobalConfig.CurrNamHoc.ToString();
         }
 
@@ -188,7 +195,7 @@ namespace PL
                             // tạo ra ct_phiếu đkhp
                             for (int i = 0; i < dgvDSMHDaChon.Rows.Count - 1; i++)
                                 dsMaMH.Add(dgvDSMHDaChon.Rows[i].Cells["MaMH"].Value.ToString());
-                            CT_PhieuDKHPBLL.TaoCT_PhieuDKHP(maPhieu, dsMaMH);
+                            _CT_phieuDKHPBLLService.TaoCT_PhieuDKHP(maPhieu, dsMaMH);
                             MessageBox.Show("Đăng ký thành công");
                             Close();
                         }
@@ -196,13 +203,14 @@ namespace PL
                     else
                     {
                         // update 
+
                         int maPhieu = _phieuDKHPBLLService.LayMaPhieuDKHP(GlobalConfig.CurrMaHocKy, GlobalConfig.CurrNamHoc); // next: lấy ma Phieu
-                        CT_PhieuDKHPBLL.XoaDSMHDKHP(maPhieu);
+                         _CT_phieuDKHPBLLService.XoaDSMHDKHP(maPhieu);
                         // tạo ra ct_phiếu đkhp
                         List<string> dsMaMH = new List<string>();
                         for (int i = 0; i < dgvDSMHDaChon.Rows.Count - 1; i++)
                             dsMaMH.Add(dgvDSMHDaChon.Rows[i].Cells["MaMH"].Value.ToString());
-                        CT_PhieuDKHPBLL.TaoCT_PhieuDKHP(maPhieu, dsMaMH);
+                        _CT_phieuDKHPBLLService.TaoCT_PhieuDKHP(maPhieu, dsMaMH);
                         MessageBox.Show("Lưu thành công");
                         Close();
                     }
@@ -295,7 +303,7 @@ namespace PL
 
         private void imgAll_Click(object sender, EventArgs e)
         {
-            List<dynamic> list = DanhSachMonHocMoBLL.LayDanhSachMonHocMo(GlobalConfig.CurrMaHocKy, GlobalConfig.CurrNamHoc);
+            List<dynamic> list = _danhSachMonHocMoBLLService.LayDanhSachMonHocMo(GlobalConfig.CurrMaHocKy, GlobalConfig.CurrNamHoc);
             LoadDataDSMonHocMo(list);
             RemoveMHTrung();
             txtTimKiem.Text = "";
@@ -308,7 +316,7 @@ namespace PL
             string monHoc = txtTimKiem.Text.Trim();
             if (monHoc != "")
             {
-                List<dynamic> listMH = DanhSachMonHocMoBLL.TimKiemDanhSachMonHocMo(GlobalConfig.CurrMaHocKy, GlobalConfig.CurrNamHoc, monHoc);
+                List<dynamic> listMH = _danhSachMonHocMoBLLService.TimKiemDanhSachMonHocMo(GlobalConfig.CurrMaHocKy, GlobalConfig.CurrNamHoc, monHoc);
                 LoadDataDSMonHocMo(listMH);
                 RemoveMHTrung();
 

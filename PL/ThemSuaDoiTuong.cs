@@ -1,14 +1,20 @@
 ﻿using BLL;
+using BLL.IServices;
+using BLL.Services;
 using ComponentFactory.Krypton.Toolkit;
+using DAL.Services;
 using DTO;
 using PL.Interfaces;
 using System;
+using System.Configuration;
 using System.Windows.Forms;
 
 namespace PL
 {
     public partial class ThemSuaDoiTuong : KryptonForm
     {
+        private readonly IDoiTuongBLLService _doiTuongBLLService = new DoiTuongBLLService(new DoiTuongDALService(new DapperService(), ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString));
+
         private IThemSuaDoiTuongRequester themSuaDoiTuongRequester;
         private DoiTuong doiTuong;
 
@@ -75,7 +81,7 @@ namespace PL
                 string tenDT = txtTenDoiTuong.Text.Trim();
                 string tiLeGiam = txtTiLeGiam.Text.Trim();
 
-                SuaDoiTuongMessage message = DoiTuongBLL.SuaDoiTuong(maDTBanDau, tenDT, tiLeGiam);
+                SuaDoiTuongMessage message = _doiTuongBLLService.SuaDoiTuong(maDTBanDau, tenDT, tiLeGiam);
                 switch (message)
                 {
                     case SuaDoiTuongMessage.EmptyTenDoiTuong:
@@ -107,7 +113,7 @@ namespace PL
                 string tenDT = txtTenDoiTuong.Text.Trim();
                 string tiLeGiam = txtTiLeGiam.Text.Trim();
 
-                ThemDoiTuongMessage message = DoiTuongBLL.ThemDoiTuong(tenDT, tiLeGiam);
+                ThemDoiTuongMessage message = _doiTuongBLLService.ThemDoiTuong(tenDT, tiLeGiam);
                 switch (message)
                 {
                     case ThemDoiTuongMessage.EmptyTenDoiTuong:

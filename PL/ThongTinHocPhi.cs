@@ -5,6 +5,7 @@ using ComponentFactory.Krypton.Toolkit;
 using DAL.Services;
 using DTO;
 using System;
+using System.Configuration;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Globalization;
@@ -15,10 +16,12 @@ namespace PL
 {
     public partial class ThongTinHocPhi : KryptonForm
     {
-		private readonly IPhieuDKHPBLLService _phieuDKHPBLLService = new PhieuDKHPBLLService(new PhieuDKHPDALService(new DapperService(), ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString));
-		private readonly IPhieuThuHPBLLService _phieuThuHPBLLService = new PhieuThuHPBLLService(new PhieuThuHPDALService(new DapperService(), ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString));
+        private readonly IDoiTuongBLLService _doiTuongBLLService = new DoiTuongBLLService(new DoiTuongDALService(new DapperService(), ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString));
+        private readonly IHocKyBLLService _hocKyBLLService = new HocKyBLLService(new HocKyDALService(new DapperService(), ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString));
+        private readonly IPhieuDKHPBLLService _phieuDKHPBLLService = new PhieuDKHPBLLService(new PhieuDKHPDALService(new DapperService(), ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString));
+        private readonly IPhieuThuHPBLLService _phieuThuHPBLLService = new PhieuThuHPBLLService(new PhieuThuHPDALService(new DapperService(), ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString));
 
-		CultureInfo cultureInfo = new CultureInfo("vi-VN");
+        CultureInfo cultureInfo = new CultureInfo("vi-VN");
 
         public ThongTinHocPhi()
         {
@@ -32,7 +35,7 @@ namespace PL
 
         private void LoadCmbHK()
         {
-            List<HocKy> ds = HocKyBLL.LayDanhSachHK();
+            List<HocKy> ds = _hocKyBLLService.LayDanhSachHK();
             cmbHocKy.DisplayMember = "TenHocKy";
             cmbHocKy.ValueMember = "MaHocKy";
             cmbHocKy.DataSource = ds;
@@ -98,7 +101,7 @@ namespace PL
                                 txtHocPhiDaDong.Text = _phieuDKHPBLLService.TinhHocPhiDaDong(maPhieuDKHP).ToString("c", cultureInfo);
                                 txtConNo.Text = _phieuDKHPBLLService.TinhHocPhiConThieu(maPhieuDKHP).ToString("c", cultureInfo);
                                 HienThiTinhTrang(kq.MaTinhTrang);
-                                List<DoiTuong> dt = DoiTuongBLL.LayDSDoiTuongBangMaSV(GlobalConfig.CurrNguoiDung.TenDangNhap);
+                                List<DoiTuong> dt = _doiTuongBLLService.LayDSDoiTuongBangMaSV(GlobalConfig.CurrNguoiDung.TenDangNhap);
                                 DoiTuong dt1 = dt[0];
                                 lblTyLeGiam.Text = "(Học phí được giảm " + (hocPhi - hocPhiPhaiDong).ToString("c", cultureInfo) + " - theo đối tượng " + dt1.TenDT + " )";
 

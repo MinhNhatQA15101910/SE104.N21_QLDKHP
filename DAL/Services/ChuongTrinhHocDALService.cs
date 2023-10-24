@@ -1,4 +1,5 @@
-﻿using Dapper;
+﻿using DAL.IServices;
+using Dapper;
 using DTO;
 using System;
 using System.Collections.Generic;
@@ -6,11 +7,19 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 
-namespace DAL
+namespace DAL.Services
 {
-    public class ChuongTrinhHocDAL
+    public class ChuongTrinhHocDALService: IChuongTrinhHocDALService
     {
-        public static MessageDeleteListCTHoc DeleteListCTHoc(string MaNganh, int HocKy)
+        private readonly IDapperService _dapperService;
+        private readonly string _dbConnection;
+
+        public ChuongTrinhHocDALService(IDapperService dapperService, string dbConnection)
+        {
+            _dapperService = dapperService;
+            _dbConnection = dbConnection;
+        }
+        public MessageDeleteListCTHoc DeleteListCTHoc(string MaNganh, int HocKy)
         {
             ChuongTrinhHoc CTHoc = new ChuongTrinhHoc();
             try
@@ -20,7 +29,7 @@ namespace DAL
                     var mhm = new DynamicParameters();
                     mhm.Add("@MaNganh", MaNganh);
                     mhm.Add("@HocKy", HocKy);
-                    connection.Execute("spCHUONGTRINHHOC_DeleteListCTHoc", mhm, commandType: CommandType.StoredProcedure);
+                    _dapperService.Execute(connection, "spCHUONGTRINHHOC_DeleteListCTHoc", mhm, CommandType.StoredProcedure);
                 }
             }
             catch (Exception)
@@ -31,19 +40,17 @@ namespace DAL
             return MessageDeleteListCTHoc.Success;
         }
 
-        public static List<ChuongTrinhHoc> GetAllCTHoc()
+        public List<ChuongTrinhHoc> GetAllCTHoc()
         {
-            List<ChuongTrinhHoc> ListChuongTrinhHoc;
 
             using (IDbConnection connection = new SqlConnection(DatabaseConnection.CnnString()))
             {
-                ListChuongTrinhHoc = connection.Query<ChuongTrinhHoc>("spCHUONGTRINHHOC_GetAll").ToList();
+                return _dapperService.Query<ChuongTrinhHoc>(connection, "spCHUONGTRINHHOC_GetAll").ToList();    
             }
 
-            return ListChuongTrinhHoc;
         }
 
-        public static MessageAddCTHoc AddCTHoc(string MaMH, string MaNganh, int HocKy)
+        public MessageAddCTHoc AddCTHoc(string MaMH, string MaNganh, int HocKy)
         {
             ChuongTrinhHoc CTHoc = new ChuongTrinhHoc();
             try
@@ -54,7 +61,7 @@ namespace DAL
                     mhm.Add("@MaMH", MaMH);
                     mhm.Add("@MaNganh", MaNganh);
                     mhm.Add("@HocKy", HocKy);
-                    connection.Execute("spCHUONGTRINHHOC_AddCTHoc", mhm, commandType: CommandType.StoredProcedure);
+                    _dapperService.Execute(connection, "spCHUONGTRINHHOC_AddCTHoc", mhm, CommandType.StoredProcedure);
                 }
             }
             catch (Exception)
@@ -65,7 +72,7 @@ namespace DAL
             return MessageAddCTHoc.Success;
         }
 
-        public static MessageDeleteCTHoc DeleteCTHoc(string MaMH, string MaNganh, int HocKy)
+        public MessageDeleteCTHoc DeleteCTHoc(string MaMH, string MaNganh, int HocKy)
         {
             ChuongTrinhHoc CTHoc = new ChuongTrinhHoc();
             try
@@ -76,7 +83,7 @@ namespace DAL
                     mhm.Add("@MaMH", MaMH);
                     mhm.Add("@MaNganh", MaNganh);
                     mhm.Add("@HocKy", HocKy);
-                    connection.Execute("spCHUONGTRINHHOC_DeleteCTHoc", mhm, commandType: CommandType.StoredProcedure);
+                    _dapperService.Execute(connection, "spCHUONGTRINHHOC_DeleteCTHoc", mhm, CommandType.StoredProcedure);
                 }
             }
             catch (Exception)

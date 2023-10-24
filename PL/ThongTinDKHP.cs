@@ -14,9 +14,11 @@ namespace PL
 {
     public partial class ThongTinDKHP : KryptonForm
     {
-		private readonly IPhieuDKHPBLLService _phieuDKHPBLLService = new PhieuDKHPBLLService(new PhieuDKHPDALService(new DapperService(), ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString));
 
-		public ThongTinDKHP()
+        private readonly IHocKyBLLService _hocKyBLLService = new HocKyBLLService(new HocKyDALService(new DapperService(), ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString));
+        private readonly IPhieuDKHPBLLService _phieuDKHPBLLService = new PhieuDKHPBLLService(new PhieuDKHPDALService(new DapperService(), ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString));
+
+        public ThongTinDKHP()
         {
             InitializeComponent();
         }
@@ -28,7 +30,7 @@ namespace PL
         }
         private void LoadCmbHK()
         {
-            List<HocKy> ds = HocKyBLL.LayDanhSachHK();
+            List<HocKy> ds = _hocKyBLLService.LayDanhSachHK();
             cmbHocKy.DisplayMember = "TenHocKy";
             cmbHocKy.ValueMember = "MaHocKy";
             cmbHocKy.DataSource = ds;
