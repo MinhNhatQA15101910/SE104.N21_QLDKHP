@@ -17,7 +17,7 @@ namespace PL
         private readonly IKhoaBLLService _khoaBLLService = new KhoaBLLService(new KhoaDALService(new DapperService(), ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString));
         private readonly INganhBLLService _nganhBLLService = new NganhBLLService(new NganhDALService(new DapperService(), ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString));
         private readonly IChuongTrinhHocBLLService _chuongtrinhhocBLLService = new ChuongTrinhHocBLLService(new ChuongTrinhHocDALService(new DapperService(), ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString));
-
+        private readonly IMonHocBLLService _monHocBLLService = new MonHocBLLService(new MonHocDALService(new DapperService(), ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString));
 
         BindingList<Khoa> mKhoa;
         BindingList<Nganh> mNganh;
@@ -143,7 +143,7 @@ namespace PL
         public void SetUpDgvMonHoc()
         {
             dgv_DSMonHoc.Rows.Clear();
-            mMonHoc = new BindingList<MonHoc>(MonHocBLL.LayDSMonHoc2());
+            mMonHoc = new BindingList<MonHoc>(_monHocBLLService.LayDSMonHoc2());
             foreach (var item in mMonHoc)
             {
                 dgv_DSMonHoc.Rows.Add(item.MaMH, item.TenMH, item.MaLoaiMonHoc, item.SoTiet);
@@ -161,7 +161,7 @@ namespace PL
                 {
                     if (item.TenNganh == cb_Nganh.Text)
                     {
-                        mChuongTrinhHoc = new BindingList<MonHoc>(MonHocBLL.GetChuongTrinhHoc(item.MaNganh, x));
+                        mChuongTrinhHoc = new BindingList<MonHoc>(_monHocBLLService.GetChuongTrinhHoc(item.MaNganh, x));
                         break;
                     }
                 }
@@ -289,7 +289,7 @@ namespace PL
         private void img_Sort_Click(object sender, EventArgs e)
         {
             dgv_DSMonHoc.Rows.Clear();
-            mMonHoc = new BindingList<MonHoc>(MonHocBLL.LayDSMonHoc2());
+            mMonHoc = new BindingList<MonHoc>(_monHocBLLService.LayDSMonHoc2());
             foreach (var item in mMonHoc)
             {
                 if (item.TenMH.Contains(txt_Search.Text) || (item.MaMH.Contains(txt_Search.Text)))

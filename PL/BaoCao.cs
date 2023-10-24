@@ -1,8 +1,12 @@
 ﻿using BLL;
+using BLL.IServices;
+using BLL.Services;
 using ComponentFactory.Krypton.Toolkit;
+using DAL.Services;
 using DTO;
 using PL.Interfaces;
 using System;
+using System.Configuration;
 using System.Collections.Generic;
 using System.Windows.Forms;
 
@@ -10,6 +14,8 @@ namespace PL
 {
     public partial class BaoCao : KryptonForm
     {
+        private readonly IHocKyBLLService _hocKyBLLService = new HocKyBLLService(new HocKyDALService(new DapperService(), ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString));
+
         private IBaoCaoRequester baoCaoRequester;
 
         public BaoCao(IBaoCaoRequester requester)
@@ -45,7 +51,7 @@ namespace PL
 
         private void LoadHocKy()
         {
-            List<HocKy> ds = HocKyBLL.LayDanhSachHK();
+            List<HocKy> ds = _hocKyBLLService.LayDanhSachHK();
             cmbHocKy.DisplayMember = "TenHocKy";
             cmbHocKy.ValueMember = "MaHocKy";
             cmbHocKy.DataSource = ds;

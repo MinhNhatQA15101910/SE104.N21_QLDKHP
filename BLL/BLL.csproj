@@ -42,25 +42,30 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CT_PhieuDKHPBLL.cs" />
-    <Compile Include="DanhSachMonHocMoBLL.cs" />
-    <Compile Include="DoiTuongBLL.cs" />
     <Compile Include="GlobalConfigBLL.cs" />
-    <Compile Include="HocKyBLL.cs" />
     <Compile Include="HuyenBLL.cs" />
     <Compile Include="IServices\IChuongTrinhHocBLLService.cs" />
+    <Compile Include="IServices\ICT_PhieuDKHPBLLService.cs" />
+    <Compile Include="IServices\IDanhSachMonHocMoBLLService.cs" />
+    <Compile Include="IServices\IDoiTuongBLLService.cs" />
+    <Compile Include="IServices\IHocKyBLLService.cs" />
     <Compile Include="IServices\IKhoaBLLService.cs" />
+    <Compile Include="IServices\IMonHocBLLService.cs" />
     <Compile Include="IServices\INganhBLLService.cs" />
     <Compile Include="Services\ChuongTrinhHocBLLService.cs" />
+    <Compile Include="Services\CT_DKHPBLLService.cs" />
+    <Compile Include="Services\DanhSachMonHocMoBLLService.cs" />
+    <Compile Include="Services\DoiTuongBLLService.cs" />
+    <Compile Include="Services\HocKyBLLService.cs" />
     <Compile Include="Services\KhoaBLLService.cs" />
     <Compile Include="LoaiMonHocBLL.cs" />
-    <Compile Include="MonHocBLL.cs" />
     <Compile Include="MonHocMoBLL.cs" />
     <Compile Include="NguoiDungBLL.cs" />
     <Compile Include="NhomNguoiDungBLL.cs" />
     <Compile Include="PhieuDKHPBLL.cs" />
     <Compile Include="PhieuThuHPBLL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Services\MonHocBLLService.cs" />
     <Compile Include="Services\NganhBLLService.cs" />
     <Compile Include="SinhVienBLL.cs" />
     <Compile Include="TinhBLL.cs" />

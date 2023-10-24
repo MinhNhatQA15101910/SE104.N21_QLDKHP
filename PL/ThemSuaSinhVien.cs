@@ -16,6 +16,7 @@ namespace PL
     public partial class ThemSuaSinhVien : KryptonForm, IThemSuaNganhRequester, IThemSuaHuyenRequester, IThemSuaDoiTuongRequester
     {
         private readonly INganhBLLService _nganhBLLService = new NganhBLLService(new NganhDALService(new DapperService(), ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString));
+        private readonly IDoiTuongBLLService _doiTuongBLLService = new DoiTuongBLLService(new DoiTuongDALService(new DapperService(), ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString));
 
         private readonly IThemSuaSinhVienRequester themSuaSinhVienRequester;
         private readonly CT_SinhVien sinhVien;
@@ -110,14 +111,14 @@ namespace PL
                 cmbNganh.ValueMember = "MaNganh";
 
                 // DoiTuongSelected
-                mDoiTuongSelected = new BindingList<DoiTuong>(DoiTuongBLL.LayDSDoiTuongBangMaSV(sinhVien.MaSV));
+                mDoiTuongSelected = new BindingList<DoiTuong>(_doiTuongBLLService.LayDSDoiTuongBangMaSV(sinhVien.MaSV));
                 mDoiTuongSelectedSource = new BindingSource(mDoiTuongSelected, null);
                 lbSelectedDoiTuong.DataSource = mDoiTuongSelectedSource;
                 lbSelectedDoiTuong.DisplayMember = "TenDT";
                 lbSelectedDoiTuong.ValueMember = "MaDT";
 
                 // DoiTuongAll
-                mDoiTuongAll = new BindingList<DoiTuong>(DoiTuongBLL.LayDSDoiTuongKhongThuocVeMaSV(sinhVien.MaSV));
+                mDoiTuongAll = new BindingList<DoiTuong>(_doiTuongBLLService.LayDSDoiTuongKhongThuocVeMaSV(sinhVien.MaSV));
                 mDoiTuongAllSource = new BindingSource(mDoiTuongAll, null);
                 cmbDoiTuongAll.DataSource = mDoiTuongAllSource;
                 cmbDoiTuongAll.DisplayMember = "TenDT";
@@ -158,7 +159,7 @@ namespace PL
                 lbSelectedDoiTuong.ValueMember = "MaDT";
 
                 // DoiTuongAll
-                mDoiTuongAll = new BindingList<DoiTuong>(DoiTuongBLL.LayDSDoiTuong2());
+                mDoiTuongAll = new BindingList<DoiTuong>(_doiTuongBLLService.LayDSDoiTuong2());
                 mDoiTuongAllSource = new BindingSource(mDoiTuongAll, null);
                 cmbDoiTuongAll.DataSource = mDoiTuongAllSource;
                 cmbDoiTuongAll.DisplayMember = "TenDT";
@@ -191,7 +192,7 @@ namespace PL
 
         private void RefreshDoiTuongAllList()
         {
-            mDoiTuongAll = new BindingList<DoiTuong>(DoiTuongBLL.LayDSDoiTuong2());
+            mDoiTuongAll = new BindingList<DoiTuong>(_doiTuongBLLService.LayDSDoiTuong2());
             mDoiTuongAllSource.DataSource = mDoiTuongAll;
         }
 
@@ -199,7 +200,7 @@ namespace PL
         {
             if (sinhVien != null)
             {
-                mDoiTuongSelected = new BindingList<DoiTuong>(DoiTuongBLL.LayDSDoiTuongBangMaSV(sinhVien.MaSV));
+                mDoiTuongSelected = new BindingList<DoiTuong>(_doiTuongBLLService.LayDSDoiTuongBangMaSV(sinhVien.MaSV));
                 mDoiTuongSelectedSource.DataSource = mDoiTuongSelected;
             }
             else

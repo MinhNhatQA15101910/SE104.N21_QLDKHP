@@ -1,9 +1,13 @@
 ﻿using BLL;
+using BLL.IServices;
+using BLL.Services;
 using ComponentFactory.Krypton.Toolkit;
+using DAL.Services;
 using DTO;
 using PL.Interfaces;
 using System;
 using System.ComponentModel;
+using System.Configuration;
 using System.Data;
 using System.Drawing;
 using System.Linq;
@@ -13,6 +17,8 @@ namespace PL
 {
     public partial class QuanLySinhVien : KryptonForm, IThemSuaSinhVienRequester
     {
+        private readonly IDoiTuongBLLService _doiTuongBLLService = new DoiTuongBLLService(new DoiTuongDALService(new DapperService(), ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString));
+
         private readonly IDanhSachSinhVienRequester dssvRequester;
         private BindingList<CT_SinhVien> mSinhVien;
         private BindingList<DoiTuong> mDoiTuong;
@@ -100,7 +106,7 @@ namespace PL
                         rbtnNam.Checked = false;
                         rbtnNu.Checked = true;
                     }
-                    mDoiTuong = new BindingList<DoiTuong>(DoiTuongBLL.LayDSDoiTuongBangMaSV(sinhVien.MaSV));
+                    mDoiTuong = new BindingList<DoiTuong>(_doiTuongBLLService.LayDSDoiTuongBangMaSV(sinhVien.MaSV));
                     mDoiTuongSource = new BindingSource(mDoiTuong, null);
                     lbDoiTuong.DataSource = mDoiTuongSource;
                     lbDoiTuong.DisplayMember = "TenDT";

@@ -1,4 +1,5 @@
-﻿using Dapper;
+﻿using DAL.IServices;
+using Dapper;
 using DTO;
 using System;
 using System.Collections.Generic;
@@ -7,21 +8,28 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 
-namespace DAL
+namespace DAL.Services
 {
-    public class DoiTuongDAL
+    public class DoiTuongDALService: IDoiTuongDALService
     {
-        public static List<DoiTuong> LayDSDoiTuong()
+        private readonly IDapperService _dapperService;
+        private readonly string _dbConnection;
+
+        public DoiTuongDALService(IDapperService dapperService, string dbConnection)
         {
-            List<DoiTuong> output;
-            using (IDbConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString))
-            {
-                output = connection.Query<DoiTuong>("spDOITUONG_LayDSDoiTuong").ToList();
-            }
-            return output;
+            _dapperService = dapperService;
+            _dbConnection = dbConnection;
         }
 
-        public static SuaDoiTuongMessage SuaDoiTuong(int maDTBanDau, string tenDT, float tiLeGiam)
+        public List<DoiTuong> LayDSDoiTuong()
+        {
+            using (IDbConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString))
+            {
+                return _dapperService.Query<DoiTuong>(connection, "spDOITUONG_LayDSDoiTuong").ToList();
+            }
+        }
+
+        public SuaDoiTuongMessage SuaDoiTuong(int maDTBanDau, string tenDT, float tiLeGiam)
         {
             try
             {
@@ -31,7 +39,7 @@ namespace DAL
                     p.Add("@MaDT", maDTBanDau);
                     p.Add("@TenDT", tenDT);
                     p.Add("@TiLeGiamHocPhi", tiLeGiam);
-                    connection.Execute("spDOITUONG_SuaDoiTuong", p, commandType: CommandType.StoredProcedure);
+                    _dapperService.Execute(connection, "spDOITUONG_SuaDoiTuong", p, CommandType.StoredProcedure);
                 }
             }
             catch (SqlException ex)
@@ -52,7 +60,7 @@ namespace DAL
             return SuaDoiTuongMessage.Success;
         }
 
-        public static ThemDoiTuongMessage ThemDoiTuong(string tenDT, float tiLeGiam)
+        public ThemDoiTuongMessage ThemDoiTuong(string tenDT, float tiLeGiam)
         {
             try
             {
@@ -61,7 +69,7 @@ namespace DAL
                     var p = new DynamicParameters();
                     p.Add("@TenDT", tenDT);
                     p.Add("@TiLeGiamHocPhi", tiLeGiam);
-                    connection.Execute("spDOITUONG_ThemDoiTuong", p, commandType: CommandType.StoredProcedure);
+                    _dapperService.Execute(connection, "spDOITUONG_ThemDoiTuong", p, CommandType.StoredProcedure);
                 }
             }
             catch (SqlException ex)
@@ -82,45 +90,36 @@ namespace DAL
             return ThemDoiTuongMessage.Success;
         }
 
-        public static List<DoiTuong> LayDSDoiTuong2()
+        public List<DoiTuong> LayDSDoiTuong2()
         {
-            List<DoiTuong> output;
             using (IDbConnection connection = new SqlConnection(DatabaseConnection.CnnString()))
             {
-                output = connection.Query<DoiTuong>("spDOITUONG_LayDSDoiTuong2").ToList();
+                return _dapperService.Query<DoiTuong>(connection, "spDOITUONG_LayDSDoiTuong").ToList();
             }
-            return output;
         }
 
-        public static List<DoiTuong> LayDSDoiTuongKhongThuocVeMaSV(string maSV)
+        public List<DoiTuong> LayDSDoiTuongKhongThuocVeMaSV(string maSV)
         {
-            List<DoiTuong> output;
 
             using (IDbConnection connection = new SqlConnection(DatabaseConnection.CnnString()))
             {
                 var p = new DynamicParameters();
                 p.Add("@MaSV", maSV);
-                output = connection.Query<DoiTuong>("spDOITUONG_LayDSDoiTuongKhongThuocVeMaSV", p, commandType: CommandType.StoredProcedure).ToList();
+                return _dapperService.Query<DoiTuong>(connection, "spDOITUONG_LayDSDoiTuongKhongThuocVeMaSV", p, CommandType.StoredProcedure).ToList();
             }
-
-            return output;
         }
 
-        public static List<DoiTuong> LayDSDoiTuongBangMaSV(string maSV)
+        public List<DoiTuong> LayDSDoiTuongBangMaSV(string maSV)
         {
-            List<DoiTuong> output;
-
             using (IDbConnection connection = new SqlConnection(DatabaseConnection.CnnString()))
             {
                 var p = new DynamicParameters();
                 p.Add("@MaSV", maSV);
-                output = connection.Query<DoiTuong>("spDOITUONG_LayDSDoiTuongBangMaSV", p, commandType: CommandType.StoredProcedure).ToList();
+                return _dapperService.Query<DoiTuong>(connection, "spDOITUONG_LayDSDoiTuongBangMaSV", p, CommandType.StoredProcedure).ToList();
             }
-
-            return output;
         }
 
-        public static XoaDoiTuongMessage XoaDoiTuong(int maDT)
+        public XoaDoiTuongMessage XoaDoiTuong(int maDT)
         {
             try
             {
@@ -128,7 +127,7 @@ namespace DAL
                 {
                     var p = new DynamicParameters();
                     p.Add("@MaDT", maDT);
-                    connection.Execute("spDOITUONG_XoaDoiTuong", p, commandType: CommandType.StoredProcedure);
+                    _dapperService.Execute(connection, "spDOITUONG_XoaDoiTuong", p, CommandType.StoredProcedure);
                 }
             }
             catch (Exception)

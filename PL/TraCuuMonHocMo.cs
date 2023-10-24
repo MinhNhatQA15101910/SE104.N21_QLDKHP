@@ -1,8 +1,12 @@
 ﻿using BLL;
+using BLL.IServices;
+using BLL.Services;
+using DAL.Services;
 using ComponentFactory.Krypton.Toolkit;
 using DTO;
 using PL.Interfaces;
 using System;
+using System.Configuration;
 using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
@@ -11,6 +15,8 @@ namespace PL
 {
     public partial class TraCuuMonHocMo : KryptonForm
     {
+        private readonly IMonHocBLLService _monHocBLLService = new MonHocBLLService(new MonHocDALService(new DapperService(), ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString));
+
         private ITraCuuMonHocMoRequester traCuuMonHocMoRequester;
         BindingList<int> mNamHoc;
         BindingList<MonHoc> mMonHoc;
@@ -108,7 +114,7 @@ namespace PL
         }
         public void GetMonHocMHM(int HocKy, int NamHoc)
         {
-            mMonHoc = new BindingList<DTO.MonHoc>(MonHocBLL.GetTermMonHocMo(HocKy, NamHoc));
+            mMonHoc = new BindingList<DTO.MonHoc>(_monHocBLLService.GetTermMonHocMo(HocKy, NamHoc));
             dgv_MonHoc.Rows.Clear();
             foreach (var item in mMonHoc)
             {

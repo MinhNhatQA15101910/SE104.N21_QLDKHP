@@ -1,5 +1,4 @@
-﻿using BLL;
-using BLL.IServices;
+﻿using BLL.IServices;
 using BLL.Services;
 using ComponentFactory.Krypton.Toolkit;
 using DAL.Services;
@@ -19,6 +18,7 @@ namespace PL
         private readonly IKhoaBLLService _khoaBLLService = new KhoaBLLService(new KhoaDALService(new DapperService(), ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString));
         private readonly INganhBLLService _nganhBLLService = new NganhBLLService(new NganhDALService(new DapperService(), ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString));
         private readonly IChuongTrinhHocBLLService _chuongtrinhhocBLLService = new ChuongTrinhHocBLLService(new ChuongTrinhHocDALService(new DapperService(), ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString));
+        private readonly IMonHocBLLService _monHocBLLService = new MonHocBLLService(new MonHocDALService(new DapperService(), ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString));
 
         BindingList<Khoa> mKhoa;
         BindingList<Nganh> mNganh;
@@ -197,7 +197,7 @@ namespace PL
                     break;
                 }
             }
-            mChuongTrinhHoc = new BindingList<MonHoc>(MonHocBLL.GetChuongTrinhHoc(ng, hk));
+            mChuongTrinhHoc = new BindingList<MonHoc>(_monHocBLLService.GetChuongTrinhHoc(ng, hk));
             dgv_ChuongTrinhHoc.Rows.Clear();
             if (hk > 0)
             {

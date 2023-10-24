@@ -1,4 +1,5 @@
-﻿using Dapper;
+﻿using DAL.IServices;
+using Dapper;
 using DTO;
 using System;
 using System.Collections.Generic;
@@ -6,21 +7,28 @@ using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
 
-namespace DAL
+namespace DAL.Services
 {
-    public class MonHocDAL
+    public class MonHocDALService: IMonHocDALService
     {
-        public static List<CT_MonHoc> LayDSMonHoc()
+        private readonly IDapperService _dapperService;
+        private readonly string _dbConnection;
+
+        public MonHocDALService(IDapperService dapperService, string dbConnection)
         {
-            List<CT_MonHoc> output;
-            using (IDbConnection connection = new SqlConnection(DatabaseConnection.CnnString()))
-            {
-                output = connection.Query<CT_MonHoc>("spMONHOC_LayDSMonHoc").ToList();
-            }
-            return output;
+            _dapperService = dapperService;
+            _dbConnection = dbConnection;
         }
 
-        public static XoaMonHocMessage XoaMonHoc(string maMH)
+        public List<CT_MonHoc> LayDSMonHoc()
+        {
+            using (IDbConnection connection = new SqlConnection(DatabaseConnection.CnnString()))
+            {
+                return _dapperService.Query<CT_MonHoc>(connection, "spMONHOC_LayDSMonHoc").ToList();
+            }
+        }
+
+        public  XoaMonHocMessage XoaMonHoc(string maMH)
         {
             try
             {
@@ -28,7 +36,7 @@ namespace DAL
                 {
                     var p = new DynamicParameters();
                     p.Add("@MaMH", maMH);
-                    connection.Execute("spMONHOC_XoaMonHoc", p, commandType: CommandType.StoredProcedure);
+                    _dapperService.Execute(connection, "spMONHOC_XoaMonHoc", p, CommandType.StoredProcedure);
                 }
             }
             catch (Exception)
@@ -39,7 +47,7 @@ namespace DAL
             return XoaMonHocMessage.Success;
         }
 
-        public static SuaMonHocMessage SuaMonHoc(string maMHBanDau, string tenMH, int maLoaiMonHoc, int soTiet)
+        public  SuaMonHocMessage SuaMonHoc(string maMHBanDau, string tenMH, int maLoaiMonHoc, int soTiet)
         {
             try
             {
@@ -50,7 +58,7 @@ namespace DAL
                     p.Add("@TenMH", tenMH);
                     p.Add("@MaLoaiMonHoc", maLoaiMonHoc);
                     p.Add("@SoTiet", soTiet);
-                    connection.Execute("spMONHOC_SuaMonHoc", p, commandType: CommandType.StoredProcedure);
+                    _dapperService.Execute(connection, "spMONHOC_SuaMonHoc", p, CommandType.StoredProcedure);
                 }
             }
             catch (Exception)
@@ -61,7 +69,7 @@ namespace DAL
             return SuaMonHocMessage.Success;
         }
 
-        public static ThemMonHocMessage ThemMonHoc(string maMH, string tenMH, int maLoaiMonHoc, int soTiet)
+        public  ThemMonHocMessage ThemMonHoc(string maMH, string tenMH, int maLoaiMonHoc, int soTiet)
         {
             try
             {
@@ -72,7 +80,7 @@ namespace DAL
                     p.Add("@TenMH", tenMH);
                     p.Add("@MaLoaiMonHoc", maLoaiMonHoc);
                     p.Add("@SoTiet", soTiet);
-                    connection.Execute("spMONHOC_ThemMonHoc", p, commandType: CommandType.StoredProcedure);
+                    _dapperService.Execute(connection, "spMONHOC_ThemMonHoc", p, CommandType.StoredProcedure);
                 }
             }
             catch (SqlException ex)
@@ -93,50 +101,44 @@ namespace DAL
             return ThemMonHocMessage.Success;
         }
 
-        public static List<MonHoc> LayDSMonHoc2()
+        public  List<MonHoc> LayDSMonHoc2()
         {
-            List<MonHoc> output;
             using (IDbConnection connection = new SqlConnection(DatabaseConnection.CnnString()))
             {
-                output = connection.Query<MonHoc>("spMONHOC_LayDSMonHoc2").ToList();
+                return _dapperService.Query<MonHoc>(connection, "spMONHOC_LayDSMonHoc2").ToList();
             }
-            return output;
         }
 
-        public static List<MonHoc> GetTermMonHoc(int HocKy)
+        public  List<MonHoc> GetTermMonHoc(int HocKy)
         {
-            List<MonHoc> output;
             using (IDbConnection connection = new SqlConnection(DatabaseConnection.CnnString()))
             {
                 if (HocKy == 1)
                 {
-                    output = connection.Query<MonHoc>("spMONHOC_GetOddCTMonHoc").ToList();
+                    return _dapperService.Query<MonHoc>(connection, "spMONHOC_GetOddCTMonHoc").ToList();
                 }
                 else if (HocKy == 2)
                 {
-                    output = connection.Query<MonHoc>("spMONHOC_GetEvenCTMonHoc").ToList();
+                    return _dapperService.Query<MonHoc>(connection, "spMONHOC_GetEvenCTMonHoc").ToList();
                 }
-                else output = connection.Query<MonHoc>("spMONHOC_GetAllCTMonHoc").ToList();
+                else 
+                    return _dapperService.Query<MonHoc>(connection, "spMONHOC_GetAllCTMonHoc").ToList();
             }
-            return output;
         }
 
-        public static List<MonHoc> GetTermMonHocMo(int HocKy, int NamHoc)
+        public  List<MonHoc> GetTermMonHocMo(int HocKy, int NamHoc)
         {
-            List<MonHoc> output;
             using (IDbConnection connection = new SqlConnection(DatabaseConnection.CnnString()))
             {
                 var p = new DynamicParameters();
                 p.Add("@HocKy", HocKy);
                 p.Add("@NamHoc", NamHoc);
-                output = connection.Query<MonHoc>("spMONHOC_GetTermMonHocMo", p, commandType: CommandType.StoredProcedure).ToList();
+                return _dapperService.Query<MonHoc>(connection, "spMONHOC_GetTermMonHocMo", p, CommandType.StoredProcedure).ToList();
             }
-            return output;
         }
 
-        public static List<MonHoc> GetChuongTrinhHoc(string MaNganh, int HocKy)
+        public  List<MonHoc> GetChuongTrinhHoc(string MaNganh, int HocKy)
         {
-            List<MonHoc> ListMonHoc;
             using (IDbConnection connection = new SqlConnection(DatabaseConnection.CnnString()))
             {
                 if (HocKy != 0)
@@ -144,29 +146,26 @@ namespace DAL
                     var p = new DynamicParameters();
                     p.Add("@MaNganh", MaNganh);
                     p.Add("@HocKy", HocKy);
-                    ListMonHoc = connection.Query<MonHoc>("spMONHOC_GetCTHHocKyMaNganh", p, commandType: CommandType.StoredProcedure).ToList();
+                    return _dapperService.Query<MonHoc>(connection, "spMONHOC_GetCTHHocKy", p, CommandType.StoredProcedure).ToList();
                 }
                 else
                 {
                     var p = new DynamicParameters();
                     p.Add("@MaNganh", MaNganh);
-                    ListMonHoc = connection.Query<MonHoc>("spMONHOC_GetCTHHocKy", p, commandType: CommandType.StoredProcedure).ToList();
+                    return _dapperService.Query<MonHoc>(connection, "spMONHOC_GetCTHHocKy", p, CommandType.StoredProcedure).ToList();
                 }
 
             }
-            return ListMonHoc;
         }
 
-        public static List<MonHoc> GetMonHocPhieuDKHP(int MaPhieuDKHP)
+        public  List<MonHoc> GetMonHocPhieuDKHP(int MaPhieuDKHP)
         {
-            List<MonHoc> ListMonHoc;
             using (IDbConnection connection = new SqlConnection(DatabaseConnection.CnnString()))
             {
                 var p = new DynamicParameters();
                 p.Add("@MaPhieuDKHP", MaPhieuDKHP);
-                ListMonHoc = connection.Query<MonHoc>("spMONHOC_GetMonHocPhieuDKHP", p, commandType: CommandType.StoredProcedure).ToList();
+                return _dapperService.Query<MonHoc>(connection, "spMONHOC_GetMonHocPhieuDKHP", p, CommandType.StoredProcedure).ToList();
             }
-            return ListMonHoc;
         }
     }
 }

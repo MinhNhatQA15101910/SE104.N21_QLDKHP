@@ -16,5 +16,10 @@ namespace DAL.Services
         {
             return connection.Query<T>(sql);
         }
+
+        public IEnumerable<T> Query<T>(IDbConnection connection, string sql, DynamicParameters p, CommandType commandType)
+        {
+            return connection.Query<T>(sql, p, commandType: commandType);
+        }
     }
 }

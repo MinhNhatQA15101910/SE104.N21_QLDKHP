@@ -1,8 +1,12 @@
 ﻿using BLL;
+using BLL.IServices;
+using BLL.Services;
+using DAL.Services;
 using ComponentFactory.Krypton.Toolkit;
 using DTO;
 using PL.Interfaces;
 using System;
+using System.Configuration;
 using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
@@ -11,6 +15,8 @@ namespace PL
 {
     public partial class XacNhanDKHP : KryptonForm
     {
+        private readonly IMonHocBLLService _monHocBLLService = new MonHocBLLService(new MonHocDALService(new DapperService(), ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString));
+
         private IXacNhanDKHPRequester xacNhanDKHPRequester;
         int thisTerm = 3;
         int thisYear = 2024;
@@ -131,7 +137,7 @@ namespace PL
         public void SetUpDgvMonHoc(int x)
         {
             dgv_MonHoc.Rows.Clear();
-            mMonHoc = new BindingList<DTO.MonHoc>(MonHocBLL.GetMonHocPhieuDKHP(x));
+            mMonHoc = new BindingList<DTO.MonHoc>(_monHocBLLService.GetMonHocPhieuDKHP(x));
             mLoaiMonHoc = new BindingList<DTO.LoaiMonHoc>(LoaiMonHocBLL.LayDSLoaiMonHoc());
             foreach (var item in mMonHoc)
             {

@@ -42,7 +42,6 @@ namespace DAL.Services
 
         public List<ChuongTrinhHoc> GetAllCTHoc()
         {
-            List<ChuongTrinhHoc> ListChuongTrinhHoc;
 
             using (IDbConnection connection = new SqlConnection(DatabaseConnection.CnnString()))
             {

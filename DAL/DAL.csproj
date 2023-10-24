@@ -63,21 +63,25 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="CT_PhieuDKHPDAL.cs" />
-    <Compile Include="DanhSachMonHocMoDAL.cs" />
     <Compile Include="DatabaseConnection.cs" />
-    <Compile Include="DoiTuongDAL.cs" />
     <Compile Include="GlobalConfigDAL.cs" />
-    <Compile Include="HocKyDAL.cs" />
     <Compile Include="HuyenDAL.cs" />
     <Compile Include="IServices\IChuongTrinhHocDALService.cs" />
+    <Compile Include="IServices\ICT_PhieuDKHPDALService.cs" />
+    <Compile Include="IServices\IDanhSachMonHocMoDALService.cs" />
+    <Compile Include="IServices\IDoiTuongDALService.cs" />
+    <Compile Include="IServices\IHocKyDALService.cs" />
     <Compile Include="IServices\IKhoaDALService.cs" />
     <Compile Include="IServices\IDapperService.cs" />
+    <Compile Include="IServices\IMonHocDALService.cs" />
     <Compile Include="IServices\INganhDALService.cs" />
     <Compile Include="Services\ChuongTrinhHocDALService.cs" />
+    <Compile Include="Services\CT_PhieuDKHPDALService.cs" />
+    <Compile Include="Services\DanhSachMonHocMoDALService.cs.cs" />
+    <Compile Include="Services\DoiTuongDALService.cs" />
+    <Compile Include="Services\HocKyDALService.cs" />
     <Compile Include="Services\KhoaDALService.cs" />
     <Compile Include="LoaiMonHocDAL.cs" />
-    <Compile Include="MonHocDAL.cs" />
     <Compile Include="MonHocMoDAL.cs" />
     <Compile Include="NguoiDungDAL.cs" />
     <Compile Include="NhomNguoiDungDAL.cs" />
@@ -85,6 +89,7 @@
     <Compile Include="PhieuThuHPDAL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\DapperService.cs" />
+    <Compile Include="Services\MonHocDALService.cs" />
     <Compile Include="Services\NganhDALService.cs" />
     <Compile Include="SinhVienDAL.cs" />
     <Compile Include="TinhDAL.cs" />

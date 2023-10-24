@@ -1,8 +1,12 @@
 ﻿using BLL;
+using BLL.IServices;
+using BLL.Services;
 using ComponentFactory.Krypton.Toolkit;
+using DAL.Services;
 using DTO;
 using System;
 using System.Collections.Generic;
+using System.Configuration;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -10,6 +14,8 @@ namespace PL
 {
     public partial class ThongTinDKHP : KryptonForm
     {
+        private readonly IHocKyBLLService _hocKyBLLService = new HocKyBLLService(new HocKyDALService(new DapperService(), ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString));
+
         public ThongTinDKHP()
         {
             InitializeComponent();
@@ -22,7 +28,7 @@ namespace PL
         }
         private void LoadCmbHK()
         {
-            List<HocKy> ds = HocKyBLL.LayDanhSachHK();
+            List<HocKy> ds = _hocKyBLLService.LayDanhSachHK();
             cmbHocKy.DisplayMember = "TenHocKy";
             cmbHocKy.ValueMember = "MaHocKy";
             cmbHocKy.DataSource = ds;
