@@ -1,9 +1,8 @@
-﻿using DAL.Services;
-using BLL.IServices;
-using DAL;
+﻿using BLL.IServices;
+using DAL.IServices;
+using DAL.Services;
 using DTO;
 using System.Collections.Generic;
-using DAL.IServices;
 using System.Configuration;
 
 namespace BLL.Services
@@ -18,6 +17,7 @@ namespace BLL.Services
         {
             _monHocDALService = monHocDALService;
         }
+
         public List<CT_MonHoc> LayDSMonHoc()
         {
             return _monHocDALService.LayDSMonHoc();

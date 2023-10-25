@@ -1,9 +1,12 @@
-﻿using BLL;
+﻿using BLL.IServices;
+using BLL.Services;
 using ComponentFactory.Krypton.Toolkit;
+using DAL.Services;
 using DTO;
 using PL.Interfaces;
 using System;
 using System.ComponentModel;
+using System.Configuration;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -11,6 +14,10 @@ namespace PL
 {
     public partial class QuanLyHuyen : KryptonForm, IThemSuaHuyenRequester
     {
+        #region Register Services
+        private readonly IHuyenBLLService _huyenBLLService = new HuyenBLLService(new HuyenDALService(new DapperService(), ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString));
+        #endregion
+
         private ICaiDatRequester caiDatRequester;
         private BindingList<CT_Huyen> mHuyen;
         private BindingSource mHuyenSource;
@@ -35,7 +42,7 @@ namespace PL
 
         private void QuanLyHuyen_Load(object sender, EventArgs e)
         {
-            mHuyen = new BindingList<CT_Huyen>(HuyenBLL.LayDSHuyen());
+            mHuyen = new BindingList<CT_Huyen>(_huyenBLLService.LayDSHuyen());
             mHuyenSource = new BindingSource(mHuyen, null);
             dgvDSHuyen.DataSource = mHuyenSource;
 
@@ -104,7 +111,7 @@ namespace PL
                 CT_Huyen huyen = mHuyen[dgvDSHuyen.CurrentRow.Index];
                 int maHuyen = mHuyen[dgvDSHuyen.CurrentRow.Index].MaHuyen;
 
-                XoaHuyenMessage message = HuyenBLL.XoaHuyen(maHuyen);
+                XoaHuyenMessage message = _huyenBLLService.XoaHuyen(maHuyen);
                 switch (message)
                 {
                     case XoaHuyenMessage.Error:
@@ -139,7 +146,7 @@ namespace PL
 
         public void OnThemSuaHuyenClosing()
         {
-            mHuyen = new BindingList<CT_Huyen>(HuyenBLL.LayDSHuyen());
+            mHuyen = new BindingList<CT_Huyen>(_huyenBLLService.LayDSHuyen());
             mHuyenSource.DataSource = mHuyen;
         }
 

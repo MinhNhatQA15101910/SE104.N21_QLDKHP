@@ -20,7 +20,7 @@ namespace DAL.Services
         {
             foreach (var i in list)
             {
-                using (IDbConnection connection = new SqlConnection(DatabaseConnection.CnnString()))
+                using (IDbConnection connection = new SqlConnection(_dbConnection))
                 {
                     var parameters = new DynamicParameters();
                     parameters.Add("@maPhieuDKHP", maPhieu);
@@ -32,7 +32,7 @@ namespace DAL.Services
 
         public void XoaDSMHDKHP(int maPhieu)
         {
-            using (IDbConnection connection = new SqlConnection(DatabaseConnection.CnnString()))
+            using (IDbConnection connection = new SqlConnection(_dbConnection))
             {
                 var parameters = new DynamicParameters();
                 parameters.Add("@maPhieuDKHP", maPhieu);

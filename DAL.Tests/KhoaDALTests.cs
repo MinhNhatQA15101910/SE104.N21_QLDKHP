@@ -10,7 +10,7 @@ namespace DAL.Tests
 
         public KhoaDALTests()
         {
-            _khoaDALService = new KhoaDALService(new DapperService(), @"Data Source=DUYMAI\SQLEXPRESS;Database=QuanLyDangKyHP;Trusted_Connection=True;");
+            _khoaDALService = new KhoaDALService(new DapperService(), @"Data Source=(local);Database=QuanLyDangKyHP;Trusted_Connection=True;");
         }
 
         [Fact]

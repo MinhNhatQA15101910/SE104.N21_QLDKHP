@@ -1,22 +1,30 @@
-﻿using DAL;
+﻿using BLL.IServices;
+using DAL.IServices;
 using DTO;
 using System.Collections.Generic;
 
-namespace BLL
+namespace BLL.Services
 {
-    public class LoaiMonHocBLL
+    public class LoaiMonHocBLLService : ILoaiMonHocBLLService
     {
-        public static List<LoaiMonHoc> LayDSLoaiMonHoc()
+        private readonly ILoaiMonHocDALService _loaiMonHocDALService;
+
+        public LoaiMonHocBLLService(ILoaiMonHocDALService loaiMonHocDALService)
         {
-            return LoaiMonHocDAL.LayDSLoaiMonHoc();
+            _loaiMonHocDALService = loaiMonHocDALService;
         }
 
-        public static XoaLoaiMonHocMessage XoaLoaiMonHoc(int maLoaiMonHoc)
+        public List<LoaiMonHoc> LayDSLoaiMonHoc()
         {
-            return LoaiMonHocDAL.XoaLoaiMonHoc(maLoaiMonHoc);
+            return _loaiMonHocDALService.LayDSLoaiMonHoc();
         }
 
-        public static SuaLoaiMonHocMessage SuaLoaiMonHoc(int maLoaiMonHoc, string tenLoaiMonHoc, string soTiet, string soTien)
+        public XoaLoaiMonHocMessage XoaLoaiMonHoc(int maLoaiMonHoc)
+        {
+            return _loaiMonHocDALService.XoaLoaiMonHoc(maLoaiMonHoc);
+        }
+
+        public SuaLoaiMonHocMessage SuaLoaiMonHoc(int maLoaiMonHoc, string tenLoaiMonHoc, string soTiet, string soTien)
         {
             if (tenLoaiMonHoc.Equals(""))
             {
@@ -55,10 +63,10 @@ namespace BLL
                 return SuaLoaiMonHocMessage.SoTienKhongHopLe;
             }
 
-            return LoaiMonHocDAL.SuaLoaiMonHoc(maLoaiMonHoc, tenLoaiMonHoc, soTietValue, soTienValue);
+            return _loaiMonHocDALService.SuaLoaiMonHoc(maLoaiMonHoc, tenLoaiMonHoc, soTietValue, soTienValue);
         }
 
-        public static ThemLoaiMonHocMessage ThemLoaiMonHoc(string tenLoaiMonHoc, string soTiet, string soTien)
+        public ThemLoaiMonHocMessage ThemLoaiMonHoc(string tenLoaiMonHoc, string soTiet, string soTien)
         {
             if (tenLoaiMonHoc.Equals(""))
             {
@@ -97,8 +105,7 @@ namespace BLL
                 return ThemLoaiMonHocMessage.SoTienKhongHopLe;
             }
 
-            return LoaiMonHocDAL.ThemLoaiMonHoc(tenLoaiMonHoc, soTietValue, soTienValue);
-
+            return _loaiMonHocDALService.ThemLoaiMonHoc(tenLoaiMonHoc, soTietValue, soTienValue);
         }
     }
 }

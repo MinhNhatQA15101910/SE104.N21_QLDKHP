@@ -1,13 +1,10 @@
 ﻿using DTO;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BLL.IServices
 {
-	public interface ISinhVienBLLService
+    public interface ISinhVienBLLService
 	{
 		List<SinhVien> LayDSSVChuaCoTK();
 		List<CT_SinhVien> LayDSSV();

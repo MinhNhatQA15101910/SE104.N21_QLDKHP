@@ -1,14 +1,13 @@
-﻿using BLL;
-using BLL.IServices;
+﻿using BLL.IServices;
 using BLL.Services;
-using DAL.Services;
 using ComponentFactory.Krypton.Toolkit;
+using DAL.Services;
 using DTO;
 using PL.Interfaces;
 using System;
-using System.Configuration;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Configuration;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
@@ -17,13 +16,16 @@ namespace PL
 {
     public partial class QuanLyMonHocMo : KryptonForm, ITraCuuMonHocMoRequester
     {
+        #region Register Service
         private readonly IMonHocBLLService _monHocBLLService = new MonHocBLLService(new MonHocDALService(new DapperService(), ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString));
+        private readonly IGlobalConfigBLLService _globalConfigBLLService = new GlobalConfigBLLService(new GlobalConfigDALService(new DapperService(), ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString));
+        private readonly IMonHocMoBLLService _monHocMoBLLService = new MonHocMoBLLService(new MonHocMoDALService(new DapperService(), ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString));
+        #endregion
 
         private IMonHocMoRequester monHocMoRequester;
         BindingList<HocKyNamHoc> mHocKyNamHoc;
         BindingList<MonHoc> mMonHoc;
         BindingList<MonHocMo> mDSMonHocThem = new BindingList<MonHocMo>();
-        BindingList<MonHocMo> mDSMonHocXoa = new BindingList<MonHocMo>();
         int NamHocNow = 0;
         int HocKyNow = 0;
 
@@ -105,7 +107,7 @@ namespace PL
 
         public void SetUpCurrentHocKyNamHoc()
         {
-            mHocKyNamHoc = new BindingList<HocKyNamHoc>(MonHocMoBLL.GetAllHocKyNamHoc());
+            mHocKyNamHoc = new BindingList<HocKyNamHoc>(_monHocMoBLLService.GetAllHocKyNamHoc());
             int maxHocKy = 0;
             int maxNamHoc = 0;
             foreach (var item in mHocKyNamHoc)
@@ -208,7 +210,7 @@ namespace PL
                     }
                     else
                     {
-                        MessageKhoangTGDongHP message = GlobalConfigBLL.KhoangTGDongHP(HocKyNow, NamHocNow, Int32.Parse(txt_SoNgayDongHp.Text.ToString()));
+                        MessageKhoangTGDongHP message = _globalConfigBLLService.KhoangTGDongHP(HocKyNow, NamHocNow, Int32.Parse(txt_SoNgayDongHp.Text.ToString()));
                         switch (message)
                         {
                             case MessageKhoangTGDongHP.Failed:
@@ -220,7 +222,7 @@ namespace PL
                                 int addsuccess = 0;
                                 foreach (var item in mDSMonHocThem)
                                 {
-                                    MessageAddMonHocMo Message = MonHocMoBLL.AddMonHocMo(item.MaMH, item.MaHocKy, item.NamHoc);
+                                    MessageAddMonHocMo Message = _monHocMoBLLService.AddMonHocMo(item.MaMH, item.MaHocKy, item.NamHoc);
                                     switch (Message)
                                     {
                                         case MessageAddMonHocMo.Failed:

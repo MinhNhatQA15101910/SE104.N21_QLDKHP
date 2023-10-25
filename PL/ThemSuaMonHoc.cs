@@ -1,21 +1,22 @@
-﻿using BLL;
-using BLL.IServices;
+﻿using BLL.IServices;
 using BLL.Services;
-using DAL.IServices;
-using DAL.Services;
 using ComponentFactory.Krypton.Toolkit;
+using DAL.Services;
 using DTO;
-using System.Configuration;
 using PL.Interfaces;
 using System;
 using System.ComponentModel;
+using System.Configuration;
 using System.Windows.Forms;
 
 namespace PL
 {
     public partial class ThemSuaMonHoc : KryptonForm, IThemSuaLoaiMonHocRequester
     {
+        #region Register Services
         private readonly IMonHocBLLService _monHocBLLService = new MonHocBLLService(new MonHocDALService(new DapperService(), ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString));
+        private readonly ILoaiMonHocBLLService _loaiMonHocBLLService = new LoaiMonHocBLLService(new LoaiMonHocDALService(new DapperService(), ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString));
+        #endregion
 
         private IThemSuaMonHocRequester themSuaMonHocRequester;
         private CT_MonHoc monHoc;
@@ -65,7 +66,7 @@ namespace PL
 
         private void ThemSuaMonHoc_Load(object sender, EventArgs e)
         {
-            mLoaiMonHoc = new BindingList<LoaiMonHoc>(LoaiMonHocBLL.LayDSLoaiMonHoc());
+            mLoaiMonHoc = new BindingList<LoaiMonHoc>(_loaiMonHocBLLService.LayDSLoaiMonHoc());
             mLoaiMonHocSource = new BindingSource(mLoaiMonHoc, null);
             cmbLoaiMonHoc.DataSource = mLoaiMonHocSource;
             cmbLoaiMonHoc.DisplayMember = "TenLoaiMonHoc";
@@ -85,7 +86,7 @@ namespace PL
 
         public void OnThemSuaLoaiMonHocClosing()
         {
-            mLoaiMonHoc = new BindingList<LoaiMonHoc>(LoaiMonHocBLL.LayDSLoaiMonHoc());
+            mLoaiMonHoc = new BindingList<LoaiMonHoc>(_loaiMonHocBLLService.LayDSLoaiMonHoc());
             mLoaiMonHocSource.DataSource = mLoaiMonHoc;
         }
 

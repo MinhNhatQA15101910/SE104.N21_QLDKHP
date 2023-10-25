@@ -1,15 +1,15 @@
 ﻿using DAL.IServices;
 using Dapper;
 using DTO;
-using System.Collections.Generic;
-using System.Data.SqlClient;
-using System.Data;
-using System.Linq;
 using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
+using System.Linq;
 
 namespace DAL.Services
 {
-	public class PhieuDKHPDALService : IPhieuDKHPDALService
+    public class PhieuDKHPDALService : IPhieuDKHPDALService
 	{
 		private readonly IDapperService _dapperService;
 		private readonly string _dbConnection;
@@ -20,114 +20,90 @@ namespace DAL.Services
 		}
 		public List<PhieuDKHP> LayTTPhieuDKHP(string mssv, int maHocKy, int namHoc)
 		{
-			List<PhieuDKHP> output;
-
-			using (IDbConnection connection = new SqlConnection(DatabaseConnection.CnnString()))
+			using (IDbConnection connection = new SqlConnection(_dbConnection))
 			{
 				var parameters = new DynamicParameters();
 				parameters.Add("@mssv", mssv);
 				parameters.Add("@MaHocKy", maHocKy);
 				parameters.Add("@NamHoc", namHoc);
-				output = connection.Query<PhieuDKHP>("spPHIEUDKHP_LayTTPhieuDKHP", parameters, commandType: CommandType.StoredProcedure).ToList();
+                return _dapperService.Query<PhieuDKHP>(connection, "spPHIEUDKHP_LayTTPhieuDKHP", parameters, commandType: CommandType.StoredProcedure).ToList();
 			}
-
-			return output;
 		}
 
 		public List<dynamic> LayDSMHThuocHP(int maPhieuDKHP)
 		{
-			List<dynamic> output;
-
-			using (IDbConnection connection = new SqlConnection(DatabaseConnection.CnnString()))
+			using (IDbConnection connection = new SqlConnection(_dbConnection))
 			{
 				var parameters = new DynamicParameters();
 				parameters.Add("@ma", maPhieuDKHP);
 
-				output = connection.Query<dynamic>("spPHIEUDKHP_LayDSMHThuocHP", parameters, commandType: CommandType.StoredProcedure).ToList();
+				return _dapperService.Query<dynamic>(connection, "spPHIEUDKHP_LayDSMHThuocHP", parameters, commandType: CommandType.StoredProcedure).ToList();
 			}
-			return output;
 		}
 
 		public int TinhHocPhi(int maPhieuDKHP)
 		{
-			int output;
-
-			using (IDbConnection connection = new SqlConnection(DatabaseConnection.CnnString()))
+			using (IDbConnection connection = new SqlConnection(_dbConnection))
 			{
 				var parameters = new DynamicParameters();
 				parameters.Add("@maPhieuDKHP", maPhieuDKHP);
-				output = connection.QueryFirstOrDefault<int>("spPHIEUDKHP_TinhHocPhi", parameters, commandType: CommandType.StoredProcedure);
+				return _dapperService.QueryFirstOrDefault<int>(connection, "spPHIEUDKHP_TinhHocPhi", parameters, commandType: CommandType.StoredProcedure);
 			}
-
-			return output;
 		}
 
 		public float TinhHocPhiPhaiDong(int maPhieuDKHP)
 		{
-			float output;
-
-			using (IDbConnection connection = new SqlConnection(DatabaseConnection.CnnString()))
+			using (IDbConnection connection = new SqlConnection(_dbConnection))
 			{
 				var parameters = new DynamicParameters();
 				parameters.Add("@maPhieuDKHP", maPhieuDKHP);
-				output = connection.QueryFirstOrDefault<float>("spPHIEUDKHP_TinhHocPhiPhaiDong", parameters, commandType: CommandType.StoredProcedure);
+				return _dapperService.QueryFirstOrDefault<float>(connection, "spPHIEUDKHP_TinhHocPhiPhaiDong", parameters, commandType: CommandType.StoredProcedure);
 			}
-
-			return output;
 		}
 
 		public float TinhHocPhiDaDong(int maPhieuDKHP)
 		{
-			float output;
-
-			using (IDbConnection connection = new SqlConnection(DatabaseConnection.CnnString()))
+			using (IDbConnection connection = new SqlConnection(_dbConnection))
 			{
 				var parameters = new DynamicParameters();
 				parameters.Add("@maPhieuDKHP", maPhieuDKHP);
-				output = connection.QueryFirstOrDefault<float>("spPHIEUDKHP_TinhHocPhiDaDong", parameters, commandType: CommandType.StoredProcedure);
+				return _dapperService.QueryFirstOrDefault<float>(connection, "spPHIEUDKHP_TinhHocPhiDaDong", parameters, commandType: CommandType.StoredProcedure);
 			}
-
-			return output;
 		}
 
 		public float TinhHocPhiConThieu(int maPhieuDKHP)
 		{
-			float output;
-			using (IDbConnection connection = new SqlConnection(DatabaseConnection.CnnString()))
+			using (IDbConnection connection = new SqlConnection(_dbConnection))
 			{
 				var parameters = new DynamicParameters();
 				parameters.Add("@maPhieuDKHP", maPhieuDKHP);
-				output = connection.QueryFirstOrDefault<float>("spPHIEUDKHP_TinhHocPhiConThieu", parameters, commandType: CommandType.StoredProcedure);
+				return _dapperService.QueryFirstOrDefault<float>(connection, "spPHIEUDKHP_TinhHocPhiConThieu", parameters, commandType: CommandType.StoredProcedure);
 			}
-			return output;
 		}
 
 		public List<dynamic> LayDSMHThuocHP2(int maPhieuDKHP)
 		{
-			List<dynamic> output;
-
-			using (IDbConnection connection = new SqlConnection(DatabaseConnection.CnnString()))
+			using (IDbConnection connection = new SqlConnection(_dbConnection))
 			{
 				var parameters = new DynamicParameters();
 				parameters.Add("@ma", maPhieuDKHP);
 
-				output = connection.Query<dynamic>("spPHIEUDKHP_layDSMHThuocHP2", parameters, commandType: CommandType.StoredProcedure).ToList();
+				return _dapperService.Query<dynamic>(connection, "spPHIEUDKHP_layDSMHThuocHP2", parameters, commandType: CommandType.StoredProcedure).ToList();
 			}
-
-			return output;
 		}
 
 		public bool TaoPhieuDKHP(string mssv, int hocKy, int namHoc)
 		{
 			int numRowsAffected;
-			using (IDbConnection connection = new SqlConnection(DatabaseConnection.CnnString()))
+			using (IDbConnection connection = new SqlConnection(_dbConnection))
 			{
 				var parameters = new DynamicParameters();
 				parameters.Add("@maSV", mssv);
 				parameters.Add("@hocKy", hocKy);
 				parameters.Add("@namHoc", namHoc);
-				numRowsAffected = connection.Execute("spPHIEUDKHP_TaoPhieuDKHP ", parameters, commandType: CommandType.StoredProcedure);
+                numRowsAffected = _dapperService.Execute(connection, "spPHIEUDKHP_TaoPhieuDKHP ", parameters, commandType: CommandType.StoredProcedure);
 			}
+
 			if (numRowsAffected > 0)
 				return true;
 			else
@@ -136,59 +112,48 @@ namespace DAL.Services
 
 		public int LayMaPhieuDKHP(int hocKy, int namHoc)
 		{
-			int output;
-
-			using (IDbConnection connection = new SqlConnection(DatabaseConnection.CnnString()))
+			using (IDbConnection connection = new SqlConnection(_dbConnection))
 			{
 				var parameters = new DynamicParameters();
 				parameters.Add("@maHocKy", hocKy);
 				parameters.Add("@namHoc", namHoc);
-				output = connection.QueryFirstOrDefault<int>("spPHIEUDKHP_LayMaPhieuDKHP", parameters, commandType: CommandType.StoredProcedure);
+				return _dapperService.QueryFirstOrDefault<int>(connection, "spPHIEUDKHP_LayMaPhieuDKHP", parameters, commandType: CommandType.StoredProcedure);
 			}
-
-			return output;
 		}
 
 		public List<PhieuDKHP> LayDanhSachDKHPDaXacNhan(string mssv)
 		{
-			List<PhieuDKHP> output;
-
-			using (IDbConnection connection = new SqlConnection(DatabaseConnection.CnnString()))
+			using (IDbConnection connection = new SqlConnection(_dbConnection))
 			{
 				var parameters = new DynamicParameters();
 				parameters.Add("@mssv", mssv);
 
-				output = connection.Query<PhieuDKHP>("spPHIEUDKHP_LayDanhSachDKHPChoThanhToan", parameters, commandType: CommandType.StoredProcedure).ToList();
+				return _dapperService.Query<PhieuDKHP>(connection, "spPHIEUDKHP_LayDanhSachDKHPChoThanhToan", parameters, commandType: CommandType.StoredProcedure).ToList();
 			}
-
-			return output;
 		}
 
 		public List<PhieuDKHP> GetPhieuDKHP(int MaHocKy, int NamHoc, int MaTinhTrang)
 		{
-			List<PhieuDKHP> ListPhieuDKHP;
-			using (IDbConnection connection = new SqlConnection(DatabaseConnection.CnnString()))
+			using (IDbConnection connection = new SqlConnection(_dbConnection))
 			{
 				var p = new DynamicParameters();
 				p.Add("@MaHocKy", MaHocKy);
 				p.Add("@NamHoc", NamHoc);
 				p.Add("@MaTinhTrang", MaTinhTrang);
-				ListPhieuDKHP = connection.Query<PhieuDKHP>("spPHIEUDKHP_GetPhieuDKHP", p, commandType: CommandType.StoredProcedure).ToList();
+				return _dapperService.Query<PhieuDKHP>(connection, "spPHIEUDKHP_GetPhieuDKHP", p, commandType: CommandType.StoredProcedure).ToList();
 			}
-
-			return ListPhieuDKHP;
 		}
 
 		public MessagePhieuDKHPUpdateTinhTrang PhieuDKHPUpdateTinhTrang(int MaPhieuDKHP, int MaTinhTrang)
 		{
 			try
 			{
-				using (IDbConnection connection = new SqlConnection(DatabaseConnection.CnnString()))
+				using (IDbConnection connection = new SqlConnection(_dbConnection))
 				{
 					var p = new DynamicParameters();
 					p.Add("@MaPhieuDKHP", MaPhieuDKHP);
 					p.Add("@MaTinhTrang", MaTinhTrang);
-					connection.Execute("spPHIEUDKHP_UpdateTinhTrang", p, commandType: CommandType.StoredProcedure);
+					_dapperService.Execute(connection, "spPHIEUDKHP_UpdateTinhTrang", p, commandType: CommandType.StoredProcedure);
 				}
 
 				return MessagePhieuDKHPUpdateTinhTrang.Success;
@@ -201,12 +166,10 @@ namespace DAL.Services
 
 		public List<PhieuDKHP> GetAllPhieuDKHP()
 		{
-			List<PhieuDKHP> ListPhieuDKHP;
-			using (IDbConnection connection = new SqlConnection(DatabaseConnection.CnnString()))
+			using (IDbConnection connection = new SqlConnection(_dbConnection))
 			{
-				ListPhieuDKHP = connection.Query<PhieuDKHP>("spPHIEUDKHP_GetAllPhieuDKHP").ToList();
+				return _dapperService.Query<PhieuDKHP>(connection, "spPHIEUDKHP_GetAllPhieuDKHP").ToList();
 			}
-			return ListPhieuDKHP;
 		}
 	}
 }

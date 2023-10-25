@@ -1,5 +1,4 @@
-﻿using BLL;
-using BLL.IServices;
+﻿using BLL.IServices;
 using BLL.Services;
 using ComponentFactory.Krypton.Toolkit;
 using DAL.Services;
@@ -15,11 +14,14 @@ namespace PL
 {
     public partial class ThemSuaSinhVien : KryptonForm, IThemSuaNganhRequester, IThemSuaHuyenRequester, IThemSuaDoiTuongRequester
     {
+        #region Register Services
+        private readonly IHuyenBLLService _huyenBLLService = new HuyenBLLService(new HuyenDALService(new DapperService(), ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString));
         private readonly INganhBLLService _nganhBLLService = new NganhBLLService(new NganhDALService(new DapperService(), ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString));
         private readonly IDoiTuongBLLService _doiTuongBLLService = new DoiTuongBLLService(new DoiTuongDALService(new DapperService(), ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString));
-		    private readonly ISinhVienBLLService _sinhVienBLLService = new SinhVienBLLService(new SinhVienDALService(new DapperService(), ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString));
+		private readonly ISinhVienBLLService _sinhVienBLLService = new SinhVienBLLService(new SinhVienDALService(new DapperService(), ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString));
+        #endregion
 
-		    private readonly IThemSuaSinhVienRequester themSuaSinhVienRequester;
+        private readonly IThemSuaSinhVienRequester themSuaSinhVienRequester;
         private readonly CT_SinhVien sinhVien;
 
         private BindingList<DoiTuong> mDoiTuongSelected;
@@ -91,7 +93,7 @@ namespace PL
 
         private void RefreshHuyenList()
         {
-            mHuyen = new BindingList<CT_Huyen>(HuyenBLL.LayDSHuyen());
+            mHuyen = new BindingList<CT_Huyen>(_huyenBLLService.LayDSHuyen());
             mHuyenSource.DataSource = mHuyen;
         }
 
@@ -126,7 +128,7 @@ namespace PL
                 cmbDoiTuongAll.ValueMember = "MaDT";
 
                 // Huyen
-                mHuyen = new BindingList<CT_Huyen>(HuyenBLL.LayDSHuyen());
+                mHuyen = new BindingList<CT_Huyen>(_huyenBLLService.LayDSHuyen());
                 mHuyenSource = new BindingSource(mHuyen, null);
                 cmbHuyen.DataSource = mHuyenSource;
                 cmbHuyen.DisplayMember = "DisplayHuyen";
@@ -167,7 +169,7 @@ namespace PL
                 cmbDoiTuongAll.ValueMember = "MaDT";
 
                 // Huyen
-                mHuyen = new BindingList<CT_Huyen>(HuyenBLL.LayDSHuyen());
+                mHuyen = new BindingList<CT_Huyen>(_huyenBLLService.LayDSHuyen());
                 mHuyenSource = new BindingSource(mHuyen, null);
                 cmbHuyen.DataSource = mHuyenSource;
                 cmbHuyen.DisplayMember = "DisplayHuyen";

@@ -1,9 +1,12 @@
-﻿using BLL;
+﻿using BLL.IServices;
+using BLL.Services;
 using ComponentFactory.Krypton.Toolkit;
+using DAL.Services;
 using DTO;
 using PL.Interfaces;
 using System;
 using System.ComponentModel;
+using System.Configuration;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -11,6 +14,11 @@ namespace PL
 {
     public partial class QuanLyLoaiMonHoc : KryptonForm, IThemSuaLoaiMonHocRequester
     {
+        #region Register Service
+        private readonly IGlobalConfigBLLService _globalConfigBLLService = new GlobalConfigBLLService(new GlobalConfigDALService(new DapperService(), ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString));
+        private readonly ILoaiMonHocBLLService _loaiMonHocBLLService = new LoaiMonHocBLLService(new LoaiMonHocDALService(new DapperService(), ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString));
+        #endregion
+
         private ICaiDatRequester caiDatRequester;
         private BindingList<LoaiMonHoc> mLoaiMonHoc;
         private BindingSource mLoaiMonHocSource;
@@ -48,7 +56,7 @@ namespace PL
 
         private void QuanLyLoaiMonHoc_Load(object sender, EventArgs e)
         {
-            mLoaiMonHoc = new BindingList<LoaiMonHoc>(LoaiMonHocBLL.LayDSLoaiMonHoc());
+            mLoaiMonHoc = new BindingList<LoaiMonHoc>(_loaiMonHocBLLService.LayDSLoaiMonHoc());
             mLoaiMonHocSource = new BindingSource(mLoaiMonHoc, null);
             dgvDSLoaiMon.DataSource = mLoaiMonHocSource;
 
@@ -64,8 +72,8 @@ namespace PL
             dgvDSLoaiMon.Columns["MaLoaiMonHoc"].Visible = false;
 
 
-            txtTinChiToiDa.Text = GlobalConfigBLL.LaySoTinChiToiDa().ToString();
-            txtTinChiToiThieu.Text = GlobalConfigBLL.LaySoTinChiToiThieu().ToString();
+            txtTinChiToiDa.Text = _globalConfigBLLService.LaySoTinChiToiDa().ToString();
+            txtTinChiToiThieu.Text = _globalConfigBLLService.LaySoTinChiToiThieu().ToString();
         }
 
         private void dgvDSLoaiMon_SelectionChanged(object sender, EventArgs e)
@@ -89,7 +97,7 @@ namespace PL
             string tinChiToiDa = txtTinChiToiDa.Text.Trim();
             string tinChiToiThieu = txtTinChiToiThieu.Text.Trim();
 
-            SuaGioiHanTinChiMessage message = GlobalConfigBLL.SuaGioiHanTinChi(tinChiToiDa, tinChiToiThieu);
+            SuaGioiHanTinChiMessage message = _globalConfigBLLService.SuaGioiHanTinChi(tinChiToiDa, tinChiToiThieu);
             switch (message)
             {
                 case SuaGioiHanTinChiMessage.TinChiToiDaRong:
@@ -125,7 +133,7 @@ namespace PL
                 LoaiMonHoc loaiMonHoc = mLoaiMonHoc[dgvDSLoaiMon.CurrentRow.Index];
                 int maLoaiMonHoc = mLoaiMonHoc[dgvDSLoaiMon.CurrentRow.Index].MaLoaiMonHoc;
 
-                XoaLoaiMonHocMessage message = LoaiMonHocBLL.XoaLoaiMonHoc(maLoaiMonHoc);
+                XoaLoaiMonHocMessage message = _loaiMonHocBLLService.XoaLoaiMonHoc(maLoaiMonHoc);
                 switch (message)
                 {
                     case XoaLoaiMonHocMessage.Error:
@@ -148,7 +156,7 @@ namespace PL
 
         public void OnThemSuaLoaiMonHocClosing()
         {
-            mLoaiMonHoc = new BindingList<LoaiMonHoc>(LoaiMonHocBLL.LayDSLoaiMonHoc());
+            mLoaiMonHoc = new BindingList<LoaiMonHoc>(_loaiMonHocBLLService.LayDSLoaiMonHoc());
             mLoaiMonHocSource.DataSource = mLoaiMonHoc;
         }
 

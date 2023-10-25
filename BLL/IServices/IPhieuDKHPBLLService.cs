@@ -1,13 +1,9 @@
 ﻿using DTO;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BLL.IServices
 {
-	public interface IPhieuDKHPBLLService
+    public interface IPhieuDKHPBLLService
 	{
 		List<PhieuDKHP> LayTTPhieuDKHP(string mssv, int maHocKy, int namHoc);
 		List<dynamic> LayDSMHThuocHP(int maPhieuDKHP);

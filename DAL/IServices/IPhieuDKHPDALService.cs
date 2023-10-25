@@ -1,13 +1,9 @@
 ﻿using DTO;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DAL.IServices
 {
-	public interface IPhieuDKHPDALService
+    public interface IPhieuDKHPDALService
 	{
 		List<PhieuDKHP> LayTTPhieuDKHP(string mssv, int maHocKy, int namHoc);
 		List<dynamic> LayDSMHThuocHP(int maPhieuDKHP);

@@ -1,5 +1,4 @@
-﻿using BLL;
-using BLL.IServices;
+﻿using BLL.IServices;
 using BLL.Services;
 using ComponentFactory.Krypton.Toolkit;
 using DAL.Services;
@@ -12,7 +11,7 @@ using System.Windows.Forms;
 
 namespace PL
 {
-	public partial class ThemSuaNganh : KryptonForm, IThemSuaKhoaRequester
+    public partial class ThemSuaNganh : KryptonForm, IThemSuaKhoaRequester
 	{
 		private readonly IKhoaBLLService _khoaBLLService = new KhoaBLLService(new KhoaDALService(new DapperService(), ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString));
 		private readonly INganhBLLService _nganhBLLService = new NganhBLLService(new NganhDALService(new DapperService(), ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString));

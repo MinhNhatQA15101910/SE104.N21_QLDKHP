@@ -3,15 +3,13 @@ using Dapper;
 using DTO;
 using System;
 using System.Collections.Generic;
-using System.Data.SqlClient;
 using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DAL.Services
 {
-	public class SinhVienDALService : ISinhVienDALService
+    public class SinhVienDALService : ISinhVienDALService
 	{
 		private readonly IDapperService _dapperService;
 		private readonly string _dbConnection;
@@ -22,29 +20,25 @@ namespace DAL.Services
 		}
 		public List<SinhVien> LayDSSVChuaCoTK()
 		{
-			List<SinhVien> output;
-			using (IDbConnection connection = new SqlConnection(DatabaseConnection.CnnString()))
+			using (IDbConnection connection = new SqlConnection(_dbConnection))
 			{
-				output = connection.Query<SinhVien>("spSINHVIEN_LayDSSVChuaCoTK").ToList();
+				return _dapperService.Query<SinhVien>(connection, "spSINHVIEN_LayDSSVChuaCoTK").ToList();
 			}
-			return output;
 		}
 
 		public List<CT_SinhVien> LayDSSV()
 		{
-			List<CT_SinhVien> output;
-			using (IDbConnection connection = new SqlConnection(DatabaseConnection.CnnString()))
+			using (IDbConnection connection = new SqlConnection(_dbConnection))
 			{
-				output = connection.Query<CT_SinhVien>("spSINHVIEN_LayDSSV").ToList();
+				return _dapperService.Query<CT_SinhVien>(connection, "spSINHVIEN_LayDSSV").ToList();
 			}
-			return output;
 		}
 
 		public SuaSinhVienMessage SuaSinhVien(string mssvBanDau, string mssv, string hoTen, DateTime ngaySinh, string gioiTinh, int maHuyen, string maNganh, List<int> maDTList)
 		{
 			try
 			{
-				using (IDbConnection connection = new SqlConnection(DatabaseConnection.CnnString()))
+				using (IDbConnection connection = new SqlConnection(_dbConnection))
 				{
 					var p = new DynamicParameters();
 					p.Add("@MaSV", mssvBanDau);
@@ -53,18 +47,18 @@ namespace DAL.Services
 					p.Add("@GioiTinh", gioiTinh);
 					p.Add("@MaHuyen", maHuyen);
 					p.Add("@MaNganh", maNganh);
-					connection.Execute("spSINHVIEN_SuaSinhVien", p, commandType: CommandType.StoredProcedure);
+					_dapperService.Execute(connection, "spSINHVIEN_SuaSinhVien", p, commandType: CommandType.StoredProcedure);
 
 					p = new DynamicParameters();
 					p.Add("@MaSV", mssvBanDau);
-					connection.Execute("spSINHVIEN_DOITUONG_XoaSinhVien", p, commandType: CommandType.StoredProcedure);
+					_dapperService.Execute(connection, "spSINHVIEN_DOITUONG_XoaSinhVien", p, commandType: CommandType.StoredProcedure);
 
 					foreach (int maDT in maDTList)
 					{
 						p = new DynamicParameters();
 						p.Add("@MaSV", mssv);
 						p.Add("@MaDT", maDT);
-						connection.Execute("spSINHVIEN_DOITUONG_Them", p, commandType: CommandType.StoredProcedure);
+						_dapperService.Execute(connection, "spSINHVIEN_DOITUONG_Them", p, commandType: CommandType.StoredProcedure);
 					}
 				}
 			}
@@ -80,7 +74,7 @@ namespace DAL.Services
 		{
 			try
 			{
-				using (IDbConnection connection = new SqlConnection(DatabaseConnection.CnnString()))
+				using (IDbConnection connection = new SqlConnection(_dbConnection))
 				{
 					var p = new DynamicParameters();
 					p.Add("@MaSV", mssv);
@@ -89,14 +83,14 @@ namespace DAL.Services
 					p.Add("@GioiTinh", gioiTinh);
 					p.Add("@MaHuyen", maHuyen);
 					p.Add("@MaNganh", maNganh);
-					connection.Execute("spSINHVIEN_ThemSinhVien", p, commandType: CommandType.StoredProcedure);
+					_dapperService.Execute(connection, "spSINHVIEN_ThemSinhVien", p, commandType: CommandType.StoredProcedure);
 
 					foreach (int maDT in maDTList)
 					{
 						p = new DynamicParameters();
 						p.Add("@MaSV", mssv);
 						p.Add("@MaDT", maDT);
-						connection.Execute("spSINHVIEN_DOITUONG_Them", p, commandType: CommandType.StoredProcedure);
+						_dapperService.Execute(connection, "spSINHVIEN_DOITUONG_Them", p, commandType: CommandType.StoredProcedure);
 					}
 				}
 			}
@@ -122,15 +116,15 @@ namespace DAL.Services
 		{
 			try
 			{
-				using (IDbConnection connection = new SqlConnection(DatabaseConnection.CnnString()))
+				using (IDbConnection connection = new SqlConnection(_dbConnection))
 				{
 					var p = new DynamicParameters();
 					p.Add("@MaSV", maSV);
-					connection.Execute("spSINHVIEN_DOITUONG_XoaSinhVien", p, commandType: CommandType.StoredProcedure);
-					connection.Execute("spCT_PHIEUDKHP_XoaSinhVien", p, commandType: CommandType.StoredProcedure);
-					connection.Execute("spPHIEUTHUHP_XoaSinhVien", p, commandType: CommandType.StoredProcedure);
-					connection.Execute("spPHIEUDKHP_XoaSinhVien", p, commandType: CommandType.StoredProcedure);
-					connection.Execute("spSINHVIEN_XoaSinhVien", p, commandType: CommandType.StoredProcedure);
+					_dapperService.Execute(connection, "spSINHVIEN_DOITUONG_XoaSinhVien", p, commandType: CommandType.StoredProcedure);
+					_dapperService.Execute(connection, "spCT_PHIEUDKHP_XoaSinhVien", p, commandType: CommandType.StoredProcedure);
+					_dapperService.Execute(connection, "spPHIEUTHUHP_XoaSinhVien", p, commandType: CommandType.StoredProcedure);
+					_dapperService.Execute(connection, "spPHIEUDKHP_XoaSinhVien", p, commandType: CommandType.StoredProcedure);
+					_dapperService.Execute(connection, "spSINHVIEN_XoaSinhVien", p, commandType: CommandType.StoredProcedure);
 
 				}
 			}
@@ -144,46 +138,34 @@ namespace DAL.Services
 
 		public string LayTenSV(string mssv)
 		{
-			string output;
-
-			using (IDbConnection connection = new SqlConnection(DatabaseConnection.CnnString()))
+			using (IDbConnection connection = new SqlConnection(_dbConnection))
 			{
 				var parameters = new DynamicParameters();
 				parameters.Add("@mssv", mssv);
-				output = connection.QueryFirstOrDefault<string>("spSINHVIEN_LayTenSV", parameters, commandType: CommandType.StoredProcedure).ToString();
+				return _dapperService.QueryFirstOrDefault<string>(connection, "spSINHVIEN_LayTenSV", parameters, commandType: CommandType.StoredProcedure).ToString();
 			}
-
-			return output;
 		}
 
 		public List<dynamic> LayThongTinSV(string mssv)
 		{
-			List<dynamic> output;
-
-			using (IDbConnection connection = new SqlConnection(DatabaseConnection.CnnString()))
+			using (IDbConnection connection = new SqlConnection(_dbConnection))
 			{
 				var parameters = new DynamicParameters();
 				parameters.Add("@mssv", mssv);
-				output = connection.Query<dynamic>("spSINHVIEN_LayThongTinSV", parameters, commandType: CommandType.StoredProcedure).ToList();
+				return _dapperService.Query<dynamic>(connection, "spSINHVIEN_LayThongTinSV", parameters, commandType: CommandType.StoredProcedure).ToList();
 			}
-
-			return output;
 		}
 
 		public List<dynamic> BaoCaoSinhVienChuaDongHocPhi(int hocKy, int namHoc)
 		{
-			List<dynamic> output;
-
-			using (IDbConnection connection = new SqlConnection(DatabaseConnection.CnnString()))
+			using (IDbConnection connection = new SqlConnection(_dbConnection))
 			{
 				var parameters = new DynamicParameters();
 				parameters.Add("@hocKy", hocKy);
 				parameters.Add("@namHoc", namHoc);
 
-				output = connection.Query<dynamic>("spSINHVIEN_BaoCao", parameters, commandType: CommandType.StoredProcedure).ToList();
+				return _dapperService.Query<dynamic>(connection, "spSINHVIEN_BaoCao", parameters, commandType: CommandType.StoredProcedure).ToList();
 			}
-
-			return output;
 		}
 	}
 }

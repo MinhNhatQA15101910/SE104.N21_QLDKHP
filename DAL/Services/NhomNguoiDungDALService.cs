@@ -1,17 +1,17 @@
 ﻿using DAL.IServices;
-using Dapper;
 using DTO;
 using System.Collections.Generic;
-using System.Data.SqlClient;
 using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 
 namespace DAL.Services
 {
-	public class NhomNguoiDungDALService : INhomNguoiDungDALService
+    public class NhomNguoiDungDALService : INhomNguoiDungDALService
 	{
 		private readonly IDapperService _dapperService;
 		private readonly string _dbConnection;
+
 		public NhomNguoiDungDALService(IDapperService dapperService, string dbConnection)
 		{
 			_dapperService = dapperService;
@@ -19,12 +19,10 @@ namespace DAL.Services
 		}
 		public List<NhomNguoiDung> LayDSNhomNguoiDung()
 		{
-			List<NhomNguoiDung> output;
-			using (IDbConnection connection = new SqlConnection(DatabaseConnection.CnnString()))
+			using (IDbConnection connection = new SqlConnection(_dbConnection))
 			{
-				output = connection.Query<NhomNguoiDung>("spNHOMNGUOIDUNG_LayDSNhomNguoiDung").ToList();
+				return _dapperService.Query<NhomNguoiDung>(connection, "spNHOMNGUOIDUNG_LayDSNhomNguoiDung").ToList();
 			}
-			return output;
 		}
 	}
 }

@@ -1,5 +1,4 @@
-﻿using BLL;
-using BLL.IServices;
+﻿using BLL.IServices;
 using BLL.Services;
 using ComponentFactory.Krypton.Toolkit;
 using DAL.Services;

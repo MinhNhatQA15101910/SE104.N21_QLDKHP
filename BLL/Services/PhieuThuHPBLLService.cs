@@ -1,17 +1,12 @@
-﻿using DAL.IServices;
-using BLL.IServices;
+﻿using BLL.IServices;
+using DAL.IServices;
+using DTO;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using DAL.Services;
-using DAL;
-using DTO;
 
 namespace BLL.Services
 {
-	public class PhieuThuHPBLLService : IPhieuThuHPBLLService
+    public class PhieuThuHPBLLService : IPhieuThuHPBLLService
 	{
 		private readonly IPhieuThuHPDALService _phieuThuHPDALService;
 		public PhieuThuHPBLLService(IPhieuThuHPDALService phieuThuHPDALService)

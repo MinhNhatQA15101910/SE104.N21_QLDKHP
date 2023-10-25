@@ -1,15 +1,11 @@
 ﻿using BLL.IServices;
 using DAL.IServices;
 using DTO;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace BLL.Services
 {
-	public class PhieuDKHPBLLService : IPhieuDKHPBLLService
+    public class PhieuDKHPBLLService : IPhieuDKHPBLLService
 	{
 		private readonly IPhieuDKHPDALService _phieuDKHPDALService;
 		public PhieuDKHPBLLService(IPhieuDKHPDALService phieuDKHPDALService)

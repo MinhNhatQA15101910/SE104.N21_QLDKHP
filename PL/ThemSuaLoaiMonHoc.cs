@@ -1,14 +1,21 @@
-﻿using BLL;
+﻿using BLL.IServices;
+using BLL.Services;
 using ComponentFactory.Krypton.Toolkit;
+using DAL.Services;
 using DTO;
 using PL.Interfaces;
 using System;
+using System.Configuration;
 using System.Windows.Forms;
 
 namespace PL
 {
     public partial class ThemSuaLoaiMonHoc : KryptonForm
     {
+        #region Register Services
+        private readonly ILoaiMonHocBLLService _loaiMonHocBLLService = new LoaiMonHocBLLService(new LoaiMonHocDALService(new DapperService(), ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString));
+        #endregion
+
         private IThemSuaLoaiMonHocRequester themSuaLoaiMonHocRequester;
         private LoaiMonHoc loaiMonHoc;
 
@@ -65,7 +72,7 @@ namespace PL
                 string soTiet = txtSoTiet.Text.Trim();
                 string soTien = txtSoTien.Text.Trim();
 
-                SuaLoaiMonHocMessage message = LoaiMonHocBLL.SuaLoaiMonHoc(maLoaiMonHoc, tenLoaiMonHoc, soTiet, soTien);
+                SuaLoaiMonHocMessage message = _loaiMonHocBLLService.SuaLoaiMonHoc(maLoaiMonHoc, tenLoaiMonHoc, soTiet, soTien);
                 switch (message)
                 {
                     case SuaLoaiMonHocMessage.EmptyTenLoaiMonHoc:
@@ -101,7 +108,7 @@ namespace PL
                 string soTiet = txtSoTiet.Text.Trim();
                 string soTien = txtSoTien.Text.Trim();
 
-                ThemLoaiMonHocMessage message = LoaiMonHocBLL.ThemLoaiMonHoc(tenLoaiMonHoc, soTiet, soTien);
+                ThemLoaiMonHocMessage message = _loaiMonHocBLLService.ThemLoaiMonHoc(tenLoaiMonHoc, soTiet, soTien);
                 switch (message)
                 {
                     case ThemLoaiMonHocMessage.EmptyTenLoaiMonHoc:

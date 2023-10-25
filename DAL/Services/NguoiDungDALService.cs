@@ -1,18 +1,18 @@
 ﻿using DAL.IServices;
 using Dapper;
 using DTO;
-using System.Collections.Generic;
-using System.Data.SqlClient;
-using System.Data;
 using System;
+using System.Collections.Generic;
+using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
-using System.Text;
 using System.Security.Cryptography;
+using System.Text;
 
 
 namespace DAL.Services
 {
-	public class NguoiDungDALService : INguoiDungDALService
+    public class NguoiDungDALService : INguoiDungDALService
 	{
 		private readonly IDapperService _dapperService;
 		private readonly string _dbConnection;
@@ -31,24 +31,22 @@ namespace DAL.Services
 		}
 		public List<CT_NguoiDung> LayDSNguoiDung()
 		{
-			List<CT_NguoiDung> output;
-			using (IDbConnection connection = new SqlConnection(DatabaseConnection.CnnString()))
+			using (IDbConnection connection = new SqlConnection(_dbConnection))
 			{
-				output = connection.Query<CT_NguoiDung>("spNGUOIDUNG_LayDSNguoiDung").ToList();
+				return _dapperService.Query<CT_NguoiDung>(connection, "spNGUOIDUNG_LayDSNguoiDung").ToList();
 			}
-			return output;
 		}
 
 		public DangNhapMessage DangNhap(string tenDangNhap, string matKhau)
 		{
 			try
 			{
-				using (IDbConnection connection = new SqlConnection(DatabaseConnection.CnnString()))
+				using (IDbConnection connection = new SqlConnection(_dbConnection))
 				{
 					var p = new DynamicParameters();
 					p.Add("@TenDangNhap", tenDangNhap);
 					p.Add("@MatKhau", ConvertToSHA512(matKhau));
-					GlobalConfig.CurrNguoiDung = connection.QuerySingleOrDefault<NguoiDung>("spNGUOIDUNG_LayBangTenDangNhapVaMatKhau", p, commandType: CommandType.StoredProcedure);
+					GlobalConfig.CurrNguoiDung = _dapperService.QuerySingleOrDefault<NguoiDung>(connection, "spNGUOIDUNG_LayBangTenDangNhapVaMatKhau", p, commandType: CommandType.StoredProcedure);
 				}
 			}
 			catch (Exception)
@@ -67,11 +65,11 @@ namespace DAL.Services
 		{
 			try
 			{
-				using (IDbConnection connection = new SqlConnection(DatabaseConnection.CnnString()))
+				using (IDbConnection connection = new SqlConnection(_dbConnection))
 				{
 					var p = new DynamicParameters();
 					p.Add("@TenDangNhap", tenDangNhap);
-					connection.Execute("spNGUOIDUNG_XoaTaiKhoan", p, commandType: CommandType.StoredProcedure);
+					_dapperService.Execute(connection, "spNGUOIDUNG_XoaTaiKhoan", p, commandType: CommandType.StoredProcedure);
 				}
 			}
 			catch (Exception)
@@ -88,13 +86,13 @@ namespace DAL.Services
 
 			try
 			{
-				using (IDbConnection connection = new SqlConnection(DatabaseConnection.CnnString()))
+				using (IDbConnection connection = new SqlConnection(_dbConnection))
 				{
 					var p = new DynamicParameters();
 					p.Add("@TenDangNhap", GlobalConfig.CurrNguoiDung.TenDangNhap);
 					p.Add("@MatKhauHT", ConvertToSHA512(matKhauHT));
 					p.Add("@MatKhauMoi", ConvertToSHA512(matKhauMoi));
-					rowsAffected = connection.Execute("spNGUOIDUNG_DoiMatKhau", p, commandType: CommandType.StoredProcedure);
+					rowsAffected = _dapperService.Execute(connection, "spNGUOIDUNG_DoiMatKhau", p, commandType: CommandType.StoredProcedure);
 				}
 			}
 			catch (Exception)
@@ -115,12 +113,12 @@ namespace DAL.Services
 		{
 			try
 			{
-				using (IDbConnection connection = new SqlConnection(DatabaseConnection.CnnString()))
+				using (IDbConnection connection = new SqlConnection(_dbConnection))
 				{
 					var p = new DynamicParameters();
 					p.Add("@TenDangNhap", tenDangNhap);
 					p.Add("@MaNhom", maNhom);
-					connection.Execute("spNGUOIDUNG_ThemTaiKhoan", p, commandType: CommandType.StoredProcedure);
+					_dapperService.Execute(connection, "spNGUOIDUNG_ThemTaiKhoan", p, commandType: CommandType.StoredProcedure);
 				}
 			}
 			catch (SqlException ex)
@@ -145,25 +143,22 @@ namespace DAL.Services
 		{
 			try
 			{
-				using (IDbConnection connection = new SqlConnection(DatabaseConnection.CnnString()))
+				using (IDbConnection connection = new SqlConnection(_dbConnection))
 				{
 					var p = new DynamicParameters();
 					p.Add("@TenDangNhapBD", tenDangNhapBD);
 					p.Add("@TenDangNhap", tenDangNhap);
 					p.Add("@MaNhom", maNhom);
-					connection.Execute("spNGUOIDUNG_SuaTaiKhoan", p, commandType: CommandType.StoredProcedure);
+					_dapperService.Execute(connection, "spNGUOIDUNG_SuaTaiKhoan", p, commandType: CommandType.StoredProcedure);
 				}
 			}
 			catch (SqlException ex)
 			{
-				if (ex.Number == 2627)
-				{
-					if (ex.Message.Contains("PK_NGUOIDUNG"))
-					{
-						return SuaTaiKhoanMessage.DuplicateTenDangNhap;
-					}
-				}
-			}
+                if (ex.Number == 2627 && ex.Message.Contains("PK_NGUOIDUNG"))
+                {
+                    return SuaTaiKhoanMessage.DuplicateTenDangNhap;
+                }
+            }
 			catch (Exception)
 			{
 				return SuaTaiKhoanMessage.Error;
@@ -176,13 +171,13 @@ namespace DAL.Services
 		{
 			try
 			{
-				using (IDbConnection connection = new SqlConnection(DatabaseConnection.CnnString()))
+				using (IDbConnection connection = new SqlConnection(_dbConnection))
 				{
 					foreach (SinhVien sinhVien in dssv)
 					{
 						var p = new DynamicParameters();
 						p.Add("@MaSV", sinhVien.MaSV);
-						connection.Execute("spNGUOIDUNG_ThemTaiKhoanSV", p, commandType: CommandType.StoredProcedure);
+						_dapperService.Execute(connection, "spNGUOIDUNG_ThemTaiKhoanSV", p, commandType: CommandType.StoredProcedure);
 					}
 				}
 			}
