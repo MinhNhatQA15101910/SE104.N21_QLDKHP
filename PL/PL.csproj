@@ -40,22 +40,22 @@
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="ComponentFactory.Krypton.Design">
-      <HintPath>..\..\..\..\Desktop\Bin\ComponentFactory.Krypton.Design.dll</HintPath>
+      <HintPath>..\External\ComponentFactory.Krypton.Design.dll</HintPath>
     </Reference>
     <Reference Include="ComponentFactory.Krypton.Docking">
-      <HintPath>..\..\..\..\Desktop\Bin\ComponentFactory.Krypton.Docking.dll</HintPath>
+      <HintPath>..\External\ComponentFactory.Krypton.Docking.dll</HintPath>
     </Reference>
     <Reference Include="ComponentFactory.Krypton.Navigator">
-      <HintPath>..\..\..\..\Desktop\Bin\ComponentFactory.Krypton.Navigator.dll</HintPath>
+      <HintPath>..\External\ComponentFactory.Krypton.Navigator.dll</HintPath>
     </Reference>
     <Reference Include="ComponentFactory.Krypton.Ribbon">
-      <HintPath>..\..\..\..\Desktop\Bin\ComponentFactory.Krypton.Ribbon.dll</HintPath>
+      <HintPath>..\External\ComponentFactory.Krypton.Ribbon.dll</HintPath>
     </Reference>
     <Reference Include="ComponentFactory.Krypton.Toolkit">
-      <HintPath>..\..\..\..\Desktop\Bin\ComponentFactory.Krypton.Toolkit.dll</HintPath>
+      <HintPath>..\External\ComponentFactory.Krypton.Toolkit.dll</HintPath>
     </Reference>
     <Reference Include="ComponentFactory.Krypton.Workspace">
-      <HintPath>..\..\..\..\Desktop\Bin\ComponentFactory.Krypton.Workspace.dll</HintPath>
+      <HintPath>..\External\ComponentFactory.Krypton.Workspace.dll</HintPath>
     </Reference>
     <Reference Include="Microsoft.ReportViewer.Common, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.150.1576.0\lib\net40\Microsoft.ReportViewer.Common.dll</HintPath>

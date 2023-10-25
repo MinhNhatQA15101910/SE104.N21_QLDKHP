@@ -1,13 +1,10 @@
-﻿using BLL;
-using BLL.IServices;
+﻿using BLL.IServices;
 using BLL.Services;
 using ComponentFactory.Krypton.Toolkit;
-using DAL.IServices;
 using DAL.Services;
 using DTO;
 using PL.Interfaces;
 using System;
-using System.Configuration;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Windows.Forms;

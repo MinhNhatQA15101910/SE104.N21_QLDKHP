@@ -6,13 +6,9 @@ using DAL.Services;
 using DTO;
 using PL.Interfaces;
 using System;
-using System.ComponentModel;
-using System.Configuration;
-using System.Data;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Drawing;
-using System.Linq;
 using System.Windows.Forms;
 
 namespace PL
@@ -23,7 +19,7 @@ namespace PL
         private readonly IDanhSachMonHocMoBLLService _danhSachMonHocMoBLLService = new DanhSachMonHocMoBLLService(new DanhSachMonHocMoDALService(new DapperService(), ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString));
         private readonly IHocKyBLLService _hocKyBLLService = new HocKyBLLService(new HocKyDALService(new DapperService(), ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString));
         private readonly IPhieuDKHPBLLService _phieuDKHPBLLService = new PhieuDKHPBLLService(new PhieuDKHPDALService(new DapperService(), ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString));
-        private IDangKyHocPhanRequester dangKyHocPhanRequester;>>>>>>> master
+        private IDangKyHocPhanRequester dangKyHocPhanRequester;
         private bool dangKy = false;
         private int selectedIndex1 = -1;
         private int selectedIndex2 = -1;
@@ -60,19 +56,14 @@ namespace PL
         private void KtDangKyHocPhan()
         {
             List<PhieuDKHP> list = _phieuDKHPBLLService.LayTTPhieuDKHP(GlobalConfig.CurrNguoiDung.TenDangNhap, GlobalConfig.CurrMaHocKy, GlobalConfig.CurrNamHoc);
-            if (list.Count > 0)
+            if (list.Count > 0 && list[0].MaTinhTrang == 1)
             {
-                if (list[0].MaTinhTrang == 1)
-                {
-                    dangKy = true;
-                    btnDangKy.Text = "LƯU";
+                dangKy = true;
+                btnDangKy.Text = "LƯU";
 
-                    LoadDataDSMonHocDaChon(list[0].MaPhieuDKHP);
+                LoadDataDSMonHocDaChon(list[0].MaPhieuDKHP);
 
-                    RemoveMHTrung();
-                }
-
-
+                RemoveMHTrung();
             }
 
         }

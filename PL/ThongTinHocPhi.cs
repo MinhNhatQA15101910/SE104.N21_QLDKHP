@@ -1,11 +1,9 @@
-﻿using BLL;
-using BLL.IServices;
+﻿using BLL.IServices;
 using BLL.Services;
 using ComponentFactory.Krypton.Toolkit;
 using DAL.Services;
 using DTO;
 using System;
-using System.Configuration;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Globalization;
@@ -88,25 +86,21 @@ namespace PL
                         {
                             PhieuDKHP kq = ds[0];
                             int maPhieuDKHP = int.Parse(kq.MaPhieuDKHP.ToString().Trim());
-                            if (kq != null)
-                            {
-                                int hocPhi = _phieuDKHPBLLService.TinhHocPhi(maPhieuDKHP);
-                                float hocPhiPhaiDong = _phieuDKHPBLLService.TinhHocPhiPhaiDong(maPhieuDKHP);
-                                txtSoPhieuDKHP.Text = maPhieuDKHP.ToString();
-                                txtTGDongGanNhat.Text = _phieuThuHPBLLService.LayThoiGianDongHPGanNhat(maPhieuDKHP).ToString("dd/MM/yyyy"); // lấy tgian đóng gần nhất 
+                            int hocPhi = _phieuDKHPBLLService.TinhHocPhi(maPhieuDKHP);
+                            float hocPhiPhaiDong = _phieuDKHPBLLService.TinhHocPhiPhaiDong(maPhieuDKHP);
+                            txtSoPhieuDKHP.Text = maPhieuDKHP.ToString();
+                            txtTGDongGanNhat.Text = _phieuThuHPBLLService.LayThoiGianDongHPGanNhat(maPhieuDKHP).ToString("dd/MM/yyyy"); // lấy tgian đóng gần nhất 
 
 
-                                txtHocPhi.Text = hocPhi.ToString("c", cultureInfo);
-                                txtHocPhiPhaiDong.Text = hocPhiPhaiDong.ToString("c", cultureInfo);
-                                txtHocPhiDaDong.Text = _phieuDKHPBLLService.TinhHocPhiDaDong(maPhieuDKHP).ToString("c", cultureInfo);
-                                txtConNo.Text = _phieuDKHPBLLService.TinhHocPhiConThieu(maPhieuDKHP).ToString("c", cultureInfo);
-                                HienThiTinhTrang(kq.MaTinhTrang);
-                                List<DoiTuong> dt = _doiTuongBLLService.LayDSDoiTuongBangMaSV(GlobalConfig.CurrNguoiDung.TenDangNhap);
-                                DoiTuong dt1 = dt[0];
-                                lblTyLeGiam.Text = "(Học phí được giảm " + (hocPhi - hocPhiPhaiDong).ToString("c", cultureInfo) + " - theo đối tượng " + dt1.TenDT + " )";
-
-
-                            }
+                            txtHocPhi.Text = hocPhi.ToString("c", cultureInfo);
+                            txtHocPhiPhaiDong.Text = hocPhiPhaiDong.ToString("c", cultureInfo);
+                            txtHocPhiDaDong.Text = _phieuDKHPBLLService.TinhHocPhiDaDong(maPhieuDKHP).ToString("c", cultureInfo);
+                            txtConNo.Text = _phieuDKHPBLLService.TinhHocPhiConThieu(maPhieuDKHP).ToString("c", cultureInfo);
+                            HienThiTinhTrang(kq.MaTinhTrang);
+                            List<DoiTuong> dt = _doiTuongBLLService.LayDSDoiTuongBangMaSV(GlobalConfig.CurrNguoiDung.TenDangNhap);
+                            DoiTuong dt1 = dt[0];
+                            lblTyLeGiam.Text = "(Học phí được giảm " + (hocPhi - hocPhiPhaiDong).ToString("c", cultureInfo) + " - theo đối tượng " + dt1.TenDT + " )";
+                            break;
 
                         }
                         else
