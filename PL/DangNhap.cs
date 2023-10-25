@@ -1,5 +1,4 @@
-﻿using BLL;
-using BLL.IServices;
+﻿using BLL.IServices;
 using BLL.Services;
 using ComponentFactory.Krypton.Toolkit;
 using DAL.Services;
@@ -13,9 +12,12 @@ namespace PL
 {
     public partial class DangNhap : KryptonForm, IAdminRequester, IGVRequester, ISinhVienRequester
     {
-		private readonly INguoiDungBLLService _nguoiDungBLLService = new NguoiDungBLLService(new NguoiDungDALService(new DapperService(), ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString));
+        #region Register Services
+        private readonly INguoiDungBLLService _nguoiDungBLLService = new NguoiDungBLLService(new NguoiDungDALService(new DapperService(), ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString));
+        private readonly IGlobalConfigBLLService _globalConfigBLLService = new GlobalConfigBLLService(new GlobalConfigDALService(new DapperService(), ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString));
+        #endregion
 
-		public DangNhap()
+        public DangNhap()
         {
             InitializeComponent();
         }
@@ -77,8 +79,8 @@ namespace PL
                     MessageBox.Show("Tên đăng nhập hoặc mật khẩu không chính xác!");
                     break;
                 case DangNhapMessage.Success:
-                    GlobalConfig.CurrNamHoc = GlobalConfigBLL.GetCurrNamHoc();
-                    GlobalConfig.CurrMaHocKy = GlobalConfigBLL.GetCurrMaHocKy();
+                    GlobalConfig.CurrNamHoc = _globalConfigBLLService.GetCurrNamHoc();
+                    GlobalConfig.CurrMaHocKy = _globalConfigBLLService.GetCurrMaHocKy();
 
                     MessageBox.Show("Đăng nhập thành công!");
 

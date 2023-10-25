@@ -1,13 +1,12 @@
-﻿using BLL;
-using BLL.IServices;
+﻿using BLL.IServices;
 using BLL.Services;
-using DAL.Services;
 using ComponentFactory.Krypton.Toolkit;
+using DAL.Services;
 using DTO;
 using PL.Interfaces;
 using System;
-using System.Configuration;
 using System.ComponentModel;
+using System.Configuration;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -15,7 +14,10 @@ namespace PL
 {
     public partial class TraCuuMonHocMo : KryptonForm
     {
+        #region Register Services
         private readonly IMonHocBLLService _monHocBLLService = new MonHocBLLService(new MonHocDALService(new DapperService(), ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString));
+        private readonly IMonHocMoBLLService _monHocMoBLLService = new MonHocMoBLLService(new MonHocMoDALService(new DapperService(), ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString));
+        #endregion
 
         private ITraCuuMonHocMoRequester traCuuMonHocMoRequester;
         BindingList<int> mNamHoc;
@@ -84,7 +86,7 @@ namespace PL
 
         public void SetUpNamHoc()
         {
-            mNamHoc = new BindingList<int>(MonHocMoBLL.GetAllNamHoc());
+            mNamHoc = new BindingList<int>(_monHocMoBLLService.GetAllNamHoc());
             cb_SearchNH.Items.Clear();
             foreach (var item in mNamHoc)
             {
@@ -94,7 +96,7 @@ namespace PL
 
         public void SetUpHocKyNamHocMHM()
         {
-            mHocKyNamHoc = new BindingList<DTO.HocKyNamHoc>(MonHocMoBLL.GetAllHocKyNamHoc());
+            mHocKyNamHoc = new BindingList<DTO.HocKyNamHoc>(_monHocMoBLLService.GetAllHocKyNamHoc());
             dgv_MonHocMo.Rows.Clear();
             foreach (var item in mHocKyNamHoc)
             {
@@ -168,7 +170,7 @@ namespace PL
                         hk = 3;
                     }
                     int nh = Int32.Parse(selectedRow.Cells[1].Value.ToString());
-                    MessageDeleteHocKyNamHocMHM message = MonHocMoBLL.DeleteHocKyNamHocMHM(hk, nh);
+                    MessageDeleteHocKyNamHocMHM message = _monHocMoBLLService.DeleteHocKyNamHocMHM(hk, nh);
                     switch (message)
                     {
                         case MessageDeleteHocKyNamHocMHM.Failed:

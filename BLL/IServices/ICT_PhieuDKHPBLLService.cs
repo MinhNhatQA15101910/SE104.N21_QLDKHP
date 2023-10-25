@@ -1,6 +1,4 @@
-﻿using DAL;
-using DTO;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 
 namespace BLL.IServices
 {

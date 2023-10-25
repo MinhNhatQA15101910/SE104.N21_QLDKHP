@@ -1,5 +1,4 @@
-﻿using BLL;
-using BLL.IServices;
+﻿using BLL.IServices;
 using BLL.Services;
 using ComponentFactory.Krypton.Toolkit;
 using DAL.Services;
@@ -15,10 +14,13 @@ namespace PL
 {
     public partial class XacNhanDKHP : KryptonForm
     {
+        #region Register Services
         private readonly IMonHocBLLService _monHocBLLService = new MonHocBLLService(new MonHocDALService(new DapperService(), ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString));
         private readonly IPhieuDKHPBLLService _phieuDKHPBLLService = new PhieuDKHPBLLService(new PhieuDKHPDALService(new DapperService(), ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString));
+        private readonly ILoaiMonHocBLLService _loaiMonHocBLLService = new LoaiMonHocBLLService(new LoaiMonHocDALService(new DapperService(), ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString));
+        #endregion
+
         private IXacNhanDKHPRequester xacNhanDKHPRequester;
-        
         int thisTerm = 3;
         int thisYear = 2024;
         BindingList<PhieuDKHP> mPhieuDKHP;
@@ -138,8 +140,8 @@ namespace PL
         public void SetUpDgvMonHoc(int x)
         {
             dgv_MonHoc.Rows.Clear();
-            mMonHoc = new BindingList<DTO.MonHoc>(_monHocBLLService.GetMonHocPhieuDKHP(x));
-            mLoaiMonHoc = new BindingList<DTO.LoaiMonHoc>(LoaiMonHocBLL.LayDSLoaiMonHoc());
+            mMonHoc = new BindingList<MonHoc>(_monHocBLLService.GetMonHocPhieuDKHP(x));
+            mLoaiMonHoc = new BindingList<LoaiMonHoc>(_loaiMonHocBLLService.LayDSLoaiMonHoc());
             foreach (var item in mMonHoc)
             {
                 foreach (var item2 in mLoaiMonHoc)

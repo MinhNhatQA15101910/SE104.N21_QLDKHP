@@ -1,5 +1,4 @@
-﻿using BLL;
-using BLL.IServices;
+﻿using BLL.IServices;
 using BLL.Services;
 using ComponentFactory.Krypton.Toolkit;
 using DAL.Services;
@@ -15,9 +14,12 @@ namespace PL
 {
     public partial class ThemSuaHuyen : KryptonForm, IThemSuaTinhRequester
     {
-		private readonly ITinhBLLService _tinhBLLService = new TinhBLLService(new TinhDALService(new DapperService(), ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString));
+        #region Register Services
+        private readonly ITinhBLLService _tinhBLLService = new TinhBLLService(new TinhDALService(new DapperService(), ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString));
+        private readonly IHuyenBLLService _huyenBLLService = new HuyenBLLService(new HuyenDALService(new DapperService(), ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString));
+        #endregion
 
-		private IThemSuaHuyenRequester themSuaHuyenRequester;
+        private IThemSuaHuyenRequester themSuaHuyenRequester;
         private Huyen huyen;
         private BindingList<Tinh> mTinh;
         private List<string> mUT;
@@ -102,7 +104,7 @@ namespace PL
                 }
                 int maTinh = (int)cmbTinh.SelectedValue;
 
-                SuaHuyenMessage message = HuyenBLL.SuaHuyen(maHuyen, tenHuyen, vungUT, maTinh);
+                SuaHuyenMessage message = _huyenBLLService.SuaHuyen(maHuyen, tenHuyen, vungUT, maTinh);
                 switch (message)
                 {
                     case SuaHuyenMessage.EmptyTenHuyen:
@@ -130,7 +132,7 @@ namespace PL
                 }
                 int maTinh = (int)cmbTinh.SelectedValue;
 
-                ThemHuyenMessage message = HuyenBLL.ThemHuyen(tenHuyen, vungUT, maTinh);
+                ThemHuyenMessage message = _huyenBLLService.ThemHuyen(tenHuyen, vungUT, maTinh);
                 switch (message)
                 {
                     case ThemHuyenMessage.EmptyTenHuyen:

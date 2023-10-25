@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace DAL.IServices
 {
-	public interface INguoiDungDALService
+    public interface INguoiDungDALService
 	{
 		List<CT_NguoiDung> LayDSNguoiDung();
 		DangNhapMessage DangNhap(string tenDangNhap, string matKhau);

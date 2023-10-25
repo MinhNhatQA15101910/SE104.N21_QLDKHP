@@ -1,16 +1,12 @@
-﻿using System;
-using BLL.IServices;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using DAL;
-using DTO;
+﻿using BLL.IServices;
 using DAL.IServices;
+using DTO;
+using System;
+using System.Collections.Generic;
 
 namespace BLL.Services
 {
-	public class SinhVienBLLService : ISinhVienBLLService
+    public class SinhVienBLLService : ISinhVienBLLService
 	{
 		private readonly ISinhVienDALService _sinhVienDALService;
 		public SinhVienBLLService(ISinhVienDALService sinhVienDALService)

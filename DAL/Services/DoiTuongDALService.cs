@@ -33,7 +33,7 @@ namespace DAL.Services
         {
             try
             {
-                using (IDbConnection connection = new SqlConnection(DatabaseConnection.CnnString()))
+                using (IDbConnection connection = new SqlConnection(_dbConnection))
                 {
                     var p = new DynamicParameters();
                     p.Add("@MaDT", maDTBanDau);
@@ -64,7 +64,7 @@ namespace DAL.Services
         {
             try
             {
-                using (IDbConnection connection = new SqlConnection(DatabaseConnection.CnnString()))
+                using (IDbConnection connection = new SqlConnection(_dbConnection))
                 {
                     var p = new DynamicParameters();
                     p.Add("@TenDT", tenDT);
@@ -92,7 +92,7 @@ namespace DAL.Services
 
         public List<DoiTuong> LayDSDoiTuong2()
         {
-            using (IDbConnection connection = new SqlConnection(DatabaseConnection.CnnString()))
+            using (IDbConnection connection = new SqlConnection(_dbConnection))
             {
                 return _dapperService.Query<DoiTuong>(connection, "spDOITUONG_LayDSDoiTuong").ToList();
             }
@@ -101,7 +101,7 @@ namespace DAL.Services
         public List<DoiTuong> LayDSDoiTuongKhongThuocVeMaSV(string maSV)
         {
 
-            using (IDbConnection connection = new SqlConnection(DatabaseConnection.CnnString()))
+            using (IDbConnection connection = new SqlConnection(_dbConnection))
             {
                 var p = new DynamicParameters();
                 p.Add("@MaSV", maSV);
@@ -111,7 +111,7 @@ namespace DAL.Services
 
         public List<DoiTuong> LayDSDoiTuongBangMaSV(string maSV)
         {
-            using (IDbConnection connection = new SqlConnection(DatabaseConnection.CnnString()))
+            using (IDbConnection connection = new SqlConnection(_dbConnection))
             {
                 var p = new DynamicParameters();
                 p.Add("@MaSV", maSV);
@@ -123,7 +123,7 @@ namespace DAL.Services
         {
             try
             {
-                using (IDbConnection connection = new SqlConnection(DatabaseConnection.CnnString()))
+                using (IDbConnection connection = new SqlConnection(_dbConnection))
                 {
                     var p = new DynamicParameters();
                     p.Add("@MaDT", maDT);

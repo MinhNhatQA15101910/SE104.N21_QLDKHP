@@ -21,5 +21,25 @@ namespace DAL.Services
         {
             return connection.Query<T>(sql, p, commandType: commandType);
         }
+
+        public T QueryFirst<T>(IDbConnection connection, string sql)
+        {
+            return connection.QueryFirst<T>(sql);
+        }
+
+        public T QueryFirst<T>(IDbConnection connection, string sql, DynamicParameters p, CommandType commandType)
+        {
+            return connection.QueryFirst<T>(sql, p, commandType: commandType);
+        }
+
+        public T QueryFirstOrDefault<T>(IDbConnection connection, string sql, DynamicParameters p, CommandType commandType)
+        {
+            return connection.QueryFirstOrDefault<T>(sql, p, commandType: commandType);
+        }
+
+        public T QuerySingleOrDefault<T>(IDbConnection connection, string sql, DynamicParameters p, CommandType commandType)
+        {
+            return connection.QuerySingleOrDefault<T>(sql, p, commandType: commandType);
+        }
     }
 }

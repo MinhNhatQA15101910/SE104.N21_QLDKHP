@@ -1,13 +1,11 @@
 ﻿using BLL.IServices;
-using DAL;
 using DAL.IServices;
-using DAL.Services;
 using DTO;
 using System.Collections.Generic;
 
 namespace BLL.Services
 {
-	public class NguoiDungBLLService : INguoiDungBLLService
+    public class NguoiDungBLLService : INguoiDungBLLService
 	{
 		private readonly INguoiDungDALService _nguoiDungDALService;
 

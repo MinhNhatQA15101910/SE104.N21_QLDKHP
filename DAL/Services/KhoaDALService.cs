@@ -12,17 +12,17 @@ namespace DAL.Services
     public class KhoaDALService : IKhoaDALService
     {
         private readonly IDapperService _dapperService;
-        private readonly string _dbConnectionString;
+        private readonly string _dbConnection;
 
-        public KhoaDALService(IDapperService dapperService, string dbConnectionString)
+        public KhoaDALService(IDapperService dapperService, string dbConnection)
         {
             _dapperService = dapperService;
-            _dbConnectionString = dbConnectionString;
+            _dbConnection = dbConnection;
         }
 
         public List<Khoa> LayDSKhoa()
         {
-            using (var connection = new SqlConnection(_dbConnectionString))
+            using (var connection = new SqlConnection(_dbConnection))
             {
                 List<Khoa> result = _dapperService.Query<Khoa>(connection, "spKHOA_LayDSKhoa").ToList();
                 return result;
@@ -33,7 +33,7 @@ namespace DAL.Services
         {
             try
             {
-                using (var connection = new SqlConnection(_dbConnectionString))
+                using (var connection = new SqlConnection(_dbConnection))
                 {
                     var p = new DynamicParameters();
                     p.Add("@MaKhoaBanDau", maKhoaBanDau);
@@ -64,12 +64,12 @@ namespace DAL.Services
         {
             try
             {
-                using (var connection = new SqlConnection(DatabaseConnection.CnnString()))
+                using (var connection = new SqlConnection(_dbConnection))
                 {
                     var p = new DynamicParameters();
                     p.Add("@MaKhoa", maKhoa);
                     p.Add("@TenKhoa", tenKhoa);
-                    connection.Execute("spKHOA_ThemKhoa", p, commandType: CommandType.StoredProcedure);
+                    _dapperService.Execute(connection, "spKHOA_ThemKhoa", p, commandType: CommandType.StoredProcedure);
                 }
             }
             catch (SqlException ex)
@@ -98,11 +98,11 @@ namespace DAL.Services
         {
             try
             {
-                using (var connection = new SqlConnection(DatabaseConnection.CnnString()))
+                using (var connection = new SqlConnection(_dbConnection))
                 {
                     var p = new DynamicParameters();
                     p.Add("@MaKhoa", maKhoa);
-                    connection.Execute("spKHOA_XoaKhoa", p, commandType: CommandType.StoredProcedure);
+                    _dapperService.Execute(connection, "spKHOA_XoaKhoa", p, commandType: CommandType.StoredProcedure);
                 }
             }
             catch (Exception)

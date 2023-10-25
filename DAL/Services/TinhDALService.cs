@@ -3,18 +3,17 @@ using Dapper;
 using DTO;
 using System;
 using System.Collections.Generic;
-using System.Data.SqlClient;
 using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DAL.Services
 {
-	public class TinhDALService : ITinhDALService
+    public class TinhDALService : ITinhDALService
 	{
 		private readonly IDapperService _dapperService;
 		private readonly string _dbConnection;
+
 		public TinhDALService(IDapperService dapperService, string dbConnection)
 		{
 			_dapperService = dapperService;
@@ -22,24 +21,22 @@ namespace DAL.Services
 		}
 		public List<Tinh> LayDSTinh()
 		{
-			List<Tinh> output;
-			using (IDbConnection connection = new SqlConnection(DatabaseConnection.CnnString()))
+			using (IDbConnection connection = new SqlConnection(_dbConnection))
 			{
-				output = connection.Query<Tinh>("spTINH_LayDSTinh").ToList();
+				return _dapperService.Query<Tinh>(connection, "spTINH_LayDSTinh").ToList();
 			}
-			return output;
 		}
 
 		public SuaTinhMessage SuaTinh(int maTinh, string tenTinh)
 		{
 			try
 			{
-				using (IDbConnection connection = new SqlConnection(DatabaseConnection.CnnString()))
+				using (IDbConnection connection = new SqlConnection(_dbConnection))
 				{
 					var p = new DynamicParameters();
 					p.Add("@MaTinh", maTinh);
 					p.Add("@TenTinh", tenTinh);
-					connection.Execute("spTINH_SuaTinh", p, commandType: CommandType.StoredProcedure);
+                    _dapperService.Execute(connection, "spTINH_SuaTinh", p, commandType: CommandType.StoredProcedure);
 				}
 			}
 			catch (SqlException ex)
@@ -61,11 +58,11 @@ namespace DAL.Services
 		{
 			try
 			{
-				using (IDbConnection connection = new SqlConnection(DatabaseConnection.CnnString()))
+				using (IDbConnection connection = new SqlConnection(_dbConnection))
 				{
 					var p = new DynamicParameters();
 					p.Add("@MaTinh", maTinh);
-					connection.Execute("spTINH_XoaTinh", p, commandType: CommandType.StoredProcedure);
+                    _dapperService.Execute(connection, "spTINH_XoaTinh", p, commandType: CommandType.StoredProcedure);
 				}
 			}
 			catch (Exception)
@@ -80,11 +77,11 @@ namespace DAL.Services
 		{
 			try
 			{
-				using (IDbConnection connection = new SqlConnection(DatabaseConnection.CnnString()))
+				using (IDbConnection connection = new SqlConnection(_dbConnection))
 				{
 					var p = new DynamicParameters();
 					p.Add("@TenTinh", tenTinh);
-					connection.Execute("spTINH_ThemTinh", p, commandType: CommandType.StoredProcedure);
+					_dapperService.Execute(connection, "spTINH_ThemTinh", p, commandType: CommandType.StoredProcedure);
 				}
 			}
 			catch (SqlException ex)

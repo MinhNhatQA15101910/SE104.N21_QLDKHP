@@ -1,12 +1,12 @@
 ﻿using BLL.IServices;
 using BLL.Services;
-using DAL.Services;
 using ComponentFactory.Krypton.Toolkit;
+using DAL.Services;
 using DTO;
 using PL.Interfaces;
 using System;
-using System.Configuration;
 using System.ComponentModel;
+using System.Configuration;
 using System.Data;
 using System.Drawing;
 using System.Linq;

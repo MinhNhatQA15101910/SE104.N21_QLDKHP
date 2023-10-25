@@ -21,7 +21,7 @@ namespace DAL.Services
         public List<string> LayDSMonHocMo()
         {
 
-            using (IDbConnection connection = new SqlConnection(DatabaseConnection.CnnString()))
+            using (IDbConnection connection = new SqlConnection(_dbConnection))
             {
                 return _dapperService.Query<string>(connection, "spDANHSACHMONHOCMO_LayDSMonHocMo").ToList();
             }
@@ -30,7 +30,7 @@ namespace DAL.Services
         public List<dynamic> LayDanhSachMonHocMo(int hocKy, int namHoc)
         {
 
-            using (IDbConnection connection = new SqlConnection(DatabaseConnection.CnnString()))
+            using (IDbConnection connection = new SqlConnection(_dbConnection))
             {
                 var parameters = new DynamicParameters();
                 parameters.Add("@hocKy", hocKy);
@@ -43,7 +43,7 @@ namespace DAL.Services
         public List<dynamic> TimKiemDanhSachMonHocMo(int hocKy, int namHoc, string monHoc)
         {
 
-            using (IDbConnection connection = new SqlConnection(DatabaseConnection.CnnString()))
+            using (IDbConnection connection = new SqlConnection(_dbConnection))
             {
                 var parameters = new DynamicParameters();
                 parameters.Add("@hocKy", hocKy);

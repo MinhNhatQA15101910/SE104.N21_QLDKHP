@@ -22,7 +22,7 @@ namespace DAL.Services
 
         public List<CT_MonHoc> LayDSMonHoc()
         {
-            using (IDbConnection connection = new SqlConnection(DatabaseConnection.CnnString()))
+            using (IDbConnection connection = new SqlConnection(_dbConnection))
             {
                 return _dapperService.Query<CT_MonHoc>(connection, "spMONHOC_LayDSMonHoc").ToList();
             }
@@ -32,7 +32,7 @@ namespace DAL.Services
         {
             try
             {
-                using (IDbConnection connection = new SqlConnection(DatabaseConnection.CnnString()))
+                using (IDbConnection connection = new SqlConnection(_dbConnection))
                 {
                     var p = new DynamicParameters();
                     p.Add("@MaMH", maMH);
@@ -51,7 +51,7 @@ namespace DAL.Services
         {
             try
             {
-                using (IDbConnection connection = new SqlConnection(DatabaseConnection.CnnString()))
+                using (IDbConnection connection = new SqlConnection(_dbConnection))
                 {
                     var p = new DynamicParameters();
                     p.Add("@MaMH", maMHBanDau);
@@ -73,7 +73,7 @@ namespace DAL.Services
         {
             try
             {
-                using (IDbConnection connection = new SqlConnection(DatabaseConnection.CnnString()))
+                using (IDbConnection connection = new SqlConnection(_dbConnection))
                 {
                     var p = new DynamicParameters();
                     p.Add("@MaMH", maMH);
@@ -103,7 +103,7 @@ namespace DAL.Services
 
         public  List<MonHoc> LayDSMonHoc2()
         {
-            using (IDbConnection connection = new SqlConnection(DatabaseConnection.CnnString()))
+            using (IDbConnection connection = new SqlConnection(_dbConnection))
             {
                 return _dapperService.Query<MonHoc>(connection, "spMONHOC_LayDSMonHoc2").ToList();
             }
@@ -111,7 +111,7 @@ namespace DAL.Services
 
         public  List<MonHoc> GetTermMonHoc(int HocKy)
         {
-            using (IDbConnection connection = new SqlConnection(DatabaseConnection.CnnString()))
+            using (IDbConnection connection = new SqlConnection(_dbConnection))
             {
                 if (HocKy == 1)
                 {
@@ -128,7 +128,7 @@ namespace DAL.Services
 
         public  List<MonHoc> GetTermMonHocMo(int HocKy, int NamHoc)
         {
-            using (IDbConnection connection = new SqlConnection(DatabaseConnection.CnnString()))
+            using (IDbConnection connection = new SqlConnection(_dbConnection))
             {
                 var p = new DynamicParameters();
                 p.Add("@HocKy", HocKy);
@@ -139,7 +139,7 @@ namespace DAL.Services
 
         public  List<MonHoc> GetChuongTrinhHoc(string MaNganh, int HocKy)
         {
-            using (IDbConnection connection = new SqlConnection(DatabaseConnection.CnnString()))
+            using (IDbConnection connection = new SqlConnection(_dbConnection))
             {
                 if (HocKy != 0)
                 {
@@ -160,7 +160,7 @@ namespace DAL.Services
 
         public  List<MonHoc> GetMonHocPhieuDKHP(int MaPhieuDKHP)
         {
-            using (IDbConnection connection = new SqlConnection(DatabaseConnection.CnnString()))
+            using (IDbConnection connection = new SqlConnection(_dbConnection))
             {
                 var p = new DynamicParameters();
                 p.Add("@MaPhieuDKHP", MaPhieuDKHP);

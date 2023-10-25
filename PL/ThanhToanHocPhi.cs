@@ -1,5 +1,4 @@
-﻿using BLL;
-using BLL.IServices;
+﻿using BLL.IServices;
 using BLL.Services;
 using ComponentFactory.Krypton.Toolkit;
 using DAL.Services;
@@ -16,8 +15,12 @@ namespace PL
 {
     public partial class ThanhToanHocPhi : KryptonForm
     {
-		private readonly IPhieuDKHPBLLService _phieuDKHPBLLService = new PhieuDKHPBLLService(new PhieuDKHPDALService(new DapperService(), ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString));
-		private IThanhToanHocPhiRequester thanhToanHocPhiRequester;
+        #region Register Service
+        private readonly IPhieuDKHPBLLService _phieuDKHPBLLService = new PhieuDKHPBLLService(new PhieuDKHPDALService(new DapperService(), ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString));
+        private readonly IGlobalConfigBLLService _globalConfigBLLService = new GlobalConfigBLLService(new GlobalConfigDALService(new DapperService(), ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString));
+        #endregion
+
+        private IThanhToanHocPhiRequester thanhToanHocPhiRequester;
         CultureInfo cultureInfo = new CultureInfo("vi-VN");
 
         public ThanhToanHocPhi(IThanhToanHocPhiRequester requester)
@@ -116,7 +119,10 @@ namespace PL
                     hocKy = 3;
                 }
                 else
+                {
                     hocKy = Convert.ToInt32(dgvDSHPChuaThanhToan.Rows[e.RowIndex].Cells["HocKy"].Value);
+                }
+
                 int namHoc = Convert.ToInt32(dgvDSHPChuaThanhToan.Rows[e.RowIndex].Cells["NamHoc"].Value);
                 string ngayLapStr = dgvDSHPChuaThanhToan.Rows[e.RowIndex].Cells["NgayLap"].Value.ToString();
                 DateTime ngayLap;
@@ -125,7 +131,7 @@ namespace PL
                     MessageBox.Show("Lỗi ngày lập");
                 }
                 // kiểm tra còn trong khoảng tgian đóng hp không ?
-                int khoangTGDongHP = GlobalConfigBLL.LayKhoangTGDongHP(hocKy, namHoc);
+                int khoangTGDongHP = _globalConfigBLLService.LayKhoangTGDongHP(hocKy, namHoc);
                 TimeSpan kc = ngayLap.Subtract(DateTime.Now);
                 if (kc.Days * -1 <= khoangTGDongHP)
                 {

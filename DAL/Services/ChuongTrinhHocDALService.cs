@@ -24,7 +24,7 @@ namespace DAL.Services
             ChuongTrinhHoc CTHoc = new ChuongTrinhHoc();
             try
             {
-                using (IDbConnection connection = new SqlConnection(DatabaseConnection.CnnString()))
+                using (IDbConnection connection = new SqlConnection(_dbConnection))
                 {
                     var mhm = new DynamicParameters();
                     mhm.Add("@MaNganh", MaNganh);
@@ -43,7 +43,7 @@ namespace DAL.Services
         public List<ChuongTrinhHoc> GetAllCTHoc()
         {
 
-            using (IDbConnection connection = new SqlConnection(DatabaseConnection.CnnString()))
+            using (IDbConnection connection = new SqlConnection(_dbConnection))
             {
                 return _dapperService.Query<ChuongTrinhHoc>(connection, "spCHUONGTRINHHOC_GetAll").ToList();    
             }
@@ -55,7 +55,7 @@ namespace DAL.Services
             ChuongTrinhHoc CTHoc = new ChuongTrinhHoc();
             try
             {
-                using (IDbConnection connection = new SqlConnection(DatabaseConnection.CnnString()))
+                using (IDbConnection connection = new SqlConnection(_dbConnection))
                 {
                     var mhm = new DynamicParameters();
                     mhm.Add("@MaMH", MaMH);
@@ -77,7 +77,7 @@ namespace DAL.Services
             ChuongTrinhHoc CTHoc = new ChuongTrinhHoc();
             try
             {
-                using (IDbConnection connection = new SqlConnection(DatabaseConnection.CnnString()))
+                using (IDbConnection connection = new SqlConnection(_dbConnection))
                 {
                     var mhm = new DynamicParameters();
                     mhm.Add("@MaMH", MaMH);

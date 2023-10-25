@@ -63,22 +63,24 @@
     <Reference Include="WindowsBase" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DatabaseConnection.cs" />
-    <Compile Include="GlobalConfigDAL.cs" />
-    <Compile Include="HuyenDAL.cs" />
     <Compile Include="IServices\IChuongTrinhHocDALService.cs" />
     <Compile Include="IServices\ICT_PhieuDKHPDALService.cs" />
     <Compile Include="IServices\IDanhSachMonHocMoDALService.cs" />
     <Compile Include="IServices\IDoiTuongDALService.cs" />
+    <Compile Include="IServices\IGlobalConfigDALService.cs" />
     <Compile Include="IServices\IHocKyDALService.cs" />
+    <Compile Include="IServices\IHuyenDALService.cs" />
     <Compile Include="IServices\IKhoaDALService.cs" />
     <Compile Include="IServices\IDapperService.cs" />
+    <Compile Include="IServices\ILoaiMonHocDALService.cs" />
     <Compile Include="IServices\IMonHocDALService.cs" />
+    <Compile Include="IServices\IMonHocMoDALService.cs" />
     <Compile Include="IServices\INganhDALService.cs" />
     <Compile Include="Services\ChuongTrinhHocDALService.cs" />
     <Compile Include="Services\CT_PhieuDKHPDALService.cs" />
     <Compile Include="Services\DanhSachMonHocMoDALService.cs.cs" />
     <Compile Include="Services\DoiTuongDALService.cs" />
+    <Compile Include="Services\GlobalConfigDALService.cs" />
     <Compile Include="Services\HocKyDALService.cs" />
     <Compile Include="IServices\INguoiDungDALService.cs" />
     <Compile Include="IServices\INhomNguoiDungDALService.cs" />
@@ -86,12 +88,13 @@
     <Compile Include="IServices\IPhieuThuHPDALService.cs" />
     <Compile Include="IServices\ISinhVienDALService.cs" />
     <Compile Include="IServices\ITinhDALService.cs" />
+    <Compile Include="Services\HuyenDALService.cs" />
     <Compile Include="Services\KhoaDALService.cs" />
-    <Compile Include="LoaiMonHocDAL.cs" />
-    <Compile Include="MonHocMoDAL.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\DapperService.cs" />
+    <Compile Include="Services\LoaiMonHocDALService.cs" />
     <Compile Include="Services\MonHocDALService.cs" />
+    <Compile Include="Services\MonHocMoDALService.cs" />
     <Compile Include="Services\NganhDALService.cs" />
     <Compile Include="Services\NguoiDungDALService.cs" />
     <Compile Include="Services\NhomNguoiDungDALService.cs" />
