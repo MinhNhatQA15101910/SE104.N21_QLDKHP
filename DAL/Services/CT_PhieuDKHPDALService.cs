@@ -1,11 +1,11 @@
 ﻿using DAL.IServices;
 using Dapper;
-using System.Collections.Generic;
+using DTO;
 using System.Data;
 
 namespace DAL.Services
 {
-    public class CT_PhieuDKHPDALService: ICT_PhieuDKHPDALService
+    public class CT_PhieuDKHPDALService : ICT_PhieuDKHPDALService
     {
         public readonly IDapperService _dapperService;
 
@@ -14,15 +14,12 @@ namespace DAL.Services
             _dapperService = dapperService;
         }
 
-        public void TaoCT_PhieuDKHP(int maPhieu, List<string> list)
+        public void TaoCT_PhieuDKHP(CT_PhieuDKHP ct_PhieuDKHP)
         {
-            foreach (var i in list)
-            {
-                var parameters = new DynamicParameters();
-                parameters.Add("@maPhieuDKHP", maPhieu);
-                parameters.Add("@maMH", i);
-                _dapperService.Execute("spPHIEUDKHP_TaoCT_PhieuDKHP", parameters, CommandType.StoredProcedure);
-            }
+            var parameters = new DynamicParameters();
+            parameters.Add("@maPhieuDKHP", ct_PhieuDKHP.MaPhieuDKHP);
+            parameters.Add("@maMH", ct_PhieuDKHP.MaMH);
+            _dapperService.Execute("spPHIEUDKHP_TaoCT_PhieuDKHP", parameters, CommandType.StoredProcedure);
         }
 
         public void XoaDSMHDKHP(int maPhieu)
