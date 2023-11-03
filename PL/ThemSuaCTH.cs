@@ -238,7 +238,7 @@ namespace PL
                 {
                     if (item != null)
                     {
-                        MessageAddCTHoc message = _chuongtrinhhocBLLService.AddCTHoc(item.MaMH, item.MaNganh, item.HocKy);
+                        MessageAddCTHoc message = _chuongtrinhhocBLLService.AddCTHoc(item);
                         switch (message)
                         {
                             case MessageAddCTHoc.Failed:

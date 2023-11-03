@@ -5,9 +5,9 @@ namespace BLL.IServices
 {
     public interface IChuongTrinhHocBLLService
     {
-        MessageDeleteListCTHoc DeleteListCTHoc(string MaNganh, int HocKy);
+        MessageDeleteListCTHoc DeleteListCTHoc(string maNganh, int hocKy);
         List<ChuongTrinhHoc> GetAllCTHoc();
-        MessageAddCTHoc AddCTHoc(string MaMH, string MaNganh, int HocKy);
-        MessageDeleteCTHoc DeleteCTHoc(string MaMH, string MaNganh, int HocKy);
+        MessageAddCTHoc AddCTHoc(ChuongTrinhHoc chuongTrinhHoc);
+        MessageDeleteCTHoc DeleteCTHoc(string maMH, string maNganh, int hocKy);
     }
 }

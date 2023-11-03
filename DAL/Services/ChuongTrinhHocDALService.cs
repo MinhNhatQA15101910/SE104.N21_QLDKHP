@@ -17,22 +17,14 @@ namespace DAL.Services
             _dapperService = dapperService;
         }
 
-        public MessageDeleteListCTHoc DeleteListCTHoc(string MaNganh, int HocKy)
+        public MessageDeleteListCTHoc DeleteListCTHoc(string maNganh, int hocKy)
         {
-            try
-            {
-                var mhm = new DynamicParameters();
-                mhm.Add("@MaNganh", MaNganh);
-                mhm.Add("@HocKy", HocKy);
-                _dapperService.Execute("spCHUONGTRINHHOC_DeleteListCTHoc", mhm, CommandType.StoredProcedure);
+            var mhm = new DynamicParameters();
+            mhm.Add("@MaNganh", maNganh);
+            mhm.Add("@HocKy", hocKy);
+            _dapperService.Execute("spCHUONGTRINHHOC_DeleteListCTHoc", mhm, CommandType.StoredProcedure);
 
-                return MessageDeleteListCTHoc.Success;
-            }
-            catch (Exception)
-            {
-                return MessageDeleteListCTHoc.Failed;
-            }
-            
+            return MessageDeleteListCTHoc.Success;
         }
 
         public List<ChuongTrinhHoc> GetAllCTHoc()
@@ -40,41 +32,27 @@ namespace DAL.Services
             return _dapperService.Query<ChuongTrinhHoc>("spCHUONGTRINHHOC_GetAll").ToList();
         }
 
-        public MessageAddCTHoc AddCTHoc(string MaMH, string MaNganh, int HocKy)
-        {
-            try
-            {
-                var mhm = new DynamicParameters();
-                mhm.Add("@MaMH", MaMH);
-                mhm.Add("@MaNganh", MaNganh);
-                mhm.Add("@HocKy", HocKy);
-
-                _dapperService.Execute("spCHUONGTRINHHOC_AddCTHoc", mhm, CommandType.StoredProcedure);
-
-                return MessageAddCTHoc.Success;
-            }
-            catch (Exception)
-            {
-                return MessageAddCTHoc.Failed;
-            }
-        }
-
         public MessageDeleteCTHoc DeleteCTHoc(string MaMH, string MaNganh, int HocKy)
         {
-            try
-            {
-                var mhm = new DynamicParameters();
-                mhm.Add("@MaMH", MaMH);
-                mhm.Add("@MaNganh", MaNganh);
-                mhm.Add("@HocKy", HocKy);
-                _dapperService.Execute("spCHUONGTRINHHOC_DeleteCTHoc", mhm, CommandType.StoredProcedure);
+            var mhm = new DynamicParameters();
+            mhm.Add("@MaMH", MaMH);
+            mhm.Add("@MaNganh", MaNganh);
+            mhm.Add("@HocKy", HocKy);
+            _dapperService.Execute("spCHUONGTRINHHOC_DeleteCTHoc", mhm, CommandType.StoredProcedure);
 
-                return MessageDeleteCTHoc.Success;
-            }
-            catch (Exception)
-            {
-                return MessageDeleteCTHoc.Failed;
-            }
+            return MessageDeleteCTHoc.Success;
+        }
+
+        public MessageAddCTHoc AddCTHoc(ChuongTrinhHoc chuongTrinhHoc)
+        {
+            var mhm = new DynamicParameters();
+            mhm.Add("@MaMH", chuongTrinhHoc.MaMH);
+            mhm.Add("@MaNganh", chuongTrinhHoc.MaNganh);
+            mhm.Add("@HocKy", chuongTrinhHoc.HocKy);
+
+            _dapperService.Execute("spCHUONGTRINHHOC_AddCTHoc", mhm, CommandType.StoredProcedure);
+
+            return MessageAddCTHoc.Success;
         }
     }
 }
