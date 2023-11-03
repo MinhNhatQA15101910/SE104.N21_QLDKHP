@@ -16,7 +16,7 @@ namespace PL
 {
     public partial class QuanLyNganh : KryptonForm, IThemSuaNganhRequester
     {
-        private readonly INganhBLLService _nganhBLLService = new NganhBLLService(new NganhDALService(new DapperService(), ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString));
+        private readonly INganhBLLService _nganhBLLService = new NganhBLLService(new NganhDALService(new DapperService(ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString)));
 
         private INganhRequester nganhRequester;
         private BindingList<CT_Nganh> mNganh;

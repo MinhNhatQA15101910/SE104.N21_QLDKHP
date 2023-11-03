@@ -12,7 +12,7 @@ namespace PL
 {
     public partial class ThemSuaKhoa : KryptonForm
     {
-        private readonly IKhoaBLLService _khoaBLLService = new KhoaBLLService(new KhoaDALService(new DapperService(), ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString));
+        private readonly IKhoaBLLService _khoaBLLService = new KhoaBLLService(new KhoaDALService(new DapperService(ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString)));
 
         private IThemSuaKhoaRequester themSuaKhoaRequester;
         private Khoa khoa;

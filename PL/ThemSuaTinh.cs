@@ -12,7 +12,7 @@ namespace PL
 {
     public partial class ThemSuaTinh : KryptonForm
     {
-		private readonly ITinhBLLService _tinhBLLService = new TinhBLLService(new TinhDALService(new DapperService(), ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString));
+		private readonly ITinhBLLService _tinhBLLService = new TinhBLLService(new TinhDALService(new DapperService(ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString)));
 
 		private IThemSuaTinhRequester themSuaTinhRequester;
         private Tinh tinh;

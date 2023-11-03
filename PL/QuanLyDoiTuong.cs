@@ -14,7 +14,7 @@ namespace PL
 {
     public partial class QuanLyDoiTuong : KryptonForm, IThemSuaDoiTuongRequester
     {
-        private readonly IDoiTuongBLLService _doiTuongBLLService = new DoiTuongBLLService(new DoiTuongDALService(new DapperService(), ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString));
+        private readonly IDoiTuongBLLService _doiTuongBLLService = new DoiTuongBLLService(new DoiTuongDALService(new DapperService(ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString)));
 
         private ICaiDatRequester caiDatRequester;
         private BindingList<DoiTuong> mDoiTuong;

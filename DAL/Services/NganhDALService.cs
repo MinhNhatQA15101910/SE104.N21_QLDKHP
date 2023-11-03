@@ -12,32 +12,24 @@ namespace DAL.Services
     public class NganhDALService : INganhDALService
     {
         private readonly IDapperService _dapperService;
-        private readonly string _dbConnection;
 
-        public NganhDALService(IDapperService dapperService, string dbConnection)
+        public NganhDALService(IDapperService dapperService)
         {
             _dapperService = dapperService;
-            _dbConnection = dbConnection;
         }
 
         public List<CT_Nganh> LayDSNganh()
         {
-            using (IDbConnection connection = new SqlConnection(_dbConnection))
-            {
-                return _dapperService.Query<CT_Nganh>(connection, "spNGANH_LayDSNganh").ToList();
-            }
+            return _dapperService.Query<CT_Nganh>("spNGANH_LayDSNganh").ToList();
         }
 
         public XoaNganhMessage XoaNganh(string maNganh)
         {
             try
             {
-                using (IDbConnection connection = new SqlConnection(_dbConnection))
-                {
-                    var p = new DynamicParameters();
-                    p.Add("@MaNganh", maNganh);
-                    _dapperService.Execute(connection, "spNGANH_XoaNganh", p, CommandType.StoredProcedure);
-                }
+                var p = new DynamicParameters();
+                p.Add("@MaNganh", maNganh);
+                _dapperService.Execute("spNGANH_XoaNganh", p, CommandType.StoredProcedure);
             }
             catch (Exception)
             {
@@ -51,24 +43,18 @@ namespace DAL.Services
         {
             try
             {
-                using (IDbConnection connection = new SqlConnection(_dbConnection))
-                {
-                    var p = new DynamicParameters();
-                    p.Add("@MaNganhBanDau", maNganhBanDau);
-                    p.Add("@MaNganh", maNganhSua);
-                    p.Add("@TenNganh", tenNganhSua);
-                    p.Add("@MaKhoa", maKhoaSua);
-                    _dapperService.Execute(connection, "spNGANH_SuaNganh", p, commandType: CommandType.StoredProcedure);
-                }
+                var p = new DynamicParameters();
+                p.Add("@MaNganhBanDau", maNganhBanDau);
+                p.Add("@MaNganh", maNganhSua);
+                p.Add("@TenNganh", tenNganhSua);
+                p.Add("@MaKhoa", maKhoaSua);
+                _dapperService.Execute("spNGANH_SuaNganh", p, commandType: CommandType.StoredProcedure);
             }
             catch (SqlException ex)
             {
-                if (ex.Number == 2627)
+                if (ex.Number == 2627 && ex.Message.Contains("UQ_NGANH_TenNganh"))
                 {
-                    if (ex.Message.Contains("UQ_NGANH_TenNganh"))
-                    {
-                        return SuaNganhMessage.DuplicateTenNganh;
-                    }
+                    return SuaNganhMessage.DuplicateTenNganh;
                 }
             }
             catch (Exception)
@@ -83,14 +69,11 @@ namespace DAL.Services
         {
             try
             {
-                using (IDbConnection connection = new SqlConnection(_dbConnection))
-                {
-                    var p = new DynamicParameters();
-                    p.Add("@MaNganh", maNganh);
-                    p.Add("@TenNganh", tenNganh);
-                    p.Add("@MaKhoa", maKhoa);
-                    _dapperService.Execute(connection, "spNGANH_ThemNganh", p, commandType: CommandType.StoredProcedure);
-                }
+                var p = new DynamicParameters();
+                p.Add("@MaNganh", maNganh);
+                p.Add("@TenNganh", tenNganh);
+                p.Add("@MaKhoa", maKhoa);
+                _dapperService.Execute("spNGANH_ThemNganh", p, commandType: CommandType.StoredProcedure);
             }
             catch (SqlException ex)
             {
@@ -118,19 +101,13 @@ namespace DAL.Services
         {
             if (MaKhoa != null)
             {
-                using (IDbConnection connection = new SqlConnection(_dbConnection))
-                {
-                    var p = new DynamicParameters();
-                    p.Add("@MaKhoa", MaKhoa);
-                    return _dapperService.Query<Nganh>(connection, "spNGANH_LayNganhBangMaKhoa", p, commandType: CommandType.StoredProcedure).ToList();
-                }
+                var p = new DynamicParameters();
+                p.Add("@MaKhoa", MaKhoa);
+                return _dapperService.Query<Nganh>("spNGANH_LayNganhBangMaKhoa", p, commandType: CommandType.StoredProcedure).ToList();
             }
             else
             {
-                using (IDbConnection connection = new SqlConnection(_dbConnection))
-                {
-                    return _dapperService.Query<Nganh>(connection, "spNGANH_LayDSNganh").ToList();
-                }
+                return _dapperService.Query<Nganh>("spNGANH_LayDSNganh").ToList();
             }
 
         }

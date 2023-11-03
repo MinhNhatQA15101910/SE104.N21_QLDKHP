@@ -16,7 +16,7 @@ namespace PL
 {
     public partial class QuanLyKhoa : KryptonForm, IThemSuaKhoaRequester
     {
-        private readonly IKhoaBLLService _khoaBLLService = new KhoaBLLService(new KhoaDALService(new DapperService(), ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString));
+        private readonly IKhoaBLLService _khoaBLLService = new KhoaBLLService(new KhoaDALService(new DapperService(ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString)));
 
         private IKhoaRequester khoaRequester;
         private BindingList<Khoa> mKhoa;

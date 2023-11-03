@@ -12,7 +12,7 @@ namespace PL
 {
     public partial class ThemSuaDoiTuong : KryptonForm
     {
-        private readonly IDoiTuongBLLService _doiTuongBLLService = new DoiTuongBLLService(new DoiTuongDALService(new DapperService(), ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString));
+        private readonly IDoiTuongBLLService _doiTuongBLLService = new DoiTuongBLLService(new DoiTuongDALService(new DapperService(ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString)));
 
         private IThemSuaDoiTuongRequester themSuaDoiTuongRequester;
         private DoiTuong doiTuong;

@@ -3,7 +3,6 @@ using Dapper;
 using DTO;
 using System.Collections.Generic;
 using System.Data;
-using System.Data.SqlClient;
 using System.Linq;
 
 namespace DAL.Services
@@ -11,30 +10,22 @@ namespace DAL.Services
     public class HocKyDALService: IHocKyDALService
     {
         private readonly IDapperService _dapperService;
-        private readonly string _dbConnection;
 
-        public HocKyDALService(IDapperService dapperService, string dbConnection)
+        public HocKyDALService(IDapperService dapperService)
         {
             _dapperService = dapperService;
-            _dbConnection = dbConnection;
         }
 
         public List<HocKy> LayDanhSachHK()
         {
-            using (IDbConnection connection = new SqlConnection(_dbConnection))
-            {
-                return _dapperService.Query<HocKy>(connection, "spHOCKY_LayDanhSachHK").ToList();
-            }
+            return _dapperService.Query<HocKy>("spHOCKY_LayDanhSachHK").ToList();
         }
 
         public string LayHKByMaHK(int currMaHocKy)
         {
-            using (IDbConnection connection = new SqlConnection(_dbConnection))
-            {
-                var p = new DynamicParameters();
-                p.Add("@MaHocKy", currMaHocKy);
-                return _dapperService.Query<string>(connection, "spHOCKY_LayHKByMaHK", p, commandType: CommandType.StoredProcedure).ToString();
-            }
+            var p = new DynamicParameters();
+            p.Add("@MaHocKy", currMaHocKy);
+            return _dapperService.Query<string>("spHOCKY_LayHKByMaHK", p, commandType: CommandType.StoredProcedure).ToString();
         }
     }
 }

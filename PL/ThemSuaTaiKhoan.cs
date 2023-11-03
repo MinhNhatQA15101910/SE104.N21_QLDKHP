@@ -13,9 +13,8 @@ namespace PL
 {
     public partial class ThemSuaTaiKhoan : KryptonForm
     {
-		private readonly INhomNguoiDungBLLService _nhomNguoiDungBLLService = new NhomNguoiDungBLLService(new NhomNguoiDungDALService(new DapperService(), ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString));
-
-		private readonly INguoiDungBLLService _nguoiDungBLLService = new NguoiDungBLLService(new NguoiDungDALService(new DapperService(), ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString));
+		private readonly INhomNguoiDungBLLService _nhomNguoiDungBLLService = new NhomNguoiDungBLLService(new NhomNguoiDungDALService(new DapperService(ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString)));
+		private readonly INguoiDungBLLService _nguoiDungBLLService = new NguoiDungBLLService(new NguoiDungDALService(new DapperService(ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString)));
 		private IThemSuaTaiKhoanRequester themSuaTaiKhoanRequester;
         private CT_NguoiDung nguoiDung;
 

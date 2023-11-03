@@ -15,7 +15,7 @@ namespace PL
     public partial class QuanLyHuyen : KryptonForm, IThemSuaHuyenRequester
     {
         #region Register Services
-        private readonly IHuyenBLLService _huyenBLLService = new HuyenBLLService(new HuyenDALService(new DapperService(), ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString));
+        private readonly IHuyenBLLService _huyenBLLService = new HuyenBLLService(new HuyenDALService(new DapperService(ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString)));
         #endregion
 
         private ICaiDatRequester caiDatRequester;

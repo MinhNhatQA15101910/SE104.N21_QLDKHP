@@ -2,44 +2,52 @@
 using Dapper;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.SqlClient;
 
 namespace DAL.Services
 {
     public class DapperService : IDapperService
     {
-        public int Execute(IDbConnection connection, string sql, DynamicParameters p, CommandType commandType)
+        private readonly IDbConnection _connection;
+
+        public DapperService(string connectionString)
         {
-            return connection.Execute(sql, p, commandType: commandType);
+            _connection = new SqlConnection(connectionString);
         }
 
-        public IEnumerable<T> Query<T>(IDbConnection connection, string sql)
+        public int Execute(string sql, DynamicParameters p, CommandType commandType)
         {
-            return connection.Query<T>(sql);
+            return _connection.Execute(sql, p, commandType: commandType);
         }
 
-        public IEnumerable<T> Query<T>(IDbConnection connection, string sql, DynamicParameters p, CommandType commandType)
+        public IEnumerable<T> Query<T>(string sql)
         {
-            return connection.Query<T>(sql, p, commandType: commandType);
+            return _connection.Query<T>(sql);
         }
 
-        public T QueryFirst<T>(IDbConnection connection, string sql)
+        public IEnumerable<T> Query<T>(string sql, DynamicParameters p, CommandType commandType)
         {
-            return connection.QueryFirst<T>(sql);
+            return _connection.Query<T>(sql, p, commandType: commandType);
         }
 
-        public T QueryFirst<T>(IDbConnection connection, string sql, DynamicParameters p, CommandType commandType)
+        public T QueryFirst<T>(string sql)
         {
-            return connection.QueryFirst<T>(sql, p, commandType: commandType);
+            return _connection.QueryFirst<T>(sql);
         }
 
-        public T QueryFirstOrDefault<T>(IDbConnection connection, string sql, DynamicParameters p, CommandType commandType)
+        public T QueryFirst<T>(string sql, DynamicParameters p, CommandType commandType)
         {
-            return connection.QueryFirstOrDefault<T>(sql, p, commandType: commandType);
+            return _connection.QueryFirst<T>(sql, p, commandType: commandType);
         }
 
-        public T QuerySingleOrDefault<T>(IDbConnection connection, string sql, DynamicParameters p, CommandType commandType)
+        public T QueryFirstOrDefault<T>(string sql, DynamicParameters p, CommandType commandType)
         {
-            return connection.QuerySingleOrDefault<T>(sql, p, commandType: commandType);
+            return _connection.QueryFirstOrDefault<T>(sql, p, commandType: commandType);
+        }
+
+        public T QuerySingleOrDefault<T>(string sql, DynamicParameters p, CommandType commandType)
+        {
+            return _connection.QuerySingleOrDefault<T>(sql, p, commandType: commandType);
         }
     }
 }

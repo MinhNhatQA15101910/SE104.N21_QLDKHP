@@ -12,35 +12,26 @@ namespace DAL.Services
     public class KhoaDALService : IKhoaDALService
     {
         private readonly IDapperService _dapperService;
-        private readonly string _dbConnection;
 
-        public KhoaDALService(IDapperService dapperService, string dbConnection)
+        public KhoaDALService(IDapperService dapperService)
         {
             _dapperService = dapperService;
-            _dbConnection = dbConnection;
         }
 
         public List<Khoa> LayDSKhoa()
         {
-            using (var connection = new SqlConnection(_dbConnection))
-            {
-                List<Khoa> result = _dapperService.Query<Khoa>(connection, "spKHOA_LayDSKhoa").ToList();
-                return result;
-            }
+            return _dapperService.Query<Khoa>("spKHOA_LayDSKhoa").ToList();
         }
 
         public SuaKhoaMessage SuaKhoa(string maKhoaBanDau, string maKhoaSua, string tenKhoaSua)
         {
             try
             {
-                using (var connection = new SqlConnection(_dbConnection))
-                {
-                    var p = new DynamicParameters();
-                    p.Add("@MaKhoaBanDau", maKhoaBanDau);
-                    p.Add("@MaKhoaSua", maKhoaSua);
-                    p.Add("@TenKhoaSua", tenKhoaSua);
-                    _dapperService.Execute(connection, "spKHOA_SuaKhoa", p, CommandType.StoredProcedure);
-                }
+                var p = new DynamicParameters();
+                p.Add("@MaKhoaBanDau", maKhoaBanDau);
+                p.Add("@MaKhoaSua", maKhoaSua);
+                p.Add("@TenKhoaSua", tenKhoaSua);
+                _dapperService.Execute("spKHOA_SuaKhoa", p, CommandType.StoredProcedure);
 
                 return SuaKhoaMessage.Success;
             }
@@ -64,13 +55,10 @@ namespace DAL.Services
         {
             try
             {
-                using (var connection = new SqlConnection(_dbConnection))
-                {
-                    var p = new DynamicParameters();
-                    p.Add("@MaKhoa", maKhoa);
-                    p.Add("@TenKhoa", tenKhoa);
-                    _dapperService.Execute(connection, "spKHOA_ThemKhoa", p, commandType: CommandType.StoredProcedure);
-                }
+                var p = new DynamicParameters();
+                p.Add("@MaKhoa", maKhoa);
+                p.Add("@TenKhoa", tenKhoa);
+                _dapperService.Execute("spKHOA_ThemKhoa", p, commandType: CommandType.StoredProcedure);
             }
             catch (SqlException ex)
             {
@@ -98,12 +86,9 @@ namespace DAL.Services
         {
             try
             {
-                using (var connection = new SqlConnection(_dbConnection))
-                {
-                    var p = new DynamicParameters();
-                    p.Add("@MaKhoa", maKhoa);
-                    _dapperService.Execute(connection, "spKHOA_XoaKhoa", p, commandType: CommandType.StoredProcedure);
-                }
+                var p = new DynamicParameters();
+                p.Add("@MaKhoa", maKhoa);
+                _dapperService.Execute("spKHOA_XoaKhoa", p, commandType: CommandType.StoredProcedure);
             }
             catch (Exception)
             {

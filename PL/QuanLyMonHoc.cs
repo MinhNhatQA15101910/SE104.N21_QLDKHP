@@ -16,7 +16,7 @@ namespace PL
 {
     public partial class QuanLyMonHoc : KryptonForm, IThemSuaMonHocRequester
     {
-        private readonly IMonHocBLLService _monHocBLLService = new MonHocBLLService(new MonHocDALService(new DapperService(), ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString));
+        private readonly IMonHocBLLService _monHocBLLService = new MonHocBLLService(new MonHocDALService(new DapperService(ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString)));
         
         private IMonHocRequester monHocRequester;
         private BindingList<CT_MonHoc> mMonHoc;

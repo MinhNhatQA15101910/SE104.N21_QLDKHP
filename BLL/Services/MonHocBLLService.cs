@@ -9,7 +9,7 @@ namespace BLL.Services
 {
     public class MonHocBLLService: IMonHocBLLService
     {
-        private readonly IDanhSachMonHocMoDALService _danhSachMonHocMoDALService = new DanhSachMonHocMoDALService(new DapperService(), ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString);
+        private readonly IDanhSachMonHocMoDALService _danhSachMonHocMoDALService = new DanhSachMonHocMoDALService(new DapperService(ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString));
         
         private readonly IMonHocDALService _monHocDALService;
 

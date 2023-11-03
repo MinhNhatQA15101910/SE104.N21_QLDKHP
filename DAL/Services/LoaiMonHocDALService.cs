@@ -12,32 +12,24 @@ namespace DAL.Services
     public class LoaiMonHocDALService : ILoaiMonHocDALService
     {
         private readonly IDapperService _dapperService;
-        private readonly string _dbConnection;
 
-        public LoaiMonHocDALService(IDapperService dapperService, string dbConnection)
+        public LoaiMonHocDALService(IDapperService dapperService)
         {
             _dapperService = dapperService;
-            _dbConnection = dbConnection;
         }
 
         public List<LoaiMonHoc> LayDSLoaiMonHoc()
         {
-            using (IDbConnection connection = new SqlConnection(_dbConnection))
-            {
-                return _dapperService.Query<LoaiMonHoc>(connection, "spLOAIMONHOC_LayDSLoaiMonHoc").ToList();
-            }
+            return _dapperService.Query<LoaiMonHoc>("spLOAIMONHOC_LayDSLoaiMonHoc").ToList();
         }
 
         public XoaLoaiMonHocMessage XoaLoaiMonHoc(int maLoaiMonHoc)
         {
             try
             {
-                using (IDbConnection connection = new SqlConnection(_dbConnection))
-                {
-                    var p = new DynamicParameters();
-                    p.Add("@MaLoaiMonHoc", maLoaiMonHoc);
-                    _dapperService.Execute(connection, "spLOAIMONHOC_XoaLoaiMonHoc", p, commandType: CommandType.StoredProcedure);
-                }
+                var p = new DynamicParameters();
+                p.Add("@MaLoaiMonHoc", maLoaiMonHoc);
+                _dapperService.Execute("spLOAIMONHOC_XoaLoaiMonHoc", p, commandType: CommandType.StoredProcedure);
             }
             catch (Exception)
             {
@@ -51,24 +43,18 @@ namespace DAL.Services
         {
             try
             {
-                using (IDbConnection connection = new SqlConnection(_dbConnection))
-                {
-                    var p = new DynamicParameters();
-                    p.Add("@MaLoaiMonHoc", maLoaiMonHoc);
-                    p.Add("@TenLoaiMonHoc", tenLoaiMonHoc);
-                    p.Add("@SoTiet", soTiet);
-                    p.Add("@SoTien", soTien);
-                    _dapperService.Execute(connection, "spLOAIMONHOC_SuaLoaiMonHoc", p, commandType: CommandType.StoredProcedure);
-                }
+                var p = new DynamicParameters();
+                p.Add("@MaLoaiMonHoc", maLoaiMonHoc);
+                p.Add("@TenLoaiMonHoc", tenLoaiMonHoc);
+                p.Add("@SoTiet", soTiet);
+                p.Add("@SoTien", soTien);
+                _dapperService.Execute("spLOAIMONHOC_SuaLoaiMonHoc", p, commandType: CommandType.StoredProcedure);
             }
             catch (SqlException ex)
             {
-                if (ex.Number == 2627)
+                if (ex.Number == 2627 && ex.Message.Contains("UQ_LOAIMONHOC_TenLoaiMonHoc"))
                 {
-                    if (ex.Message.Contains("UQ_LOAIMONHOC_TenLoaiMonHoc"))
-                    {
-                        return SuaLoaiMonHocMessage.DuplicateTenLoaiMonHoc;
-                    }
+                    return SuaLoaiMonHocMessage.DuplicateTenLoaiMonHoc;
                 }
             }
             catch (Exception)
@@ -83,14 +69,11 @@ namespace DAL.Services
         {
             try
             {
-                using (IDbConnection connection = new SqlConnection(_dbConnection))
-                {
-                    var p = new DynamicParameters();
-                    p.Add("@TenLoaiMonHoc", tenLoaiMonHoc);
-                    p.Add("@SoTiet", soTiet);
-                    p.Add("@SoTien", soTien);
-                    _dapperService.Execute(connection, "spLOAIMONHOC_ThemLoaiMonHoc", p, commandType: CommandType.StoredProcedure);
-                }
+                var p = new DynamicParameters();
+                p.Add("@TenLoaiMonHoc", tenLoaiMonHoc);
+                p.Add("@SoTiet", soTiet);
+                p.Add("@SoTien", soTien);
+                _dapperService.Execute("spLOAIMONHOC_ThemLoaiMonHoc", p, commandType: CommandType.StoredProcedure);
             }
             catch (SqlException ex)
             {
