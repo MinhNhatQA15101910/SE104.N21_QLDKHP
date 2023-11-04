@@ -44,7 +44,7 @@ namespace BLL.Services
             }
 
             List<DoiTuong> doiTuongList = _doiTuongDALService.LayDSDoiTuong();
-            DoiTuong doiTuong = doiTuongList.Find(dt => dt.TenDT == tenDT);
+            DoiTuong doiTuong = doiTuongList.Find(dt => dt.TenDT == tenDT && dt.MaDT != maDTBanDau);
             if (doiTuong != null)
             {
                 return SuaDoiTuongMessage.DuplicateTenDoiTuong;

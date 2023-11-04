@@ -95,8 +95,8 @@ namespace BLL.Services
 			}
 
 			List<CT_NguoiDung> nguoiDungList = _nguoiDungDALService.LayDSNguoiDung();
-			CT_NguoiDung nguoiDung = nguoiDungList.Find(nd => nd.TenDangNhap == tenDangNhap);
-            if (nguoiDung != null && nguoiDung.TenDangNhap != tenDangNhapBD)
+			CT_NguoiDung nguoiDung = nguoiDungList.Find(nd => nd.TenDangNhap == tenDangNhap && nd.TenDangNhap != tenDangNhapBD);
+            if (nguoiDung != null)
             {
 				return SuaTaiKhoanMessage.DuplicateTenDangNhap;
             }
