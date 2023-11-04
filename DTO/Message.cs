@@ -29,8 +29,8 @@
         EmptyMatKhauHT,
         EmptyMatKhauMoi, 
         EmptyMatKhauNhapLai,
-        InvalidNewPassword, 
-        Success, 
+        InvalidNewPassword,
+        Success,
         Failed
     }
 

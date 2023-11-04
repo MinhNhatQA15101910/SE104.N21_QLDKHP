@@ -46,7 +46,7 @@ namespace BLL.Services
 
 		public DoiMatKhauMessage DoiMatKhau(string matKhauHT, string matKhauMoi, string matKhauNhapLai)
 		{
-			if(string.IsNullOrEmpty(matKhauHT))
+			if (string.IsNullOrEmpty(matKhauHT))
 			{
 				return DoiMatKhauMessage.EmptyMatKhauHT;
 			}
@@ -55,12 +55,18 @@ namespace BLL.Services
 			{
 				return DoiMatKhauMessage.EmptyMatKhauMoi;
 			}
+
 			if (string.IsNullOrEmpty(matKhauNhapLai))
 			{
 				return DoiMatKhauMessage.EmptyMatKhauNhapLai;
 			}
 
-			return _nguoiDungDALService.DoiMatKhau(matKhauHT,matKhauMoi);
+			if (!matKhauMoi.Equals(matKhauNhapLai))
+			{
+				return DoiMatKhauMessage.InvalidNewPassword;
+			}
+
+			return _nguoiDungDALService.DoiMatKhau(matKhauHT, matKhauMoi);
 		}
 
 		public ThemTaiKhoanMessage ThemTaiKhoan(string tenDangNhap, string maNhom)
