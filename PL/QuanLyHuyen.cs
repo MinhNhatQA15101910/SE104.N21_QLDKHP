@@ -114,6 +114,9 @@ namespace PL
                 XoaHuyenMessage message = _huyenBLLService.XoaHuyen(maHuyen);
                 switch (message)
                 {
+                    case XoaHuyenMessage.Unable:
+                        MessageBox.Show("Không thể xóa huyện vì có sinh viên đang thuộc huyện trên!");
+                        break;
                     case XoaHuyenMessage.Success:
                         mHuyen.Remove(huyen);
                         MessageBox.Show("Xóa huyện thành công!");

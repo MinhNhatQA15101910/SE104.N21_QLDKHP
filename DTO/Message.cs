@@ -163,6 +163,7 @@
     public enum XoaHuyenMessage
     {
         None,
+        Unable,
         Success
     }
 

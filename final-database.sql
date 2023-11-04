@@ -57,7 +57,8 @@ create table HUYEN
 	MaTinh int not null, 
 
 	constraint PK_HUYEN primary key (MaHuyen), 
-	constraint FK_HUYEN_TINH foreign key (MaTinh) references TINH(MaTinh)
+	constraint FK_HUYEN_TINH foreign key (MaTinh) references TINH(MaTinh),
+	constraint UQ_HUYEN_TenHuyen_MaTinh unique (TenHuyen, MaTinh)
 );
 go
 create table DOITUONG
@@ -3557,5 +3558,13 @@ begin
 	where MaPhieuThuHP=@MaPhieuThuHP
 end
 go
+
+-- spSINHVIEN_DOITUONG_GetSinhVien_DoiTuongs
+CREATE PROC spSINHVIEN_DOITUONG_GetSinhVien_DoiTuongs
+AS
+BEGIN
+	SELECT * FROM SINHVIEN_DOITUONG;
+END
+GO
 
 select * from NGUOIDUNG;

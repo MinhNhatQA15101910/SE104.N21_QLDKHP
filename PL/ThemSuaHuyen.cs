@@ -111,7 +111,7 @@ namespace PL
                         MessageBox.Show("Tên huyện không được để trống!");
                         break;
                     case SuaHuyenMessage.DuplicateTenHuyen:
-                        MessageBox.Show("Tên huyện đã tồn tại, vui lòng nhập giá trị khác!");
+                        MessageBox.Show("Tên huyện đã tồn tại trong tỉnh này, vui lòng nhập giá trị khác!");
                         break;
                     case SuaHuyenMessage.Success:
                         MessageBox.Show("Sửa huyện thành công!");
