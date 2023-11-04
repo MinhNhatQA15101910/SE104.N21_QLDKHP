@@ -7,10 +7,8 @@ using System.Configuration;
 
 namespace BLL.Services
 {
-    public class MonHocBLLService: IMonHocBLLService
+    public class MonHocBLLService : IMonHocBLLService
     {
-        private readonly IDanhSachMonHocMoDALService _danhSachMonHocMoDALService = new DanhSachMonHocMoDALService(new DapperService(ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString));
-        
         private readonly IMonHocDALService _monHocDALService;
 
         public MonHocBLLService(IMonHocDALService monHocDALService)
@@ -30,7 +28,8 @@ namespace BLL.Services
 
         public SuaMonHocMessage SuaMonHoc(string maMHBanDau, string maMH, string tenMH, int maLoaiMonHoc, string soTiet, int soTietLoaiMon)
         {
-            List<string> currMonHocMoList = _danhSachMonHocMoDALService.LayDSMonHocMo();
+            IDanhSachMonHocMoDALService danhSachMonHocMoDALService = new DanhSachMonHocMoDALService(new DapperService(ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString));
+            List<string> currMonHocMoList = danhSachMonHocMoDALService.LayDSMonHocMo();
             if (currMonHocMoList.Contains(maMHBanDau))
             {
                 return SuaMonHocMessage.Unable;

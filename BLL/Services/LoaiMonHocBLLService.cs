@@ -1,7 +1,9 @@
 ﻿using BLL.IServices;
 using DAL.IServices;
+using DAL.Services;
 using DTO;
 using System.Collections.Generic;
+using System.Configuration;
 
 namespace BLL.Services
 {
@@ -21,6 +23,14 @@ namespace BLL.Services
 
         public XoaLoaiMonHocMessage XoaLoaiMonHoc(int maLoaiMonHoc)
         {
+            IMonHocBLLService monHocBLLService = new MonHocBLLService(new MonHocDALService(new DapperService(ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString)));
+            List<CT_MonHoc> ct_MonHocs = monHocBLLService.LayDSMonHoc();
+            CT_MonHoc ct_MonHoc = ct_MonHocs.Find(mh => mh.MaLoaiMonHoc == maLoaiMonHoc);
+            if (ct_MonHoc != null)
+            {
+                return XoaLoaiMonHocMessage.Unable;
+            }
+
             return _loaiMonHocDALService.XoaLoaiMonHoc(maLoaiMonHoc);
         }
 

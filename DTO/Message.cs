@@ -93,6 +93,7 @@
     public enum XoaLoaiMonHocMessage
     {
         None,
+        Unable,
         Success 
     }
 

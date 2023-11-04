@@ -133,6 +133,9 @@ namespace PL
                 XoaLoaiMonHocMessage message = _loaiMonHocBLLService.XoaLoaiMonHoc(maLoaiMonHoc);
                 switch (message)
                 {
+                    case XoaLoaiMonHocMessage.Unable:
+                        MessageBox.Show("Không thể xóa loại môn học do có môn học đang thuộc loại này!");
+                        break;
                     case XoaLoaiMonHocMessage.Success:
                         mLoaiMonHoc.Remove(loaiMonHoc);
                         MessageBox.Show("Xóa loại môn học thành công!");
