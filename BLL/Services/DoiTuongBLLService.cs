@@ -1,7 +1,9 @@
 ﻿using BLL.IServices;
 using DAL.IServices;
+using DAL.Services;
 using DTO;
 using System.Collections.Generic;
+using System.Configuration;
 
 namespace BLL.Services
 {
@@ -81,6 +83,14 @@ namespace BLL.Services
         public XoaDoiTuongMessage XoaDoiTuong(int maDT)
         {
             if (maDT == 2)
+            {
+                return XoaDoiTuongMessage.UnableToDeleteVungSauVungXa;
+            }
+
+            ISinhVien_DoiTuongBLLService sinhVien_DoiTuongBLLService = new SinhVien_DoiTuongBLLService(new SinhVien_DoiTuongDALService(new DapperService(ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString)));
+            List<SinhVien_DoiTuong> sinhVien_DoiTuongs = sinhVien_DoiTuongBLLService.GetSinhVien_DoiTuongs();
+            SinhVien_DoiTuong sinhVien_DoiTuong = sinhVien_DoiTuongs.Find(dt => dt.MaDT ==  maDT);
+            if (sinhVien_DoiTuong != null)
             {
                 return XoaDoiTuongMessage.Unable;
             }

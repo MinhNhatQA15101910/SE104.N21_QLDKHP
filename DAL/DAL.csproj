@@ -76,6 +76,7 @@
     <Compile Include="IServices\IMonHocDALService.cs" />
     <Compile Include="IServices\IMonHocMoDALService.cs" />
     <Compile Include="IServices\INganhDALService.cs" />
+    <Compile Include="IServices\ISinhVien_DoiTuongDALService.cs" />
     <Compile Include="Services\ChuongTrinhHocDALService.cs" />
     <Compile Include="Services\CT_PhieuDKHPDALService.cs" />
     <Compile Include="Services\DanhSachMonHocMoDALService.cs.cs" />
@@ -101,6 +102,7 @@
     <Compile Include="Services\PhieuDKHPDALService.cs" />
     <Compile Include="Services\PhieuThuHPDALService.cs" />
     <Compile Include="Services\SinhVienDALService.cs" />
+    <Compile Include="Services\SinhVien_DoiTuongDALService.cs" />
     <Compile Include="Services\TinhDALService.cs" />
   </ItemGroup>
   <ItemGroup>

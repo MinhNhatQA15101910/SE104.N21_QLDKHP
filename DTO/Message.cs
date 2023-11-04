@@ -74,7 +74,8 @@
     public enum XoaDoiTuongMessage
     {
         None,
-        Success, 
+        Success,
+        UnableToDeleteVungSauVungXa,
         Unable
     }
 
