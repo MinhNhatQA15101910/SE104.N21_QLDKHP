@@ -72,11 +72,19 @@ namespace BLL.Services
 
 		public ThemTaiKhoanMessage ThemTaiKhoan(string tenDangNhap, string maNhom)
 		{
-			if(string.IsNullOrEmpty(tenDangNhap))
+			if (string.IsNullOrEmpty(tenDangNhap))
 			{
 				return ThemTaiKhoanMessage.EmptyTenDangNhap;
 			}
-			return _nguoiDungDALService.ThemTaiKhoan(tenDangNhap,maNhom);
+
+            List<CT_NguoiDung> nguoiDungList = _nguoiDungDALService.LayDSNguoiDung();
+            CT_NguoiDung nguoiDung = nguoiDungList.Find(nd => nd.TenDangNhap == tenDangNhap);
+            if (nguoiDung != null)
+            {
+                return ThemTaiKhoanMessage.DuplicateTenDangNhap;
+            }
+
+            return _nguoiDungDALService.ThemTaiKhoan(tenDangNhap,maNhom);
 		}
 
 		public SuaTaiKhoanMessage SuaTaiKhoan(string tenDangNhapBD, string tenDangNhap, string maNhom)
