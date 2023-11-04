@@ -35,34 +35,22 @@ namespace BLL.Services
 
         public SuaGioiHanTinChiMessage SuaGioiHanTinChi(string tinChiToiDa, string tinChiToiThieu)
         {
-            if (tinChiToiDa == "")
+            if (string.IsNullOrEmpty(tinChiToiDa))
             {
                 return SuaGioiHanTinChiMessage.TinChiToiDaRong;
             }
 
-            if (tinChiToiThieu == "")
+            if (string.IsNullOrEmpty(tinChiToiThieu))
             {
                 return SuaGioiHanTinChiMessage.TinChiToiThieuRong;
             }
 
-            int tinChiToiDaValue;
-            if (!int.TryParse(tinChiToiDa, out tinChiToiDaValue))
+            if (!int.TryParse(tinChiToiDa, out int tinChiToiDaValue) || tinChiToiDaValue <= 0)
             {
                 return SuaGioiHanTinChiMessage.TinChiToiDaKhongHopLe;
             }
 
-            if (tinChiToiDaValue <= 0)
-            {
-                return SuaGioiHanTinChiMessage.TinChiToiDaKhongHopLe;
-            }
-
-            int tinChiToiThieuValue;
-            if (!int.TryParse(tinChiToiThieu, out tinChiToiThieuValue))
-            {
-                return SuaGioiHanTinChiMessage.TinChiToiThieuKhongHopLe;
-            }
-
-            if (tinChiToiThieuValue <= 0)
+            if (!int.TryParse(tinChiToiThieu, out int tinChiToiThieuValue) || tinChiToiThieuValue <= 0)
             {
                 return SuaGioiHanTinChiMessage.TinChiToiThieuKhongHopLe;
             }
