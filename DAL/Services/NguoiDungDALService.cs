@@ -37,19 +37,12 @@ namespace DAL.Services
 
 		public DangNhapMessage DangNhap(string tenDangNhap, string matKhau)
 		{
-			try
-			{
-                var p = new DynamicParameters();
-                p.Add("@TenDangNhap", tenDangNhap);
-                p.Add("@MatKhau", ConvertToSHA512(matKhau));
-                GlobalConfig.CurrNguoiDung = _dapperService.QuerySingleOrDefault<NguoiDung>("spNGUOIDUNG_LayBangTenDangNhapVaMatKhau", p, commandType: CommandType.StoredProcedure);
-            }
-			catch (Exception)
-			{
-				return DangNhapMessage.Error;
-			}
+            var p = new DynamicParameters();
+            p.Add("@TenDangNhap", tenDangNhap);
+            p.Add("@MatKhau", ConvertToSHA512(matKhau));
+            GlobalConfig.CurrNguoiDung = _dapperService.QuerySingleOrDefault<NguoiDung>("spNGUOIDUNG_LayBangTenDangNhapVaMatKhau", p, commandType: CommandType.StoredProcedure);
 
-			if (GlobalConfig.CurrNguoiDung == null)
+            if (GlobalConfig.CurrNguoiDung == null)
 			{
 				return DangNhapMessage.Failed;
 			}
@@ -59,38 +52,24 @@ namespace DAL.Services
 
 		public XoaTaiKhoanMessage XoaTaiKhoan(string tenDangNhap)
 		{
-			try
-			{
-                var p = new DynamicParameters();
-                p.Add("@TenDangNhap", tenDangNhap);
-                _dapperService.Execute("spNGUOIDUNG_XoaTaiKhoan", p, commandType: CommandType.StoredProcedure);
-            }
-			catch (Exception)
-			{
-				return XoaTaiKhoanMessage.Error;
-			}
+            var p = new DynamicParameters();
+            p.Add("@TenDangNhap", tenDangNhap);
+            _dapperService.Execute("spNGUOIDUNG_XoaTaiKhoan", p, commandType: CommandType.StoredProcedure);
 
-			return XoaTaiKhoanMessage.Success;
+            return XoaTaiKhoanMessage.Success;
 		}
 
 		public DoiMatKhauMessage DoiMatKhau(string matKhauHT, string matKhauMoi)
 		{
 			int rowsAffected;
 
-			try
-			{
-                var p = new DynamicParameters();
-                p.Add("@TenDangNhap", GlobalConfig.CurrNguoiDung.TenDangNhap);
-                p.Add("@MatKhauHT", ConvertToSHA512(matKhauHT));
-                p.Add("@MatKhauMoi", ConvertToSHA512(matKhauMoi));
-                rowsAffected = _dapperService.Execute("spNGUOIDUNG_DoiMatKhau", p, commandType: CommandType.StoredProcedure);
-            }
-			catch (Exception)
-			{
-				return DoiMatKhauMessage.Error;
-			}
+            var p = new DynamicParameters();
+            p.Add("@TenDangNhap", GlobalConfig.CurrNguoiDung.TenDangNhap);
+            p.Add("@MatKhauHT", ConvertToSHA512(matKhauHT));
+            p.Add("@MatKhauMoi", ConvertToSHA512(matKhauMoi));
+            rowsAffected = _dapperService.Execute("spNGUOIDUNG_DoiMatKhau", p, commandType: CommandType.StoredProcedure);
 
-			if (rowsAffected == 0)
+            if (rowsAffected == 0)
 			{
 				return DoiMatKhauMessage.Failed;
 			}
@@ -101,70 +80,35 @@ namespace DAL.Services
 
 		public ThemTaiKhoanMessage ThemTaiKhoan(string tenDangNhap, string maNhom)
 		{
-			try
-			{
-                var p = new DynamicParameters();
-                p.Add("@TenDangNhap", tenDangNhap);
-                p.Add("@MaNhom", maNhom);
-                _dapperService.Execute("spNGUOIDUNG_ThemTaiKhoan", p, commandType: CommandType.StoredProcedure);
-            }
-			catch (SqlException ex)
-			{
-                if (ex.Number == 2627 && ex.Message.Contains("PK_NGUOIDUNG"))
-                {
-                    return ThemTaiKhoanMessage.DuplicateTenDangNhap;
-                }
-            }
-			catch (Exception)
-			{
-				return ThemTaiKhoanMessage.Error;
-			}
+            var p = new DynamicParameters();
+            p.Add("@TenDangNhap", tenDangNhap);
+            p.Add("@MaNhom", maNhom);
+            _dapperService.Execute("spNGUOIDUNG_ThemTaiKhoan", p, commandType: CommandType.StoredProcedure);
 
-			return ThemTaiKhoanMessage.Success;
+            return ThemTaiKhoanMessage.Success;
 		}
 
 		public SuaTaiKhoanMessage SuaTaiKhoan(string tenDangNhapBD, string tenDangNhap, string maNhom)
 		{
-			try
-			{
-                var p = new DynamicParameters();
-                p.Add("@TenDangNhapBD", tenDangNhapBD);
-                p.Add("@TenDangNhap", tenDangNhap);
-                p.Add("@MaNhom", maNhom);
-                _dapperService.Execute("spNGUOIDUNG_SuaTaiKhoan", p, commandType: CommandType.StoredProcedure);
-            }
-			catch (SqlException ex)
-			{
-                if (ex.Number == 2627 && ex.Message.Contains("PK_NGUOIDUNG"))
-                {
-                    return SuaTaiKhoanMessage.DuplicateTenDangNhap;
-                }
-            }
-			catch (Exception)
-			{
-				return SuaTaiKhoanMessage.Error;
-			}
+            var p = new DynamicParameters();
+            p.Add("@TenDangNhapBD", tenDangNhapBD);
+            p.Add("@TenDangNhap", tenDangNhap);
+            p.Add("@MaNhom", maNhom);
+            _dapperService.Execute("spNGUOIDUNG_SuaTaiKhoan", p, commandType: CommandType.StoredProcedure);
 
-			return SuaTaiKhoanMessage.Success;
+            return SuaTaiKhoanMessage.Success;
 		}
 
 		public ThemTaiKhoanSVMessage ThemTaiKhoanSV(IList<SinhVien> dssv)
 		{
-			try
-			{
-                foreach (SinhVien sinhVien in dssv)
-                {
-                    var p = new DynamicParameters();
-                    p.Add("@MaSV", sinhVien.MaSV);
-                    _dapperService.Execute("spNGUOIDUNG_ThemTaiKhoanSV", p, commandType: CommandType.StoredProcedure);
-                }
+            foreach (SinhVien sinhVien in dssv)
+            {
+                var p = new DynamicParameters();
+                p.Add("@MaSV", sinhVien.MaSV);
+                _dapperService.Execute("spNGUOIDUNG_ThemTaiKhoanSV", p, commandType: CommandType.StoredProcedure);
             }
-			catch (Exception)
-			{
-				return ThemTaiKhoanSVMessage.Error;
-			}
 
-			return ThemTaiKhoanSVMessage.Success;
+            return ThemTaiKhoanSVMessage.Success;
 		}
 	}
 }

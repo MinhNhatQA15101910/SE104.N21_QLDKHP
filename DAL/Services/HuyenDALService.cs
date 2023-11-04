@@ -25,67 +25,32 @@ namespace DAL.Services
 
         public SuaHuyenMessage SuaHuyen(int maHuyen, string tenHuyen, int vungUT, int maTinh)
         {
-            try
-            {
-                var p = new DynamicParameters();
-                p.Add("@MaHuyen", maHuyen);
-                p.Add("@TenHuyen", tenHuyen);
-                p.Add("@VungUT", vungUT);
-                p.Add("@MaTinh", maTinh);
-                _dapperService.Execute("spHUYEN_SuaHuyen", p, commandType: CommandType.StoredProcedure);
-            }
-            catch (SqlException ex)
-            {
-                if (ex.Number == 2627 && ex.Message.Contains("UQ_HUYEN_TenHuyen"))
-                {
-                    return SuaHuyenMessage.DuplicateTenHuyen;
-                }
-            }
-            catch (Exception)
-            {
-                return SuaHuyenMessage.Error;
-            }
+            var p = new DynamicParameters();
+            p.Add("@MaHuyen", maHuyen);
+            p.Add("@TenHuyen", tenHuyen);
+            p.Add("@VungUT", vungUT);
+            p.Add("@MaTinh", maTinh);
+            _dapperService.Execute("spHUYEN_SuaHuyen", p, commandType: CommandType.StoredProcedure);
 
             return SuaHuyenMessage.Success;
         }
 
         public XoaHuyenMessage XoaHuyen(int maHuyen)
         {
-            try
-            {
-                var p = new DynamicParameters();
-                p.Add("@MaHuyen", maHuyen);
-                _dapperService.Execute("spHUYEN_XoaHuyen", p, commandType: CommandType.StoredProcedure);
-            }
-            catch (Exception)
-            {
-                return XoaHuyenMessage.Error;
-            }
+            var p = new DynamicParameters();
+            p.Add("@MaHuyen", maHuyen);
+            _dapperService.Execute("spHUYEN_XoaHuyen", p, commandType: CommandType.StoredProcedure);
 
             return XoaHuyenMessage.Success;
         }
 
         public ThemHuyenMessage ThemHuyen(string tenHuyen, int vungUT, int maTinh)
         {
-            try
-            {
-                var p = new DynamicParameters();
-                p.Add("@TenHuyen", tenHuyen);
-                p.Add("@VungUT", vungUT);
-                p.Add("@MaTinh", maTinh);
-                _dapperService.Execute("spHUYEN_ThemHuyen", p, commandType: CommandType.StoredProcedure);
-            }
-            catch (SqlException ex)
-            {
-                if (ex.Number == 2627 && ex.Message.Contains("UQ_HUYEN_TenHuyen"))
-                {
-                    return ThemHuyenMessage.DuplicateTenHuyen;
-                }
-            }
-            catch (Exception)
-            {
-                return ThemHuyenMessage.Error;
-            }
+            var p = new DynamicParameters();
+            p.Add("@TenHuyen", tenHuyen);
+            p.Add("@VungUT", vungUT);
+            p.Add("@MaTinh", maTinh);
+            _dapperService.Execute("spHUYEN_ThemHuyen", p, commandType: CommandType.StoredProcedure);
 
             return ThemHuyenMessage.Success;
         }

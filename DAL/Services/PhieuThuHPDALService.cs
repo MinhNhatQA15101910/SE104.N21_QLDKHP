@@ -47,18 +47,12 @@ namespace DAL.Services
 
 		public MessagePhieuThuHPUpdateTinhTrang PhieuThuHPUpdateTinhTrang(int MaPhieuThuHP, int MaTinhTrang)
 		{
-			try
-			{
-                var p = new DynamicParameters();
-                p.Add("@MaPhieuThuHP", MaPhieuThuHP);
-                p.Add("@MaTinhTrang", MaTinhTrang);
-                _dapperService.Execute("spPHIEUTHUHP_UpdateTinhTrang", p, commandType: CommandType.StoredProcedure);
-            }
-			catch (Exception)
-			{
-				return MessagePhieuThuHPUpdateTinhTrang.Failed;
-			}
-			return MessagePhieuThuHPUpdateTinhTrang.Success;
+            var p = new DynamicParameters();
+            p.Add("@MaPhieuThuHP", MaPhieuThuHP);
+            p.Add("@MaTinhTrang", MaTinhTrang);
+            _dapperService.Execute("spPHIEUTHUHP_UpdateTinhTrang", p, commandType: CommandType.StoredProcedure);
+
+            return MessagePhieuThuHPUpdateTinhTrang.Success;
 		}
 	}
 }

@@ -39,17 +39,10 @@ namespace DAL.Services
 
         public SuaGioiHanTinChiMessage SuaGioiHanTinChi(int tinChiToiDa, int tinChiToiThieu)
         {
-            try
-            {
-                var p = new DynamicParameters();
-                p.Add("@SoTinChiToiDa", tinChiToiDa);
-                p.Add("@SoTinChiToiThieu", tinChiToiThieu);
-                _dapperService.Execute("spGLOBALCONFIG_SuaGioiHanTinChi", p, commandType: CommandType.StoredProcedure);
-            }
-            catch (Exception)
-            {
-                return SuaGioiHanTinChiMessage.Error;
-            }
+            var p = new DynamicParameters();
+            p.Add("@SoTinChiToiDa", tinChiToiDa);
+            p.Add("@SoTinChiToiThieu", tinChiToiThieu);
+            _dapperService.Execute("spGLOBALCONFIG_SuaGioiHanTinChi", p, commandType: CommandType.StoredProcedure);
 
             return SuaGioiHanTinChiMessage.Success;
         }
@@ -64,18 +57,12 @@ namespace DAL.Services
 
         public MessageKhoangTGDongHP KhoangTGDongHP(int MaHocKy, int NamHoc, int KhoangTG)
         {
-            try
-            {
-                var p = new DynamicParameters();
-                p.Add("@MaHocKy", MaHocKy);
-                p.Add("@NamHoc", NamHoc);
-                p.Add("@KhoangTG", KhoangTG);
-                _dapperService.Execute("spKHOANGTGDONGHP_Add", p, commandType: CommandType.StoredProcedure);
-            }
-            catch (Exception)
-            {
-                return MessageKhoangTGDongHP.Failed;
-            }
+            var p = new DynamicParameters();
+            p.Add("@MaHocKy", MaHocKy);
+            p.Add("@NamHoc", NamHoc);
+            p.Add("@KhoangTG", KhoangTG);
+            _dapperService.Execute("spKHOANGTGDONGHP_Add", p, commandType: CommandType.StoredProcedure);
+
             return MessageKhoangTGDongHP.Success;
 
         }

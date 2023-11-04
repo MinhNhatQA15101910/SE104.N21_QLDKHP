@@ -25,49 +25,21 @@ namespace DAL.Services
 
         public SuaDoiTuongMessage SuaDoiTuong(int maDTBanDau, string tenDT, float tiLeGiam)
         {
-            try
-            {
-                var p = new DynamicParameters();
-                p.Add("@MaDT", maDTBanDau);
-                p.Add("@TenDT", tenDT);
-                p.Add("@TiLeGiamHocPhi", tiLeGiam);
-                _dapperService.Execute("spDOITUONG_SuaDoiTuong", p, CommandType.StoredProcedure);
-            }
-            catch (SqlException ex)
-            {
-                if (ex.Number == 2627 && ex.Message.Contains("UQ_DOITUONG_TenDT"))
-                {
-                    return SuaDoiTuongMessage.DuplicateTenDoiTuong;
-                }
-            }
-            catch (Exception)
-            {
-                return SuaDoiTuongMessage.Error;
-            }
+            var p = new DynamicParameters();
+            p.Add("@MaDT", maDTBanDau);
+            p.Add("@TenDT", tenDT);
+            p.Add("@TiLeGiamHocPhi", tiLeGiam);
+            _dapperService.Execute("spDOITUONG_SuaDoiTuong", p, CommandType.StoredProcedure);
 
             return SuaDoiTuongMessage.Success;
         }
 
         public ThemDoiTuongMessage ThemDoiTuong(string tenDT, float tiLeGiam)
         {
-            try
-            {
-                var p = new DynamicParameters();
-                p.Add("@TenDT", tenDT);
-                p.Add("@TiLeGiamHocPhi", tiLeGiam);
-                _dapperService.Execute("spDOITUONG_ThemDoiTuong", p, CommandType.StoredProcedure);
-            }
-            catch (SqlException ex)
-            {
-                if (ex.Number == 2627 && ex.Message.Contains("UQ_DOITUONG_TenDT"))
-                {
-                    return ThemDoiTuongMessage.DuplicateTenDoiTuong;
-                }
-            }
-            catch (Exception)
-            {
-                return ThemDoiTuongMessage.Error;
-            }
+            var p = new DynamicParameters();
+            p.Add("@TenDT", tenDT);
+            p.Add("@TiLeGiamHocPhi", tiLeGiam);
+            _dapperService.Execute("spDOITUONG_ThemDoiTuong", p, CommandType.StoredProcedure);
 
             return ThemDoiTuongMessage.Success;
         }
@@ -95,16 +67,9 @@ namespace DAL.Services
 
         public XoaDoiTuongMessage XoaDoiTuong(int maDT)
         {
-            try
-            {
-                var p = new DynamicParameters();
-                p.Add("@MaDT", maDT);
-                _dapperService.Execute("spDOITUONG_XoaDoiTuong", p, CommandType.StoredProcedure);
-            }
-            catch (Exception)
-            {
-                return XoaDoiTuongMessage.Error;
-            }
+            var p = new DynamicParameters();
+            p.Add("@MaDT", maDT);
+            _dapperService.Execute("spDOITUONG_XoaDoiTuong", p, CommandType.StoredProcedure);
 
             return XoaDoiTuongMessage.Success;
         }

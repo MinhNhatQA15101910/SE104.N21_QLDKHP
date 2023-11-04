@@ -25,61 +25,33 @@ namespace DAL.Services
 
         public  XoaMonHocMessage XoaMonHoc(string maMH)
         {
-            try
-            {
-                var p = new DynamicParameters();
-                p.Add("@MaMH", maMH);
-                _dapperService.Execute("spMONHOC_XoaMonHoc", p, CommandType.StoredProcedure);
-            }
-            catch (Exception)
-            {
-                return XoaMonHocMessage.Error;
-            }
+            var p = new DynamicParameters();
+            p.Add("@MaMH", maMH);
+            _dapperService.Execute("spMONHOC_XoaMonHoc", p, CommandType.StoredProcedure);
 
             return XoaMonHocMessage.Success;
         }
 
         public  SuaMonHocMessage SuaMonHoc(string maMHBanDau, string tenMH, int maLoaiMonHoc, int soTiet)
         {
-            try
-            {
-                var p = new DynamicParameters();
-                p.Add("@MaMH", maMHBanDau);
-                p.Add("@TenMH", tenMH);
-                p.Add("@MaLoaiMonHoc", maLoaiMonHoc);
-                p.Add("@SoTiet", soTiet);
-                _dapperService.Execute("spMONHOC_SuaMonHoc", p, CommandType.StoredProcedure);
-            }
-            catch (Exception)
-            {
-                return SuaMonHocMessage.Error;
-            }
+            var p = new DynamicParameters();
+            p.Add("@MaMH", maMHBanDau);
+            p.Add("@TenMH", tenMH);
+            p.Add("@MaLoaiMonHoc", maLoaiMonHoc);
+            p.Add("@SoTiet", soTiet);
+            _dapperService.Execute("spMONHOC_SuaMonHoc", p, CommandType.StoredProcedure);
 
             return SuaMonHocMessage.Success;
         }
 
         public  ThemMonHocMessage ThemMonHoc(string maMH, string tenMH, int maLoaiMonHoc, int soTiet)
         {
-            try
-            {
-                var p = new DynamicParameters();
-                p.Add("@MaMH", maMH);
-                p.Add("@TenMH", tenMH);
-                p.Add("@MaLoaiMonHoc", maLoaiMonHoc);
-                p.Add("@SoTiet", soTiet);
-                _dapperService.Execute("spMONHOC_ThemMonHoc", p, CommandType.StoredProcedure);
-            }
-            catch (SqlException ex)
-            {
-                if (ex.Number == 2627 && ex.Message.Contains("PK_MONHOC"))
-                {
-                    return ThemMonHocMessage.DuplicateMaMH;
-                }
-            }
-            catch (Exception)
-            {
-                return ThemMonHocMessage.Error;
-            }
+            var p = new DynamicParameters();
+            p.Add("@MaMH", maMH);
+            p.Add("@TenMH", tenMH);
+            p.Add("@MaLoaiMonHoc", maLoaiMonHoc);
+            p.Add("@SoTiet", soTiet);
+            _dapperService.Execute("spMONHOC_ThemMonHoc", p, CommandType.StoredProcedure);
 
             return ThemMonHocMessage.Success;
         }

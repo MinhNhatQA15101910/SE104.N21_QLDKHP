@@ -25,74 +25,32 @@ namespace DAL.Services
 
         public XoaNganhMessage XoaNganh(string maNganh)
         {
-            try
-            {
-                var p = new DynamicParameters();
-                p.Add("@MaNganh", maNganh);
-                _dapperService.Execute("spNGANH_XoaNganh", p, CommandType.StoredProcedure);
-            }
-            catch (Exception)
-            {
-                return XoaNganhMessage.Error;
-            }
+            var p = new DynamicParameters();
+            p.Add("@MaNganh", maNganh);
+            _dapperService.Execute("spNGANH_XoaNganh", p, CommandType.StoredProcedure);
 
             return XoaNganhMessage.Success;
         }
 
         public SuaNganhMessage SuaNganh(string maNganhBanDau, string maNganhSua, string tenNganhSua, string maKhoaSua)
         {
-            try
-            {
-                var p = new DynamicParameters();
-                p.Add("@MaNganhBanDau", maNganhBanDau);
-                p.Add("@MaNganh", maNganhSua);
-                p.Add("@TenNganh", tenNganhSua);
-                p.Add("@MaKhoa", maKhoaSua);
-                _dapperService.Execute("spNGANH_SuaNganh", p, commandType: CommandType.StoredProcedure);
-            }
-            catch (SqlException ex)
-            {
-                if (ex.Number == 2627 && ex.Message.Contains("UQ_NGANH_TenNganh"))
-                {
-                    return SuaNganhMessage.DuplicateTenNganh;
-                }
-            }
-            catch (Exception)
-            {
-                return SuaNganhMessage.Error;
-            }
+            var p = new DynamicParameters();
+            p.Add("@MaNganhBanDau", maNganhBanDau);
+            p.Add("@MaNganh", maNganhSua);
+            p.Add("@TenNganh", tenNganhSua);
+            p.Add("@MaKhoa", maKhoaSua);
+            _dapperService.Execute("spNGANH_SuaNganh", p, commandType: CommandType.StoredProcedure);
 
             return SuaNganhMessage.Success;
         }
 
         public ThemNganhMessage ThemNganh(string maNganh, string tenNganh, string maKhoa)
         {
-            try
-            {
-                var p = new DynamicParameters();
-                p.Add("@MaNganh", maNganh);
-                p.Add("@TenNganh", tenNganh);
-                p.Add("@MaKhoa", maKhoa);
-                _dapperService.Execute("spNGANH_ThemNganh", p, commandType: CommandType.StoredProcedure);
-            }
-            catch (SqlException ex)
-            {
-                if (ex.Number == 2627)
-                {
-                    if (ex.Message.Contains("PK_NGANH"))
-                    {
-                        return ThemNganhMessage.DuplicateMaNganh;
-                    }
-                    else if (ex.Message.Contains("UQ_NGANH_TenNganh"))
-                    {
-                        return ThemNganhMessage.DuplicateTenNganh;
-                    }
-                }
-            }
-            catch (Exception)
-            {
-                return ThemNganhMessage.Error;
-            }
+            var p = new DynamicParameters();
+            p.Add("@MaNganh", maNganh);
+            p.Add("@TenNganh", tenNganh);
+            p.Add("@MaKhoa", maKhoa);
+            _dapperService.Execute("spNGANH_ThemNganh", p, commandType: CommandType.StoredProcedure);
 
             return ThemNganhMessage.Success;
         }

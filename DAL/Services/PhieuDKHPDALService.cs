@@ -119,21 +119,14 @@ namespace DAL.Services
 
 		public MessagePhieuDKHPUpdateTinhTrang PhieuDKHPUpdateTinhTrang(int MaPhieuDKHP, int MaTinhTrang)
 		{
-			try
-			{
-                var p = new DynamicParameters();
-                p.Add("@MaPhieuDKHP", MaPhieuDKHP);
-                p.Add("@MaTinhTrang", MaTinhTrang);
+            var p = new DynamicParameters();
+            p.Add("@MaPhieuDKHP", MaPhieuDKHP);
+            p.Add("@MaTinhTrang", MaTinhTrang);
 
-                _dapperService.Execute("spPHIEUDKHP_UpdateTinhTrang", p, commandType: CommandType.StoredProcedure);
+            _dapperService.Execute("spPHIEUDKHP_UpdateTinhTrang", p, commandType: CommandType.StoredProcedure);
 
-                return MessagePhieuDKHPUpdateTinhTrang.Success;
-			}
-			catch (Exception)
-			{
-				return MessagePhieuDKHPUpdateTinhTrang.Failed;
-			}
-		}
+            return MessagePhieuDKHPUpdateTinhTrang.Success;
+        }
 
 		public List<PhieuDKHP> GetAllPhieuDKHP()
 		{

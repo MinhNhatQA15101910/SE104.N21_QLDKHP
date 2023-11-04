@@ -24,18 +24,12 @@ namespace DAL.Services
 
         public MessageAddMonHocMo AddMonHocMo(string MaMH, int MaHocKy, int NamHoc)
         {
-            try
-            {
-                var p = new DynamicParameters();
-                p.Add("@MaHocKy", MaHocKy);
-                p.Add("@MaMH", MaMH);
-                p.Add("@NamHoc", NamHoc);
-                _dapperService.Execute("spDANHSACHMONHOCMO_AddMonHocMo", p, commandType: CommandType.StoredProcedure);
-            }
-            catch (Exception)
-            {
-                return MessageAddMonHocMo.Failed;
-            }
+            var p = new DynamicParameters();
+            p.Add("@MaHocKy", MaHocKy);
+            p.Add("@MaMH", MaMH);
+            p.Add("@NamHoc", NamHoc);
+            _dapperService.Execute("spDANHSACHMONHOCMO_AddMonHocMo", p, commandType: CommandType.StoredProcedure);
+
             return MessageAddMonHocMo.Success;
         }
 
@@ -46,17 +40,11 @@ namespace DAL.Services
 
         public MessageDeleteHocKyNamHocMHM DeleteHocKyNamHocMHM(int MaHocKy, int NamHoc)
         {
-            try
-            {
-                var mhm = new DynamicParameters();
-                mhm.Add("@MaHocKy", MaHocKy);
-                mhm.Add("@NamHoc", NamHoc);
-                _dapperService.Execute("spDANHSACHMONHOCMO_XoaDanhSach", mhm, commandType: CommandType.StoredProcedure);
-            }
-            catch (Exception)
-            {
-                return MessageDeleteHocKyNamHocMHM.Failed;
-            }
+            var mhm = new DynamicParameters();
+            mhm.Add("@MaHocKy", MaHocKy);
+            mhm.Add("@NamHoc", NamHoc);
+            _dapperService.Execute("spDANHSACHMONHOCMO_XoaDanhSach", mhm, commandType: CommandType.StoredProcedure);
+
             return MessageDeleteHocKyNamHocMHM.Success;
         }
     }

@@ -1,14 +1,13 @@
 ﻿using DAL.IServices;
 using Dapper;
 using DTO;
-using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Linq;
 
 namespace DAL.Services
 {
-    public class ChuongTrinhHocDALService: IChuongTrinhHocDALService
+    public class ChuongTrinhHocDALService : IChuongTrinhHocDALService
     {
         private readonly IDapperService _dapperService;
 

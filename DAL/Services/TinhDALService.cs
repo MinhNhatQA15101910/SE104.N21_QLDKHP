@@ -24,65 +24,30 @@ namespace DAL.Services
 
 		public SuaTinhMessage SuaTinh(int maTinh, string tenTinh)
 		{
-			try
-			{
-                var p = new DynamicParameters();
-                p.Add("@MaTinh", maTinh);
-                p.Add("@TenTinh", tenTinh);
-                _dapperService.Execute("spTINH_SuaTinh", p, commandType: CommandType.StoredProcedure);
-            }
-			catch (SqlException ex)
-			{
-				if (ex.Number == 2627 && ex.Message.Contains("UQ_TINH_TenTinh"))
-				{
-					return SuaTinhMessage.DuplicateTenTinh;
-				}
-			}
-			catch (Exception)
-			{
-				return SuaTinhMessage.Error;
-			}
+            var p = new DynamicParameters();
+            p.Add("@MaTinh", maTinh);
+            p.Add("@TenTinh", tenTinh);
+            _dapperService.Execute("spTINH_SuaTinh", p, commandType: CommandType.StoredProcedure);
 
-			return SuaTinhMessage.Success;
+            return SuaTinhMessage.Success;
 		}
 
 		public XoaTinhMessage XoaTinh(int maTinh)
 		{
-			try
-			{
-                var p = new DynamicParameters();
-                p.Add("@MaTinh", maTinh);
-                _dapperService.Execute("spTINH_XoaTinh", p, commandType: CommandType.StoredProcedure);
-            }
-			catch (Exception)
-			{
-				return XoaTinhMessage.Error;
-			}
+            var p = new DynamicParameters();
+            p.Add("@MaTinh", maTinh);
+            _dapperService.Execute("spTINH_XoaTinh", p, commandType: CommandType.StoredProcedure);
 
-			return XoaTinhMessage.Success;
+            return XoaTinhMessage.Success;
 		}
 
 		public ThemTinhMessage ThemTinh(string tenTinh)
 		{
-			try
-			{
-                var p = new DynamicParameters();
-                p.Add("@TenTinh", tenTinh);
-                _dapperService.Execute("spTINH_ThemTinh", p, commandType: CommandType.StoredProcedure);
-            }
-			catch (SqlException ex)
-			{
-				if (ex.Number == 2627 && ex.Message.Contains("UQ_TINH_TenTTP"))
-				{
-					return ThemTinhMessage.DuplicateTenTinh;
-				}
-			}
-			catch (Exception)
-			{
-				return ThemTinhMessage.Error;
-			}
+            var p = new DynamicParameters();
+            p.Add("@TenTinh", tenTinh);
+            _dapperService.Execute("spTINH_ThemTinh", p, commandType: CommandType.StoredProcedure);
 
-			return ThemTinhMessage.Success;
+            return ThemTinhMessage.Success;
 		}
 	}
 }
