@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace BLL.Services
 {
-    public class DoiTuongBLLService: IDoiTuongBLLService
+    public class DoiTuongBLLService : IDoiTuongBLLService
     {
         private readonly IDoiTuongDALService _doiTuongDALService;
 
@@ -13,6 +13,7 @@ namespace BLL.Services
         {
             _doiTuongDALService = doiTuongDALService;
         }
+
         public List<DoiTuong> LayDSDoiTuong()
         {
             return _doiTuongDALService.LayDSDoiTuong();
@@ -20,30 +21,31 @@ namespace BLL.Services
 
         public SuaDoiTuongMessage SuaDoiTuong(int maDTBanDau, string tenDT, string tiLeGiam)
         {
-            if (tenDT.Equals(""))
+            if (string.IsNullOrEmpty(tenDT))
             {
                 return SuaDoiTuongMessage.EmptyTenDoiTuong;
             }
 
-            if (tiLeGiam.Equals(""))
+            if (string.IsNullOrEmpty(tiLeGiam))
             {
                 return SuaDoiTuongMessage.EmptyTiLeGiam;
             }
 
-            float tiLeGiamValue;
-            if (!float.TryParse(tiLeGiam, out tiLeGiamValue))
+            if (!float.TryParse(tiLeGiam, out float tiLeGiamValue) || tiLeGiamValue > 1 || tiLeGiamValue <= 0)
             {
                 return SuaDoiTuongMessage.TiLeGiamKhongHopLe;
             }
 
-            if (tiLeGiamValue > 1 || tiLeGiamValue <= 0)
-            {
-                return SuaDoiTuongMessage.TiLeGiamKhongHopLe;
-            }
-
-            if (maDTBanDau == 2 && tenDT != "Vùng sâu vùng xa")
+            if (maDTBanDau == 2)
             {
                 return SuaDoiTuongMessage.Unable;
+            }
+
+            List<DoiTuong> doiTuongList = _doiTuongDALService.LayDSDoiTuong();
+            DoiTuong doiTuong = doiTuongList.Find(dt => dt.TenDT == tenDT);
+            if (doiTuong != null)
+            {
+                return SuaDoiTuongMessage.DuplicateTenDoiTuong;
             }
 
             return _doiTuongDALService.SuaDoiTuong(maDTBanDau, tenDT, tiLeGiamValue);
