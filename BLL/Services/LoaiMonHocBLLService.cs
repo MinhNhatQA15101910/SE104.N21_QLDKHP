@@ -73,41 +73,36 @@ namespace BLL.Services
 
         public ThemLoaiMonHocMessage ThemLoaiMonHoc(string tenLoaiMonHoc, string soTiet, string soTien)
         {
-            if (tenLoaiMonHoc.Equals(""))
+            if (string.IsNullOrEmpty(tenLoaiMonHoc))
             {
                 return ThemLoaiMonHocMessage.EmptyTenLoaiMonHoc;
             }
 
-            if (soTiet.Equals(""))
+            if (string.IsNullOrEmpty(soTiet))
             {
                 return ThemLoaiMonHocMessage.EmptySoTiet;
             }
 
-            if (soTien.Equals(""))
+            if (string.IsNullOrEmpty(soTien))
             {
                 return ThemLoaiMonHocMessage.EmptySoTien;
             }
 
-            int soTietValue;
-            if (!int.TryParse(soTiet, out soTietValue))
+            if (!int.TryParse(soTiet, out int soTietValue) || soTietValue < 0)
             {
                 return ThemLoaiMonHocMessage.SoTietKhongHopLe;
             }
 
-            if (soTietValue < 0)
-            {
-                return ThemLoaiMonHocMessage.SoTietKhongHopLe;
-            }
-
-            decimal soTienValue;
-            if (!decimal.TryParse(soTien, out soTienValue))
+            if (!decimal.TryParse(soTien, out decimal soTienValue) || soTienValue < 0)
             {
                 return ThemLoaiMonHocMessage.SoTienKhongHopLe;
             }
 
-            if (soTienValue < 0)
+            List<LoaiMonHoc> loaiMonHocs = _loaiMonHocDALService.LayDSLoaiMonHoc();
+            LoaiMonHoc loaiMonHoc = loaiMonHocs.Find(lmh => lmh.TenLoaiMonHoc == tenLoaiMonHoc);
+            if (loaiMonHoc != null)
             {
-                return ThemLoaiMonHocMessage.SoTienKhongHopLe;
+                return ThemLoaiMonHocMessage.DuplicateTenLoaiMonHoc;
             }
 
             return _loaiMonHocDALService.ThemLoaiMonHoc(tenLoaiMonHoc, soTietValue, soTienValue);
