@@ -265,9 +265,6 @@ namespace PL
                     case SuaSinhVienMessage.DuplicateMaSV:
                         MessageBox.Show("Mã sinh viên đã tồn tại, vui lòng nhập giá trị khác!");
                         break;
-                    case SuaSinhVienMessage.Error:
-                        MessageBox.Show("Đã có lỗi xảy ra!");
-                        break;
                     case SuaSinhVienMessage.Success:
                         MessageBox.Show("Cập nhật sinh viên thành công!");
                         Close();
@@ -303,9 +300,6 @@ namespace PL
                         break;
                     case ThemSinhVienMessage.DuplicateMaSV:
                         MessageBox.Show("Mã sinh viên đã tồn tại, vui lòng nhập giá trị khác!");
-                        break;
-                    case ThemSinhVienMessage.Error:
-                        MessageBox.Show("Đã có lỗi xảy ra!");
                         break;
                     case ThemSinhVienMessage.Success:
                         if (themSuaSinhVienRequester != null)

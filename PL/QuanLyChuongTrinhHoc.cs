@@ -165,9 +165,6 @@ namespace PL
                             case MessageDeleteListCTHoc.Failed:
                                 MessageBox.Show("False to connect database");
                                 break;
-                            case MessageDeleteListCTHoc.ErrorData:
-                                MessageBox.Show("False to get data");
-                                break;
                             case MessageDeleteListCTHoc.Success:
                                 MessageBox.Show("Xóa chương trình học thành công");
                                 dgv_ChuongTrinhHoc.Rows.Clear();

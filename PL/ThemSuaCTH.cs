@@ -231,7 +231,7 @@ namespace PL
 
         private void btn_Save_Click(object sender, EventArgs e)
         {
-            int failed = 0, error = 0, success = 0;
+            int failed = 0, success = 0;
             if (mDSMonHocThem != null)
             {
                 foreach (var item in mDSMonHocThem)
@@ -243,9 +243,6 @@ namespace PL
                         {
                             case MessageAddCTHoc.Failed:
                                 failed++;
-                                break;
-                            case MessageAddCTHoc.ErrorData:
-                                error++;
                                 break;
                             case MessageAddCTHoc.Success:
                                 success++;
@@ -266,9 +263,6 @@ namespace PL
                             case MessageDeleteCTHoc.Failed:
                                 failed++;
                                 break;
-                            case MessageDeleteCTHoc.ErrorData:
-                                error++;
-                                break;
                             case MessageDeleteCTHoc.Success:
                                 success++;
                                 break;
@@ -277,7 +271,6 @@ namespace PL
             }
             if (success > 0) MessageBox.Show("Cập nhật chương trình học thành công!");
             else if (failed > 0) MessageBox.Show("Failed to connect databse");
-            else if (error > 0) MessageBox.Show("Failed to add data");
             SetUpDgvMonHocChon();
             SetUpDgvMonHoc();
             DeleteSameRows();

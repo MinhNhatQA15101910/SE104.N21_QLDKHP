@@ -72,9 +72,6 @@ namespace PL
                 case DangNhapMessage.EmptyMatKhau:
                     MessageBox.Show("Vui lòng nhập mật khẩu!");
                     break;
-                case DangNhapMessage.Error:
-                    MessageBox.Show("Đã có lỗi xảy ra!");
-                    break;
                 case DangNhapMessage.Failed:
                     MessageBox.Show("Tên đăng nhập hoặc mật khẩu không chính xác!");
                     break;

@@ -123,9 +123,6 @@ namespace PL
                 XoaKhoaMessage message = _khoaBLLService.XoaKhoa(maKhoa);
                 switch (message)
                 {
-                    case XoaKhoaMessage.Error:
-                        MessageBox.Show("Không thể xóa khoa vì có ngành đang thuộc khoa hiện tại!");
-                        break;
                     case XoaKhoaMessage.Success:
                         mKhoa.Remove(khoa);
                         MessageBox.Show("Xóa khoa thành công!");

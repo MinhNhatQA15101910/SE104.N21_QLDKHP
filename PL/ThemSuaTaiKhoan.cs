@@ -107,9 +107,6 @@ namespace PL
                     case SuaTaiKhoanMessage.DuplicateTenDangNhap:
                         MessageBox.Show("Tên đăng nhập đã tồn tại, vui lòng nhập giá trị khác!");
                         break;
-                    case SuaTaiKhoanMessage.Error:
-                        MessageBox.Show("Đã có lỗi xảy ra!");
-                        break;
                     case SuaTaiKhoanMessage.Success:
                         MessageBox.Show("Cập nhật tài khoản thành công!");
                         Close();
@@ -129,9 +126,6 @@ namespace PL
                         break;
                     case ThemTaiKhoanMessage.DuplicateTenDangNhap:
                         MessageBox.Show("Tên đăng nhập đã tồn tại, vui lòng nhập giá trị khác!");
-                        break;
-                    case ThemTaiKhoanMessage.Error:
-                        MessageBox.Show("Đã có lỗi xảy ra!");
                         break;
                     case ThemTaiKhoanMessage.Success:
                         if (themSuaTaiKhoanRequester != null)

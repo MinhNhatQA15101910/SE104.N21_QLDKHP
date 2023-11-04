@@ -110,9 +110,6 @@ namespace PL
                 XoaTinhMessage message = _tinhBLLService.XoaTinh(maTinh);
                 switch (message)
                 {
-                    case XoaTinhMessage.Error:
-                        MessageBox.Show("Bạn không thể xóa tỉnh này do có huyện đang thuộc tỉnh!");
-                        break;
                     case XoaTinhMessage.Success:
                         mTinh.Remove(tinh);
                         MessageBox.Show("Xóa tỉnh thành công!");

@@ -135,9 +135,6 @@ namespace PL
                 XoaMonHocMessage message = _monHocBLLService.XoaMonHoc(maMH);
                 switch (message)
                 {
-                    case XoaMonHocMessage.Error:
-                        MessageBox.Show("Không thể xóa môn học này vì có chương trình học chứa môn học hoặc môn học có trong danh sách môn học mở!");
-                        break;
                     case XoaMonHocMessage.Success:
                         mMonHoc.Remove(monHoc);
                         MessageBox.Show("Xóa môn học thành công!");

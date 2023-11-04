@@ -184,9 +184,6 @@ namespace PL
                 XoaSinhVienMessage message = _sinhVienBLLService.XoaSinhVien(maSV);
                 switch (message)
                 {
-                    case XoaSinhVienMessage.Error:
-                        MessageBox.Show("Đã có lỗi xảy ra!");
-                        break;
                     case XoaSinhVienMessage.Success:
                         mSinhVien.Remove(sinhVien);
                         MessageBox.Show("Xóa sinh viên thành công!");

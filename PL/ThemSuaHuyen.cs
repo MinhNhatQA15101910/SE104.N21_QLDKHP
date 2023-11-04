@@ -113,9 +113,6 @@ namespace PL
                     case SuaHuyenMessage.DuplicateTenHuyen:
                         MessageBox.Show("Tên huyện đã tồn tại, vui lòng nhập giá trị khác!");
                         break;
-                    case SuaHuyenMessage.Error:
-                        MessageBox.Show("Đã có lỗi xảy ra!");
-                        break;
                     case SuaHuyenMessage.Success:
                         MessageBox.Show("Sửa huyện thành công!");
                         Close();
@@ -140,9 +137,6 @@ namespace PL
                         break;
                     case ThemHuyenMessage.DuplicateTenHuyen:
                         MessageBox.Show("Tên huyện đã tồn tại, vui lòng nhập giá trị khác!");
-                        break;
-                    case ThemHuyenMessage.Error:
-                        MessageBox.Show("Đã có lỗi xảy ra!");
                         break;
                     case ThemHuyenMessage.Success:
                         if (themSuaHuyenRequester != null)

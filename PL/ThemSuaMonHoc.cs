@@ -135,9 +135,6 @@ namespace PL
                     case SuaMonHocMessage.DuplicateMaMH:
                         MessageBox.Show("Mã môn học đã tồn tại, vui lòng nhập giá trị khác!");
                         break;
-                    case SuaMonHocMessage.Error:
-                        MessageBox.Show("Đã có lỗi xảy ra!");
-                        break;
                     case SuaMonHocMessage.Success:
                         MessageBox.Show("Sửa môn học thành công!");
                         Close();
@@ -169,9 +166,6 @@ namespace PL
                         break;
                     case ThemMonHocMessage.DuplicateMaMH:
                         MessageBox.Show("Mã môn học đã tồn tại, vui lòng nhập giá trị khác!");
-                        break;
-                    case ThemMonHocMessage.Error:
-                        MessageBox.Show("Đã có lỗi xảy ra!");
                         break;
                     case ThemMonHocMessage.Success:
                         MessageBox.Show("Thêm môn học thành công!");

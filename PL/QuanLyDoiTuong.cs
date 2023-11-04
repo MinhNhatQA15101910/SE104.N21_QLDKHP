@@ -112,9 +112,6 @@ namespace PL
                 XoaDoiTuongMessage message = _doiTuongBLLService.XoaDoiTuong(maDT);
                 switch (message)
                 {
-                    case XoaDoiTuongMessage.Error:
-                        MessageBox.Show("Bạn không thể xóa đối tượng này do có sinh viên đang thuộc đối tượng!");
-                        break;
                     case XoaDoiTuongMessage.Unable:
                         MessageBox.Show("Bạn không thể xóa đối tượng vùng sâu vùng xa!");
                         break;

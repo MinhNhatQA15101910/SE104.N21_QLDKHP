@@ -84,9 +84,6 @@ namespace PL
                     case SuaKhoaMessage.DuplicateTenKhoa:
                         MessageBox.Show("Tên khoa đã tồn tại, vui lòng nhập giá trị khác!");
                         break;
-                    case SuaKhoaMessage.Error:
-                        MessageBox.Show("Đã có lỗi xảy ra!");
-                        break;
                     case SuaKhoaMessage.Success:
                         MessageBox.Show("Sửa khoa thành công!");
                         Close();
@@ -112,9 +109,6 @@ namespace PL
                         break;
                     case ThemKhoaMessage.DuplicateTenKhoa:
                         MessageBox.Show("Tên khoa đã tồn tại, vui lòng nhập giá trị khác!");
-                        break;
-                    case ThemKhoaMessage.Error:
-                        MessageBox.Show("Đã có lỗi xảy ra!");
                         break;
                     case ThemKhoaMessage.Success:
                         if (themSuaKhoaRequester != null)

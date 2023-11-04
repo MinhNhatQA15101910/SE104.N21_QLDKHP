@@ -123,9 +123,6 @@ namespace PL
 					case SuaNganhMessage.DuplicateTenNganh:
 						MessageBox.Show("Tên ngành đã tồn tại, vui lòng nhập giá trị khác!");
 						break;
-					case SuaNganhMessage.Error:
-						MessageBox.Show("Đã có lỗi xảy ra!");
-						break;
 					case SuaNganhMessage.Success:
 						MessageBox.Show("Sửa ngành thành công!");
 						Close();
@@ -152,9 +149,6 @@ namespace PL
 						break;
 					case ThemNganhMessage.DuplicateTenNganh:
 						MessageBox.Show("Tên ngành đã tồn tại, vui lòng nhập giá trị khác!");
-						break;
-					case ThemNganhMessage.Error:
-						MessageBox.Show("Đã có lỗi xảy ra!");
 						break;
 					case ThemNganhMessage.Success:
 						if (themSuaNganhRequester != null)

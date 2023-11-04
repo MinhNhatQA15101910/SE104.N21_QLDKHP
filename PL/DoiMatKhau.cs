@@ -53,9 +53,6 @@ namespace PL
                     errProv1.SetError(txtMatKhauHT, "Mật khẩu hiện tại không chính xác");
                     txtMatKhauHT.Focus();
                     break;
-                case DoiMatKhauMessage.Error:
-                    MessageBox.Show("Đã có lỗi xảy ra!");
-                    break;
                 case DoiMatKhauMessage.Success:
                     MessageBox.Show("Đổi mật khẩu thành công");
 
