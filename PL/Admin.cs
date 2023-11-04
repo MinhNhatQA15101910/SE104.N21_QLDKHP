@@ -270,7 +270,7 @@ namespace PL
                     MessageBox.Show("Vui lòng chọn sinh viên để thêm tài khoản!");
                     break;
                 case ThemTaiKhoanSVMessage.Success:
-                    MessageBox.Show("Thêm tài khoản thành công!");
+                    MessageBox.Show("Thêm tài khoản sinh viên thành công!");
 
                     mSinhVienChuaCoTKSelected.Clear();
                     mNguoiDung = new BindingList<CT_NguoiDung>(_nguoiDungBLLService.LayDSNguoiDung());

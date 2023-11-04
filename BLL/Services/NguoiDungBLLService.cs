@@ -13,10 +13,12 @@ namespace BLL.Services
 		{
 			_nguoiDungDALService = nguoiDungDALService;
 		}
+
 		public List<CT_NguoiDung> LayDSNguoiDung()
 		{
 			return _nguoiDungDALService.LayDSNguoiDung();
 		}
+
 		public DangNhapMessage DangNhap(string tenDangNhap, string matKhau)
 		{
 			if (string.IsNullOrEmpty(tenDangNhap))
@@ -31,10 +33,12 @@ namespace BLL.Services
 
 			return _nguoiDungDALService.DangNhap(tenDangNhap, matKhau);
 		}
+
 		public XoaTaiKhoanMessage XoaTaiKhoan(string tenDangNhap)
 		{
 			return _nguoiDungDALService.XoaTaiKhoan(tenDangNhap);
 		}
+
 		public DoiMatKhauMessage DoiMatKhau(string matKhauHT, string matKhauMoi, string matKhauNhapLai)
 		{
 			if(string.IsNullOrEmpty(matKhauHT))
@@ -53,6 +57,7 @@ namespace BLL.Services
 
 			return _nguoiDungDALService.DoiMatKhau(matKhauHT,matKhauMoi);
 		}
+
 		public ThemTaiKhoanMessage ThemTaiKhoan(string tenDangNhap, string maNhom)
 		{
 			if(string.IsNullOrEmpty(tenDangNhap))
@@ -61,6 +66,7 @@ namespace BLL.Services
 			}
 			return _nguoiDungDALService.ThemTaiKhoan(tenDangNhap,maNhom);
 		}
+
 		public SuaTaiKhoanMessage SuaTaiKhoan(string tenDangNhapBD, string tenDangNhap, string maNhom)
 		{
 			if (string.IsNullOrEmpty(tenDangNhap))
@@ -71,6 +77,11 @@ namespace BLL.Services
 		}
 		public ThemTaiKhoanSVMessage ThemTaiKhoanSV(IList<SinhVien> dssv)
 		{
+			if (dssv == null || dssv.Count <= 0)
+			{
+				return ThemTaiKhoanSVMessage.Unable;
+			}
+
 			return _nguoiDungDALService.ThemTaiKhoanSV(dssv);
 		}
 	}
