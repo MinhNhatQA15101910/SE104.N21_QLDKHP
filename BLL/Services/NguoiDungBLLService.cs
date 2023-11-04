@@ -36,6 +36,11 @@ namespace BLL.Services
 
 		public XoaTaiKhoanMessage XoaTaiKhoan(string tenDangNhap)
 		{
+			if (tenDangNhap == GlobalConfig.CurrNguoiDung.TenDangNhap)
+			{
+				return XoaTaiKhoanMessage.Unable;
+			}
+
 			return _nguoiDungDALService.XoaTaiKhoan(tenDangNhap);
 		}
 
