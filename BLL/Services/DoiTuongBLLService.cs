@@ -53,25 +53,26 @@ namespace BLL.Services
 
         public ThemDoiTuongMessage ThemDoiTuong(string tenDT, string tiLeGiam)
         {
-            if (tenDT.Equals(""))
+            if (string.IsNullOrEmpty(tenDT))
             {
                 return ThemDoiTuongMessage.EmptyTenDoiTuong;
             }
 
-            if (tiLeGiam.Equals(""))
+            if (string.IsNullOrEmpty(tiLeGiam))
             {
                 return ThemDoiTuongMessage.EmptyTiLeGiam;
             }
 
-            float tiLeGiamValue;
-            if (!float.TryParse(tiLeGiam, out tiLeGiamValue))
+            if (!float.TryParse(tiLeGiam, out float tiLeGiamValue) || tiLeGiamValue > 1 || tiLeGiamValue <= 0)
             {
                 return ThemDoiTuongMessage.TiLeGiamKhongHopLe;
             }
 
-            if (tiLeGiamValue > 1 || tiLeGiamValue <= 0)
+            List<DoiTuong> doiTuongList = _doiTuongDALService.LayDSDoiTuong();
+            DoiTuong doiTuong = doiTuongList.Find(dt => dt.TenDT == tenDT);
+            if (doiTuong != null)
             {
-                return ThemDoiTuongMessage.TiLeGiamKhongHopLe;
+                return ThemDoiTuongMessage.DuplicateTenDoiTuong;
             }
 
             return _doiTuongDALService.ThemDoiTuong(tenDT, tiLeGiamValue);
