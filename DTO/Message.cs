@@ -140,6 +140,7 @@
     public enum XoaTinhMessage
     {
         None,
+        Unable,
         Success
     }
 

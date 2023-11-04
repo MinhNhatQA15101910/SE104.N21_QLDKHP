@@ -17,6 +17,7 @@ namespace DAL.Services
 		{
 			_dapperService = dapperService;
 		}
+
 		public List<Tinh> LayDSTinh()
 		{
             return _dapperService.Query<Tinh>("spTINH_LayDSTinh").ToList();
