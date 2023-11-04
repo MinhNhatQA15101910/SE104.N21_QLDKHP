@@ -2,6 +2,7 @@
 using DAL.IServices;
 using DTO;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace BLL.Services
 {
@@ -84,7 +85,15 @@ namespace BLL.Services
 			{
 				return SuaTaiKhoanMessage.EmptyTenDangNhap;
 			}
-			return _nguoiDungDALService.SuaTaiKhoan(tenDangNhapBD, tenDangNhap, maNhom);
+
+			List<CT_NguoiDung> nguoiDungList = _nguoiDungDALService.LayDSNguoiDung();
+			CT_NguoiDung nguoiDung = nguoiDungList.Find(nd => nd.TenDangNhap == tenDangNhap);
+            if (nguoiDung != null && nguoiDung.TenDangNhap != tenDangNhapBD)
+            {
+				return SuaTaiKhoanMessage.DuplicateTenDangNhap;
+            }
+
+            return _nguoiDungDALService.SuaTaiKhoan(tenDangNhapBD, tenDangNhap, maNhom);
 		}
 		public ThemTaiKhoanSVMessage ThemTaiKhoanSV(IList<SinhVien> dssv)
 		{
