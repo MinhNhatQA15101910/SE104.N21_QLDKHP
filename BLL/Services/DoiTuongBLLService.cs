@@ -87,8 +87,8 @@ namespace BLL.Services
                 return XoaDoiTuongMessage.UnableToDeleteVungSauVungXa;
             }
 
-            ISinhVien_DoiTuongBLLService sinhVien_DoiTuongBLLService = new SinhVien_DoiTuongBLLService(new SinhVien_DoiTuongDALService(new DapperService(ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString)));
-            List<SinhVien_DoiTuong> sinhVien_DoiTuongs = sinhVien_DoiTuongBLLService.GetSinhVien_DoiTuongs();
+            ISinhVien_DoiTuongDALService sinhVien_DoiTuongDALService = new SinhVien_DoiTuongDALService(new DapperService(ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString));
+            List<SinhVien_DoiTuong> sinhVien_DoiTuongs = sinhVien_DoiTuongDALService.GetSinhVien_DoiTuongs();
             SinhVien_DoiTuong sinhVien_DoiTuong = sinhVien_DoiTuongs.Find(dt => dt.MaDT ==  maDT);
             if (sinhVien_DoiTuong != null)
             {

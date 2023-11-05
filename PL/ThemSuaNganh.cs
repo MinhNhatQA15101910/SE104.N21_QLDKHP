@@ -14,7 +14,10 @@ namespace PL
     public partial class ThemSuaNganh : KryptonForm, IThemSuaKhoaRequester
 	{
 		private readonly IKhoaBLLService _khoaBLLService = new KhoaBLLService(new KhoaDALService(new DapperService(ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString)));
-		private readonly INganhBLLService _nganhBLLService = new NganhBLLService(new NganhDALService(new DapperService(ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString)));
+		private readonly INganhBLLService _nganhBLLService = new NganhBLLService(
+            new NganhDALService(new DapperService(ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString)),
+            new SinhVienDALService(new DapperService(ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString)),
+			new ChuongTrinhHocDALService(new DapperService(ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString)));
 
 		private IThemSuaNganhRequester themSuaNganhRequester;
 		private CT_Nganh nganh;
@@ -123,7 +126,13 @@ namespace PL
 					case SuaNganhMessage.DuplicateTenNganh:
 						MessageBox.Show("Tên ngành đã tồn tại, vui lòng nhập giá trị khác!");
 						break;
-					case SuaNganhMessage.Success:
+                    case SuaNganhMessage.UnableForSinhVien:
+                        MessageBox.Show("Không thể sửa ngành này do có sinh viên thuộc ngành!");
+                        break;
+                    case SuaNganhMessage.UnableForChuongTrinhHoc:
+                        MessageBox.Show("Không thể sửa ngành này do có chương trình học của ngành!");
+                        break;
+                    case SuaNganhMessage.Success:
 						MessageBox.Show("Sửa ngành thành công!");
 						Close();
 						break;

@@ -57,8 +57,8 @@ namespace BLL.Services
 
         public XoaHuyenMessage XoaHuyen(int maHuyen)
         {
-            ISinhVienBLLService sinhVienBLLService = new SinhVienBLLService(new SinhVienDALService(new DapperService(ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString)));
-            List<CT_SinhVien> ct_SinhViens = sinhVienBLLService.LayDSSV();
+            ISinhVienDALService sinhVienDALService = new SinhVienDALService(new DapperService(ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString));
+            List<CT_SinhVien> ct_SinhViens = sinhVienDALService.LayDSSV();
             CT_SinhVien ct_SinhVien = ct_SinhViens.Find(sv => sv.MaHuyen == maHuyen);
             if (ct_SinhVien != null)
             {

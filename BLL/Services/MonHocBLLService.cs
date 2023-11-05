@@ -30,6 +30,7 @@ namespace BLL.Services
         {
             IDanhSachMonHocMoDALService danhSachMonHocMoDALService = new DanhSachMonHocMoDALService(new DapperService(ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString));
             List<string> currMonHocMoList = danhSachMonHocMoDALService.LayDSMonHocMo();
+
             if (currMonHocMoList.Contains(maMHBanDau))
             {
                 return SuaMonHocMessage.Unable;

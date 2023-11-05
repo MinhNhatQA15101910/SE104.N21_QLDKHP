@@ -56,8 +56,8 @@ namespace BLL.Services
 
 		public XoaTinhMessage XoaTinh(int maTinh)
 		{
-			IHuyenBLLService huyenBLLService = new HuyenBLLService(new HuyenDALService(new DapperService(ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString)));
-			List<CT_Huyen> ct_Huyens = huyenBLLService.LayDSHuyen();
+			IHuyenDALService huyenDALService = new HuyenDALService(new DapperService(ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString));
+			List<CT_Huyen> ct_Huyens = huyenDALService.LayDSHuyen();
 			CT_Huyen ct_Huyen = ct_Huyens.Find(h => h.MaTinh == maTinh);
 			if (ct_Huyen != null)
 			{

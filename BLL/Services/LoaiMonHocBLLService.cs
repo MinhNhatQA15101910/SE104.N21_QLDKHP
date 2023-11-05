@@ -23,8 +23,8 @@ namespace BLL.Services
 
         public XoaLoaiMonHocMessage XoaLoaiMonHoc(int maLoaiMonHoc)
         {
-            IMonHocBLLService monHocBLLService = new MonHocBLLService(new MonHocDALService(new DapperService(ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString)));
-            List<CT_MonHoc> ct_MonHocs = monHocBLLService.LayDSMonHoc();
+            IMonHocDALService monHocDALService = new MonHocDALService(new DapperService(ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString));
+            List<CT_MonHoc> ct_MonHocs = monHocDALService.LayDSMonHoc();
             CT_MonHoc ct_MonHoc = ct_MonHocs.Find(mh => mh.MaLoaiMonHoc == maLoaiMonHoc);
             if (ct_MonHoc != null)
             {

@@ -167,6 +167,28 @@
         Success
     }
 
+    public enum SuaNganhMessage
+    {
+        None,
+        EmptyMaNganh,
+        EmptyTenNganh,
+        DuplicateMaNganh,
+        DuplicateTenNganh,
+        UnableForSinhVien,
+        UnableForChuongTrinhHoc,
+        Success
+    }
+
+    public enum ThemNganhMessage
+    {
+        None,
+        EmptyMaNganh,
+        EmptyTenNganh,
+        DuplicateMaNganh,
+        DuplicateTenNganh,
+        Success
+    }
+
     public enum XoaNganhMessage
     {
         None,
@@ -190,26 +212,6 @@
         EmptyTenKhoa,
         DuplicateMaKhoa,
         DuplicateTenKhoa,
-        Success
-    }
-
-    public enum SuaNganhMessage
-    {
-        None,
-        EmptyMaNganh,
-        EmptyTenNganh,
-        DuplicateMaNganh,
-        DuplicateTenNganh,
-        Success
-    }
-
-    public enum ThemNganhMessage
-    {
-        None,
-        EmptyMaNganh,
-        EmptyTenNganh,
-        DuplicateMaNganh,
-        DuplicateTenNganh,
         Success
     }
 
