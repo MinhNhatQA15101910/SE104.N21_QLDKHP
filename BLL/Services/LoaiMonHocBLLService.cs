@@ -10,10 +10,12 @@ namespace BLL.Services
     public class LoaiMonHocBLLService : ILoaiMonHocBLLService
     {
         private readonly ILoaiMonHocDALService _loaiMonHocDALService;
+        private readonly IMonHocDALService _monHocDALService;
 
-        public LoaiMonHocBLLService(ILoaiMonHocDALService loaiMonHocDALService)
+        public LoaiMonHocBLLService(ILoaiMonHocDALService loaiMonHocDALService, IMonHocDALService monHocDALService)
         {
             _loaiMonHocDALService = loaiMonHocDALService;
+            _monHocDALService = monHocDALService;
         }
 
         public List<LoaiMonHoc> LayDSLoaiMonHoc()
@@ -23,8 +25,7 @@ namespace BLL.Services
 
         public XoaLoaiMonHocMessage XoaLoaiMonHoc(int maLoaiMonHoc)
         {
-            IMonHocDALService monHocDALService = new MonHocDALService(new DapperService(ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString));
-            List<CT_MonHoc> ct_MonHocs = monHocDALService.LayDSMonHoc();
+            List<CT_MonHoc> ct_MonHocs = _monHocDALService.LayDSMonHoc();
             CT_MonHoc ct_MonHoc = ct_MonHocs.Find(mh => mh.MaLoaiMonHoc == maLoaiMonHoc);
             if (ct_MonHoc != null)
             {

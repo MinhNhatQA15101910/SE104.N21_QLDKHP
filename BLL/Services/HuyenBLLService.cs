@@ -10,10 +10,12 @@ namespace BLL.Services
     public class HuyenBLLService : IHuyenBLLService
     {
         private readonly IHuyenDALService _huyenDALService;
+        private readonly ISinhVienDALService _sinhVienDALService;
 
-        public HuyenBLLService(IHuyenDALService huyenDALService)
+        public HuyenBLLService(IHuyenDALService huyenDALService, ISinhVienDALService sinhVienDALService)
         {
             _huyenDALService = huyenDALService;
+            _sinhVienDALService = sinhVienDALService;
         }
 
         public List<CT_Huyen> LayDSHuyen()
@@ -57,8 +59,7 @@ namespace BLL.Services
 
         public XoaHuyenMessage XoaHuyen(int maHuyen)
         {
-            ISinhVienDALService sinhVienDALService = new SinhVienDALService(new DapperService(ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString));
-            List<CT_SinhVien> ct_SinhViens = sinhVienDALService.LayDSSV();
+            List<CT_SinhVien> ct_SinhViens = _sinhVienDALService.LayDSSV();
             CT_SinhVien ct_SinhVien = ct_SinhViens.Find(sv => sv.MaHuyen == maHuyen);
             if (ct_SinhVien != null)
             {

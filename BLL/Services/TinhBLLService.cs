@@ -1,19 +1,19 @@
 ﻿using BLL.IServices;
 using DAL.IServices;
-using DAL.Services;
 using DTO;
 using System.Collections.Generic;
-using System.Configuration;
 
 namespace BLL.Services
 {
     public class TinhBLLService : ITinhBLLService
 	{
 		private readonly ITinhDALService _tinhDALService;
+		private readonly IHuyenDALService _huyenDALService;
 
-		public TinhBLLService(ITinhDALService tinhDALService)
+		public TinhBLLService(ITinhDALService tinhDALService, IHuyenDALService huyenDALService)
 		{
 			_tinhDALService = tinhDALService;
+			_huyenDALService = huyenDALService;
 		}
 		public List<Tinh> LayDSTinh()
 		{
@@ -56,8 +56,7 @@ namespace BLL.Services
 
 		public XoaTinhMessage XoaTinh(int maTinh)
 		{
-			IHuyenDALService huyenDALService = new HuyenDALService(new DapperService(ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString));
-			List<CT_Huyen> ct_Huyens = huyenDALService.LayDSHuyen();
+			List<CT_Huyen> ct_Huyens = _huyenDALService.LayDSHuyen();
 			CT_Huyen ct_Huyen = ct_Huyens.Find(h => h.MaTinh == maTinh);
 			if (ct_Huyen != null)
 			{

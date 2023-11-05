@@ -1,19 +1,19 @@
 ﻿using BLL.IServices;
 using DAL.IServices;
-using DAL.Services;
 using DTO;
 using System.Collections.Generic;
-using System.Configuration;
 
 namespace BLL.Services
 {
     public class DoiTuongBLLService : IDoiTuongBLLService
     {
         private readonly IDoiTuongDALService _doiTuongDALService;
+        private readonly ISinhVien_DoiTuongDALService _doiTuong_SinhVienDALService;
 
-        public DoiTuongBLLService(IDoiTuongDALService doiTuongDALService)
+        public DoiTuongBLLService(IDoiTuongDALService doiTuongDALService, ISinhVien_DoiTuongDALService doiTuong_SinhVienDALService)
         {
             _doiTuongDALService = doiTuongDALService;
+            _doiTuong_SinhVienDALService = doiTuong_SinhVienDALService;
         }
 
         public List<DoiTuong> LayDSDoiTuong()
@@ -87,8 +87,7 @@ namespace BLL.Services
                 return XoaDoiTuongMessage.UnableToDeleteVungSauVungXa;
             }
 
-            ISinhVien_DoiTuongDALService sinhVien_DoiTuongDALService = new SinhVien_DoiTuongDALService(new DapperService(ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString));
-            List<SinhVien_DoiTuong> sinhVien_DoiTuongs = sinhVien_DoiTuongDALService.GetSinhVien_DoiTuongs();
+            List<SinhVien_DoiTuong> sinhVien_DoiTuongs = _doiTuong_SinhVienDALService.GetSinhVien_DoiTuongs();
             SinhVien_DoiTuong sinhVien_DoiTuong = sinhVien_DoiTuongs.Find(dt => dt.MaDT ==  maDT);
             if (sinhVien_DoiTuong != null)
             {

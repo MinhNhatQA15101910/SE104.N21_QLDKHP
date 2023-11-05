@@ -14,7 +14,9 @@ namespace PL
 {
     public partial class QuanLyTinh : KryptonForm, IThemSuaTinhRequester
     {
-		private readonly ITinhBLLService _tinhBLLService = new TinhBLLService(new TinhDALService(new DapperService(ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString)));
+		private readonly ITinhBLLService _tinhBLLService = new TinhBLLService(
+            new TinhDALService(new DapperService(ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString)),
+            new HuyenDALService(new DapperService(ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString)));
 
 		private ICaiDatRequester caiDatRequester;
         private BindingList<Tinh> mTinh;

@@ -15,8 +15,12 @@ namespace PL
     public partial class ThemSuaHuyen : KryptonForm, IThemSuaTinhRequester
     {
         #region Register Services
-        private readonly ITinhBLLService _tinhBLLService = new TinhBLLService(new TinhDALService(new DapperService(ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString)));
-        private readonly IHuyenBLLService _huyenBLLService = new HuyenBLLService(new HuyenDALService(new DapperService(ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString)));
+        private readonly ITinhBLLService _tinhBLLService = new TinhBLLService(
+            new TinhDALService(new DapperService(ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString)),
+            new HuyenDALService(new DapperService(ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString)));
+        private readonly IHuyenBLLService _huyenBLLService = new HuyenBLLService(
+            new HuyenDALService(new DapperService(ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString)),
+            new SinhVienDALService(new DapperService(ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString)));
         #endregion
 
         private IThemSuaHuyenRequester themSuaHuyenRequester;

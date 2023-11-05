@@ -1,19 +1,19 @@
 ﻿using BLL.IServices;
 using DAL.IServices;
-using DAL.Services;
 using DTO;
 using System.Collections.Generic;
-using System.Configuration;
 
 namespace BLL.Services
 {
     public class MonHocBLLService : IMonHocBLLService
     {
         private readonly IMonHocDALService _monHocDALService;
+        private readonly IDanhSachMonHocMoDALService _danhSachMonHocMoDALService;
 
-        public MonHocBLLService(IMonHocDALService monHocDALService)
+        public MonHocBLLService(IMonHocDALService monHocDALService, IDanhSachMonHocMoDALService danhSachMonHocMoDALService)
         {
             _monHocDALService = monHocDALService;
+            _danhSachMonHocMoDALService = danhSachMonHocMoDALService;
         }
 
         public List<CT_MonHoc> LayDSMonHoc()
@@ -28,8 +28,7 @@ namespace BLL.Services
 
         public SuaMonHocMessage SuaMonHoc(string maMHBanDau, string maMH, string tenMH, int maLoaiMonHoc, string soTiet, int soTietLoaiMon)
         {
-            IDanhSachMonHocMoDALService danhSachMonHocMoDALService = new DanhSachMonHocMoDALService(new DapperService(ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString));
-            List<string> currMonHocMoList = danhSachMonHocMoDALService.LayDSMonHocMo();
+            List<string> currMonHocMoList = _danhSachMonHocMoDALService.LayDSMonHocMo();
 
             if (currMonHocMoList.Contains(maMHBanDau))
             {
