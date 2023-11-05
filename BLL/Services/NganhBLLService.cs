@@ -72,14 +72,27 @@ namespace BLL.Services
 
         public ThemNganhMessage ThemNganh(string maNganh, string tenNganh, string maKhoa)
         {
-            if (maNganh.Equals(""))
+            if (string.IsNullOrEmpty(maNganh))
             {
                 return ThemNganhMessage.EmptyMaNganh;
             }
 
-            if (tenNganh.Equals(""))
+            if (string.IsNullOrEmpty(tenNganh))
             {
                 return ThemNganhMessage.EmptyTenNganh;
+            }
+
+            List<CT_Nganh> ct_Nganhs = _nganhDALService.LayDSNganh();
+            CT_Nganh ct_Nganh = ct_Nganhs.Find(n => n.MaNganh == maNganh);
+            if (ct_Nganh != null)
+            {
+                return ThemNganhMessage.DuplicateMaNganh;
+            }
+
+            ct_Nganh = ct_Nganhs.Find(n => n.TenNganh == tenNganh);
+            if (ct_Nganh != null)
+            {
+                return ThemNganhMessage.DuplicateTenNganh;
             }
 
             return _nganhDALService.ThemNganh(maNganh, tenNganh, maKhoa);

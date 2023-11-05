@@ -10,11 +10,14 @@ namespace BLL.Tests
     [ExcludeFromCodeCoverage]
     public class NganhBLLTests
     {
+        #region Services
         private readonly INganhBLLService _nganhBLLService;
         private readonly Mock<INganhDALService> _nganhDALServiceMock;
         private readonly Mock<ISinhVienDALService> _sinhVienDALServiceMock;
         private readonly Mock<IChuongTrinhHocDALService> _chuongTrinhHocDALServiceMock;
+        #endregion
 
+        #region Constructor
         public NganhBLLTests()
         {
             _nganhDALServiceMock = new Mock<INganhDALService>();
@@ -22,6 +25,7 @@ namespace BLL.Tests
             _chuongTrinhHocDALServiceMock = new Mock<IChuongTrinhHocDALService>();
             _nganhBLLService = new NganhBLLService(_nganhDALServiceMock.Object, _sinhVienDALServiceMock.Object, _chuongTrinhHocDALServiceMock.Object);
         }
+        #endregion
 
         #region LayDSNganh
         [Fact]
@@ -251,6 +255,102 @@ namespace BLL.Tests
             _nganhDALServiceMock.Verify(d => d.SuaNganh(maNganhBanDau, maNganhSua, tenNganhSua, maKhoaSua), Times.Once);
         }
 
+        #endregion
+
+        #region ThemNganh
+        [Theory]
+        [InlineData("", "Kỹ Thuật Phần Mềm 1", "CNPM")]
+        public void ThemNganh_WithEmptyMaNganh_ReturnEmptyMaNganhMessage(string maNganh, string tenNganh, string maKhoa)
+        {
+            // Act
+            var result = _nganhBLLService.ThemNganh(maNganh, tenNganh, maKhoa);
+
+            // Assert
+            Assert.IsType<ThemNganhMessage>(result);
+            Assert.Equal(ThemNganhMessage.EmptyMaNganh, result);
+        }
+
+        [Theory]
+        [InlineData("KTPM1", "", "CNPM")]
+        public void ThemNganh_WithEmptyTenNganh_ReturnEmptyTenNganhMessage(string maNganh, string tenNganh, string maKhoa)
+        {
+            // Act
+            var result = _nganhBLLService.ThemNganh(maNganh, tenNganh, maKhoa);
+
+            // Assert
+            Assert.IsType<ThemNganhMessage>(result);
+            Assert.Equal(ThemNganhMessage.EmptyTenNganh, result);
+        }
+
+        [Theory]
+        [InlineData("KTPM", "Kỹ Thuật Phần Mềm 1", "CNPM")]
+        public void ThemNganh_WithDuplicateMaNganh_ReturnDuplicateMaNganhMessage(string maNganh, string tenNganh, string maKhoa)
+        {
+            // Arrange
+            var nganhs = new List<CT_Nganh>
+            {
+                new CT_Nganh
+                {
+                    MaNganh = "KTPM"
+                }
+            };
+
+            _nganhDALServiceMock.Setup(_ => _.LayDSNganh()).Returns(nganhs);
+
+            // Act
+            var result = _nganhBLLService.ThemNganh(maNganh, tenNganh, maKhoa);
+
+            // Assert
+            Assert.IsType<ThemNganhMessage>(result);
+            Assert.Equal(ThemNganhMessage.DuplicateMaNganh, result);
+        }
+
+        [Theory]
+        [InlineData("KTPM1", "Kỹ Thuật Phần Mềm", "CNPM")]
+        public void ThemNganh_WithDuplicateTenNganh_ReturnDuplicateTenNganhMessage(string maNganh, string tenNganh, string maKhoa)
+        {
+            // Arrange
+            var nganhs = new List<CT_Nganh>
+            {
+                new CT_Nganh
+                {
+                    MaNganh = "KTPM",
+                    TenNganh = "Kỹ Thuật Phần Mềm"
+                }
+            };
+
+            _nganhDALServiceMock.Setup(_ => _.LayDSNganh()).Returns(nganhs);
+
+            // Act
+            var result = _nganhBLLService.ThemNganh(maNganh, tenNganh, maKhoa);
+
+            // Assert
+            Assert.IsType<ThemNganhMessage>(result);
+            Assert.Equal(ThemNganhMessage.DuplicateTenNganh, result);
+        }
+
+        [Theory]
+        [InlineData("KTPM1", "Kỹ Thuật Phần Mềm 1", "CNPM")]
+        public void ThemNganh_WithValidInputs_ReturnSuccessfulMessage(string maNganh, string tenNganh, string maKhoa)
+        {
+            // Arrange
+            var nganhs = new List<CT_Nganh>
+            {
+                new CT_Nganh
+                {
+                    MaNganh = "KTPM",
+                    TenNganh = "Kỹ Thuật Phần Mềm"
+                }
+            };
+
+            _nganhDALServiceMock.Setup(_ => _.LayDSNganh()).Returns(nganhs);
+
+            // Act
+            _nganhBLLService.ThemNganh(maNganh, tenNganh, maKhoa);
+
+            // Assert
+            _nganhDALServiceMock.Verify(d => d.ThemNganh(maNganh, tenNganh, maKhoa), Times.Once);
+        }
         #endregion
     }
 }
