@@ -192,6 +192,8 @@
     public enum XoaNganhMessage
     {
         None,
+        UnableForSinhVien,
+        UnableForChuongTrinhHoc,
         Success
     }
 

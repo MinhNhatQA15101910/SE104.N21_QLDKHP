@@ -1,11 +1,4 @@
-﻿using BLL.IServices;
-using BLL.Services;
-using DAL.IServices;
-using DTO;
-using Moq;
-using System.Diagnostics.CodeAnalysis;
-
-namespace BLL.Tests
+﻿namespace BLL.Tests
 {
     [ExcludeFromCodeCoverage]
     public class NganhBLLTests
@@ -35,13 +28,12 @@ namespace BLL.Tests
             _nganhBLLService.LayDSNganh();
 
             // Assert
-            _nganhDALServiceMock.Verify(d => d.LayDSNganh(), Times.Once);
+            _nganhDALServiceMock.Verify(_ => _.LayDSNganh(), Times.Once);
         }
         #endregion
 
         #region SuaNganh
-        [Theory]
-        [InlineData("KTPM", "", "Kỹ thuật phần mềm 1", "CNPM")]
+        [Theory, InlineData("KTPM", "", "Kỹ thuật phần mềm 1", "CNPM")]
         public void SuaNganh_WithEmptyMaNganhSua_ReturnsEmptyMaNganhMessage(string maNganhBanDau, string maNganhSua, string tenNganhSua, string maKhoaSua)
         {
             // Act
@@ -52,8 +44,7 @@ namespace BLL.Tests
             Assert.Equal(SuaNganhMessage.EmptyMaNganh, result);
         }
 
-        [Theory]
-        [InlineData("KTPM", "KTPM1", "", "CNPM")]
+        [Theory, InlineData("KTPM", "KTPM1", "", "CNPM")]
         public void SuaNganh_WithEmptyTenNganhSua_ReturnsEmptyTenNganhMessage(string maNganhBanDau, string maNganhSua, string tenNganhSua, string maKhoaSua)
         {
             // Act
@@ -64,8 +55,7 @@ namespace BLL.Tests
             Assert.Equal(SuaNganhMessage.EmptyTenNganh, result);
         }
 
-        [Theory]
-        [InlineData("KTPM", "HTTT", "Kỹ thuật phần mềm", "CNPM")]
+        [Theory, InlineData("KTPM", "HTTT", "Kỹ thuật phần mềm", "CNPM")]
         public void SuaNganh_WithDuplicateMaNganhSua_ReturnsDuplicateMaNganhMessage(string maNganhBanDau, string maNganhSua, string tenNganhSua, string maKhoaSua)
         {
             // Arrange
@@ -86,8 +76,7 @@ namespace BLL.Tests
             Assert.Equal(SuaNganhMessage.DuplicateMaNganh, result);
         }
 
-        [Theory]
-        [InlineData("KTPM", "KTPM", "Hệ thống thông tin", "CNPM")]
+        [Theory, InlineData("KTPM", "KTPM", "Hệ thống thông tin", "CNPM")]
         public void SuaNganh_WithDuplicateTenNganhSua_ReturnsDuplicateTenNganhMessage(string maNganhBanDau, string maNganhSua, string tenNganhSua, string maKhoaSua)
         {
             // Arrange
@@ -108,8 +97,7 @@ namespace BLL.Tests
             Assert.Equal(SuaNganhMessage.DuplicateTenNganh, result);
         }
 
-        [Theory]
-        [InlineData("KTPM", "KTPM1", "Kỹ thuật phần mềm 1", "CNPM")]
+        [Theory, InlineData("KTPM", "KTPM1", "Kỹ thuật phần mềm 1", "CNPM")]
         public void SuaNganh_WithMaNganhRelativeToSinhVien_ReturnsUnableForSinhVienMessage(string maNganhBanDau, string maNganhSua, string tenNganhSua, string maKhoaSua)
         {
             // Arrange
@@ -150,8 +138,7 @@ namespace BLL.Tests
             Assert.Equal(SuaNganhMessage.UnableForSinhVien, result);
         }
 
-        [Theory]
-        [InlineData("KTPM", "KTPM1", "Kỹ thuật phần mềm 1", "CNPM")]
+        [Theory, InlineData("KTPM", "KTPM1", "Kỹ thuật phần mềm 1", "CNPM")]
         public void SuaNganh_WithMaNganhRelativeToChuongTrinhHoc_ReturnsUnableForChuongTrinhHocMessage(string maNganhBanDau, string maNganhSua, string tenNganhSua, string maKhoaSua)
         {
             // Arrange
@@ -201,8 +188,7 @@ namespace BLL.Tests
             Assert.Equal(SuaNganhMessage.UnableForChuongTrinhHoc, result);
         }
 
-        [Theory]
-        [InlineData("KTPM", "KTPM", "Kỹ thuật phần mềm 1", "CNPM")]
+        [Theory, InlineData("KTPM", "KTPM1", "Kỹ thuật phần mềm 1", "CNPM")]
         public void SuaNganh_WithValidInputs_ReturnsSuccessfulMessage(string maNganhBanDau, string maNganhSua, string tenNganhSua, string maKhoaSua)
         {
             // Arrange
@@ -226,17 +212,11 @@ namespace BLL.Tests
             {
                 new CT_Nganh
                 {
-                    MaNganh = "HTTT",
-                    TenNganh = "Hệ thống thông tin",
-                    MaKhoa = "HTTT",
-                    TenKhoa = "Hệ thống thông tin"
+                    MaNganh = "HTTT"
                 },
                 new CT_Nganh
                 {
-                    MaNganh = "KTPM",
-                    TenNganh = "Kỹ thuật phần mềm",
-                    MaKhoa = "CNPM",
-                    TenKhoa = "Công nghệ phần mềm"
+                    MaNganh = "KTPM"
                 },
                 new CT_Nganh
                 {
@@ -252,14 +232,12 @@ namespace BLL.Tests
             _nganhBLLService.SuaNganh(maNganhBanDau, maNganhSua, tenNganhSua, maKhoaSua);
 
             // Assert
-            _nganhDALServiceMock.Verify(d => d.SuaNganh(maNganhBanDau, maNganhSua, tenNganhSua, maKhoaSua), Times.Once);
+            _nganhDALServiceMock.Verify(_ => _.SuaNganh(maNganhBanDau, maNganhSua, tenNganhSua, maKhoaSua), Times.Once);
         }
-
         #endregion
 
         #region ThemNganh
-        [Theory]
-        [InlineData("", "Kỹ Thuật Phần Mềm 1", "CNPM")]
+        [Theory, InlineData("", "Kỹ Thuật Phần Mềm 1", "CNPM")]
         public void ThemNganh_WithEmptyMaNganh_ReturnEmptyMaNganhMessage(string maNganh, string tenNganh, string maKhoa)
         {
             // Act
@@ -270,8 +248,7 @@ namespace BLL.Tests
             Assert.Equal(ThemNganhMessage.EmptyMaNganh, result);
         }
 
-        [Theory]
-        [InlineData("KTPM1", "", "CNPM")]
+        [Theory, InlineData("KTPM1", "", "CNPM")]
         public void ThemNganh_WithEmptyTenNganh_ReturnEmptyTenNganhMessage(string maNganh, string tenNganh, string maKhoa)
         {
             // Act
@@ -282,8 +259,7 @@ namespace BLL.Tests
             Assert.Equal(ThemNganhMessage.EmptyTenNganh, result);
         }
 
-        [Theory]
-        [InlineData("KTPM", "Kỹ Thuật Phần Mềm 1", "CNPM")]
+        [Theory, InlineData("KTPM", "Kỹ Thuật Phần Mềm 1", "CNPM")]
         public void ThemNganh_WithDuplicateMaNganh_ReturnDuplicateMaNganhMessage(string maNganh, string tenNganh, string maKhoa)
         {
             // Arrange
@@ -305,8 +281,7 @@ namespace BLL.Tests
             Assert.Equal(ThemNganhMessage.DuplicateMaNganh, result);
         }
 
-        [Theory]
-        [InlineData("KTPM1", "Kỹ Thuật Phần Mềm", "CNPM")]
+        [Theory, InlineData("KTPM1", "Kỹ Thuật Phần Mềm", "CNPM")]
         public void ThemNganh_WithDuplicateTenNganh_ReturnDuplicateTenNganhMessage(string maNganh, string tenNganh, string maKhoa)
         {
             // Arrange
@@ -329,8 +304,7 @@ namespace BLL.Tests
             Assert.Equal(ThemNganhMessage.DuplicateTenNganh, result);
         }
 
-        [Theory]
-        [InlineData("KTPM1", "Kỹ Thuật Phần Mềm 1", "CNPM")]
+        [Theory, InlineData("KTPM1", "Kỹ Thuật Phần Mềm 1", "CNPM")]
         public void ThemNganh_WithValidInputs_ReturnSuccessfulMessage(string maNganh, string tenNganh, string maKhoa)
         {
             // Arrange
@@ -349,7 +323,104 @@ namespace BLL.Tests
             _nganhBLLService.ThemNganh(maNganh, tenNganh, maKhoa);
 
             // Assert
-            _nganhDALServiceMock.Verify(d => d.ThemNganh(maNganh, tenNganh, maKhoa), Times.Once);
+            _nganhDALServiceMock.Verify(_ => _.ThemNganh(maNganh, tenNganh, maKhoa), Times.Once);
+        }
+        #endregion
+
+        #region XoaNganh
+        [Theory, InlineData("KTPM")]
+        public void XoaNganh_WithMaNganhRelativeToSinhVien_ReturnsUnableForSinhVienMessage(string maNganh)
+        {
+            // Arrange
+            var sinhViens = new List<CT_SinhVien>
+            {
+                new CT_SinhVien
+                {
+                    MaNganh = "KTPM"
+                }
+            };
+
+            _sinhVienDALServiceMock.Setup(_ => _.LayDSSV()).Returns(sinhViens);
+
+            // Act
+            var result = _nganhBLLService.XoaNganh(maNganh);
+
+            // Assert
+            Assert.IsType<XoaNganhMessage>(result);
+            Assert.Equal(XoaNganhMessage.UnableForSinhVien, result);
+        }
+
+        [Theory, InlineData("KTPM")]
+        public void XoaNganh_WithMaNganhRelativeToChuongTrinhHoc_ReturnsUnableForChuongTrinhHocMessage(string maNganh)
+        {
+            // Arrange
+            var sinhViens = new List<CT_SinhVien>
+            {
+                new CT_SinhVien
+                {
+                    MaNganh = "KTMT"
+                }
+            };
+
+            var chuongTrinhHocs = new List<ChuongTrinhHoc>
+            {
+                new ChuongTrinhHoc
+                {
+                    MaNganh = "KTPM"
+                }
+            };
+
+            _sinhVienDALServiceMock.Setup(_ => _.LayDSSV()).Returns(sinhViens);
+            _chuongTrinhHocDALServiceMock.Setup(_ => _.GetAllCTHoc()).Returns(chuongTrinhHocs);
+
+            // Act
+            var result = _nganhBLLService.XoaNganh(maNganh);
+
+            // Assert
+            Assert.IsType<XoaNganhMessage>(result);
+            Assert.Equal(XoaNganhMessage.UnableForChuongTrinhHoc, result);
+        }
+
+        [Theory, InlineData("KTPM")]
+        public void XoaNganh_WithValidInputs_VerifyExecuteDAL(string maNganh)
+        {
+            // Arrange
+            var sinhViens = new List<CT_SinhVien>
+            {
+                new CT_SinhVien
+                {
+                    MaNganh = "KTMT"
+                }
+            };
+
+            var chuongTrinhHocs = new List<ChuongTrinhHoc>
+            {
+                new ChuongTrinhHoc
+                {
+                    MaNganh = "HTTT"
+                }
+            };
+
+            _sinhVienDALServiceMock.Setup(_ => _.LayDSSV()).Returns(sinhViens);
+            _chuongTrinhHocDALServiceMock.Setup(_ => _.GetAllCTHoc()).Returns(chuongTrinhHocs);
+
+            // Act
+            _nganhBLLService.XoaNganh(maNganh);
+
+            // Assert
+            _nganhDALServiceMock.Verify(_ => _.XoaNganh(maNganh), Times.Once);
+        }
+        #endregion
+
+        #region GetNganh
+        [Theory, InlineData("KTPM")]
+        public void GetNganh_WithValidInputs_VerifyExecuteDAL(string maNganh)
+        {
+            // Act
+            _nganhBLLService.GetNganh(maNganh);
+
+            // Assert
+            _nganhDALServiceMock.Verify(_ => _.GetNganh(maNganh), Times.Once);
         }
         #endregion
     }

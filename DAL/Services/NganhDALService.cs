@@ -1,10 +1,8 @@
 ﻿using DAL.IServices;
 using Dapper;
 using DTO;
-using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Data.SqlClient;
 using System.Linq;
 
 namespace DAL.Services
@@ -55,12 +53,12 @@ namespace DAL.Services
             return ThemNganhMessage.Success;
         }
 
-        public List<Nganh> GetNganh(string MaKhoa)
+        public List<Nganh> GetNganh(string maKhoa)
         {
-            if (MaKhoa != null)
+            if (maKhoa != null)
             {
                 var p = new DynamicParameters();
-                p.Add("@MaKhoa", MaKhoa);
+                p.Add("@MaKhoa", maKhoa);
                 return _dapperService.Query<Nganh>("spNGANH_LayNganhBangMaKhoa", p, commandType: CommandType.StoredProcedure).ToList();
             }
             else

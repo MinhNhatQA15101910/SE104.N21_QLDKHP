@@ -147,6 +147,13 @@ namespace PL
                 XoaNganhMessage message = _nganhBLLService.XoaNganh(maNganh);
                 switch (message)
                 {
+                    case XoaNganhMessage.UnableForSinhVien:
+                        MessageBox.Show("Không thể xóa ngành vì có sinh viên đang thuộc ngành này!");
+                        break;
+                    case XoaNganhMessage.UnableForChuongTrinhHoc:
+                        mNganh.Remove(nganh);
+                        MessageBox.Show("Không thể xóa ngành vì có chương trình học của ngành này!");
+                        break;
                     case XoaNganhMessage.Success:
                         mNganh.Remove(nganh);
                         MessageBox.Show("Xóa ngành thành công!");

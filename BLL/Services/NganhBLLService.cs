@@ -25,6 +25,20 @@ namespace BLL.Services
 
         public XoaNganhMessage XoaNganh(string maNganh)
         {
+            List<CT_SinhVien> ct_SinhViens = _sinhVienDALService.LayDSSV();
+            CT_SinhVien ct_SinhVien = ct_SinhViens.Find(sv => sv.MaNganh == maNganh);
+            if (ct_SinhVien != null)
+            {
+                return XoaNganhMessage.UnableForSinhVien;
+            }
+
+            List<ChuongTrinhHoc> chuongTrinhHocs = _chuongHocDALService.GetAllCTHoc();
+            ChuongTrinhHoc chuongTrinhHoc = chuongTrinhHocs.Find(cth => cth.MaNganh == maNganh);
+            if (chuongTrinhHoc != null)
+            {
+                return XoaNganhMessage.UnableForChuongTrinhHoc;
+            }
+
             return _nganhDALService.XoaNganh(maNganh);
         }
 
@@ -98,9 +112,9 @@ namespace BLL.Services
             return _nganhDALService.ThemNganh(maNganh, tenNganh, maKhoa);
         }
 
-        public List<Nganh> GetNganh(string MaKhoa)
+        public List<Nganh> GetNganh(string maKhoa)
         {
-            return _nganhDALService.GetNganh(MaKhoa);
+            return _nganhDALService.GetNganh(maKhoa);
         }
     }
 }
