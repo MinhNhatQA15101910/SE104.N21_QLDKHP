@@ -1,6 +1,4 @@
-﻿using Dapper;
-
-namespace BLL.Tests
+﻿namespace BLL.Tests
 {
     [ExcludeFromCodeCoverage]
     public class KhoaBLLTests
@@ -63,11 +61,13 @@ namespace BLL.Tests
             {
                 new Khoa
                 {
-                    MaKhoa = "HTTT"
+                    MaKhoa = "HTTT",
+                    TenKhoa = "Hệ thống thông tin"
                 },
                 new Khoa
                 {
-                    MaKhoa = "CNPM"
+                    MaKhoa = "CNPM",
+                    TenKhoa = "Công nghệ phần mềm"
                 }
             };
 
@@ -131,7 +131,10 @@ namespace BLL.Tests
             {
                 new CT_Nganh
                 {
-                    MaKhoa = "CNPM"
+                    MaNganh = "KTPM",
+                    TenNganh = "Kỹ thuật phần mềm",
+                    MaKhoa = "CNPM",
+                    TenKhoa = "Công nghệ phần mềm"
                 }
             };
 
@@ -168,7 +171,10 @@ namespace BLL.Tests
             {
                 new CT_Nganh
                 {
-                    MaKhoa = "HTTT"
+                    MaNganh = "HTTT",
+                    TenNganh = "Hệ thống thông tin",
+                    MaKhoa = "HTTT",
+                    TenKhoa = "Hệ thống thông tin"
                 }
             };
 
@@ -214,11 +220,13 @@ namespace BLL.Tests
             {
                 new Khoa
                 {
-                    MaKhoa = "HTTT"
+                    MaKhoa = "HTTT",
+                    TenKhoa = "Hệ thống thông tin"
                 },
                 new Khoa
                 {
-                    MaKhoa = "CNPM"
+                    MaKhoa = "CNPM",
+                    TenKhoa = "Công nghệ phần mềm"
                 }
             };
 
@@ -297,7 +305,10 @@ namespace BLL.Tests
             {
                 new CT_Nganh
                 {
-                    MaKhoa = "CNPM"
+                    MaNganh = "KTPM",
+                    TenNganh = "Kỹ thuật phần mềm",
+                    MaKhoa = "CNPM",
+                    TenKhoa = "Công nghệ phần mềm"
                 }
             };
 
@@ -319,7 +330,10 @@ namespace BLL.Tests
             {
                 new CT_Nganh
                 {
-                    MaKhoa = "HTTT"
+                    MaNganh = "HTTT",
+                    TenNganh = "Hệ thống thông tin",
+                    MaKhoa = "HTTT",
+                    TenKhoa = "Hệ thống thông tin"
                 }
             };
 

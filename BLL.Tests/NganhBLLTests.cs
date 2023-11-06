@@ -63,7 +63,10 @@
             {
                 new CT_Nganh
                 {
-                    MaNganh = "HTTT"
+                    MaNganh = "HTTT",
+                    TenNganh = "Hệ thống thông tin",
+                    MaKhoa = "HTTT",
+                    TenKhoa = "Hệ thống thông tin"
                 },
             };
             _nganhDALServiceMock.Setup(_ => _.LayDSNganh()).Returns(nganhs);
@@ -84,7 +87,10 @@
             {
                 new CT_Nganh
                 {
-                    TenNganh = "Hệ thống thông tin"
+                    MaNganh = "HTTT",
+                    TenNganh = "Hệ thống thông tin",
+                    MaKhoa = "HTTT",
+                    TenKhoa = "Hệ thống thông tin"
                 }
             };
             _nganhDALServiceMock.Setup(_ => _.LayDSNganh()).Returns(nganhs);
@@ -123,7 +129,19 @@
             {
                 new CT_SinhVien
                 {
-                    MaNganh = "KTPM"
+                    MaSV = "SV21522415",
+                    HoTen = "Do Minh Nhat",
+                    NgaySinh = new DateTime(2003, 10, 19),
+                    GioiTinh = "Nam",
+                    MaHuyen = 100,
+                    MaNganh = "KTPM",
+                    TenHuyen = "Huyện Gò Công Tây",
+                    VungUT = 1,
+                    MaTinh = 10,
+                    TenTTP = "Tien Giang",
+                    TenNganh = "Ky thuat phan mem",
+                    MaKhoa = "CNPM",
+                    TenKhoa = "Cong nghe phan mem"
                 }
             };
 
@@ -146,7 +164,19 @@
             {
                 new CT_SinhVien
                 {
-                    MaNganh = "HTTT"
+                    MaSV = "SV21522415",
+                    HoTen = "Do Minh Nhat",
+                    NgaySinh = new DateTime(2003, 10, 19),
+                    GioiTinh = "Nam",
+                    MaHuyen = 100,
+                    MaNganh = "HTTT",
+                    TenHuyen = "Huyện Gò Công Tây",
+                    VungUT = 1,
+                    MaTinh = 10,
+                    TenTTP = "Tien Giang",
+                    TenNganh = "He thong thong tin",
+                    MaKhoa = "HTTT",
+                    TenKhoa = "He thong thong tin"
                 }
             };
 
@@ -154,7 +184,9 @@
             {
                 new ChuongTrinhHoc
                 {
-                    MaNganh = "KTPM"
+                    MaNganh = "KTPM",
+                    MaMH = "IT001",
+                    HocKy = 1
                 }
             };
 
@@ -196,7 +228,19 @@
             {
                 new CT_SinhVien
                 {
-                    MaNganh = "HTTT"
+                    MaSV = "SV21522415",
+                    HoTen = "Do Minh Nhat",
+                    NgaySinh = new DateTime(2003, 10, 19),
+                    GioiTinh = "Nam",
+                    MaHuyen = 100,
+                    MaNganh = "HTTT",
+                    TenHuyen = "Huyện Gò Công Tây",
+                    VungUT = 1,
+                    MaTinh = 10,
+                    TenTTP = "Tien Giang",
+                    TenNganh = "He thong thong tin",
+                    MaKhoa = "HTTT",
+                    TenKhoa = "He thong thong tin"
                 }
             };
 
@@ -204,7 +248,9 @@
             {
                 new ChuongTrinhHoc
                 {
-                    MaNganh = "KTMT"
+                    MaNganh = "KTMT",
+                    MaMH = "IT001",
+                    HocKy = 1
                 }
             };
 
@@ -212,15 +258,24 @@
             {
                 new CT_Nganh
                 {
-                    MaNganh = "HTTT"
+                    MaNganh = "HTTT",
+                    TenNganh = "Hệ thống thông tin",
+                    MaKhoa = "HTTT",
+                    TenKhoa = "Hệ thống thông tin"
                 },
                 new CT_Nganh
                 {
-                    MaNganh = "KTPM"
+                    MaNganh = "KTPM",
+                    TenNganh = "Kỹ thuật phần mềm",
+                    MaKhoa = "CNPM",
+                    TenKhoa = "Công nghệ phần mềm"
                 },
                 new CT_Nganh
                 {
-                    MaNganh = "KTMT"
+                    MaNganh = "KTMT",
+                    TenNganh = "Ky thuat may tinh",
+                    MaKhoa = "KTMT",
+                    TenKhoa = "Ky thuat may tinh"
                 }
             };
 
@@ -267,7 +322,10 @@
             {
                 new CT_Nganh
                 {
-                    MaNganh = "KTPM"
+                    MaNganh = "KTPM",
+                    TenNganh = "Ky thuat phan mem",
+                    MaKhoa = "CNPM",
+                    TenKhoa = "Cong nghe phan mem"
                 }
             };
 
@@ -281,7 +339,7 @@
             Assert.Equal(ThemNganhMessage.DuplicateMaNganh, result);
         }
 
-        [Theory, InlineData("KTPM1", "Kỹ Thuật Phần Mềm", "CNPM")]
+        [Theory, InlineData("KTPM1", "Ky thuat phan mem", "CNPM")]
         public void ThemNganh_WithDuplicateTenNganh_ReturnDuplicateTenNganhMessage(string maNganh, string tenNganh, string maKhoa)
         {
             // Arrange
@@ -290,7 +348,9 @@
                 new CT_Nganh
                 {
                     MaNganh = "KTPM",
-                    TenNganh = "Kỹ Thuật Phần Mềm"
+                    TenNganh = "Ky thuat phan mem",
+                    MaKhoa = "CNPM",
+                    TenKhoa = "Cong nghe phan mem"
                 }
             };
 
@@ -313,7 +373,9 @@
                 new CT_Nganh
                 {
                     MaNganh = "KTPM",
-                    TenNganh = "Kỹ Thuật Phần Mềm"
+                    TenNganh = "Ky thuat phan mem",
+                    MaKhoa = "CNPM",
+                    TenKhoa = "Cong nghe phan mem"
                 }
             };
 
@@ -328,7 +390,7 @@
         #endregion
 
         #region XoaNganh
-        [Theory, InlineData("KTPM")]
+        [Theory, InlineData("HTTT")]
         public void XoaNganh_WithMaNganhRelativeToSinhVien_ReturnsUnableForSinhVienMessage(string maNganh)
         {
             // Arrange
@@ -336,7 +398,19 @@
             {
                 new CT_SinhVien
                 {
-                    MaNganh = "KTPM"
+                    MaSV = "SV21522415",
+                    HoTen = "Do Minh Nhat",
+                    NgaySinh = new DateTime(2003, 10, 19),
+                    GioiTinh = "Nam",
+                    MaHuyen = 100,
+                    MaNganh = "HTTT",
+                    TenHuyen = "Huyện Gò Công Tây",
+                    VungUT = 1,
+                    MaTinh = 10,
+                    TenTTP = "Tien Giang",
+                    TenNganh = "He thong thong tin",
+                    MaKhoa = "HTTT",
+                    TenKhoa = "He thong thong tin"
                 }
             };
 
@@ -358,7 +432,19 @@
             {
                 new CT_SinhVien
                 {
-                    MaNganh = "KTMT"
+                    MaSV = "SV21522415",
+                    HoTen = "Do Minh Nhat",
+                    NgaySinh = new DateTime(2003, 10, 19),
+                    GioiTinh = "Nam",
+                    MaHuyen = 100,
+                    MaNganh = "HTTT",
+                    TenHuyen = "Huyện Gò Công Tây",
+                    VungUT = 1,
+                    MaTinh = 10,
+                    TenTTP = "Tien Giang",
+                    TenNganh = "He thong thong tin",
+                    MaKhoa = "HTTT",
+                    TenKhoa = "He thong thong tin"
                 }
             };
 
@@ -366,7 +452,9 @@
             {
                 new ChuongTrinhHoc
                 {
-                    MaNganh = "KTPM"
+                    MaNganh = "KTPM",
+                    MaMH = "IT001",
+                    HocKy = 1
                 }
             };
 
@@ -381,7 +469,7 @@
             Assert.Equal(XoaNganhMessage.UnableForChuongTrinhHoc, result);
         }
 
-        [Theory, InlineData("KTPM")]
+        [Theory, InlineData("KTMT")]
         public void XoaNganh_WithValidInputs_VerifyExecuteDAL(string maNganh)
         {
             // Arrange
@@ -389,7 +477,19 @@
             {
                 new CT_SinhVien
                 {
-                    MaNganh = "KTMT"
+                    MaSV = "SV21522415",
+                    HoTen = "Do Minh Nhat",
+                    NgaySinh = new DateTime(2003, 10, 19),
+                    GioiTinh = "Nam",
+                    MaHuyen = 100,
+                    MaNganh = "HTTT",
+                    TenHuyen = "Huyện Gò Công Tây",
+                    VungUT = 1,
+                    MaTinh = 10,
+                    TenTTP = "Tien Giang",
+                    TenNganh = "He thong thong tin",
+                    MaKhoa = "HTTT",
+                    TenKhoa = "He thong thong tin"
                 }
             };
 
@@ -397,7 +497,9 @@
             {
                 new ChuongTrinhHoc
                 {
-                    MaNganh = "HTTT"
+                    MaNganh = "KTPM",
+                    MaMH = "IT001",
+                    HocKy = 1
                 }
             };
 
