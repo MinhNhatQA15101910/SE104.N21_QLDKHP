@@ -1,26 +1,24 @@
 ﻿using DAL.IServices;
 using Dapper;
 using DTO;
-using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Data.SqlClient;
 using System.Linq;
 
 namespace DAL.Services
 {
     public class HuyenDALService : IHuyenDALService
     {
-        private readonly IDapperService _dapperService;
+        private readonly IDbConnection _connection;
 
-        public HuyenDALService(IDapperService dapperService)
+        public HuyenDALService(IDbConnection connection)
         {
-            _dapperService = dapperService;
+            _connection = connection;
         }
 
         public List<CT_Huyen> LayDSHuyen()
         {
-            return _dapperService.Query<CT_Huyen>("spHUYEN_LayDSHuyen").ToList();
+            return _connection.Query<CT_Huyen>("spHUYEN_LayDSHuyen").ToList();
         }
 
         public SuaHuyenMessage SuaHuyen(int maHuyen, string tenHuyen, int vungUT, int maTinh)
@@ -30,7 +28,7 @@ namespace DAL.Services
             p.Add("@TenHuyen", tenHuyen);
             p.Add("@VungUT", vungUT);
             p.Add("@MaTinh", maTinh);
-            _dapperService.Execute("spHUYEN_SuaHuyen", p, commandType: CommandType.StoredProcedure);
+            _connection.Execute("spHUYEN_SuaHuyen", p, commandType: CommandType.StoredProcedure);
 
             return SuaHuyenMessage.Success;
         }
@@ -39,7 +37,7 @@ namespace DAL.Services
         {
             var p = new DynamicParameters();
             p.Add("@MaHuyen", maHuyen);
-            _dapperService.Execute("spHUYEN_XoaHuyen", p, commandType: CommandType.StoredProcedure);
+            _connection.Execute("spHUYEN_XoaHuyen", p, commandType: CommandType.StoredProcedure);
 
             return XoaHuyenMessage.Success;
         }
@@ -50,7 +48,7 @@ namespace DAL.Services
             p.Add("@TenHuyen", tenHuyen);
             p.Add("@VungUT", vungUT);
             p.Add("@MaTinh", maTinh);
-            _dapperService.Execute("spHUYEN_ThemHuyen", p, commandType: CommandType.StoredProcedure);
+            _connection.Execute("spHUYEN_ThemHuyen", p, commandType: CommandType.StoredProcedure);
 
             return ThemHuyenMessage.Success;
         }

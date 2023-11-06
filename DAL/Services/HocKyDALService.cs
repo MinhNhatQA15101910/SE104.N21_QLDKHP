@@ -9,23 +9,23 @@ namespace DAL.Services
 {
     public class HocKyDALService: IHocKyDALService
     {
-        private readonly IDapperService _dapperService;
+        private readonly IDbConnection _connection;
 
-        public HocKyDALService(IDapperService dapperService)
+        public HocKyDALService(IDbConnection connection)
         {
-            _dapperService = dapperService;
+            _connection = connection;
         }
 
         public List<HocKy> LayDanhSachHK()
         {
-            return _dapperService.Query<HocKy>("spHOCKY_LayDanhSachHK").ToList();
+            return _connection.Query<HocKy>("spHOCKY_LayDanhSachHK").ToList();
         }
 
         public string LayHKByMaHK(int currMaHocKy)
         {
             var p = new DynamicParameters();
             p.Add("@MaHocKy", currMaHocKy);
-            return _dapperService.Query<string>("spHOCKY_LayHKByMaHK", p, commandType: CommandType.StoredProcedure).ToString();
+            return _connection.Query<string>("spHOCKY_LayHKByMaHK", p, commandType: CommandType.StoredProcedure).ToString();
         }
     }
 }

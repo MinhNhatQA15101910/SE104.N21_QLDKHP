@@ -10,17 +10,18 @@ namespace DAL.Services
 {
     public class PhieuThuHPDALService : IPhieuThuHPDALService
 	{
-		private readonly IDapperService _dapperService;
+        private readonly IDbConnection _connection;
 
-		public PhieuThuHPDALService(IDapperService dapperService)
-		{
-			_dapperService = dapperService;
-		}
-		public DateTime LayThoiGianDongHPGanNhat(int maPhieuDKHP)
+        public PhieuThuHPDALService(IDbConnection connection)
+        {
+            _connection = connection;
+        }
+
+        public DateTime LayThoiGianDongHPGanNhat(int maPhieuDKHP)
 		{
             var parameters = new DynamicParameters();
             parameters.Add("@ma", maPhieuDKHP);
-            return _dapperService.QueryFirstOrDefault<DateTime>("spPHIEUTHUHP_LayThoiGianDongHPGanNhat", parameters, commandType: CommandType.StoredProcedure);
+            return _connection.QueryFirstOrDefault<DateTime>("spPHIEUTHUHP_LayThoiGianDongHPGanNhat", parameters, commandType: CommandType.StoredProcedure);
         }
 
 		public bool TaoPhieuThu_ChoXacNhan(int soTienThu, int soPhieuDKHP)
@@ -30,7 +31,7 @@ namespace DAL.Services
             var parameters = new DynamicParameters();
             parameters.Add("@soTienThu", soTienThu);
             parameters.Add("@maPhieuDKHP", soPhieuDKHP);
-            numRowsAffected = _dapperService.Execute("spPHIEUTHUHP_TaoPhieuThu_ChoXacNhan ", parameters, commandType: CommandType.StoredProcedure);
+            numRowsAffected = _connection.Execute("spPHIEUTHUHP_TaoPhieuThu_ChoXacNhan ", parameters, commandType: CommandType.StoredProcedure);
 
             if (numRowsAffected > 0)
 				return true;
@@ -42,7 +43,7 @@ namespace DAL.Services
 		{
             var p = new DynamicParameters();
             p.Add("@MaTinhTrang", MaTinhTrang);
-            return _dapperService.Query<PhieuThuHP>("spPHIEUTHUHP_GetPhieuThuHP", p, commandType: CommandType.StoredProcedure).ToList();
+            return _connection.Query<PhieuThuHP>("spPHIEUTHUHP_GetPhieuThuHP", p, commandType: CommandType.StoredProcedure).ToList();
         }
 
 		public MessagePhieuThuHPUpdateTinhTrang PhieuThuHPUpdateTinhTrang(int MaPhieuThuHP, int MaTinhTrang)
@@ -50,7 +51,7 @@ namespace DAL.Services
             var p = new DynamicParameters();
             p.Add("@MaPhieuThuHP", MaPhieuThuHP);
             p.Add("@MaTinhTrang", MaTinhTrang);
-            _dapperService.Execute("spPHIEUTHUHP_UpdateTinhTrang", p, commandType: CommandType.StoredProcedure);
+            _connection.Execute("spPHIEUTHUHP_UpdateTinhTrang", p, commandType: CommandType.StoredProcedure);
 
             return MessagePhieuThuHPUpdateTinhTrang.Success;
 		}

@@ -204,7 +204,9 @@
         EmptyTenKhoa,
         DuplicateMaKhoa,
         DuplicateTenKhoa,
-        Success
+        Unable,
+        Success,
+        Failed
     }
 
     public enum ThemKhoaMessage
@@ -220,12 +222,14 @@
     public enum XoaKhoaMessage
     {
         None,
+        Unable,
         Success
     }
 
     public enum XoaMonHocMessage
     {
         None,
+        Unable,
         Success
     }
 

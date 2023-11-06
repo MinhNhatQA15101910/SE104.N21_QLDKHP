@@ -2,10 +2,12 @@
 using BLL.Services;
 using ComponentFactory.Krypton.Toolkit;
 using DAL.Services;
+using Dapper;
 using DTO;
 using System;
 using System.ComponentModel;
 using System.Configuration;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -13,15 +15,17 @@ namespace PL
 {
     public partial class ThemSuaCTH : KryptonForm
     {
-        private readonly IKhoaBLLService _khoaBLLService = new KhoaBLLService(new KhoaDALService(new DapperService(ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString)));
+        private readonly IKhoaBLLService _khoaBLLService = new KhoaBLLService(
+             new KhoaDALService(new SqlConnection(ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString)),
+             new NganhDALService(new SqlConnection(ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString)));
         private readonly INganhBLLService _nganhBLLService = new NganhBLLService(
-            new NganhDALService(new DapperService(ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString)),
-            new SinhVienDALService(new DapperService(ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString)),
-            new ChuongTrinhHocDALService(new DapperService(ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString)));
-        private readonly IChuongTrinhHocBLLService _chuongtrinhhocBLLService = new ChuongTrinhHocBLLService(new ChuongTrinhHocDALService(new DapperService(ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString)));
+            new NganhDALService(new SqlConnection(ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString)),
+            new SinhVienDALService(new SqlConnection(ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString)),
+            new ChuongTrinhHocDALService(new SqlConnection(ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString)));
+        private readonly IChuongTrinhHocBLLService _chuongtrinhhocBLLService = new ChuongTrinhHocBLLService(new ChuongTrinhHocDALService(new SqlConnection(ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString)));
         private readonly IMonHocBLLService _monHocBLLService = new MonHocBLLService(
-            new MonHocDALService(new DapperService(ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString)),
-            new DanhSachMonHocMoDALService(new DapperService(ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString)));
+            new MonHocDALService(new SqlConnection(ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString)),
+            new DanhSachMonHocMoDALService(new SqlConnection(ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString)));
 
         BindingList<Khoa> mKhoa;
         BindingList<Nganh> mNganh;

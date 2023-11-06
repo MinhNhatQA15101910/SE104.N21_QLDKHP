@@ -1,33 +1,31 @@
 ﻿using DAL.IServices;
 using Dapper;
 using DTO;
-using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Data.SqlClient;
 using System.Linq;
 
 namespace DAL.Services
 {
     public class LoaiMonHocDALService : ILoaiMonHocDALService
     {
-        private readonly IDapperService _dapperService;
+        private readonly IDbConnection _connection;
 
-        public LoaiMonHocDALService(IDapperService dapperService)
+        public LoaiMonHocDALService(IDbConnection connection)
         {
-            _dapperService = dapperService;
+            _connection = connection;
         }
 
         public List<LoaiMonHoc> LayDSLoaiMonHoc()
         {
-            return _dapperService.Query<LoaiMonHoc>("spLOAIMONHOC_LayDSLoaiMonHoc").ToList();
+            return _connection.Query<LoaiMonHoc>("spLOAIMONHOC_LayDSLoaiMonHoc").ToList();
         }
 
         public XoaLoaiMonHocMessage XoaLoaiMonHoc(int maLoaiMonHoc)
         {
             var p = new DynamicParameters();
             p.Add("@MaLoaiMonHoc", maLoaiMonHoc);
-            _dapperService.Execute("spLOAIMONHOC_XoaLoaiMonHoc", p, commandType: CommandType.StoredProcedure);
+            _connection.Execute("spLOAIMONHOC_XoaLoaiMonHoc", p, commandType: CommandType.StoredProcedure);
 
             return XoaLoaiMonHocMessage.Success;
         }
@@ -39,7 +37,7 @@ namespace DAL.Services
             p.Add("@TenLoaiMonHoc", tenLoaiMonHoc);
             p.Add("@SoTiet", soTiet);
             p.Add("@SoTien", soTien);
-            _dapperService.Execute("spLOAIMONHOC_SuaLoaiMonHoc", p, commandType: CommandType.StoredProcedure);
+            _connection.Execute("spLOAIMONHOC_SuaLoaiMonHoc", p, commandType: CommandType.StoredProcedure);
 
             return SuaLoaiMonHocMessage.Success;
         }
@@ -50,7 +48,7 @@ namespace DAL.Services
             p.Add("@TenLoaiMonHoc", tenLoaiMonHoc);
             p.Add("@SoTiet", soTiet);
             p.Add("@SoTien", soTien);
-            _dapperService.Execute("spLOAIMONHOC_ThemLoaiMonHoc", p, commandType: CommandType.StoredProcedure);
+            _connection.Execute("spLOAIMONHOC_ThemLoaiMonHoc", p, commandType: CommandType.StoredProcedure);
 
             return ThemLoaiMonHocMessage.Success;
         }

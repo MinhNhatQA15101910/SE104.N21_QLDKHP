@@ -11,16 +11,16 @@ namespace DAL.Services
 {
     public class TinhDALService : ITinhDALService
 	{
-		private readonly IDapperService _dapperService;
+        private readonly IDbConnection _connection;
 
-		public TinhDALService(IDapperService dapperService)
-		{
-			_dapperService = dapperService;
-		}
+        public TinhDALService(IDbConnection connection)
+        {
+            _connection = connection;
+        }
 
-		public List<Tinh> LayDSTinh()
+        public List<Tinh> LayDSTinh()
 		{
-            return _dapperService.Query<Tinh>("spTINH_LayDSTinh").ToList();
+            return _connection.Query<Tinh>("spTINH_LayDSTinh").ToList();
         }
 
 		public SuaTinhMessage SuaTinh(int maTinh, string tenTinh)
@@ -28,7 +28,7 @@ namespace DAL.Services
             var p = new DynamicParameters();
             p.Add("@MaTinh", maTinh);
             p.Add("@TenTinh", tenTinh);
-            _dapperService.Execute("spTINH_SuaTinh", p, commandType: CommandType.StoredProcedure);
+            _connection.Execute("spTINH_SuaTinh", p, commandType: CommandType.StoredProcedure);
 
             return SuaTinhMessage.Success;
 		}
@@ -37,7 +37,7 @@ namespace DAL.Services
 		{
             var p = new DynamicParameters();
             p.Add("@MaTinh", maTinh);
-            _dapperService.Execute("spTINH_XoaTinh", p, commandType: CommandType.StoredProcedure);
+            _connection.Execute("spTINH_XoaTinh", p, commandType: CommandType.StoredProcedure);
 
             return XoaTinhMessage.Success;
 		}
@@ -46,7 +46,7 @@ namespace DAL.Services
 		{
             var p = new DynamicParameters();
             p.Add("@TenTinh", tenTinh);
-            _dapperService.Execute("spTINH_ThemTinh", p, commandType: CommandType.StoredProcedure);
+            _connection.Execute("spTINH_ThemTinh", p, commandType: CommandType.StoredProcedure);
 
             return ThemTinhMessage.Success;
 		}

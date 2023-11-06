@@ -1,70 +1,92 @@
 ﻿using DAL.IServices;
 using Dapper;
 using DTO;
-using System;
 using System.Data;
+using System.Data.SqlClient;
 
 namespace DAL.Services
 {
     public class GlobalConfigDALService : IGlobalConfigDALService
     {
-        private readonly IDapperService _dapperService;
+        private readonly string _connectionString;
+        private readonly IDapperWrapper _dapperWrapper;
 
-        public GlobalConfigDALService(IDapperService dapperService)
+        public GlobalConfigDALService(string connectionString, IDapperWrapper dapperWrapper)
         {
-            _dapperService = dapperService;
+            _connectionString = connectionString;
+            _dapperWrapper = dapperWrapper;
         }
 
         public int GetCurrNamHoc()
         {
-            return _dapperService.QueryFirst<int>("spGLOBALCONFIG_LayNamHocHienTai");
+            using (var connection = new SqlConnection(_connectionString))
+            {
+                return _dapperWrapper.QueryFirst<int>(connection, "spGLOBALCONFIG_LayNamHocHienTai");
+            }
         }
 
         public int LaySoTinChiToiDa()
         {
-            return _dapperService.QueryFirst<int>("spGLOBALCONFIG_LaySoTinChiToiDa");
+            using (var connection = new SqlConnection(_connectionString))
+            {
+                return _dapperWrapper.QueryFirst<int>(connection, "spGLOBALCONFIG_LaySoTinChiToiDa");
+            }
         }
 
         public int LaySoTinChiToiThieu()
         {
-            return _dapperService.QueryFirst<int>("spGLOBALCONFIG_LaySoTinChiToiThieu");
+            using (var connection = new SqlConnection(_connectionString))
+            {
+                return _dapperWrapper.QueryFirst<int>(connection, "spGLOBALCONFIG_LaySoTinChiToiThieu");
+            }
         }
 
         public int GetCurrMaHocKy()
         {
-            var p = new DynamicParameters();
-            p.Add("@NamHocHienTai", GlobalConfig.CurrNamHoc);
-            return _dapperService.QueryFirst<int>("spGLOBALCONFIG_LayMaHocKyHienTai", p, commandType: CommandType.StoredProcedure);
+            using (var connection = new SqlConnection(_connectionString))
+            {
+                var p = new DynamicParameters();
+                p.Add("@NamHocHienTai", GlobalConfig.CurrNamHoc);
+                return _dapperWrapper.QueryFirst<int>(connection, "spGLOBALCONFIG_LayMaHocKyHienTai", p, commandType: CommandType.StoredProcedure);
+            }
         }
 
         public SuaGioiHanTinChiMessage SuaGioiHanTinChi(int tinChiToiDa, int tinChiToiThieu)
         {
-            var p = new DynamicParameters();
-            p.Add("@SoTinChiToiDa", tinChiToiDa);
-            p.Add("@SoTinChiToiThieu", tinChiToiThieu);
-            _dapperService.Execute("spGLOBALCONFIG_SuaGioiHanTinChi", p, commandType: CommandType.StoredProcedure);
+            using (var connection = new SqlConnection(_connectionString))
+            {
+                var p = new DynamicParameters();
+                p.Add("@SoTinChiToiDa", tinChiToiDa);
+                p.Add("@SoTinChiToiThieu", tinChiToiThieu);
+                _dapperWrapper.Execute(connection, "spGLOBALCONFIG_SuaGioiHanTinChi", p, commandType: CommandType.StoredProcedure);
 
-            return SuaGioiHanTinChiMessage.Success;
+                return SuaGioiHanTinChiMessage.Success;
+            }
         }
 
         public int LayKhoangTGDongHP(int hocKy, int namHoc)
         {
-            var parameters = new DynamicParameters();
-            parameters.Add("@hocKy", hocKy);
-            parameters.Add("@namHoc", namHoc);
-            return _dapperService.QueryFirstOrDefault<int>("spGLOBALCONFIG_LayKhoangTGDongHP", parameters, commandType: CommandType.StoredProcedure);
+            using (var connection = new SqlConnection(_connectionString))
+            {
+                var parameters = new DynamicParameters();
+                parameters.Add("@hocKy", hocKy);
+                parameters.Add("@namHoc", namHoc);
+                return _dapperWrapper.QueryFirstOrDefault<int>(connection, "spGLOBALCONFIG_LayKhoangTGDongHP", parameters, commandType: CommandType.StoredProcedure);
+            }
         }
 
         public MessageKhoangTGDongHP KhoangTGDongHP(int MaHocKy, int NamHoc, int KhoangTG)
         {
-            var p = new DynamicParameters();
-            p.Add("@MaHocKy", MaHocKy);
-            p.Add("@NamHoc", NamHoc);
-            p.Add("@KhoangTG", KhoangTG);
-            _dapperService.Execute("spKHOANGTGDONGHP_Add", p, commandType: CommandType.StoredProcedure);
+            using (var connection = new SqlConnection(_connectionString))
+            {
+                var p = new DynamicParameters();
+                p.Add("@MaHocKy", MaHocKy);
+                p.Add("@NamHoc", NamHoc);
+                p.Add("@KhoangTG", KhoangTG);
+                _dapperWrapper.Execute(connection, "spKHOANGTGDONGHP_Add", p, commandType: CommandType.StoredProcedure);
 
-            return MessageKhoangTGDongHP.Success;
-
+                return MessageKhoangTGDongHP.Success;
+            }
         }
     }
 }

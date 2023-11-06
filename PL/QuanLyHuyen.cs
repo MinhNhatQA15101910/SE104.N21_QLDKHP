@@ -7,6 +7,7 @@ using PL.Interfaces;
 using System;
 using System.ComponentModel;
 using System.Configuration;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -16,8 +17,8 @@ namespace PL
     {
         #region Register Services
         private readonly IHuyenBLLService _huyenBLLService = new HuyenBLLService(
-            new HuyenDALService(new DapperService(ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString)),
-            new SinhVienDALService(new DapperService(ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString)));
+            new HuyenDALService(new SqlConnection(ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString)),
+            new SinhVienDALService(new SqlConnection(ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString)));
         #endregion
 
         private ICaiDatRequester caiDatRequester;

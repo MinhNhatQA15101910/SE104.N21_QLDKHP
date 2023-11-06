@@ -6,6 +6,7 @@ using DTO;
 using PL.Interfaces;
 using System;
 using System.Configuration;
+using System.Data.SqlClient;
 using System.Windows.Forms;
 
 namespace PL
@@ -13,8 +14,8 @@ namespace PL
     public partial class DangNhap : KryptonForm, IAdminRequester, IGVRequester, ISinhVienRequester
     {
         #region Register Services
-        private readonly INguoiDungBLLService _nguoiDungBLLService = new NguoiDungBLLService(new NguoiDungDALService(new DapperService(ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString)   ));
-        private readonly IGlobalConfigBLLService _globalConfigBLLService = new GlobalConfigBLLService(new GlobalConfigDALService(new DapperService(ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString)));
+        private readonly INguoiDungBLLService _nguoiDungBLLService = new NguoiDungBLLService(new NguoiDungDALService(new SqlConnection(ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString)   ));
+        private readonly IGlobalConfigBLLService _globalConfigBLLService = new GlobalConfigBLLService(new GlobalConfigDALService(new SqlConnection(ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString)));
         #endregion
 
         public DangNhap()

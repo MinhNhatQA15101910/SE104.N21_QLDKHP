@@ -4,7 +4,6 @@ using DTO;
 using System;
 using System.Collections.Generic;
 using System.Data;
-using System.Data.SqlClient;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
@@ -14,9 +13,14 @@ namespace DAL.Services
 {
     public class NguoiDungDALService : INguoiDungDALService
 	{
-		private readonly IDapperService _dapperService;
+        private readonly IDbConnection _connection;
 
-		private static string ConvertToSHA512(string source)
+        public NguoiDungDALService(IDbConnection connection)
+        {
+            _connection = connection;
+        }
+
+        private static string ConvertToSHA512(string source)
 		{
 			byte[] sourceBytes = Encoding.UTF8.GetBytes(source);
 			byte[] hashBytes = SHA512.Create().ComputeHash(sourceBytes);
@@ -25,14 +29,9 @@ namespace DAL.Services
 			return hash;
 		}
 
-		public NguoiDungDALService(IDapperService dapperService)
-		{
-			_dapperService = dapperService;
-		}
-
 		public List<CT_NguoiDung> LayDSNguoiDung()
 		{
-            return _dapperService.Query<CT_NguoiDung>("spNGUOIDUNG_LayDSNguoiDung").ToList();
+            return _connection.Query<CT_NguoiDung>("spNGUOIDUNG_LayDSNguoiDung").ToList();
         }
 
 		public DangNhapMessage DangNhap(string tenDangNhap, string matKhau)
@@ -40,7 +39,7 @@ namespace DAL.Services
             var p = new DynamicParameters();
             p.Add("@TenDangNhap", tenDangNhap);
             p.Add("@MatKhau", ConvertToSHA512(matKhau));
-            GlobalConfig.CurrNguoiDung = _dapperService.QuerySingleOrDefault<NguoiDung>("spNGUOIDUNG_LayBangTenDangNhapVaMatKhau", p, commandType: CommandType.StoredProcedure);
+            GlobalConfig.CurrNguoiDung = _connection.QuerySingleOrDefault<NguoiDung>("spNGUOIDUNG_LayBangTenDangNhapVaMatKhau", p, commandType: CommandType.StoredProcedure);
 
             if (GlobalConfig.CurrNguoiDung == null)
 			{
@@ -54,7 +53,7 @@ namespace DAL.Services
 		{
             var p = new DynamicParameters();
             p.Add("@TenDangNhap", tenDangNhap);
-            _dapperService.Execute("spNGUOIDUNG_XoaTaiKhoan", p, commandType: CommandType.StoredProcedure);
+            _connection.Execute("spNGUOIDUNG_XoaTaiKhoan", p, commandType: CommandType.StoredProcedure);
 
             return XoaTaiKhoanMessage.Success;
 		}
@@ -67,7 +66,7 @@ namespace DAL.Services
             p.Add("@TenDangNhap", GlobalConfig.CurrNguoiDung.TenDangNhap);
             p.Add("@MatKhauHT", ConvertToSHA512(matKhauHT));
             p.Add("@MatKhauMoi", ConvertToSHA512(matKhauMoi));
-            rowsAffected = _dapperService.Execute("spNGUOIDUNG_DoiMatKhau", p, commandType: CommandType.StoredProcedure);
+            rowsAffected = _connection.Execute("spNGUOIDUNG_DoiMatKhau", p, commandType: CommandType.StoredProcedure);
 
             if (rowsAffected == 0)
 			{
@@ -83,7 +82,7 @@ namespace DAL.Services
             var p = new DynamicParameters();
             p.Add("@TenDangNhap", tenDangNhap);
             p.Add("@MaNhom", maNhom);
-            _dapperService.Execute("spNGUOIDUNG_ThemTaiKhoan", p, commandType: CommandType.StoredProcedure);
+            _connection.Execute("spNGUOIDUNG_ThemTaiKhoan", p, commandType: CommandType.StoredProcedure);
 
             return ThemTaiKhoanMessage.Success;
 		}
@@ -94,7 +93,7 @@ namespace DAL.Services
             p.Add("@TenDangNhapBD", tenDangNhapBD);
             p.Add("@TenDangNhap", tenDangNhap);
             p.Add("@MaNhom", maNhom);
-            _dapperService.Execute("spNGUOIDUNG_SuaTaiKhoan", p, commandType: CommandType.StoredProcedure);
+            _connection.Execute("spNGUOIDUNG_SuaTaiKhoan", p, commandType: CommandType.StoredProcedure);
 
             return SuaTaiKhoanMessage.Success;
 		}
@@ -105,7 +104,7 @@ namespace DAL.Services
             {
                 var p = new DynamicParameters();
                 p.Add("@MaSV", sinhVien.MaSV);
-                _dapperService.Execute("spNGUOIDUNG_ThemTaiKhoanSV", p, commandType: CommandType.StoredProcedure);
+                _connection.Execute("spNGUOIDUNG_ThemTaiKhoanSV", p, commandType: CommandType.StoredProcedure);
             }
 
             return ThemTaiKhoanSVMessage.Success;

@@ -8,6 +8,7 @@ using System;
 using System.ComponentModel;
 using System.Configuration;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
@@ -17,8 +18,8 @@ namespace PL
     public partial class QuanLyMonHoc : KryptonForm, IThemSuaMonHocRequester
     {
         private readonly IMonHocBLLService _monHocBLLService = new MonHocBLLService(
-            new MonHocDALService(new DapperService(ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString)),
-            new DanhSachMonHocMoDALService(new DapperService(ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString)));
+            new MonHocDALService(new SqlConnection(ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString)),
+            new DanhSachMonHocMoDALService(new SqlConnection(ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString)));
         
         private IMonHocRequester monHocRequester;
         private BindingList<CT_MonHoc> mMonHoc;

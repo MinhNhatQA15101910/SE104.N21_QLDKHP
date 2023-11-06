@@ -6,6 +6,7 @@ using DTO;
 using PL.Interfaces;
 using System;
 using System.Configuration;
+using System.Data.SqlClient;
 using System.Windows.Forms;
 
 namespace PL
@@ -13,8 +14,8 @@ namespace PL
     public partial class ThemSuaTinh : KryptonForm
     {
 		private readonly ITinhBLLService _tinhBLLService = new TinhBLLService(
-            new TinhDALService(new DapperService(ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString)),
-            new HuyenDALService(new DapperService(ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString)));
+            new TinhDALService(new SqlConnection(ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString)),
+            new HuyenDALService(new SqlConnection(ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString)));
 
 		private IThemSuaTinhRequester themSuaTinhRequester;
         private Tinh tinh;

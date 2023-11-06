@@ -9,23 +9,23 @@ namespace DAL.Services
 {
     public class NganhDALService : INganhDALService
     {
-        private readonly IDapperService _dapperService;
+        private readonly IDbConnection _connection;
 
-        public NganhDALService(IDapperService dapperService)
+        public NganhDALService(IDbConnection connection)
         {
-            _dapperService = dapperService;
+            _connection = connection;
         }
 
         public List<CT_Nganh> LayDSNganh()
         {
-            return _dapperService.Query<CT_Nganh>("spNGANH_LayDSNganh").ToList();
+            return _connection.Query<CT_Nganh>("spNGANH_LayDSNganh").ToList();
         }
 
         public XoaNganhMessage XoaNganh(string maNganh)
         {
             var p = new DynamicParameters();
             p.Add("@MaNganh", maNganh);
-            _dapperService.Execute("spNGANH_XoaNganh", p, CommandType.StoredProcedure);
+            _connection.Execute("spNGANH_XoaNganh", p, commandType: CommandType.StoredProcedure);
 
             return XoaNganhMessage.Success;
         }
@@ -37,7 +37,7 @@ namespace DAL.Services
             p.Add("@MaNganh", maNganhSua);
             p.Add("@TenNganh", tenNganhSua);
             p.Add("@MaKhoa", maKhoaSua);
-            _dapperService.Execute("spNGANH_SuaNganh", p, commandType: CommandType.StoredProcedure);
+            _connection.Execute("spNGANH_SuaNganh", p, commandType: CommandType.StoredProcedure);
 
             return SuaNganhMessage.Success;
         }
@@ -48,7 +48,7 @@ namespace DAL.Services
             p.Add("@MaNganh", maNganh);
             p.Add("@TenNganh", tenNganh);
             p.Add("@MaKhoa", maKhoa);
-            _dapperService.Execute("spNGANH_ThemNganh", p, commandType: CommandType.StoredProcedure);
+            _connection.Execute("spNGANH_ThemNganh", p, commandType: CommandType.StoredProcedure);
 
             return ThemNganhMessage.Success;
         }
@@ -59,11 +59,11 @@ namespace DAL.Services
             {
                 var p = new DynamicParameters();
                 p.Add("@MaKhoa", maKhoa);
-                return _dapperService.Query<Nganh>("spNGANH_LayNganhBangMaKhoa", p, commandType: CommandType.StoredProcedure).ToList();
+                return _connection.Query<Nganh>("spNGANH_LayNganhBangMaKhoa", p, commandType: CommandType.StoredProcedure).ToList();
             }
             else
             {
-                return _dapperService.Query<Nganh>("spNGANH_LayDSNganh").ToList();
+                return _connection.Query<Nganh>("spNGANH_LayDSNganh").ToList();
             }
 
         }

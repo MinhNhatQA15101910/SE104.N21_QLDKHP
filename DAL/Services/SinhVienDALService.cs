@@ -11,20 +11,21 @@ namespace DAL.Services
 {
     public class SinhVienDALService : ISinhVienDALService
 	{
-		private readonly IDapperService _dapperService;
-		public SinhVienDALService(IDapperService dapperService)
-		{
-			_dapperService = dapperService;
-		}
+        private readonly IDbConnection _connection;
 
-		public List<SinhVien> LayDSSVChuaCoTK()
+        public SinhVienDALService(IDbConnection connection)
+        {
+            _connection = connection;
+        }
+
+        public List<SinhVien> LayDSSVChuaCoTK()
 		{
-            return _dapperService.Query<SinhVien>("spSINHVIEN_LayDSSVChuaCoTK").ToList();
+            return _connection.Query<SinhVien>("spSINHVIEN_LayDSSVChuaCoTK").ToList();
         }
 
 		public List<CT_SinhVien> LayDSSV()
 		{
-            return _dapperService.Query<CT_SinhVien>("spSINHVIEN_LayDSSV").ToList();
+            return _connection.Query<CT_SinhVien>("spSINHVIEN_LayDSSV").ToList();
         }
 
 		public SuaSinhVienMessage SuaSinhVien(string mssvBanDau, string mssv, string hoTen, DateTime ngaySinh, string gioiTinh, int maHuyen, string maNganh, List<int> maDTList)
@@ -36,18 +37,18 @@ namespace DAL.Services
             p.Add("@GioiTinh", gioiTinh);
             p.Add("@MaHuyen", maHuyen);
             p.Add("@MaNganh", maNganh);
-            _dapperService.Execute("spSINHVIEN_SuaSinhVien", p, commandType: CommandType.StoredProcedure);
+            _connection.Execute("spSINHVIEN_SuaSinhVien", p, commandType: CommandType.StoredProcedure);
 
             p = new DynamicParameters();
             p.Add("@MaSV", mssvBanDau);
-            _dapperService.Execute("spSINHVIEN_DOITUONG_XoaSinhVien", p, commandType: CommandType.StoredProcedure);
+            _connection.Execute("spSINHVIEN_DOITUONG_XoaSinhVien", p, commandType: CommandType.StoredProcedure);
 
             foreach (int maDT in maDTList)
             {
                 p = new DynamicParameters();
                 p.Add("@MaSV", mssv);
                 p.Add("@MaDT", maDT);
-                _dapperService.Execute("spSINHVIEN_DOITUONG_Them", p, commandType: CommandType.StoredProcedure);
+                _connection.Execute("spSINHVIEN_DOITUONG_Them", p, commandType: CommandType.StoredProcedure);
             }
 
             return SuaSinhVienMessage.Success;
@@ -62,14 +63,14 @@ namespace DAL.Services
             p.Add("@GioiTinh", gioiTinh);
             p.Add("@MaHuyen", maHuyen);
             p.Add("@MaNganh", maNganh);
-            _dapperService.Execute("spSINHVIEN_ThemSinhVien", p, commandType: CommandType.StoredProcedure);
+            _connection.Execute("spSINHVIEN_ThemSinhVien", p, commandType: CommandType.StoredProcedure);
 
             foreach (int maDT in maDTList)
             {
                 p = new DynamicParameters();
                 p.Add("@MaSV", mssv);
                 p.Add("@MaDT", maDT);
-                _dapperService.Execute("spSINHVIEN_DOITUONG_Them", p, commandType: CommandType.StoredProcedure);
+                _connection.Execute("spSINHVIEN_DOITUONG_Them", p, commandType: CommandType.StoredProcedure);
             }
 
             return ThemSinhVienMessage.Success;
@@ -79,11 +80,11 @@ namespace DAL.Services
 		{
             var p = new DynamicParameters();
             p.Add("@MaSV", maSV);
-            _dapperService.Execute("spSINHVIEN_DOITUONG_XoaSinhVien", p, commandType: CommandType.StoredProcedure);
-            _dapperService.Execute("spCT_PHIEUDKHP_XoaSinhVien", p, commandType: CommandType.StoredProcedure);
-            _dapperService.Execute("spPHIEUTHUHP_XoaSinhVien", p, commandType: CommandType.StoredProcedure);
-            _dapperService.Execute("spPHIEUDKHP_XoaSinhVien", p, commandType: CommandType.StoredProcedure);
-            _dapperService.Execute("spSINHVIEN_XoaSinhVien", p, commandType: CommandType.StoredProcedure);
+            _connection.Execute("spSINHVIEN_DOITUONG_XoaSinhVien", p, commandType: CommandType.StoredProcedure);
+            _connection.Execute("spCT_PHIEUDKHP_XoaSinhVien", p, commandType: CommandType.StoredProcedure);
+            _connection.Execute("spPHIEUTHUHP_XoaSinhVien", p, commandType: CommandType.StoredProcedure);
+            _connection.Execute("spPHIEUDKHP_XoaSinhVien", p, commandType: CommandType.StoredProcedure);
+            _connection.Execute("spSINHVIEN_XoaSinhVien", p, commandType: CommandType.StoredProcedure);
 
             return XoaSinhVienMessage.Success;
 		}
@@ -92,14 +93,14 @@ namespace DAL.Services
 		{
             var parameters = new DynamicParameters();
             parameters.Add("@mssv", mssv);
-            return _dapperService.QueryFirstOrDefault<string>("spSINHVIEN_LayTenSV", parameters, commandType: CommandType.StoredProcedure).ToString();
+            return _connection.QueryFirstOrDefault<string>("spSINHVIEN_LayTenSV", parameters, commandType: CommandType.StoredProcedure).ToString();
         }
 
 		public List<dynamic> LayThongTinSV(string mssv)
 		{
             var parameters = new DynamicParameters();
             parameters.Add("@mssv", mssv);
-            return _dapperService.Query<dynamic>("spSINHVIEN_LayThongTinSV", parameters, commandType: CommandType.StoredProcedure).ToList();
+            return _connection.Query<dynamic>("spSINHVIEN_LayThongTinSV", parameters, commandType: CommandType.StoredProcedure).ToList();
         }
 
 		public List<dynamic> BaoCaoSinhVienChuaDongHocPhi(int hocKy, int namHoc)
@@ -108,7 +109,7 @@ namespace DAL.Services
             parameters.Add("@hocKy", hocKy);
             parameters.Add("@namHoc", namHoc);
 
-            return _dapperService.Query<dynamic>("spSINHVIEN_BaoCao", parameters, commandType: CommandType.StoredProcedure).ToList();
+            return _connection.Query<dynamic>("spSINHVIEN_BaoCao", parameters, commandType: CommandType.StoredProcedure).ToList();
         }
 	}
 }

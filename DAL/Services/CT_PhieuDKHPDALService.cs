@@ -2,31 +2,40 @@
 using Dapper;
 using DTO;
 using System.Data;
+using System.Data.SqlClient;
 
 namespace DAL.Services
 {
     public class CT_PhieuDKHPDALService : ICT_PhieuDKHPDALService
     {
-        public readonly IDapperService _dapperService;
+        private readonly string _connectionString;
+        private readonly IDapperWrapper _dapperWrapper;
 
-        public CT_PhieuDKHPDALService(IDapperService dapperService)
+        public CT_PhieuDKHPDALService(string connectionString, IDapperWrapper dapperWrapper)
         {
-            _dapperService = dapperService;
+            _connectionString = connectionString;
+            _dapperWrapper = dapperWrapper;
         }
 
         public void TaoCT_PhieuDKHP(CT_PhieuDKHP ct_PhieuDKHP)
         {
-            var parameters = new DynamicParameters();
-            parameters.Add("@maPhieuDKHP", ct_PhieuDKHP.MaPhieuDKHP);
-            parameters.Add("@maMH", ct_PhieuDKHP.MaMH);
-            _dapperService.Execute("spPHIEUDKHP_TaoCT_PhieuDKHP", parameters, CommandType.StoredProcedure);
+            using (var connection = new SqlConnection(_connectionString))
+            {
+                var parameters = new DynamicParameters();
+                parameters.Add("@maPhieuDKHP", ct_PhieuDKHP.MaPhieuDKHP);
+                parameters.Add("@maMH", ct_PhieuDKHP.MaMH);
+                _dapperWrapper.Execute(connection, "spPHIEUDKHP_TaoCT_PhieuDKHP", parameters, commandType: CommandType.StoredProcedure);
+            }
         }
 
         public void XoaDSMHDKHP(int maPhieu)
         {
-            var parameters = new DynamicParameters();
-            parameters.Add("@maPhieuDKHP", maPhieu);
-            _dapperService.Execute("spPHIEUDKHP_XoaCT_PhieuDKHP", parameters, CommandType.StoredProcedure);
+            using (var connection = new SqlConnection(_connectionString))
+            {
+                var parameters = new DynamicParameters();
+                parameters.Add("@maPhieuDKHP", maPhieu);
+                _dapperWrapper.Execute(connection, "spPHIEUDKHP_XoaCT_PhieuDKHP", parameters, commandType: CommandType.StoredProcedure);
+            }
         }
     }
 }

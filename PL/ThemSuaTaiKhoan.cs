@@ -7,14 +7,15 @@ using PL.Interfaces;
 using System;
 using System.ComponentModel;
 using System.Configuration;
+using System.Data.SqlClient;
 using System.Windows.Forms;
 
 namespace PL
 {
     public partial class ThemSuaTaiKhoan : KryptonForm
     {
-		private readonly INhomNguoiDungBLLService _nhomNguoiDungBLLService = new NhomNguoiDungBLLService(new NhomNguoiDungDALService(new DapperService(ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString)));
-		private readonly INguoiDungBLLService _nguoiDungBLLService = new NguoiDungBLLService(new NguoiDungDALService(new DapperService(ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString)));
+		private readonly INhomNguoiDungBLLService _nhomNguoiDungBLLService = new NhomNguoiDungBLLService(new NhomNguoiDungDALService(new SqlConnection(ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString)));
+		private readonly INguoiDungBLLService _nguoiDungBLLService = new NguoiDungBLLService(new NguoiDungDALService(new SqlConnection(ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString)));
 		private IThemSuaTaiKhoanRequester themSuaTaiKhoanRequester;
         private CT_NguoiDung nguoiDung;
 
