@@ -4,6 +4,7 @@ using DTO;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
@@ -13,11 +14,13 @@ namespace DAL.Services
 {
     public class NguoiDungDALService : INguoiDungDALService
 	{
-        private readonly IDbConnection _connection;
+        private readonly string _connectionString;
+        private readonly IDapperWrapper _dapperWrapper;
 
-        public NguoiDungDALService(IDbConnection connection)
+        public NguoiDungDALService(string connectionString, IDapperWrapper dapperWrapper)
         {
-            _connection = connection;
+            _connectionString = connectionString;
+            _dapperWrapper = dapperWrapper;
         }
 
         private static string ConvertToSHA512(string source)
@@ -31,83 +34,102 @@ namespace DAL.Services
 
 		public List<CT_NguoiDung> LayDSNguoiDung()
 		{
-            return _connection.Query<CT_NguoiDung>("spNGUOIDUNG_LayDSNguoiDung").ToList();
+            using (var connection = new SqlConnection(_connectionString))
+            {
+                return _dapperWrapper.Query<CT_NguoiDung>(connection, "spNGUOIDUNG_LayDSNguoiDung").ToList();
+            }
         }
 
 		public DangNhapMessage DangNhap(string tenDangNhap, string matKhau)
 		{
-            var p = new DynamicParameters();
-            p.Add("@TenDangNhap", tenDangNhap);
-            p.Add("@MatKhau", ConvertToSHA512(matKhau));
-            GlobalConfig.CurrNguoiDung = _connection.QuerySingleOrDefault<NguoiDung>("spNGUOIDUNG_LayBangTenDangNhapVaMatKhau", p, commandType: CommandType.StoredProcedure);
+            using (var connection = new SqlConnection(_connectionString))
+            {
+                var p = new DynamicParameters();
+                p.Add("@TenDangNhap", tenDangNhap);
+                p.Add("@MatKhau", ConvertToSHA512(matKhau));
+                GlobalConfig.CurrNguoiDung = _dapperWrapper.QuerySingleOrDefault<NguoiDung>(connection, "spNGUOIDUNG_LayBangTenDangNhapVaMatKhau", p, commandType: CommandType.StoredProcedure);
 
-            if (GlobalConfig.CurrNguoiDung == null)
-			{
-				return DangNhapMessage.Failed;
-			}
+                if (GlobalConfig.CurrNguoiDung == null)
+                {
+                    return DangNhapMessage.Failed;
+                }
 
-			return DangNhapMessage.Success;
+                return DangNhapMessage.Success;
+            }
 		}
 
 		public XoaTaiKhoanMessage XoaTaiKhoan(string tenDangNhap)
 		{
-            var p = new DynamicParameters();
-            p.Add("@TenDangNhap", tenDangNhap);
-            _connection.Execute("spNGUOIDUNG_XoaTaiKhoan", p, commandType: CommandType.StoredProcedure);
+            using (var connection = new SqlConnection(_connectionString))
+            {
+                var p = new DynamicParameters();
+                p.Add("@TenDangNhap", tenDangNhap);
+                _dapperWrapper.Execute(connection, "spNGUOIDUNG_XoaTaiKhoan", p, commandType: CommandType.StoredProcedure);
 
-            return XoaTaiKhoanMessage.Success;
+                return XoaTaiKhoanMessage.Success;
+            }
 		}
 
 		public DoiMatKhauMessage DoiMatKhau(string matKhauHT, string matKhauMoi)
 		{
-			int rowsAffected;
+            using (var connection = new SqlConnection(_connectionString))
+            {
+                var p = new DynamicParameters();
+                p.Add("@TenDangNhap", GlobalConfig.CurrNguoiDung.TenDangNhap);
+                p.Add("@MatKhauHT", ConvertToSHA512(matKhauHT));
+                p.Add("@MatKhauMoi", ConvertToSHA512(matKhauMoi));
+                int rowsAffected = _dapperWrapper.Execute(connection, "spNGUOIDUNG_DoiMatKhau", p, commandType: CommandType.StoredProcedure);
 
-            var p = new DynamicParameters();
-            p.Add("@TenDangNhap", GlobalConfig.CurrNguoiDung.TenDangNhap);
-            p.Add("@MatKhauHT", ConvertToSHA512(matKhauHT));
-            p.Add("@MatKhauMoi", ConvertToSHA512(matKhauMoi));
-            rowsAffected = _connection.Execute("spNGUOIDUNG_DoiMatKhau", p, commandType: CommandType.StoredProcedure);
+                if (rowsAffected == 0)
+                {
+                    return DoiMatKhauMessage.Failed;
+                }
 
-            if (rowsAffected == 0)
-			{
-				return DoiMatKhauMessage.Failed;
-			}
-
-			GlobalConfig.CurrNguoiDung.MatKhau = matKhauMoi;
-			return DoiMatKhauMessage.Success;
+                GlobalConfig.CurrNguoiDung.MatKhau = matKhauMoi;
+                return DoiMatKhauMessage.Success;
+            }
 		}
 
 		public ThemTaiKhoanMessage ThemTaiKhoan(string tenDangNhap, string maNhom)
 		{
-            var p = new DynamicParameters();
-            p.Add("@TenDangNhap", tenDangNhap);
-            p.Add("@MaNhom", maNhom);
-            _connection.Execute("spNGUOIDUNG_ThemTaiKhoan", p, commandType: CommandType.StoredProcedure);
+            using (var connection = new SqlConnection(_connectionString))
+            {
+                var p = new DynamicParameters();
+                p.Add("@TenDangNhap", tenDangNhap);
+                p.Add("@MaNhom", maNhom);
+                _dapperWrapper.Execute(connection, "spNGUOIDUNG_ThemTaiKhoan", p, commandType: CommandType.StoredProcedure);
 
-            return ThemTaiKhoanMessage.Success;
+                return ThemTaiKhoanMessage.Success;
+            }
 		}
 
 		public SuaTaiKhoanMessage SuaTaiKhoan(string tenDangNhapBD, string tenDangNhap, string maNhom)
 		{
-            var p = new DynamicParameters();
-            p.Add("@TenDangNhapBD", tenDangNhapBD);
-            p.Add("@TenDangNhap", tenDangNhap);
-            p.Add("@MaNhom", maNhom);
-            _connection.Execute("spNGUOIDUNG_SuaTaiKhoan", p, commandType: CommandType.StoredProcedure);
+            using (var connection = new SqlConnection(_connectionString))
+            {
+                var p = new DynamicParameters();
+                p.Add("@TenDangNhapBD", tenDangNhapBD);
+                p.Add("@TenDangNhap", tenDangNhap);
+                p.Add("@MaNhom", maNhom);
+                _dapperWrapper.Execute(connection, "spNGUOIDUNG_SuaTaiKhoan", p, commandType: CommandType.StoredProcedure);
 
-            return SuaTaiKhoanMessage.Success;
+                return SuaTaiKhoanMessage.Success;
+            }
 		}
 
 		public ThemTaiKhoanSVMessage ThemTaiKhoanSV(IList<SinhVien> dssv)
 		{
-            foreach (SinhVien sinhVien in dssv)
+            using (var connection = new SqlConnection(_connectionString))
             {
-                var p = new DynamicParameters();
-                p.Add("@MaSV", sinhVien.MaSV);
-                _connection.Execute("spNGUOIDUNG_ThemTaiKhoanSV", p, commandType: CommandType.StoredProcedure);
-            }
+                foreach (SinhVien sinhVien in dssv)
+                {
+                    var p = new DynamicParameters();
+                    p.Add("@MaSV", sinhVien.MaSV);
+                    _dapperWrapper.Execute(connection, "spNGUOIDUNG_ThemTaiKhoanSV", p, commandType: CommandType.StoredProcedure);
+                }
 
-            return ThemTaiKhoanSVMessage.Success;
+                return ThemTaiKhoanSVMessage.Success;
+            }
 		}
 	}
 }

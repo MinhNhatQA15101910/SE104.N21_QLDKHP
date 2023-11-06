@@ -3,54 +3,69 @@ using Dapper;
 using DTO;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 
 namespace DAL.Services
 {
     public class HuyenDALService : IHuyenDALService
     {
-        private readonly IDbConnection _connection;
+        private readonly string _connectionString;
+        private readonly IDapperWrapper _dapperWrapper;
 
-        public HuyenDALService(IDbConnection connection)
+        public HuyenDALService(string connectionString, IDapperWrapper dapperWrapper)
         {
-            _connection = connection;
+            _connectionString = connectionString;
+            _dapperWrapper = dapperWrapper;
         }
 
         public List<CT_Huyen> LayDSHuyen()
         {
-            return _connection.Query<CT_Huyen>("spHUYEN_LayDSHuyen").ToList();
+            using (var connection = new SqlConnection(_connectionString))
+            {
+                return _dapperWrapper.Query<CT_Huyen>(connection, "spHUYEN_LayDSHuyen").ToList();
+            }
         }
 
         public SuaHuyenMessage SuaHuyen(int maHuyen, string tenHuyen, int vungUT, int maTinh)
         {
-            var p = new DynamicParameters();
-            p.Add("@MaHuyen", maHuyen);
-            p.Add("@TenHuyen", tenHuyen);
-            p.Add("@VungUT", vungUT);
-            p.Add("@MaTinh", maTinh);
-            _connection.Execute("spHUYEN_SuaHuyen", p, commandType: CommandType.StoredProcedure);
+            using (var connection = new SqlConnection(_connectionString))
+            {
+                var p = new DynamicParameters();
+                p.Add("@MaHuyen", maHuyen);
+                p.Add("@TenHuyen", tenHuyen);
+                p.Add("@VungUT", vungUT);
+                p.Add("@MaTinh", maTinh);
+                _dapperWrapper.Execute(connection, "spHUYEN_SuaHuyen", p, commandType: CommandType.StoredProcedure);
 
-            return SuaHuyenMessage.Success;
+                return SuaHuyenMessage.Success;
+            }
         }
 
         public XoaHuyenMessage XoaHuyen(int maHuyen)
         {
-            var p = new DynamicParameters();
-            p.Add("@MaHuyen", maHuyen);
-            _connection.Execute("spHUYEN_XoaHuyen", p, commandType: CommandType.StoredProcedure);
+            using (var connection = new SqlConnection(_connectionString))
+            {
+                var p = new DynamicParameters();
+                p.Add("@MaHuyen", maHuyen);
+                _dapperWrapper.Execute(connection, "spHUYEN_XoaHuyen", p, commandType: CommandType.StoredProcedure);
 
-            return XoaHuyenMessage.Success;
+                return XoaHuyenMessage.Success;
+            }
         }
 
         public ThemHuyenMessage ThemHuyen(string tenHuyen, int vungUT, int maTinh)
         {
-            var p = new DynamicParameters();
-            p.Add("@TenHuyen", tenHuyen);
-            p.Add("@VungUT", vungUT);
-            p.Add("@MaTinh", maTinh);
-            _connection.Execute("spHUYEN_ThemHuyen", p, commandType: CommandType.StoredProcedure);
+            using (var connection = new SqlConnection(_connectionString))
+            {
+                var p = new DynamicParameters();
+                p.Add("@TenHuyen", tenHuyen);
+                p.Add("@VungUT", vungUT);
+                p.Add("@MaTinh", maTinh);
+                _dapperWrapper.Execute(connection, "spHUYEN_ThemHuyen", p, commandType: CommandType.StoredProcedure);
 
-            return ThemHuyenMessage.Success;
+                return ThemHuyenMessage.Success;
+            }
         }
     }
 }

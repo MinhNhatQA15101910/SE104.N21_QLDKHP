@@ -3,22 +3,29 @@ using Dapper;
 using DTO;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.Common;
+using System.Data.SqlClient;
 using System.Linq;
 
 namespace DAL.Services
 {
     public class NhomNguoiDungDALService : INhomNguoiDungDALService
 	{
-        private readonly IDbConnection _connection;
+        private readonly string _connectionString;
+        private readonly IDapperWrapper _dapperWrapper;
 
-        public NhomNguoiDungDALService(IDbConnection connection)
+        public NhomNguoiDungDALService(string connectionString, IDapperWrapper dapperWrapper)
         {
-            _connection = connection;
+            _connectionString = connectionString;
+            _dapperWrapper = dapperWrapper;
         }
 
         public List<NhomNguoiDung> LayDSNhomNguoiDung()
 		{
-            return _connection.Query<NhomNguoiDung>("spNHOMNGUOIDUNG_LayDSNhomNguoiDung").ToList();
+            using (var connection = new SqlConnection(_connectionString))
+            {
+                return _dapperWrapper.Query<NhomNguoiDung>(connection, "spNHOMNGUOIDUNG_LayDSNhomNguoiDung").ToList();
+            }
         }
 	}
 }

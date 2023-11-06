@@ -7,7 +7,6 @@ using PL.Interfaces;
 using System;
 using System.ComponentModel;
 using System.Configuration;
-using System.Data.SqlClient;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -16,8 +15,12 @@ namespace PL
     public partial class QuanLyDoiTuong : KryptonForm, IThemSuaDoiTuongRequester
     {
         private readonly IDoiTuongBLLService _doiTuongBLLService = new DoiTuongBLLService(
-            new DoiTuongDALService(new SqlConnection(ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString)),
-            new SinhVien_DoiTuongDALService(new SqlConnection(ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString)));
+            new DoiTuongDALService(
+                ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString, 
+                new DapperWrapper()),
+            new SinhVien_DoiTuongDALService(
+                ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString, 
+                new DapperWrapper()));
 
         private ICaiDatRequester caiDatRequester;
         private BindingList<DoiTuong> mDoiTuong;

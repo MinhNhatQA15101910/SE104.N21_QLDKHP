@@ -4,56 +4,69 @@ using DTO;
 using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 
 namespace DAL.Services
 {
     public class PhieuThuHPDALService : IPhieuThuHPDALService
 	{
-        private readonly IDbConnection _connection;
+        private readonly string _connectionString;
+        private readonly IDapperWrapper _dapperWrapper;
 
-        public PhieuThuHPDALService(IDbConnection connection)
+        public PhieuThuHPDALService(string connectionString, IDapperWrapper dapperWrapper)
         {
-            _connection = connection;
+            _connectionString = connectionString;
+            _dapperWrapper = dapperWrapper;
         }
 
         public DateTime LayThoiGianDongHPGanNhat(int maPhieuDKHP)
 		{
-            var parameters = new DynamicParameters();
-            parameters.Add("@ma", maPhieuDKHP);
-            return _connection.QueryFirstOrDefault<DateTime>("spPHIEUTHUHP_LayThoiGianDongHPGanNhat", parameters, commandType: CommandType.StoredProcedure);
+            using (var connection = new SqlConnection(_connectionString))
+            {
+                var parameters = new DynamicParameters();
+                parameters.Add("@ma", maPhieuDKHP);
+                return _dapperWrapper.QueryFirstOrDefault<DateTime>(connection, "spPHIEUTHUHP_LayThoiGianDongHPGanNhat", parameters, commandType: CommandType.StoredProcedure);
+            }
         }
 
 		public bool TaoPhieuThu_ChoXacNhan(int soTienThu, int soPhieuDKHP)
 		{
-			int numRowsAffected;
+            using (var connection = new SqlConnection(_connectionString))
+            {
+                var parameters = new DynamicParameters();
+                parameters.Add("@soTienThu", soTienThu);
+                parameters.Add("@maPhieuDKHP", soPhieuDKHP);
+                int numRowsAffected = _dapperWrapper.Execute(connection, "spPHIEUTHUHP_TaoPhieuThu_ChoXacNhan ", parameters, commandType: CommandType.StoredProcedure);
 
-            var parameters = new DynamicParameters();
-            parameters.Add("@soTienThu", soTienThu);
-            parameters.Add("@maPhieuDKHP", soPhieuDKHP);
-            numRowsAffected = _connection.Execute("spPHIEUTHUHP_TaoPhieuThu_ChoXacNhan ", parameters, commandType: CommandType.StoredProcedure);
-
-            if (numRowsAffected > 0)
-				return true;
-			else
-				return false;
+                if (numRowsAffected > 0)
+                    return true;
+                else
+                    return false;
+            }
 		}
 
 		public List<PhieuThuHP> GetPhieuThuHP(int MaTinhTrang)
 		{
-            var p = new DynamicParameters();
-            p.Add("@MaTinhTrang", MaTinhTrang);
-            return _connection.Query<PhieuThuHP>("spPHIEUTHUHP_GetPhieuThuHP", p, commandType: CommandType.StoredProcedure).ToList();
+            using (var connection = new SqlConnection(_connectionString))
+            {
+                var p = new DynamicParameters();
+                p.Add("@MaTinhTrang", MaTinhTrang);
+                return _dapperWrapper.Query<PhieuThuHP>(connection, "spPHIEUTHUHP_GetPhieuThuHP", p, commandType: CommandType.StoredProcedure).ToList();
+            }
         }
 
 		public MessagePhieuThuHPUpdateTinhTrang PhieuThuHPUpdateTinhTrang(int MaPhieuThuHP, int MaTinhTrang)
 		{
-            var p = new DynamicParameters();
-            p.Add("@MaPhieuThuHP", MaPhieuThuHP);
-            p.Add("@MaTinhTrang", MaTinhTrang);
-            _connection.Execute("spPHIEUTHUHP_UpdateTinhTrang", p, commandType: CommandType.StoredProcedure);
+            using (var connection = new SqlConnection(_connectionString))
+            {
+                var p = new DynamicParameters();
+                p.Add("@MaPhieuThuHP", MaPhieuThuHP);
+                p.Add("@MaTinhTrang", MaTinhTrang);
+                _dapperWrapper.Execute(connection, "spPHIEUTHUHP_UpdateTinhTrang", p, commandType: CommandType.StoredProcedure);
 
-            return MessagePhieuThuHPUpdateTinhTrang.Success;
+                return MessagePhieuThuHPUpdateTinhTrang.Success;
+            }
 		}
 	}
 }

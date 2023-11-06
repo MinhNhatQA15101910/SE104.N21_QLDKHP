@@ -3,29 +3,38 @@ using Dapper;
 using DTO;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.SqlClient;
 using System.Linq;
 
 namespace DAL.Services
 {
     public class HocKyDALService: IHocKyDALService
     {
-        private readonly IDbConnection _connection;
+        private readonly string _connectionString;
+        private readonly IDapperWrapper _dapperWrapper;
 
-        public HocKyDALService(IDbConnection connection)
+        public HocKyDALService(string connectionString, IDapperWrapper dapperWrapper)
         {
-            _connection = connection;
+            _connectionString = connectionString;
+            _dapperWrapper = dapperWrapper;
         }
 
         public List<HocKy> LayDanhSachHK()
         {
-            return _connection.Query<HocKy>("spHOCKY_LayDanhSachHK").ToList();
+            using (var connection = new SqlConnection(_connectionString))
+            {
+                return _dapperWrapper.Query<HocKy>(connection, "spHOCKY_LayDanhSachHK").ToList();
+            }
         }
 
         public string LayHKByMaHK(int currMaHocKy)
         {
-            var p = new DynamicParameters();
-            p.Add("@MaHocKy", currMaHocKy);
-            return _connection.Query<string>("spHOCKY_LayHKByMaHK", p, commandType: CommandType.StoredProcedure).ToString();
+            using (var connection = new SqlConnection(_connectionString))
+            {
+                var p = new DynamicParameters();
+                p.Add("@MaHocKy", currMaHocKy);
+                return _dapperWrapper.Query<string>(connection, "spHOCKY_LayHKByMaHK", p, commandType: CommandType.StoredProcedure).ToString();
+            }
         }
     }
 }

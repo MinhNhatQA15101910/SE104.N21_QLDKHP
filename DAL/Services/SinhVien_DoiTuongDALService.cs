@@ -1,24 +1,32 @@
 ﻿using DAL.IServices;
 using Dapper;
 using DTO;
+using System;
 using System.Collections.Generic;
 using System.Data;
+using System.Data.Common;
+using System.Data.SqlClient;
 using System.Linq;
 
 namespace DAL.Services
 {
     public class SinhVien_DoiTuongDALService : ISinhVien_DoiTuongDALService
     {
-        private readonly IDbConnection _connection;
+        private readonly string _connectionString;
+        private readonly IDapperWrapper _dapperWrapper;
 
-        public SinhVien_DoiTuongDALService(IDbConnection connection)
+        public SinhVien_DoiTuongDALService(string connectionString, IDapperWrapper dapperWrapper)
         {
-            _connection = connection;
+            _connectionString = connectionString;
+            _dapperWrapper = dapperWrapper;
         }
 
         public List<SinhVien_DoiTuong> GetSinhVien_DoiTuongs()
         {
-            return _connection.Query<SinhVien_DoiTuong>("spSINHVIEN_DOITUONG_GetSinhVien_DoiTuongs").ToList();
+            using (var connection = new SqlConnection(_connectionString))
+            {
+                return _dapperWrapper.Query<SinhVien_DoiTuong>(connection, "spSINHVIEN_DOITUONG_GetSinhVien_DoiTuongs").ToList();
+            }
         }
     }
 }
