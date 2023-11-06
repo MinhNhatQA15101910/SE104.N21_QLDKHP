@@ -104,6 +104,9 @@ namespace PL
                     case SuaDoiTuongMessage.DuplicateTenDoiTuong:
                         MessageBox.Show("Tên đối tượng đã tồn tại, vui lòng nhập giá trị khác!");
                         break;
+                    case SuaDoiTuongMessage.Failed:
+                        MessageBox.Show("Sửa đối tượng thất bại!");
+                        break;
                     case SuaDoiTuongMessage.Success:
                         MessageBox.Show("Sửa đối tượng thành công!");
                         Close();
@@ -129,6 +132,9 @@ namespace PL
                         break;
                     case ThemDoiTuongMessage.DuplicateTenDoiTuong:
                         MessageBox.Show("Tên đối tượng đã tồn tại, vui lòng nhập giá trị khác!");
+                        break;
+                    case ThemDoiTuongMessage.Failed:
+                        MessageBox.Show("Thêm đối tượng thất bại!");
                         break;
                     case ThemDoiTuongMessage.Success:
                         if (themSuaDoiTuongRequester != null)

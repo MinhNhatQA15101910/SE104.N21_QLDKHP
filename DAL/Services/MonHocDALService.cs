@@ -33,9 +33,9 @@ namespace DAL.Services
             {
                 var p = new DynamicParameters();
                 p.Add("@MaMH", maMH);
-                _dapperWrapper.Execute(connection, "spMONHOC_XoaMonHoc", p, commandType: CommandType.StoredProcedure);
+                int result = _dapperWrapper.Execute(connection, "spMONHOC_XoaMonHoc", p, commandType: CommandType.StoredProcedure);
 
-                return XoaMonHocMessage.Success;
+                return (result > 0) ? XoaMonHocMessage.Success : XoaMonHocMessage.Failed;
             }
         }
 
@@ -48,9 +48,9 @@ namespace DAL.Services
                 p.Add("@TenMH", tenMH);
                 p.Add("@MaLoaiMonHoc", maLoaiMonHoc);
                 p.Add("@SoTiet", soTiet);
-                _dapperWrapper.Execute(connection, "spMONHOC_SuaMonHoc", p, commandType: CommandType.StoredProcedure);
+                int result = _dapperWrapper.Execute(connection, "spMONHOC_SuaMonHoc", p, commandType: CommandType.StoredProcedure);
 
-                return SuaMonHocMessage.Success;
+                return (result > 0) ? SuaMonHocMessage.Success : SuaMonHocMessage.Failed;
             }
         }
 
@@ -63,9 +63,9 @@ namespace DAL.Services
                 p.Add("@TenMH", tenMH);
                 p.Add("@MaLoaiMonHoc", maLoaiMonHoc);
                 p.Add("@SoTiet", soTiet);
-                _dapperWrapper.Execute(connection, "spMONHOC_ThemMonHoc", p, commandType: CommandType.StoredProcedure);
+                int result = _dapperWrapper.Execute(connection, "spMONHOC_ThemMonHoc", p, commandType: CommandType.StoredProcedure);
 
-                return ThemMonHocMessage.Success;
+                return (result > 0) ? ThemMonHocMessage.Success : ThemMonHocMessage.Failed;
             }
         }
 

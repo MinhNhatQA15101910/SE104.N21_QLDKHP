@@ -277,6 +277,9 @@ namespace PL
                 case ThemTaiKhoanSVMessage.Unable:
                     MessageBox.Show("Vui lòng chọn sinh viên để thêm tài khoản!");
                     break;
+                case ThemTaiKhoanSVMessage.Failed:
+                    MessageBox.Show("Thêm tài khoản sinh viên thất bại!");
+                    break;
                 case ThemTaiKhoanSVMessage.Success:
                     MessageBox.Show("Thêm tài khoản sinh viên thành công!");
 
@@ -300,6 +303,9 @@ namespace PL
                 {
                     case XoaTaiKhoanMessage.Unable:
                         MessageBox.Show("Không thể xóa tài khoản hiện tại!");
+                        break;
+                    case XoaTaiKhoanMessage.Failed:
+                        MessageBox.Show("Xóa tài khoản thất bại!");
                         break;
                     case XoaTaiKhoanMessage.Success:
                         mNguoiDung = new BindingList<CT_NguoiDung>(_nguoiDungBLLService.LayDSNguoiDung());

@@ -24,7 +24,7 @@ namespace DAL.Services
                 var parameters = new DynamicParameters();
                 parameters.Add("@maPhieuDKHP", ct_PhieuDKHP.MaPhieuDKHP);
                 parameters.Add("@maMH", ct_PhieuDKHP.MaMH);
-                _dapperWrapper.Execute(connection, "spPHIEUDKHP_TaoCT_PhieuDKHP", parameters, commandType: CommandType.StoredProcedure);
+                 _dapperWrapper.Execute(connection, "spPHIEUDKHP_TaoCT_PhieuDKHP", parameters, commandType: CommandType.StoredProcedure);
             }
         }
 

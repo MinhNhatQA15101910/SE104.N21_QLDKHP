@@ -34,9 +34,9 @@ namespace DAL.Services
                 var p = new DynamicParameters();
                 p.Add("@MaTinh", maTinh);
                 p.Add("@TenTinh", tenTinh);
-                _dapperWrapper.Execute(connection, "spTINH_SuaTinh", p, commandType: CommandType.StoredProcedure);
+                int result = _dapperWrapper.Execute(connection, "spTINH_SuaTinh", p, commandType: CommandType.StoredProcedure);
 
-                return SuaTinhMessage.Success;
+                return (result > 0) ? SuaTinhMessage.Success : SuaTinhMessage.Failed;
             }
 		}
 
@@ -46,9 +46,9 @@ namespace DAL.Services
             {
                 var p = new DynamicParameters();
                 p.Add("@MaTinh", maTinh);
-                _dapperWrapper.Execute(connection, "spTINH_XoaTinh", p, commandType: CommandType.StoredProcedure);
+                int result = _dapperWrapper.Execute(connection, "spTINH_XoaTinh", p, commandType: CommandType.StoredProcedure);
 
-                return XoaTinhMessage.Success;
+                return (result > 0) ? XoaTinhMessage.Success : XoaTinhMessage.Failed;
             }
 		}
 
@@ -58,9 +58,9 @@ namespace DAL.Services
             {
                 var p = new DynamicParameters();
                 p.Add("@TenTinh", tenTinh);
-                _dapperWrapper.Execute(connection, "spTINH_ThemTinh", p, commandType: CommandType.StoredProcedure);
+                int result = _dapperWrapper.Execute(connection, "spTINH_ThemTinh", p, commandType: CommandType.StoredProcedure);
 
-                return ThemTinhMessage.Success;
+                return (result > 0) ? ThemTinhMessage.Success : ThemTinhMessage.Failed;
             }
 		}
 	}

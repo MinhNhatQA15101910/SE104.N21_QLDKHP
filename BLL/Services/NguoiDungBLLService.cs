@@ -2,7 +2,6 @@
 using DAL.IServices;
 using DTO;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace BLL.Services
 {

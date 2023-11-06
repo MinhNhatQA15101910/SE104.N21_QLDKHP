@@ -47,21 +47,22 @@ namespace DAL.Services
                 p.Add("@GioiTinh", gioiTinh);
                 p.Add("@MaHuyen", maHuyen);
                 p.Add("@MaNganh", maNganh);
-                _dapperWrapper.Execute(connection, "spSINHVIEN_SuaSinhVien", p, commandType: CommandType.StoredProcedure);
+                int result1 = _dapperWrapper.Execute(connection, "spSINHVIEN_SuaSinhVien", p, commandType: CommandType.StoredProcedure);
 
                 p = new DynamicParameters();
                 p.Add("@MaSV", mssvBanDau);
-                _dapperWrapper.Execute(connection, "spSINHVIEN_DOITUONG_XoaSinhVien", p, commandType: CommandType.StoredProcedure);
+                int result2 = _dapperWrapper.Execute(connection, "spSINHVIEN_DOITUONG_XoaSinhVien", p, commandType: CommandType.StoredProcedure);
 
+                int result3 = 0;
                 foreach (int maDT in maDTList)
                 {
                     p = new DynamicParameters();
                     p.Add("@MaSV", mssv);
                     p.Add("@MaDT", maDT);
-                    _dapperWrapper.Execute(connection, "spSINHVIEN_DOITUONG_Them", p, commandType: CommandType.StoredProcedure);
+                    result3 += _dapperWrapper.Execute(connection, "spSINHVIEN_DOITUONG_Them", p, commandType: CommandType.StoredProcedure);
                 }
 
-                return SuaSinhVienMessage.Success;
+                return (result1 > 0 && result2 > 0 && result3 > 0) ? SuaSinhVienMessage.Success : SuaSinhVienMessage.Failed;
             }
 		}
 
@@ -76,17 +77,18 @@ namespace DAL.Services
                 p.Add("@GioiTinh", gioiTinh);
                 p.Add("@MaHuyen", maHuyen);
                 p.Add("@MaNganh", maNganh);
-                _dapperWrapper.Execute(connection, "spSINHVIEN_ThemSinhVien", p, commandType: CommandType.StoredProcedure);
+                int result1 = _dapperWrapper.Execute(connection, "spSINHVIEN_ThemSinhVien", p, commandType: CommandType.StoredProcedure);
 
+                int result2 = 0;
                 foreach (int maDT in maDTList)
                 {
                     p = new DynamicParameters();
                     p.Add("@MaSV", mssv);
                     p.Add("@MaDT", maDT);
-                    _dapperWrapper.Execute(connection, "spSINHVIEN_DOITUONG_Them", p, commandType: CommandType.StoredProcedure);
+                    result2 += _dapperWrapper.Execute(connection, "spSINHVIEN_DOITUONG_Them", p, commandType: CommandType.StoredProcedure);
                 }
 
-                return ThemSinhVienMessage.Success;
+                return (result1 > 0 && result2 > 0) ? ThemSinhVienMessage.Success : ThemSinhVienMessage.Failed;
             }
 		}
 
@@ -96,13 +98,13 @@ namespace DAL.Services
             {
                 var p = new DynamicParameters();
                 p.Add("@MaSV", maSV);
-                _dapperWrapper.Execute(connection, "spSINHVIEN_DOITUONG_XoaSinhVien", p, commandType: CommandType.StoredProcedure);
-                _dapperWrapper.Execute(connection, "spCT_PHIEUDKHP_XoaSinhVien", p, commandType: CommandType.StoredProcedure);
-                _dapperWrapper.Execute(connection, "spPHIEUTHUHP_XoaSinhVien", p, commandType: CommandType.StoredProcedure);
-                _dapperWrapper.Execute(connection, "spPHIEUDKHP_XoaSinhVien", p, commandType: CommandType.StoredProcedure);
-                _dapperWrapper.Execute(connection, "spSINHVIEN_XoaSinhVien", p, commandType: CommandType.StoredProcedure);
+                int result1 = _dapperWrapper.Execute(connection, "spSINHVIEN_DOITUONG_XoaSinhVien", p, commandType: CommandType.StoredProcedure);
+                int result2 = _dapperWrapper.Execute(connection, "spCT_PHIEUDKHP_XoaSinhVien", p, commandType: CommandType.StoredProcedure);
+                int result3 = _dapperWrapper.Execute(connection, "spPHIEUTHUHP_XoaSinhVien", p, commandType: CommandType.StoredProcedure);
+                int result4 = _dapperWrapper.Execute(connection, "spPHIEUDKHP_XoaSinhVien", p, commandType: CommandType.StoredProcedure);
+                int result5 = _dapperWrapper.Execute(connection, "spSINHVIEN_XoaSinhVien", p, commandType: CommandType.StoredProcedure);
 
-                return XoaSinhVienMessage.Success;
+                return (result1 > 0 && result2 > 0 && result3 > 0 && result4 > 0 && result5 > 0) ? XoaSinhVienMessage.Success : XoaSinhVienMessage.Failed;
             }
 		}
 

@@ -64,9 +64,9 @@ namespace DAL.Services
             {
                 var p = new DynamicParameters();
                 p.Add("@TenDangNhap", tenDangNhap);
-                _dapperWrapper.Execute(connection, "spNGUOIDUNG_XoaTaiKhoan", p, commandType: CommandType.StoredProcedure);
+                int result = _dapperWrapper.Execute(connection, "spNGUOIDUNG_XoaTaiKhoan", p, commandType: CommandType.StoredProcedure);
 
-                return XoaTaiKhoanMessage.Success;
+                return (result > 0) ? XoaTaiKhoanMessage.Success : XoaTaiKhoanMessage.Failed;
             }
 		}
 
@@ -111,9 +111,9 @@ namespace DAL.Services
                 p.Add("@TenDangNhapBD", tenDangNhapBD);
                 p.Add("@TenDangNhap", tenDangNhap);
                 p.Add("@MaNhom", maNhom);
-                _dapperWrapper.Execute(connection, "spNGUOIDUNG_SuaTaiKhoan", p, commandType: CommandType.StoredProcedure);
+                int result = _dapperWrapper.Execute(connection, "spNGUOIDUNG_SuaTaiKhoan", p, commandType: CommandType.StoredProcedure);
 
-                return SuaTaiKhoanMessage.Success;
+                return (result > 0) ? SuaTaiKhoanMessage.Success : SuaTaiKhoanMessage.Failed;
             }
 		}
 
@@ -121,14 +121,16 @@ namespace DAL.Services
 		{
             using (var connection = new SqlConnection(_connectionString))
             {
+                int rowsAffected = 0;
+
                 foreach (SinhVien sinhVien in dssv)
                 {
                     var p = new DynamicParameters();
                     p.Add("@MaSV", sinhVien.MaSV);
-                    _dapperWrapper.Execute(connection, "spNGUOIDUNG_ThemTaiKhoanSV", p, commandType: CommandType.StoredProcedure);
+                    rowsAffected += _dapperWrapper.Execute(connection, "spNGUOIDUNG_ThemTaiKhoanSV", p, commandType: CommandType.StoredProcedure);
                 }
 
-                return ThemTaiKhoanSVMessage.Success;
+                return (rowsAffected > 0) ? ThemTaiKhoanSVMessage.Success : ThemTaiKhoanSVMessage.Failed;
             }
 		}
 	}

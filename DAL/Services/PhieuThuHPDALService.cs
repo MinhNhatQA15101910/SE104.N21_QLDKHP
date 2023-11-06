@@ -63,9 +63,9 @@ namespace DAL.Services
                 var p = new DynamicParameters();
                 p.Add("@MaPhieuThuHP", MaPhieuThuHP);
                 p.Add("@MaTinhTrang", MaTinhTrang);
-                _dapperWrapper.Execute(connection, "spPHIEUTHUHP_UpdateTinhTrang", p, commandType: CommandType.StoredProcedure);
+                int result = _dapperWrapper.Execute(connection, "spPHIEUTHUHP_UpdateTinhTrang", p, commandType: CommandType.StoredProcedure);
 
-                return MessagePhieuThuHPUpdateTinhTrang.Success;
+                return (result > 0) ? MessagePhieuThuHPUpdateTinhTrang.Success : MessagePhieuThuHPUpdateTinhTrang.Failed;
             }
 		}
 	}

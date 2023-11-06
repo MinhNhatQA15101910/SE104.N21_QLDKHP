@@ -35,9 +35,9 @@ namespace DAL.Services
                 p.Add("@MaHocKy", MaHocKy);
                 p.Add("@MaMH", MaMH);
                 p.Add("@NamHoc", NamHoc);
-                _dapperWrapper.Execute(connection, "spDANHSACHMONHOCMO_AddMonHocMo", p, commandType: CommandType.StoredProcedure);
+                int result = _dapperWrapper.Execute(connection, "spDANHSACHMONHOCMO_AddMonHocMo", p, commandType: CommandType.StoredProcedure);
 
-                return MessageAddMonHocMo.Success;
+                return (result > 0) ? MessageAddMonHocMo.Success : MessageAddMonHocMo.Failed;
             }
         }
 
@@ -56,9 +56,9 @@ namespace DAL.Services
                 var mhm = new DynamicParameters();
                 mhm.Add("@MaHocKy", MaHocKy);
                 mhm.Add("@NamHoc", NamHoc);
-                _dapperWrapper.Execute(connection, "spDANHSACHMONHOCMO_XoaDanhSach", mhm, commandType: CommandType.StoredProcedure);
+                int result = _dapperWrapper.Execute(connection, "spDANHSACHMONHOCMO_XoaDanhSach", mhm, commandType: CommandType.StoredProcedure);
 
-                return MessageDeleteHocKyNamHocMHM.Success;
+                return (result > 0) ? MessageDeleteHocKyNamHocMHM.Success : MessageDeleteHocKyNamHocMHM.Failed;
             }
         }
     }

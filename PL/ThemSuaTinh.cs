@@ -81,6 +81,9 @@ namespace PL
                     case SuaTinhMessage.DuplicateTenTinh:
                         MessageBox.Show("Tên tỉnh đã tồn tại, vui lòng nhập giá trị khác!");
                         break;
+                    case SuaTinhMessage.Failed:
+                        MessageBox.Show("Sửa tỉnh thất bại!");
+                        break;
                     case SuaTinhMessage.Success:
                         MessageBox.Show("Sửa tỉnh thành công!");
                         Close();
@@ -99,6 +102,9 @@ namespace PL
                         break;
                     case ThemTinhMessage.DuplicateTenTinh:
                         MessageBox.Show("Tên tỉnh đã tồn tại, vui lòng nhập giá trị khác!");
+                        break;
+                    case ThemTinhMessage.Failed:
+                        MessageBox.Show("Thêm tỉnh thất bại!");
                         break;
                     case ThemTinhMessage.Success:
                         if (themSuaTinhRequester != null)

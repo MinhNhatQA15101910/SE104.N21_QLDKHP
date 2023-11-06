@@ -58,9 +58,9 @@ namespace DAL.Services
                 var p = new DynamicParameters();
                 p.Add("@SoTinChiToiDa", tinChiToiDa);
                 p.Add("@SoTinChiToiThieu", tinChiToiThieu);
-                _dapperWrapper.Execute(connection, "spGLOBALCONFIG_SuaGioiHanTinChi", p, commandType: CommandType.StoredProcedure);
+                int result = _dapperWrapper.Execute(connection, "spGLOBALCONFIG_SuaGioiHanTinChi", p, commandType: CommandType.StoredProcedure);
 
-                return SuaGioiHanTinChiMessage.Success;
+                return (result > 0) ? SuaGioiHanTinChiMessage.Success : SuaGioiHanTinChiMessage.Failed;
             }
         }
 

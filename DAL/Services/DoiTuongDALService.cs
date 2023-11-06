@@ -35,9 +35,9 @@ namespace DAL.Services
                 p.Add("@MaDT", maDTBanDau);
                 p.Add("@TenDT", tenDT);
                 p.Add("@TiLeGiamHocPhi", tiLeGiam);
-                _dapperWrapper.Execute(connection, "spDOITUONG_SuaDoiTuong", p, commandType: CommandType.StoredProcedure);
+                int result = _dapperWrapper.Execute(connection, "spDOITUONG_SuaDoiTuong", p, commandType: CommandType.StoredProcedure);
 
-                return SuaDoiTuongMessage.Success;
+                return (result > 0) ? SuaDoiTuongMessage.Success : SuaDoiTuongMessage.Failed;
             }
         }
 
@@ -48,9 +48,9 @@ namespace DAL.Services
                 var p = new DynamicParameters();
                 p.Add("@TenDT", tenDT);
                 p.Add("@TiLeGiamHocPhi", tiLeGiam);
-                _dapperWrapper.Execute(connection, "spDOITUONG_ThemDoiTuong", p, commandType: CommandType.StoredProcedure);
+                int result = _dapperWrapper.Execute(connection, "spDOITUONG_ThemDoiTuong", p, commandType: CommandType.StoredProcedure);
 
-                return ThemDoiTuongMessage.Success;
+                return (result > 0) ? ThemDoiTuongMessage.Success : ThemDoiTuongMessage.Failed;
             }
         }
 
@@ -90,9 +90,9 @@ namespace DAL.Services
             {
                 var p = new DynamicParameters();
                 p.Add("@MaDT", maDT);
-                _dapperWrapper.Execute(connection, "spDOITUONG_XoaDoiTuong", p, commandType: CommandType.StoredProcedure);
+                int result = _dapperWrapper.Execute(connection, "spDOITUONG_XoaDoiTuong", p, commandType: CommandType.StoredProcedure);
 
-                return XoaDoiTuongMessage.Success;
+                return (result > 0) ? XoaDoiTuongMessage.Success : XoaDoiTuongMessage.Failed;
             }
         }
     }

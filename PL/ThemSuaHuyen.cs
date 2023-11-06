@@ -127,6 +127,9 @@ namespace PL
                     case SuaHuyenMessage.DuplicateTenHuyen:
                         MessageBox.Show("Tên huyện đã tồn tại trong tỉnh này, vui lòng nhập giá trị khác!");
                         break;
+                    case SuaHuyenMessage.Failed:
+                        MessageBox.Show("Sửa huyện thất bại!");
+                        break;
                     case SuaHuyenMessage.Success:
                         MessageBox.Show("Sửa huyện thành công!");
                         Close();

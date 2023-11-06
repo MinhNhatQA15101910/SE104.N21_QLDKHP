@@ -99,6 +99,9 @@ namespace PL
                     case SuaLoaiMonHocMessage.DuplicateTenLoaiMonHoc:
                         MessageBox.Show("Tên loại môn học đã tồn tại, vui lòng nhập lại giá trị khác!");
                         break;
+                    case SuaLoaiMonHocMessage.Failed:
+                        MessageBox.Show("Sửa loại môn học thất bại!");
+                        break;
                     case SuaLoaiMonHocMessage.Success:
                         MessageBox.Show("Sửa loại môn học thành công!");
                         Close();
@@ -131,6 +134,9 @@ namespace PL
                         break;
                     case ThemLoaiMonHocMessage.DuplicateTenLoaiMonHoc:
                         MessageBox.Show("Tên loại môn học đã tồn tại, vui lòng nhập lại giá trị khác!");
+                        break;
+                    case ThemLoaiMonHocMessage.Failed:
+                        MessageBox.Show("Thêm loại môn học thất bại!");
                         break;
                     case ThemLoaiMonHocMessage.Success:
                         if (themSuaLoaiMonHocRequester != null)

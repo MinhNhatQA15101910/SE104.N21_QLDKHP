@@ -12,7 +12,8 @@
     public enum ThemTaiKhoanSVMessage
     {
         None,
-        Success, 
+        Success,
+        Failed,
         Unable
     }
 
@@ -20,6 +21,7 @@
     {
         None,
         Success,
+        Failed,
         Unable
     }
 
@@ -39,6 +41,7 @@
         None,
         EmptyTenDangNhap, 
         DuplicateTenDangNhap,
+        Failed,
         Success
     }
 
@@ -47,6 +50,7 @@
         None,
         EmptyTenDangNhap,
         DuplicateTenDangNhap,
+        Failed,
         Success
     }
 
@@ -58,6 +62,7 @@
         TiLeGiamKhongHopLe,
         Unable, 
         DuplicateTenDoiTuong,
+        Failed,
         Success
     }
 
@@ -68,6 +73,7 @@
         EmptyTiLeGiam,
         TiLeGiamKhongHopLe,
         DuplicateTenDoiTuong,
+        Failed,
         Success
     }
 
@@ -76,6 +82,7 @@
         None,
         Success,
         UnableToDeleteVungSauVungXa,
+        Failed,
         Unable
     }
 
@@ -86,7 +93,8 @@
         TinChiToiThieuRong,
         TinChiToiDaKhongHopLe, 
         TinChiToiThieuKhongHopLe, 
-        Unable, 
+        Unable,
+        Failed,
         Success
     }
 
@@ -94,6 +102,7 @@
     {
         None,
         Unable,
+        Failed,
         Success 
     }
 
@@ -106,6 +115,7 @@
         SoTietKhongHopLe,
         SoTienKhongHopLe,
         DuplicateTenLoaiMonHoc,
+        Failed,
         Success,
     }
 
@@ -118,6 +128,7 @@
         SoTietKhongHopLe,
         SoTienKhongHopLe,
         DuplicateTenLoaiMonHoc,
+        Failed,
         Success,
     }
 
@@ -126,6 +137,7 @@
         None,
         EmptyTenTinh,
         DuplicateTenTinh,
+        Failed,
         Success,
     }
 
@@ -134,6 +146,7 @@
         None,
         EmptyTenTinh,
         DuplicateTenTinh,
+        Failed,
         Success,
     }
 
@@ -141,6 +154,7 @@
     {
         None,
         Unable,
+        Failed,
         Success
     }
 
@@ -149,6 +163,7 @@
         None,
         EmptyTenHuyen,
         DuplicateTenHuyen,
+        Failed,
         Success
     }
 
@@ -157,6 +172,7 @@
         None,
         EmptyTenHuyen,
         DuplicateTenHuyen,
+        Failed,
         Success
     }
 
@@ -164,6 +180,7 @@
     {
         None,
         Unable,
+        Failed,
         Success
     }
 
@@ -176,6 +193,7 @@
         DuplicateTenNganh,
         UnableForSinhVien,
         UnableForChuongTrinhHoc,
+        Failed,
         Success
     }
 
@@ -186,6 +204,7 @@
         EmptyTenNganh,
         DuplicateMaNganh,
         DuplicateTenNganh,
+        Failed,
         Success
     }
 
@@ -194,6 +213,7 @@
         None,
         UnableForSinhVien,
         UnableForChuongTrinhHoc,
+        Failed,
         Success
     }
 
@@ -232,6 +252,7 @@
     {
         None,
         Unable,
+        Failed,
         Success
     }
 
@@ -244,6 +265,7 @@
         EmptySoTiet,
         InvalidSoTiet,
         DuplicateMaMH,
+        Failed,
         Success
     }
 
@@ -255,6 +277,7 @@
         EmptySoTiet,
         InvalidSoTiet,
         DuplicateMaMH,
+        Failed,
         Success
     }
 
@@ -264,6 +287,7 @@
         EmptyMaSV,
         EmptyTenSV,
         DuplicateMaSV,
+        Failed,
         Success
     }
 
@@ -273,12 +297,14 @@
         EmptyMaSV,
         EmptyTenSV,
         DuplicateMaSV,
+        Failed,
         Success
     }
 
     public enum XoaSinhVienMessage
     {
         None,
+        Failed,
         Success
     }
 
@@ -287,6 +313,7 @@
         None,
         EmptyNamHoc,
         InvalidNamHoc,
+        Failed,
         Sucess
     }
 
@@ -295,6 +322,7 @@
         None,
         EmptyNamHoc,
         InvalidNamHoc,
+        Failed,
         Sucess
     }
 
@@ -302,7 +330,7 @@
     {
         None,
         Success,
-        Failed
+        Failed,
     }
 
     public enum MessageAddMonHocMo

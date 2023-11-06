@@ -124,6 +124,9 @@ namespace PL
                     case XoaDoiTuongMessage.Unable:
                         MessageBox.Show("Bạn không thể xóa đối tượng này vì đang có sinh viên thuộc đối tượng!");
                         break;
+                    case XoaDoiTuongMessage.Failed:
+                        MessageBox.Show("Xóa đối tượng thất bại!");
+                        break;
                     case XoaDoiTuongMessage.Success:
                         mDoiTuong.Remove(doiTuong);
                         MessageBox.Show("Xóa đối tượng thành công!");

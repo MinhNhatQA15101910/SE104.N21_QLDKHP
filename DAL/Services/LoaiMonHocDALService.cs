@@ -33,9 +33,9 @@ namespace DAL.Services
             {
                 var p = new DynamicParameters();
                 p.Add("@MaLoaiMonHoc", maLoaiMonHoc);
-                _dapperWrapper.Execute(connection, "spLOAIMONHOC_XoaLoaiMonHoc", p, commandType: CommandType.StoredProcedure);
+                int result = _dapperWrapper.Execute(connection, "spLOAIMONHOC_XoaLoaiMonHoc", p, commandType: CommandType.StoredProcedure);
 
-                return XoaLoaiMonHocMessage.Success;
+                return (result > 0) ? XoaLoaiMonHocMessage.Success : XoaLoaiMonHocMessage.Failed;
             }
         }
 
@@ -48,9 +48,9 @@ namespace DAL.Services
                 p.Add("@TenLoaiMonHoc", tenLoaiMonHoc);
                 p.Add("@SoTiet", soTiet);
                 p.Add("@SoTien", soTien);
-                _dapperWrapper.Execute(connection, "spLOAIMONHOC_SuaLoaiMonHoc", p, commandType: CommandType.StoredProcedure);
+                int result = _dapperWrapper.Execute(connection, "spLOAIMONHOC_SuaLoaiMonHoc", p, commandType: CommandType.StoredProcedure);
 
-                return SuaLoaiMonHocMessage.Success;
+                return (result > 0) ? SuaLoaiMonHocMessage.Success : SuaLoaiMonHocMessage.Failed;
             }
         }
 
@@ -62,9 +62,9 @@ namespace DAL.Services
                 p.Add("@TenLoaiMonHoc", tenLoaiMonHoc);
                 p.Add("@SoTiet", soTiet);
                 p.Add("@SoTien", soTien);
-                _dapperWrapper.Execute(connection, "spLOAIMONHOC_ThemLoaiMonHoc", p, commandType: CommandType.StoredProcedure);
+                int result = _dapperWrapper.Execute(connection, "spLOAIMONHOC_ThemLoaiMonHoc", p, commandType: CommandType.StoredProcedure);
 
-                return ThemLoaiMonHocMessage.Success;
+                return (result > 0) ? ThemLoaiMonHocMessage.Success : ThemLoaiMonHocMessage.Failed;
             }
         }
     }

@@ -118,8 +118,10 @@ namespace PL
                 switch (message)
                 {
                     case XoaTinhMessage.Unable:
-                        mTinh.Remove(tinh);
                         MessageBox.Show("Không thể xóa tỉnh vì có huyện đang thuộc tỉnh hiện tại!");
+                        break;
+                    case XoaTinhMessage.Failed:
+                        MessageBox.Show("Xóa tỉnh thất bại!");
                         break;
                     case XoaTinhMessage.Success:
                         mTinh.Remove(tinh);

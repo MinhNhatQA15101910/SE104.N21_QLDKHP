@@ -126,6 +126,9 @@ namespace PL
                 case SuaGioiHanTinChiMessage.Unable:
                     MessageBox.Show("Giá trị nhập vào không hợp lệ!");
                     break;
+                case SuaGioiHanTinChiMessage.Failed:
+                    MessageBox.Show("Cập nhật giới hạn tín chỉ thất bại!");
+                    break;
                 case SuaGioiHanTinChiMessage.Success:
                     MessageBox.Show("Cập nhật giới hạn tín chỉ thành công!");
                     break;
@@ -146,6 +149,9 @@ namespace PL
                 {
                     case XoaLoaiMonHocMessage.Unable:
                         MessageBox.Show("Không thể xóa loại môn học do có môn học đang thuộc loại này!");
+                        break;
+                    case XoaLoaiMonHocMessage.Failed:
+                        MessageBox.Show("Xóa loại môn học thất bại!");
                         break;
                     case XoaLoaiMonHocMessage.Success:
                         mLoaiMonHoc.Remove(loaiMonHoc);

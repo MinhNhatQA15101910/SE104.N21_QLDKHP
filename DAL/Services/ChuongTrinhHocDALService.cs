@@ -26,9 +26,9 @@ namespace DAL.Services
                 var mhm = new DynamicParameters();
                 mhm.Add("@MaNganh", maNganh);
                 mhm.Add("@HocKy", hocKy);
-                _dapperWrapper.Execute(connection, "spCHUONGTRINHHOC_DeleteListCTHoc", mhm, commandType: CommandType.StoredProcedure);
+                int result = _dapperWrapper.Execute(connection, "spCHUONGTRINHHOC_DeleteListCTHoc", mhm, commandType: CommandType.StoredProcedure);
 
-                return MessageDeleteListCTHoc.Success;
+                return (result > 0) ? MessageDeleteListCTHoc.Success : MessageDeleteListCTHoc.Failed;
             }
         }
 
@@ -48,9 +48,9 @@ namespace DAL.Services
                 mhm.Add("@MaMH", MaMH);
                 mhm.Add("@MaNganh", MaNganh);
                 mhm.Add("@HocKy", HocKy);
-                _dapperWrapper.Execute(connection, "spCHUONGTRINHHOC_DeleteCTHoc", mhm, commandType: CommandType.StoredProcedure);
+                int result = _dapperWrapper.Execute(connection, "spCHUONGTRINHHOC_DeleteCTHoc", mhm, commandType: CommandType.StoredProcedure);
 
-                return MessageDeleteCTHoc.Success;
+                return (result > 0) ? MessageDeleteCTHoc.Success : MessageDeleteCTHoc.Failed;
             }
         }
 
@@ -63,9 +63,9 @@ namespace DAL.Services
                 mhm.Add("@MaNganh", chuongTrinhHoc.MaNganh);
                 mhm.Add("@HocKy", chuongTrinhHoc.HocKy);
 
-                _dapperWrapper.Execute(connection, "spCHUONGTRINHHOC_AddCTHoc", mhm, commandType: CommandType.StoredProcedure);
+                int result = _dapperWrapper.Execute(connection, "spCHUONGTRINHHOC_AddCTHoc", mhm, commandType: CommandType.StoredProcedure);
 
-                return MessageAddCTHoc.Success;
+                return (result > 0) ? MessageAddCTHoc.Success : MessageAddCTHoc.Failed;
             }
         }
     }
