@@ -216,14 +216,16 @@
         EmptyTenKhoa,
         DuplicateMaKhoa,
         DuplicateTenKhoa,
-        Success
+        Success,
+        Failed
     }
 
     public enum XoaKhoaMessage
     {
         None,
         Unable,
-        Success
+        Success,
+        Failed
     }
 
     public enum XoaMonHocMessage

@@ -13,9 +13,14 @@ namespace PL
 {
     public partial class ThemSuaTinh : KryptonForm
     {
-		private readonly ITinhBLLService _tinhBLLService = new TinhBLLService(
-            new TinhDALService(new SqlConnection(ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString)),
-            new HuyenDALService(new SqlConnection(ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString)));
+		private readonly ITinhBLLService _tinhBLLService 
+            = new TinhBLLService(
+                new TinhDALService(
+                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString, 
+                    new DapperWrapper()),
+                new HuyenDALService(
+                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString, 
+                    new DapperWrapper()));
 
 		private IThemSuaTinhRequester themSuaTinhRequester;
         private Tinh tinh;

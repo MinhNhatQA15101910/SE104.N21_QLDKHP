@@ -6,7 +6,6 @@ using DTO;
 using PL.Interfaces;
 using System;
 using System.Configuration;
-using System.Data.SqlClient;
 using System.Windows.Forms;
 
 namespace PL
@@ -15,8 +14,12 @@ namespace PL
     {
         #region Register Services
         private readonly ILoaiMonHocBLLService _loaiMonHocBLLService = new LoaiMonHocBLLService(
-            new LoaiMonHocDALService(new SqlConnection(ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString)),
-            new MonHocDALService(new SqlConnection(ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString)));
+            new LoaiMonHocDALService(
+                ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString,
+                new DapperWrapper()),
+            new MonHocDALService(
+                ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString, 
+                new DapperWrapper()));
         #endregion
 
         private IThemSuaLoaiMonHocRequester themSuaLoaiMonHocRequester;

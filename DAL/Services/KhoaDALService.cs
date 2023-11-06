@@ -48,9 +48,9 @@ namespace DAL.Services
                 var p = new DynamicParameters();
                 p.Add("@MaKhoa", maKhoa);
                 p.Add("@TenKhoa", tenKhoa);
-                _dapperWrapper.Execute(connection, "spKHOA_ThemKhoa", p, commandType: CommandType.StoredProcedure);
+                int result = _dapperWrapper.Execute(connection, "spKHOA_ThemKhoa", p, commandType: CommandType.StoredProcedure);
 
-                return ThemKhoaMessage.Success;
+                return (result > 0) ? ThemKhoaMessage.Success : ThemKhoaMessage.Failed;
             }
         }
 
@@ -60,9 +60,9 @@ namespace DAL.Services
             {
                 var p = new DynamicParameters();
                 p.Add("@MaKhoa", maKhoa);
-                _dapperWrapper.Execute(connection, "spKHOA_XoaKhoa", p, commandType: CommandType.StoredProcedure);
+                int result = _dapperWrapper.Execute(connection, "spKHOA_XoaKhoa", p, commandType: CommandType.StoredProcedure);
 
-                return XoaKhoaMessage.Success;
+                return (result > 0) ? XoaKhoaMessage.Success : XoaKhoaMessage.Failed;
             }
         }
     }

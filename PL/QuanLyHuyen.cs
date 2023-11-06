@@ -7,7 +7,6 @@ using PL.Interfaces;
 using System;
 using System.ComponentModel;
 using System.Configuration;
-using System.Data.SqlClient;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -16,9 +15,14 @@ namespace PL
     public partial class QuanLyHuyen : KryptonForm, IThemSuaHuyenRequester
     {
         #region Register Services
-        private readonly IHuyenBLLService _huyenBLLService = new HuyenBLLService(
-            new HuyenDALService(new SqlConnection(ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString)),
-            new SinhVienDALService(new SqlConnection(ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString)));
+        private readonly IHuyenBLLService _huyenBLLService 
+            = new HuyenBLLService(
+                new HuyenDALService(
+                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString, 
+                    new DapperWrapper()),
+                new SinhVienDALService(
+                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString, 
+                    new DapperWrapper()));
         #endregion
 
         private ICaiDatRequester caiDatRequester;

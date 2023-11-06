@@ -174,8 +174,6 @@ namespace BLL.Tests
 
             _khoaDALServiceMock.Setup(_ => _.LayDSKhoa()).Returns(khoas);
             _nganhDALServiceMock.Setup(_ => _.LayDSNganh()).Returns(nganhs);
-            var dynamicParameters = new DynamicParameters();
-            var storedProcedure = "SuaKhoaSql";
 
             // Act
             _khoaBLLService.SuaKhoa(maKhoaBanDau, maKhoaSua, tenKhoaSua);

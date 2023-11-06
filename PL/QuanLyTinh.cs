@@ -7,7 +7,6 @@ using PL.Interfaces;
 using System;
 using System.ComponentModel;
 using System.Configuration;
-using System.Data.SqlClient;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -15,9 +14,14 @@ namespace PL
 {
     public partial class QuanLyTinh : KryptonForm, IThemSuaTinhRequester
     {
-		private readonly ITinhBLLService _tinhBLLService = new TinhBLLService(
-            new TinhDALService(new SqlConnection(ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString)),
-            new HuyenDALService(new SqlConnection(ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString)));
+		private readonly ITinhBLLService _tinhBLLService 
+            = new TinhBLLService(
+                new TinhDALService(
+                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString, 
+                    new DapperWrapper()),
+                new HuyenDALService(
+                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString, 
+                    new DapperWrapper()));
 
 		private ICaiDatRequester caiDatRequester;
         private BindingList<Tinh> mTinh;

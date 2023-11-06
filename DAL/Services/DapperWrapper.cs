@@ -38,5 +38,10 @@ namespace DAL.Services
         {
             return dbConnection.QueryFirstOrDefault<T>(sql, p, commandType: commandType);
         }
+
+        public T QuerySingleOrDefault<T>(IDbConnection dbConnection, string sql, DynamicParameters p, CommandType commandType)
+        {
+            return dbConnection.QuerySingleOrDefault<T>(sql, p, commandType: commandType);
+        }
     }
 }

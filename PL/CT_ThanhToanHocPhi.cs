@@ -5,7 +5,6 @@ using DAL.Services;
 using DTO;
 using System;
 using System.Configuration;
-using System.Data.SqlClient;
 using System.Globalization;
 using System.Windows.Forms;
 
@@ -13,7 +12,11 @@ namespace PL
 {
     public partial class CT_ThanhToanHocPhi : KryptonForm
     {
-        private readonly IPhieuThuHPBLLService _phieuThuHPBLLService = new PhieuThuHPBLLService(new PhieuThuHPDALService(new SqlConnection(ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString)));
+        private readonly IPhieuThuHPBLLService _phieuThuHPBLLService 
+            = new PhieuThuHPBLLService(
+                new PhieuThuHPDALService(
+                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString,
+                    new DapperWrapper()));
 
         private int maPhieuDKHP;
 
