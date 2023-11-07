@@ -57,7 +57,6 @@
     <Compile Include="IServices\IMonHocBLLService.cs" />
     <Compile Include="IServices\IMonHocMoBLLService.cs" />
     <Compile Include="IServices\INganhBLLService.cs" />
-    <Compile Include="IServices\ISinhVien_DoiTuongBLLService.cs" />
     <Compile Include="Services\ChuongTrinhHocBLLService.cs" />
     <Compile Include="Services\CT_DKHPBLLService.cs" />
     <Compile Include="Services\DanhSachMonHocMoBLLService.cs" />
@@ -82,7 +81,6 @@
     <Compile Include="Services\PhieuDKHPBLLService.cs" />
     <Compile Include="Services\PhieuThuHPBLLService.cs" />
     <Compile Include="Services\SinhVienBLLService.cs" />
-    <Compile Include="Services\SinhVien_DoiTuongBLLService.cs" />
     <Compile Include="Services\TinhBLLService.cs" />
   </ItemGroup>
   <ItemGroup>

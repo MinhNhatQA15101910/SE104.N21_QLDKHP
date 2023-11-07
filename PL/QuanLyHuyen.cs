@@ -124,6 +124,9 @@ namespace PL
                     case XoaHuyenMessage.Unable:
                         MessageBox.Show("Không thể xóa huyện vì có sinh viên đang thuộc huyện trên!");
                         break;
+                    case XoaHuyenMessage.Failed:
+                        MessageBox.Show("Xóa huyện thất bại!");
+                        break;
                     case XoaHuyenMessage.Success:
                         mHuyen.Remove(huyen);
                         MessageBox.Show("Xóa huyện thành công!");

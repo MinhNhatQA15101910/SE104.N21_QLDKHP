@@ -38,7 +38,6 @@
             var result = _khoaBLLService.SuaKhoa(maKhoaBanDau, maKhoaSua, tenKhoaSua);
 
             // Assert
-            Assert.IsType<SuaKhoaMessage>(result);
             Assert.Equal(SuaKhoaMessage.EmptyMaKhoa, result);
         }
 
@@ -49,7 +48,6 @@
             var result = _khoaBLLService.SuaKhoa(maKhoaBanDau, maKhoaSua, tenKhoaSua);
 
             // Assert
-            Assert.IsType<SuaKhoaMessage>(result);
             Assert.Equal(SuaKhoaMessage.EmptyTenKhoa, result);
         }
 
@@ -77,7 +75,6 @@
             var result = _khoaBLLService.SuaKhoa(maKhoaBanDau, maKhoaSua, tenKhoaSua);
 
             // Assert
-            Assert.IsType<SuaKhoaMessage>(result);
             Assert.Equal(SuaKhoaMessage.DuplicateMaKhoa, result);
         }
 
@@ -105,7 +102,6 @@
             var result = _khoaBLLService.SuaKhoa(maKhoaBanDau, maKhoaSua, tenKhoaSua);
 
             // Assert
-            Assert.IsType<SuaKhoaMessage>(result);
             Assert.Equal(SuaKhoaMessage.DuplicateTenKhoa, result);
         }
 
@@ -145,12 +141,11 @@
             var result = _khoaBLLService.SuaKhoa(maKhoaBanDau, maKhoaSua, tenKhoaSua);
 
             // Assert
-            Assert.IsType<SuaKhoaMessage>(result);
             Assert.Equal(SuaKhoaMessage.Unable, result);
         }
 
         [Theory, InlineData("CNPM", "CNPM1", "Công nghệ phần mềm 1")]
-        public void SuaKhoa_WithValidInputs_ReturnsSuccessfulMessage(string maKhoaBanDau, string maKhoaSua, string tenKhoaSua)
+        public void SuaKhoa_WithValidInputs_VerifyExecuteDAL(string maKhoaBanDau, string maKhoaSua, string tenKhoaSua)
         {
             // Arrange
             var khoas = new List<Khoa>
@@ -197,7 +192,6 @@
             var result = _khoaBLLService.ThemKhoa(maKhoa, tenKhoa);
 
             // Assert
-            Assert.IsType<ThemKhoaMessage>(result);
             Assert.Equal(ThemKhoaMessage.EmptyMaKhoa, result);
         }
 
@@ -208,7 +202,6 @@
             var result = _khoaBLLService.ThemKhoa(maKhoa, tenKhoa);
 
             // Assert
-            Assert.IsType<ThemKhoaMessage>(result);
             Assert.Equal(ThemKhoaMessage.EmptyTenKhoa, result);
         }
 
@@ -236,7 +229,6 @@
             var result = _khoaBLLService.ThemKhoa(maKhoa, tenKhoa);
 
             // Assert
-            Assert.IsType<ThemKhoaMessage>(result);
             Assert.Equal(ThemKhoaMessage.DuplicateMaKhoa, result);
         }
 
@@ -264,12 +256,11 @@
             var result = _khoaBLLService.ThemKhoa(maKhoa, tenKhoa);
 
             // Assert
-            Assert.IsType<ThemKhoaMessage>(result);
             Assert.Equal(ThemKhoaMessage.DuplicateTenKhoa, result);
         }
 
         [Theory, InlineData("CNPM1", "Công nghệ phần mềm 1")]
-        public void ThemKhoa_WithValidInputs_ReturnsSuccessfulMessage(string maKhoa, string tenKhoa)
+        public void ThemKhoa_WithValidInputs_VerifyExecuteDAL(string maKhoa, string tenKhoa)
         {
             // Arrange
             var khoas = new List<Khoa>
@@ -318,7 +309,6 @@
             var result = _khoaBLLService.XoaKhoa(maKhoa);
 
             // Assert
-            Assert.IsType<XoaKhoaMessage>(result);
             Assert.Equal(XoaKhoaMessage.Unable, result);
         }
 

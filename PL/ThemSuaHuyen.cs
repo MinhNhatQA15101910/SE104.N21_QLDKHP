@@ -155,6 +155,9 @@ namespace PL
                     case ThemHuyenMessage.DuplicateTenHuyen:
                         MessageBox.Show("Tên huyện đã tồn tại, vui lòng nhập giá trị khác!");
                         break;
+                    case ThemHuyenMessage.Failed:
+                        MessageBox.Show("Thêm huyện thất bại!");
+                        break;
                     case ThemHuyenMessage.Success:
                         if (themSuaHuyenRequester != null)
                         {

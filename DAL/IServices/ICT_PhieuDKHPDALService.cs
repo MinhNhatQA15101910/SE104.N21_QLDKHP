@@ -1,4 +1,5 @@
 ﻿using DTO;
+using System.Collections.Generic;
 
 namespace DAL.IServices
 {
@@ -6,5 +7,6 @@ namespace DAL.IServices
     {
         void TaoCT_PhieuDKHP(CT_PhieuDKHP ct_PhieuDKHP);
         void XoaDSMHDKHP(int maPhieu);
+        List<CT_PhieuDKHP> GetCT_PhieuDKHPs();
     }
 }

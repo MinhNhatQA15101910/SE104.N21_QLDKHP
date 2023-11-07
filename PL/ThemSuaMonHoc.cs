@@ -14,12 +14,18 @@ namespace PL
     public partial class ThemSuaMonHoc : KryptonForm, IThemSuaLoaiMonHocRequester
     {
         #region Register Services
-        private readonly IMonHocBLLService _monHocBLLService 
+        private readonly IMonHocBLLService _monHocBLLService
             = new MonHocBLLService(
                 new MonHocDALService(
-                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString, 
+                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString,
                     new DapperWrapper()),
                 new DanhSachMonHocMoDALService(
+                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString,
+                    new DapperWrapper()),
+                new CT_PhieuDKHPDALService(
+                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString,
+                    new DapperWrapper()),
+                new ChuongTrinhHocDALService(
                     ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString,
                     new DapperWrapper()));
 

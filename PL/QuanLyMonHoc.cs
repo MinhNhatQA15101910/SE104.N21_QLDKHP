@@ -16,15 +16,21 @@ namespace PL
 {
     public partial class QuanLyMonHoc : KryptonForm, IThemSuaMonHocRequester
     {
-        private readonly IMonHocBLLService _monHocBLLService 
+        private readonly IMonHocBLLService _monHocBLLService
             = new MonHocBLLService(
                 new MonHocDALService(
-                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString, 
+                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString,
                     new DapperWrapper()),
                 new DanhSachMonHocMoDALService(
-                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString, 
+                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString,
+                    new DapperWrapper()),
+                new CT_PhieuDKHPDALService(
+                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString,
+                    new DapperWrapper()),
+                new ChuongTrinhHocDALService(
+                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString,
                     new DapperWrapper()));
-        
+
         private IMonHocRequester monHocRequester;
         private BindingList<CT_MonHoc> mMonHoc;
         private BindingSource mMonHocSource;
@@ -142,6 +148,18 @@ namespace PL
                 XoaMonHocMessage message = _monHocBLLService.XoaMonHoc(maMH);
                 switch (message)
                 {
+                    case XoaMonHocMessage.UnableForChuongTrinhHoc:
+                        MessageBox.Show("Không thể xóa môn học vì có chương trình học chứa môn học này!");
+                        break;
+                    case XoaMonHocMessage.UnableForCT_PhieuDKHP:
+                        MessageBox.Show("Không thể xóa môn học vì có phiếu DKHP chứa môn học này!");
+                        break;
+                    case XoaMonHocMessage.UnableForDanhSachMonHocMo:
+                        MessageBox.Show("Không thể xóa môn học vì có danh sách môn học mở chứa môn học này!");
+                        break;
+                    case XoaMonHocMessage.Failed:
+                        MessageBox.Show("Xóa môn học thất bại!");
+                        break;
                     case XoaMonHocMessage.Success:
                         mMonHoc.Remove(monHoc);
                         MessageBox.Show("Xóa môn học thành công!");

@@ -251,7 +251,9 @@
     public enum XoaMonHocMessage
     {
         None,
-        Unable,
+        UnableForDanhSachMonHocMo,
+        UnableForCT_PhieuDKHP,
+        UnableForChuongTrinhHoc,
         Failed,
         Success
     }

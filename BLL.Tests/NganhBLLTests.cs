@@ -22,7 +22,7 @@
 
         #region LayDSNganh
         [Fact]
-        public void LayDSNganh_ReturnsCTNganhList()
+        public void LayDSNganh_VerifyExecuteDAL()
         {
             // Act
             _nganhBLLService.LayDSNganh();
@@ -40,7 +40,6 @@
             var result = _nganhBLLService.SuaNganh(maNganhBanDau, maNganhSua, tenNganhSua, maKhoaSua);
 
             // Assert
-            Assert.IsType<SuaNganhMessage>(result);
             Assert.Equal(SuaNganhMessage.EmptyMaNganh, result);
         }
 
@@ -51,7 +50,6 @@
             var result = _nganhBLLService.SuaNganh(maNganhBanDau, maNganhSua, tenNganhSua, maKhoaSua);
 
             // Assert
-            Assert.IsType<SuaNganhMessage>(result);
             Assert.Equal(SuaNganhMessage.EmptyTenNganh, result);
         }
 
@@ -75,7 +73,6 @@
             var result = _nganhBLLService.SuaNganh(maNganhBanDau, maNganhSua, tenNganhSua, maKhoaSua);
 
             // Assert
-            Assert.IsType<SuaNganhMessage>(result);
             Assert.Equal(SuaNganhMessage.DuplicateMaNganh, result);
         }
 
@@ -99,7 +96,6 @@
             var result = _nganhBLLService.SuaNganh(maNganhBanDau, maNganhSua, tenNganhSua, maKhoaSua);
 
             // Assert
-            Assert.IsType<SuaNganhMessage>(result);
             Assert.Equal(SuaNganhMessage.DuplicateTenNganh, result);
         }
 
@@ -152,7 +148,6 @@
             var result = _nganhBLLService.SuaNganh(maNganhBanDau, maNganhSua, tenNganhSua, maKhoaSua);
 
             // Assert
-            Assert.IsType<SuaNganhMessage>(result);
             Assert.Equal(SuaNganhMessage.UnableForSinhVien, result);
         }
 
@@ -216,12 +211,11 @@
             var result = _nganhBLLService.SuaNganh(maNganhBanDau, maNganhSua, tenNganhSua, maKhoaSua);
 
             // Assert
-            Assert.IsType<SuaNganhMessage>(result);
             Assert.Equal(SuaNganhMessage.UnableForChuongTrinhHoc, result);
         }
 
         [Theory, InlineData("KTPM", "KTPM1", "Kỹ thuật phần mềm 1", "CNPM")]
-        public void SuaNganh_WithValidInputs_ReturnsSuccessfulMessage(string maNganhBanDau, string maNganhSua, string tenNganhSua, string maKhoaSua)
+        public void SuaNganh_WithValidInputs_VerifyExecuteDAL(string maNganhBanDau, string maNganhSua, string tenNganhSua, string maKhoaSua)
         {
             // Arrange
             var sinhViens = new List<CT_SinhVien>
@@ -299,7 +293,6 @@
             var result = _nganhBLLService.ThemNganh(maNganh, tenNganh, maKhoa);
 
             // Assert
-            Assert.IsType<ThemNganhMessage>(result);
             Assert.Equal(ThemNganhMessage.EmptyMaNganh, result);
         }
 
@@ -310,7 +303,6 @@
             var result = _nganhBLLService.ThemNganh(maNganh, tenNganh, maKhoa);
 
             // Assert
-            Assert.IsType<ThemNganhMessage>(result);
             Assert.Equal(ThemNganhMessage.EmptyTenNganh, result);
         }
 
@@ -335,7 +327,6 @@
             var result = _nganhBLLService.ThemNganh(maNganh, tenNganh, maKhoa);
 
             // Assert
-            Assert.IsType<ThemNganhMessage>(result);
             Assert.Equal(ThemNganhMessage.DuplicateMaNganh, result);
         }
 
@@ -360,12 +351,11 @@
             var result = _nganhBLLService.ThemNganh(maNganh, tenNganh, maKhoa);
 
             // Assert
-            Assert.IsType<ThemNganhMessage>(result);
             Assert.Equal(ThemNganhMessage.DuplicateTenNganh, result);
         }
 
         [Theory, InlineData("KTPM1", "Kỹ Thuật Phần Mềm 1", "CNPM")]
-        public void ThemNganh_WithValidInputs_ReturnSuccessfulMessage(string maNganh, string tenNganh, string maKhoa)
+        public void ThemNganh_WithValidInputs_VerifyExecuteDAL(string maNganh, string tenNganh, string maKhoa)
         {
             // Arrange
             var nganhs = new List<CT_Nganh>
@@ -420,7 +410,6 @@
             var result = _nganhBLLService.XoaNganh(maNganh);
 
             // Assert
-            Assert.IsType<XoaNganhMessage>(result);
             Assert.Equal(XoaNganhMessage.UnableForSinhVien, result);
         }
 
@@ -465,7 +454,6 @@
             var result = _nganhBLLService.XoaNganh(maNganh);
 
             // Assert
-            Assert.IsType<XoaNganhMessage>(result);
             Assert.Equal(XoaNganhMessage.UnableForChuongTrinhHoc, result);
         }
 

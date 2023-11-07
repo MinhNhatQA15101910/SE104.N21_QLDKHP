@@ -15,13 +15,19 @@ namespace PL
     public partial class XacNhanDKHP : KryptonForm
     {
         #region Register Services
-        private readonly IMonHocBLLService _monHocBLLService 
+        private readonly IMonHocBLLService _monHocBLLService
             = new MonHocBLLService(
                 new MonHocDALService(
-                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString, 
+                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString,
                     new DapperWrapper()),
                 new DanhSachMonHocMoDALService(
-                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString, 
+                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString,
+                    new DapperWrapper()),
+                new CT_PhieuDKHPDALService(
+                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString,
+                    new DapperWrapper()),
+                new ChuongTrinhHocDALService(
+                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString,
                     new DapperWrapper()));
         private readonly IPhieuDKHPBLLService _phieuDKHPBLLService 
             = new PhieuDKHPBLLService(

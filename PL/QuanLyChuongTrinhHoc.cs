@@ -46,6 +46,12 @@ namespace PL
                     new DapperWrapper()), 
                 new DanhSachMonHocMoDALService(
                     ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString, 
+                    new DapperWrapper()),
+                new CT_PhieuDKHPDALService(
+                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString,
+                    new DapperWrapper()),
+                new ChuongTrinhHocDALService(
+                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString,
                     new DapperWrapper()));
 
         BindingList<Khoa> mKhoa;

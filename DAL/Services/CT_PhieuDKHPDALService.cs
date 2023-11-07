@@ -1,8 +1,10 @@
 ﻿using DAL.IServices;
 using Dapper;
 using DTO;
+using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.Linq;
 
 namespace DAL.Services
 {
@@ -15,6 +17,14 @@ namespace DAL.Services
         {
             _connectionString = connectionString;
             _dapperWrapper = dapperWrapper;
+        }
+
+        public List<CT_PhieuDKHP> GetCT_PhieuDKHPs()
+        {
+            using (var connection = new SqlConnection(_connectionString))
+            {
+                return _dapperWrapper.Query<CT_PhieuDKHP>(connection, "spCT_PHIEUDKHP_GetCT_PhieuDKHPs").ToList();
+            }
         }
 
         public void TaoCT_PhieuDKHP(CT_PhieuDKHP ct_PhieuDKHP)

@@ -9,11 +9,15 @@ namespace BLL.Services
     {
         private readonly IMonHocDALService _monHocDALService;
         private readonly IDanhSachMonHocMoDALService _danhSachMonHocMoDALService;
+        private readonly ICT_PhieuDKHPDALService _ct_PhieuDKHPDALService;
+        private readonly IChuongTrinhHocDALService _chuongTrinhHocDALService;
 
-        public MonHocBLLService(IMonHocDALService monHocDALService, IDanhSachMonHocMoDALService danhSachMonHocMoDALService)
+        public MonHocBLLService(IMonHocDALService monHocDALService, IDanhSachMonHocMoDALService danhSachMonHocMoDALService, ICT_PhieuDKHPDALService ct_PhieuDKHPDALService, IChuongTrinhHocDALService chuongTrinhHocDALService)
         {
             _monHocDALService = monHocDALService;
             _danhSachMonHocMoDALService = danhSachMonHocMoDALService;
+            _ct_PhieuDKHPDALService = ct_PhieuDKHPDALService;
+            _chuongTrinhHocDALService = chuongTrinhHocDALService;
         }
 
         public List<CT_MonHoc> LayDSMonHoc()
@@ -23,6 +27,27 @@ namespace BLL.Services
 
         public XoaMonHocMessage XoaMonHoc(string maMH)
         {
+            var danhSachMonHocMos = _danhSachMonHocMoDALService.LayDSMonHocMo();
+            var danhSachMonHocMo = danhSachMonHocMos.Find(dsmhm => dsmhm == maMH);
+            if (danhSachMonHocMo != null)
+            {
+                return XoaMonHocMessage.UnableForDanhSachMonHocMo;
+            }
+
+            var ct_PhieuDKHPs = _ct_PhieuDKHPDALService.GetCT_PhieuDKHPs();
+            var ct_PhieuDKHP = ct_PhieuDKHPs.Find(ct_pdkhp => ct_pdkhp.MaMH == maMH);
+            if (ct_PhieuDKHP != null)
+            {
+                return XoaMonHocMessage.UnableForCT_PhieuDKHP;
+            }
+
+            var chuongTrinhHocs = _chuongTrinhHocDALService.GetAllCTHoc();
+            var chuongTrinhHoc = chuongTrinhHocs.Find(cth => cth.MaMH == maMH);
+            if (chuongTrinhHoc != null)
+            {
+                return XoaMonHocMessage.UnableForChuongTrinhHoc;
+            }
+
             return _monHocDALService.XoaMonHoc(maMH);
         }
 
