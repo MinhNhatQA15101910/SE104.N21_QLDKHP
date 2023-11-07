@@ -96,28 +96,22 @@ namespace BLL.Services
 
         public ThemMonHocMessage ThemMonHoc(string maMH, string tenMH, int maLoaiMonHoc, string soTiet, int soTietLoaiMon)
         {
-            if (maMH.Equals(""))
+            if (string.IsNullOrEmpty(maMH))
             {
                 return ThemMonHocMessage.EmptyMaMH;
             }
 
-            if (tenMH.Equals(""))
+            if (string.IsNullOrEmpty(tenMH))
             {
                 return ThemMonHocMessage.EmptyTenMH;
             }
 
-            if (soTiet.Equals(""))
+            if (string.IsNullOrEmpty(soTiet))
             {
                 return ThemMonHocMessage.EmptySoTiet;
             }
 
-            int soTietValue;
-            if (!int.TryParse(soTiet, out soTietValue))
-            {
-                return ThemMonHocMessage.InvalidSoTiet;
-            }
-
-            if (soTietValue % soTietLoaiMon != 0)
+            if (!int.TryParse(soTiet, out int soTietValue) || soTietValue < 0 || soTietValue % soTietLoaiMon != 0)
             {
                 return ThemMonHocMessage.InvalidSoTiet;
             }
