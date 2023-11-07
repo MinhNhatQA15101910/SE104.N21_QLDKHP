@@ -13,6 +13,7 @@ namespace BLL.Services
 		{
 			_sinhVienDALService = sinhVienDALService;
 		}
+
 		public List<SinhVien> LayDSSVChuaCoTK()
 		{
 			return _sinhVienDALService.LayDSSVChuaCoTK();
