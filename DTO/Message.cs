@@ -261,12 +261,14 @@
     public enum SuaMonHocMessage
     {
         None,
-        Unable,
         EmptyMaMH,
         EmptyTenMH,
         EmptySoTiet,
         InvalidSoTiet,
         DuplicateMaMH,
+        UnableForDanhSachMonHocMo,
+        UnableForCT_PhieuDKHP,
+        UnableForChuongTrinhHoc,
         Failed,
         Success
     }

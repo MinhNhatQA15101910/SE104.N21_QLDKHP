@@ -138,8 +138,14 @@ namespace PL
                 SuaMonHocMessage message = _monHocBLLService.SuaMonHoc(maMHBanDau, maMH, tenMH, maLoaiMonHoc, soTiet, soTietLoaiMon);
                 switch (message)
                 {
-                    case SuaMonHocMessage.Unable:
-                        MessageBox.Show("Không thể chỉnh sửa môn học trong danh sách môn học đang mở!");
+                    case SuaMonHocMessage.UnableForDanhSachMonHocMo:
+                        MessageBox.Show("Không thể chỉnh sửa môn học vì có danh sách môn học mở chứa môn học này!");
+                        break;
+                    case SuaMonHocMessage.UnableForCT_PhieuDKHP:
+                        MessageBox.Show("Không thể chỉnh sửa môn học vì có phiếu DKHP chứa môn học này!");
+                        break;
+                    case SuaMonHocMessage.UnableForChuongTrinhHoc:
+                        MessageBox.Show("Không thể chỉnh sửa môn học vì có chương trình học chứa môn học này!");
                         break;
                     case SuaMonHocMessage.EmptyMaMH:
                         MessageBox.Show("Mã môn học không được để trống!");
