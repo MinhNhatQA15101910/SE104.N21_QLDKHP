@@ -13,9 +13,16 @@ namespace PL
 {
     public partial class ThemSuaTaiKhoan : KryptonForm
     {
-		private readonly INhomNguoiDungBLLService _nhomNguoiDungBLLService = new NhomNguoiDungBLLService(new NhomNguoiDungDALService(new DapperService(), ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString));
-
-		private readonly INguoiDungBLLService _nguoiDungBLLService = new NguoiDungBLLService(new NguoiDungDALService(new DapperService(), ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString));
+		private readonly INhomNguoiDungBLLService _nhomNguoiDungBLLService 
+            = new NhomNguoiDungBLLService(
+                new NhomNguoiDungDALService(
+                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString, 
+                    new DapperWrapper()));
+		private readonly INguoiDungBLLService _nguoiDungBLLService 
+            = new NguoiDungBLLService(
+                new NguoiDungDALService(
+                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString, 
+                    new DapperWrapper()));
 		private IThemSuaTaiKhoanRequester themSuaTaiKhoanRequester;
         private CT_NguoiDung nguoiDung;
 
@@ -108,8 +115,8 @@ namespace PL
                     case SuaTaiKhoanMessage.DuplicateTenDangNhap:
                         MessageBox.Show("Tên đăng nhập đã tồn tại, vui lòng nhập giá trị khác!");
                         break;
-                    case SuaTaiKhoanMessage.Error:
-                        MessageBox.Show("Đã có lỗi xảy ra!");
+                    case SuaTaiKhoanMessage.Failed:
+                        MessageBox.Show("Cập nhật tài khoản thất bại!");
                         break;
                     case SuaTaiKhoanMessage.Success:
                         MessageBox.Show("Cập nhật tài khoản thành công!");
@@ -131,8 +138,8 @@ namespace PL
                     case ThemTaiKhoanMessage.DuplicateTenDangNhap:
                         MessageBox.Show("Tên đăng nhập đã tồn tại, vui lòng nhập giá trị khác!");
                         break;
-                    case ThemTaiKhoanMessage.Error:
-                        MessageBox.Show("Đã có lỗi xảy ra!");
+                    case ThemTaiKhoanMessage.Failed:
+                        MessageBox.Show("Thêm tài khoản thất bại!");
                         break;
                     case ThemTaiKhoanMessage.Success:
                         if (themSuaTaiKhoanRequester != null)

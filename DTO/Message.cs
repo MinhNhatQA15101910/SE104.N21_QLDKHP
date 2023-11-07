@@ -2,192 +2,186 @@
 {
     public enum DangNhapMessage
     {
+        None,
         EmptyTenDangNhap,
         EmptyMatKhau,
-        Failed, 
-        Success, 
-        Error
+        Failed,
+        Success
     }
 
     public enum ThemTaiKhoanSVMessage
     {
-        Success, 
-        Error, 
+        None,
+        Success,
+        Failed,
         Unable
     }
 
     public enum XoaTaiKhoanMessage
     {
+        None,
         Success,
-        Error, 
+        Failed,
         Unable
     }
 
     public enum DoiMatKhauMessage
     {
+        None,
         EmptyMatKhauHT,
         EmptyMatKhauMoi, 
         EmptyMatKhauNhapLai,
-        InvalidNewPassword, 
-        Success, 
-        Failed,
-        Error
+        InvalidNewPassword,
+        Success,
+        Failed
     }
 
     public enum SuaTaiKhoanMessage
     {
+        None,
         EmptyTenDangNhap, 
         DuplicateTenDangNhap,
-        Success, 
-        Error
+        Failed,
+        Success
     }
 
     public enum ThemTaiKhoanMessage
     {
+        None,
         EmptyTenDangNhap,
         DuplicateTenDangNhap,
-        Success,
-        Error
+        Failed,
+        Success
     }
 
     public enum SuaDoiTuongMessage
     {
+        None,
         EmptyTenDoiTuong,
         EmptyTiLeGiam,
         TiLeGiamKhongHopLe,
         Unable, 
         DuplicateTenDoiTuong,
-        Success,
-        Error
+        Failed,
+        Success
     }
 
     public enum ThemDoiTuongMessage
     {
+        None,
         EmptyTenDoiTuong,
         EmptyTiLeGiam,
         TiLeGiamKhongHopLe,
         DuplicateTenDoiTuong,
-        Success,
-        Error
+        Failed,
+        Success
     }
 
     public enum XoaDoiTuongMessage
     {
-        Success, 
-        Error, 
+        None,
+        Success,
+        UnableToDeleteVungSauVungXa,
+        Failed,
         Unable
     }
 
     public enum SuaGioiHanTinChiMessage
     {
+        None,
         TinChiToiDaRong,
         TinChiToiThieuRong,
         TinChiToiDaKhongHopLe, 
         TinChiToiThieuKhongHopLe, 
-        Unable, 
-        Success, 
-        Error
+        Unable,
+        Failed,
+        Success
     }
 
     public enum XoaLoaiMonHocMessage
     {
-        Success, 
-        Error
+        None,
+        Unable,
+        Failed,
+        Success 
     }
 
     public enum SuaLoaiMonHocMessage
     {
+        None,
         EmptyTenLoaiMonHoc,
         EmptySoTiet,
         EmptySoTien,
         SoTietKhongHopLe,
         SoTienKhongHopLe,
         DuplicateTenLoaiMonHoc,
+        Failed,
         Success,
-        Error
     }
 
     public enum ThemLoaiMonHocMessage
     {
+        None,
         EmptyTenLoaiMonHoc,
         EmptySoTiet,
         EmptySoTien,
         SoTietKhongHopLe,
         SoTienKhongHopLe,
         DuplicateTenLoaiMonHoc,
+        Failed,
         Success,
-        Error
     }
 
     public enum SuaTinhMessage
     {
+        None,
         EmptyTenTinh,
         DuplicateTenTinh,
+        Failed,
         Success,
-        Error
     }
 
     public enum ThemTinhMessage
     {
+        None,
         EmptyTenTinh,
         DuplicateTenTinh,
+        Failed,
         Success,
-        Error
     }
 
     public enum XoaTinhMessage
     {
-        Success, 
-        Error
+        None,
+        Unable,
+        Failed,
+        Success
     }
 
     public enum SuaHuyenMessage
     {
+        None,
         EmptyTenHuyen,
         DuplicateTenHuyen,
-        Success,
-        Error
+        Failed,
+        Success
     }
 
     public enum ThemHuyenMessage
     {
+        None,
         EmptyTenHuyen,
         DuplicateTenHuyen,
-        Success,
-        Error
+        Failed,
+        Success
     }
 
     public enum XoaHuyenMessage
     {
-        Success, 
-        Error
-    }
-
-    public enum XoaNganhMessage
-    {
-        Success,
-        Error
-    }
-
-    public enum SuaKhoaMessage
-    {
         None,
-        EmptyMaKhoa,
-        EmptyTenKhoa,
-        DuplicateMaKhoa,
-        DuplicateTenKhoa,
-        Success,
-        Error
-    }
-
-    public enum ThemKhoaMessage
-    {
-        EmptyMaKhoa,
-        EmptyTenKhoa,
-        DuplicateMaKhoa,
-        DuplicateTenKhoa,
-        Success,
-        Error
+        Unable,
+        Failed,
+        Success
     }
 
     public enum SuaNganhMessage
@@ -197,81 +191,130 @@
         EmptyTenNganh,
         DuplicateMaNganh,
         DuplicateTenNganh,
-        Success,
-        Error
+        UnableForSinhVien,
+        UnableForChuongTrinhHoc,
+        Failed,
+        Success
     }
 
     public enum ThemNganhMessage
     {
+        None,
         EmptyMaNganh,
         EmptyTenNganh,
         DuplicateMaNganh,
         DuplicateTenNganh,
+        Failed,
+        Success
+    }
+
+    public enum XoaNganhMessage
+    {
+        None,
+        UnableForSinhVien,
+        UnableForChuongTrinhHoc,
+        Failed,
+        Success
+    }
+
+    public enum SuaKhoaMessage
+    {
+        None,
+        EmptyMaKhoa,
+        EmptyTenKhoa,
+        DuplicateMaKhoa,
+        DuplicateTenKhoa,
+        Unable,
         Success,
-        Error
+        Failed
+    }
+
+    public enum ThemKhoaMessage
+    {
+        None,
+        EmptyMaKhoa,
+        EmptyTenKhoa,
+        DuplicateMaKhoa,
+        DuplicateTenKhoa,
+        Success,
+        Failed
     }
 
     public enum XoaKhoaMessage
     {
+        None,
+        Unable,
         Success,
-        Error
+        Failed
     }
 
     public enum XoaMonHocMessage
     {
-        Success,
-        Error
+        None,
+        UnableForDanhSachMonHocMo,
+        UnableForCT_PhieuDKHP,
+        UnableForChuongTrinhHoc,
+        Failed,
+        Success
     }
 
     public enum SuaMonHocMessage
     {
-        Unable,
+        None,
         EmptyMaMH,
         EmptyTenMH,
         EmptySoTiet,
         InvalidSoTiet,
         DuplicateMaMH,
-        Success,
-        Error
+        UnableForDanhSachMonHocMo,
+        UnableForCT_PhieuDKHP,
+        UnableForChuongTrinhHoc,
+        Failed,
+        Success
     }
 
     public enum ThemMonHocMessage
     {
+        None,
         EmptyMaMH,
         EmptyTenMH,
         EmptySoTiet,
         InvalidSoTiet,
         DuplicateMaMH,
-        Success,
-        Error
+        Failed,
+        Success
     }
 
     public enum SuaSinhVienMessage
     {
+        None,
         EmptyMaSV,
         EmptyTenSV,
         DuplicateMaSV,
-        Success,
-        Error
+        Failed,
+        Success
     }
 
     public enum ThemSinhVienMessage
     {
+        None,
         EmptyMaSV,
         EmptyTenSV,
         DuplicateMaSV,
-        Success,
-        Error
+        Failed,
+        Success
     }
 
     public enum XoaSinhVienMessage
     {
-        Success,
-        Error
+        None,
+        Failed,
+        Success
     }
 
     public enum TimKiemPhieuDKHPMessage
     {
+        None,
         EmptyNamHoc,
         InvalidNamHoc,
         Sucess
@@ -279,6 +322,7 @@
 
     public enum TimKiemTTHocPhiMessage
     {
+        None,
         EmptyNamHoc,
         InvalidNamHoc,
         Sucess
@@ -286,52 +330,56 @@
 
     public enum MessageKhoangTGDongHP
     {
+        None,
         Success,
-        Failed
+        Failed,
     }
 
     public enum MessageAddMonHocMo
     {
+        None,
         Success,
-        Failed,
-        ErrorData
+        Failed
     }
 
     public enum MessageDeleteHocKyNamHocMHM
     {
+        None,
         Success,
         Failed
     }
 
     public enum MessageDeleteListCTHoc
     {
+        None,
         Success,
-        Failed,
-        ErrorData
+        Failed
     }
 
     public enum MessageAddCTHoc
     {
+        None,
         Success,
-        Failed,
-        ErrorData
+        Failed
     }
 
     public enum MessageDeleteCTHoc
     {
+        None,
         Success,
-        Failed,
-        ErrorData
+        Failed
     }
 
     public enum MessagePhieuDKHPUpdateTinhTrang
     {
+        None,
         Success,
         Failed
     }
 
     public enum MessagePhieuThuHPUpdateTinhTrang
     {
+        None,
         Success,
         Failed
     }

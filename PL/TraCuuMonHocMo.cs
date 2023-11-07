@@ -15,8 +15,25 @@ namespace PL
     public partial class TraCuuMonHocMo : KryptonForm
     {
         #region Register Services
-        private readonly IMonHocBLLService _monHocBLLService = new MonHocBLLService(new MonHocDALService(new DapperService(), ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString));
-        private readonly IMonHocMoBLLService _monHocMoBLLService = new MonHocMoBLLService(new MonHocMoDALService(new DapperService(), ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString));
+        private readonly IMonHocBLLService _monHocBLLService
+            = new MonHocBLLService(
+                new MonHocDALService(
+                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString,
+                    new DapperWrapper()),
+                new DanhSachMonHocMoDALService(
+                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString,
+                    new DapperWrapper()),
+                new CT_PhieuDKHPDALService(
+                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString,
+                    new DapperWrapper()),
+                new ChuongTrinhHocDALService(
+                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString,
+                    new DapperWrapper()));
+        private readonly IMonHocMoBLLService _monHocMoBLLService 
+            = new MonHocMoBLLService(
+                new MonHocMoDALService(
+                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString, 
+                    new DapperWrapper()));
         #endregion
 
         private ITraCuuMonHocMoRequester traCuuMonHocMoRequester;
@@ -169,15 +186,15 @@ namespace PL
                     {
                         hk = 3;
                     }
-                    int nh = Int32.Parse(selectedRow.Cells[1].Value.ToString());
+                    int nh = int.Parse(selectedRow.Cells[1].Value.ToString());
                     MessageDeleteHocKyNamHocMHM message = _monHocMoBLLService.DeleteHocKyNamHocMHM(hk, nh);
                     switch (message)
                     {
                         case MessageDeleteHocKyNamHocMHM.Failed:
-                            MessageBox.Show("Failed to Delete data.");
+                            MessageBox.Show("Xóa danh sách môn học mở thất bại!");
                             break;
                         case MessageDeleteHocKyNamHocMHM.Success:
-                            MessageBox.Show("Xóa danh sách môn học mở thành công.");
+                            MessageBox.Show("Xóa danh sách môn học mở thành công!");
                             break;
                     }
                     SetUpHocKyNamHocMHM();

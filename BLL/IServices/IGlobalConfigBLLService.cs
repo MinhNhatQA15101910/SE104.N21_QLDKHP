@@ -10,6 +10,6 @@ namespace BLL.IServices
         int LaySoTinChiToiThieu();
         SuaGioiHanTinChiMessage SuaGioiHanTinChi(string tinChiToiDa, string tinChiToiThieu);
         int LayKhoangTGDongHP(int hocKy, int namHoc);
-        MessageKhoangTGDongHP KhoangTGDongHP(int MaHocKy, int NamHoc, int KhoangTG);
+        MessageKhoangTGDongHP KhoangTGDongHP(int maHocKy, int namHoc, int khoangTG);
     }
 }

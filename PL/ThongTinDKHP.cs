@@ -14,8 +14,16 @@ namespace PL
     public partial class ThongTinDKHP : KryptonForm
     {
 
-        private readonly IHocKyBLLService _hocKyBLLService = new HocKyBLLService(new HocKyDALService(new DapperService(), ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString));
-        private readonly IPhieuDKHPBLLService _phieuDKHPBLLService = new PhieuDKHPBLLService(new PhieuDKHPDALService(new DapperService(), ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString));
+        private readonly IHocKyBLLService _hocKyBLLService 
+            = new HocKyBLLService(
+                new HocKyDALService(
+                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString, 
+                    new DapperWrapper()));
+        private readonly IPhieuDKHPBLLService _phieuDKHPBLLService 
+            = new PhieuDKHPBLLService(
+                new PhieuDKHPDALService(
+                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString, 
+                    new DapperWrapper()));
 
         public ThongTinDKHP()
         {

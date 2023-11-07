@@ -13,6 +13,7 @@ namespace BLL.Services
 		{
 			_sinhVienDALService = sinhVienDALService;
 		}
+
 		public List<SinhVien> LayDSSVChuaCoTK()
 		{
 			return _sinhVienDALService.LayDSSVChuaCoTK();
@@ -25,29 +26,43 @@ namespace BLL.Services
 
 		public SuaSinhVienMessage SuaSinhVien(string mssvBanDau, string mssv, string hoTen, DateTime ngaySinh, string gioiTinh, int maHuyen, string maNganh, List<int> maDTList)
 		{
-			if (mssv.Equals(""))
+			if (string.IsNullOrEmpty(mssv))
 			{
 				return SuaSinhVienMessage.EmptyMaSV;
 			}
 
-			if (hoTen.Equals(""))
+			if (string.IsNullOrEmpty(hoTen))
 			{
 				return SuaSinhVienMessage.EmptyTenSV;
 			}
 
-			return _sinhVienDALService.SuaSinhVien(mssvBanDau, mssv, hoTen, ngaySinh, gioiTinh, maHuyen, maNganh, maDTList);
+            var sinhViens = _sinhVienDALService.LayDSSV();
+            var sinhVien = sinhViens.Find(sv => sv.MaSV == mssv && sv.MaSV != mssvBanDau);
+            if (sinhVien != null)
+            {
+                return SuaSinhVienMessage.DuplicateMaSV;
+            }
+
+            return _sinhVienDALService.SuaSinhVien(mssvBanDau, mssv, hoTen, ngaySinh, gioiTinh, maHuyen, maNganh, maDTList);
 		}
 
 		public ThemSinhVienMessage ThemSinhVien(string mssv, string hoTen, DateTime ngaySinh, string gioiTinh, int maHuyen, string maNganh, List<int> maDTList)
 		{
-			if (mssv.Equals(""))
+			if (string.IsNullOrEmpty(mssv))
 			{
 				return ThemSinhVienMessage.EmptyMaSV;
 			}
 
-			if (hoTen.Equals(""))
+			if (string.IsNullOrEmpty(hoTen))
 			{
 				return ThemSinhVienMessage.EmptyTenSV;
+			}
+
+			var sinhViens = _sinhVienDALService.LayDSSV();
+			var sinhVien = sinhViens.Find(sv => sv.MaSV == mssv);
+			if (sinhVien != null)
+			{
+				return ThemSinhVienMessage.DuplicateMaSV;
 			}
 
 			return _sinhVienDALService.ThemSinhVien(mssv, hoTen, ngaySinh, gioiTinh, maHuyen, maNganh, maDTList);

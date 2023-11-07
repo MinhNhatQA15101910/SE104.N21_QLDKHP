@@ -9,6 +9,6 @@ namespace DAL.IServices
         XoaNganhMessage XoaNganh(string maNganh);
         SuaNganhMessage SuaNganh(string maNganhBanDau, string maNganhSua, string tenNganhSua, string maKhoaSua);
         ThemNganhMessage ThemNganh(string maNganh, string tenNganh, string maKhoa);
-        List<Nganh> GetNganh(string MaKhoa);
+        List<Nganh> GetNganh(string maKhoa);
     }
 }

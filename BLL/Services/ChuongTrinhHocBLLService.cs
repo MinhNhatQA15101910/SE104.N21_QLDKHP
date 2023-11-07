@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace BLL.Services
 {
-    public class ChuongTrinhHocBLLService: IChuongTrinhHocBLLService
+    public class ChuongTrinhHocBLLService : IChuongTrinhHocBLLService
     {
         private readonly IChuongTrinhHocDALService _chuongTrinhHocDALService;
 
@@ -14,9 +14,9 @@ namespace BLL.Services
             _chuongTrinhHocDALService = chuongTrinhHocDALService;
         }
 
-        public MessageDeleteListCTHoc DeleteListCTHoc(string MaNganh, int HocKy)
+        public MessageDeleteListCTHoc DeleteListCTHoc(string maNganh, int hocKy)
         {
-            return _chuongTrinhHocDALService.DeleteListCTHoc(MaNganh, HocKy);
+            return _chuongTrinhHocDALService.DeleteListCTHoc(maNganh, hocKy);
         }
 
         public List<ChuongTrinhHoc> GetAllCTHoc()
@@ -24,14 +24,14 @@ namespace BLL.Services
             return _chuongTrinhHocDALService.GetAllCTHoc();
         }
 
-        public MessageAddCTHoc AddCTHoc(string MaMH, string MaNganh, int HocKy)
+        public MessageAddCTHoc AddCTHoc(ChuongTrinhHoc chuongTrinhHoc)
         {
-            return _chuongTrinhHocDALService.AddCTHoc(MaMH, MaNganh, HocKy);
+            return _chuongTrinhHocDALService.AddCTHoc(chuongTrinhHoc);
         }
 
-        public MessageDeleteCTHoc DeleteCTHoc(string MaMH, string MaNganh, int HocKy)
+        public MessageDeleteCTHoc DeleteCTHoc(string maMH, string maNganh, int hocKy)
         {
-            return _chuongTrinhHocDALService.DeleteCTHoc(MaMH, MaNganh, HocKy);
+            return _chuongTrinhHocDALService.DeleteCTHoc(maMH, maNganh, hocKy);
         }
     }
 }

@@ -13,8 +13,25 @@ namespace PL
 {
     public partial class ThemSuaNganh : KryptonForm, IThemSuaKhoaRequester
 	{
-		private readonly IKhoaBLLService _khoaBLLService = new KhoaBLLService(new KhoaDALService(new DapperService(), ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString));
-		private readonly INganhBLLService _nganhBLLService = new NganhBLLService(new NganhDALService(new DapperService(), ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString));
+        private readonly IKhoaBLLService _khoaBLLService 
+			= new KhoaBLLService(
+				new KhoaDALService(
+					ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString, 
+					new DapperWrapper()),
+				new NganhDALService(
+					ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString, 
+					new DapperWrapper()));
+        private readonly INganhBLLService _nganhBLLService 
+			= new NganhBLLService(
+				new NganhDALService(
+					ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString, 
+					new DapperWrapper()),
+				new SinhVienDALService(
+					ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString, 
+					new DapperWrapper()),
+				new ChuongTrinhHocDALService(
+					ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString, 
+					new DapperWrapper()));
 
 		private IThemSuaNganhRequester themSuaNganhRequester;
 		private CT_Nganh nganh;
@@ -123,10 +140,13 @@ namespace PL
 					case SuaNganhMessage.DuplicateTenNganh:
 						MessageBox.Show("Tên ngành đã tồn tại, vui lòng nhập giá trị khác!");
 						break;
-					case SuaNganhMessage.Error:
-						MessageBox.Show("Đã có lỗi xảy ra!");
-						break;
-					case SuaNganhMessage.Success:
+                    case SuaNganhMessage.UnableForSinhVien:
+                        MessageBox.Show("Không thể sửa ngành này do có sinh viên thuộc ngành!");
+                        break;
+                    case SuaNganhMessage.UnableForChuongTrinhHoc:
+                        MessageBox.Show("Không thể sửa ngành này do có chương trình học của ngành!");
+                        break;
+                    case SuaNganhMessage.Success:
 						MessageBox.Show("Sửa ngành thành công!");
 						Close();
 						break;
@@ -152,9 +172,6 @@ namespace PL
 						break;
 					case ThemNganhMessage.DuplicateTenNganh:
 						MessageBox.Show("Tên ngành đã tồn tại, vui lòng nhập giá trị khác!");
-						break;
-					case ThemNganhMessage.Error:
-						MessageBox.Show("Đã có lỗi xảy ra!");
 						break;
 					case ThemNganhMessage.Success:
 						if (themSuaNganhRequester != null)

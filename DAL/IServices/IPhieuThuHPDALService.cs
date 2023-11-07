@@ -8,8 +8,8 @@ namespace DAL.IServices
 	{
 		DateTime LayThoiGianDongHPGanNhat(int maPhieuDKHP);
 		bool TaoPhieuThu_ChoXacNhan(int soTienThu, int soPhieuDKHP);
-		List<PhieuThuHP> GetPhieuThuHP(int MaTinhTrang);
-		MessagePhieuThuHPUpdateTinhTrang PhieuThuHPUpdateTinhTrang(int MaPhieuThuHP, int MaTinhTrang);
+		List<PhieuThuHP> GetPhieuThuHP(int maTinhTrang);
+		MessagePhieuThuHPUpdateTinhTrang PhieuThuHPUpdateTinhTrang(int maPhieuThuHP, int maTinhTrang);
 
 	}
 }

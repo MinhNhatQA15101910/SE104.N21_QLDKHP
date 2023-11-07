@@ -12,7 +12,11 @@ namespace PL
 {
     public partial class CT_ThanhToanHocPhi : KryptonForm
     {
-        private readonly IPhieuThuHPBLLService _phieuThuHPBLLService = new PhieuThuHPBLLService(new PhieuThuHPDALService(new DapperService(), ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString));
+        private readonly IPhieuThuHPBLLService _phieuThuHPBLLService 
+            = new PhieuThuHPBLLService(
+                new PhieuThuHPDALService(
+                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString,
+                    new DapperWrapper()));
 
         private int maPhieuDKHP;
 

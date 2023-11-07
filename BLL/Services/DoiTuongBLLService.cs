@@ -5,14 +5,17 @@ using System.Collections.Generic;
 
 namespace BLL.Services
 {
-    public class DoiTuongBLLService: IDoiTuongBLLService
+    public class DoiTuongBLLService : IDoiTuongBLLService
     {
         private readonly IDoiTuongDALService _doiTuongDALService;
+        private readonly ISinhVien_DoiTuongDALService _doiTuong_SinhVienDALService;
 
-        public DoiTuongBLLService(IDoiTuongDALService doiTuongDALService)
+        public DoiTuongBLLService(IDoiTuongDALService doiTuongDALService, ISinhVien_DoiTuongDALService doiTuong_SinhVienDALService)
         {
             _doiTuongDALService = doiTuongDALService;
+            _doiTuong_SinhVienDALService = doiTuong_SinhVienDALService;
         }
+
         public List<DoiTuong> LayDSDoiTuong()
         {
             return _doiTuongDALService.LayDSDoiTuong();
@@ -20,30 +23,31 @@ namespace BLL.Services
 
         public SuaDoiTuongMessage SuaDoiTuong(int maDTBanDau, string tenDT, string tiLeGiam)
         {
-            if (tenDT.Equals(""))
+            if (string.IsNullOrEmpty(tenDT))
             {
                 return SuaDoiTuongMessage.EmptyTenDoiTuong;
             }
 
-            if (tiLeGiam.Equals(""))
+            if (string.IsNullOrEmpty(tiLeGiam))
             {
                 return SuaDoiTuongMessage.EmptyTiLeGiam;
             }
 
-            float tiLeGiamValue;
-            if (!float.TryParse(tiLeGiam, out tiLeGiamValue))
+            if (!float.TryParse(tiLeGiam, out float tiLeGiamValue) || tiLeGiamValue > 1 || tiLeGiamValue <= 0)
             {
                 return SuaDoiTuongMessage.TiLeGiamKhongHopLe;
             }
 
-            if (tiLeGiamValue > 1 || tiLeGiamValue <= 0)
-            {
-                return SuaDoiTuongMessage.TiLeGiamKhongHopLe;
-            }
-
-            if (maDTBanDau == 2 && tenDT != "Vùng sâu vùng xa")
+            if (maDTBanDau == 2)
             {
                 return SuaDoiTuongMessage.Unable;
+            }
+
+            List<DoiTuong> doiTuongList = _doiTuongDALService.LayDSDoiTuong();
+            DoiTuong doiTuong = doiTuongList.Find(dt => dt.TenDT == tenDT && dt.MaDT != maDTBanDau);
+            if (doiTuong != null)
+            {
+                return SuaDoiTuongMessage.DuplicateTenDoiTuong;
             }
 
             return _doiTuongDALService.SuaDoiTuong(maDTBanDau, tenDT, tiLeGiamValue);
@@ -51,25 +55,26 @@ namespace BLL.Services
 
         public ThemDoiTuongMessage ThemDoiTuong(string tenDT, string tiLeGiam)
         {
-            if (tenDT.Equals(""))
+            if (string.IsNullOrEmpty(tenDT))
             {
                 return ThemDoiTuongMessage.EmptyTenDoiTuong;
             }
 
-            if (tiLeGiam.Equals(""))
+            if (string.IsNullOrEmpty(tiLeGiam))
             {
                 return ThemDoiTuongMessage.EmptyTiLeGiam;
             }
 
-            float tiLeGiamValue;
-            if (!float.TryParse(tiLeGiam, out tiLeGiamValue))
+            if (!float.TryParse(tiLeGiam, out float tiLeGiamValue) || tiLeGiamValue > 1 || tiLeGiamValue <= 0)
             {
                 return ThemDoiTuongMessage.TiLeGiamKhongHopLe;
             }
 
-            if (tiLeGiamValue > 1 || tiLeGiamValue <= 0)
+            List<DoiTuong> doiTuongList = _doiTuongDALService.LayDSDoiTuong();
+            DoiTuong doiTuong = doiTuongList.Find(dt => dt.TenDT == tenDT);
+            if (doiTuong != null)
             {
-                return ThemDoiTuongMessage.TiLeGiamKhongHopLe;
+                return ThemDoiTuongMessage.DuplicateTenDoiTuong;
             }
 
             return _doiTuongDALService.ThemDoiTuong(tenDT, tiLeGiamValue);
@@ -78,6 +83,13 @@ namespace BLL.Services
         public XoaDoiTuongMessage XoaDoiTuong(int maDT)
         {
             if (maDT == 2)
+            {
+                return XoaDoiTuongMessage.UnableToDeleteVungSauVungXa;
+            }
+
+            List<SinhVien_DoiTuong> sinhVien_DoiTuongs = _doiTuong_SinhVienDALService.GetSinhVien_DoiTuongs();
+            SinhVien_DoiTuong sinhVien_DoiTuong = sinhVien_DoiTuongs.Find(dt => dt.MaDT ==  maDT);
+            if (sinhVien_DoiTuong != null)
             {
                 return XoaDoiTuongMessage.Unable;
             }

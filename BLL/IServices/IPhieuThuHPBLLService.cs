@@ -10,7 +10,7 @@ namespace BLL.IServices
 		DateTime LayThoiGianDongHPGanNhat(int maPhieuDKHP);
 		TimKiemPhieuDKHPMessage KtTimKiemSoTienThu(string t);
 		bool TaoPhieuThu_ChoXacNhan(int soTienThu, int soPhieuDKHP);
-		List<DTO.PhieuThuHP> GetPhieuThuHP(int MaTinhTrang);
-		MessagePhieuThuHPUpdateTinhTrang PhieuThuHPUpdateTinhTrang(int MaPhieuThuHP, int MaTinhTrang);
+		List<DTO.PhieuThuHP> GetPhieuThuHP(int maTinhTrang);
+		MessagePhieuThuHPUpdateTinhTrang PhieuThuHPUpdateTinhTrang(int maPhieuThuHP, int maTinhTrang);
 	}
 }

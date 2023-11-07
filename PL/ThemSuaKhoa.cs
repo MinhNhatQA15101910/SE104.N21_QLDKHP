@@ -2,17 +2,26 @@
 using BLL.Services;
 using ComponentFactory.Krypton.Toolkit;
 using DAL.Services;
+using Dapper;
 using DTO;
 using PL.Interfaces;
 using System;
 using System.Configuration;
+using System.Data.SqlClient;
 using System.Windows.Forms;
 
 namespace PL
 {
     public partial class ThemSuaKhoa : KryptonForm
     {
-        private readonly IKhoaBLLService _khoaBLLService = new KhoaBLLService(new KhoaDALService(new DapperService(), ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString));
+        private readonly IKhoaBLLService _khoaBLLService 
+            = new KhoaBLLService(
+                new KhoaDALService(
+                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString, 
+                    new DapperWrapper()),
+                new NganhDALService(
+                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString, 
+                    new DapperWrapper()));
 
         private IThemSuaKhoaRequester themSuaKhoaRequester;
         private Khoa khoa;
@@ -84,8 +93,8 @@ namespace PL
                     case SuaKhoaMessage.DuplicateTenKhoa:
                         MessageBox.Show("Tên khoa đã tồn tại, vui lòng nhập giá trị khác!");
                         break;
-                    case SuaKhoaMessage.Error:
-                        MessageBox.Show("Đã có lỗi xảy ra!");
+                    case SuaKhoaMessage.Unable:
+                        MessageBox.Show("Không thể sửa khoa này vì mã khoa đang là khoa của ngành khác!");
                         break;
                     case SuaKhoaMessage.Success:
                         MessageBox.Show("Sửa khoa thành công!");
@@ -112,9 +121,6 @@ namespace PL
                         break;
                     case ThemKhoaMessage.DuplicateTenKhoa:
                         MessageBox.Show("Tên khoa đã tồn tại, vui lòng nhập giá trị khác!");
-                        break;
-                    case ThemKhoaMessage.Error:
-                        MessageBox.Show("Đã có lỗi xảy ra!");
                         break;
                     case ThemKhoaMessage.Success:
                         if (themSuaKhoaRequester != null)

@@ -1,7 +1,6 @@
 ﻿using DAL.IServices;
 using Dapper;
 using DTO;
-using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
@@ -11,106 +10,60 @@ namespace DAL.Services
 {
     public class KhoaDALService : IKhoaDALService
     {
-        private readonly IDapperService _dapperService;
-        private readonly string _dbConnection;
+        private readonly string _connectionString;
+        private readonly IDapperWrapper _dapperWrapper;
 
-        public KhoaDALService(IDapperService dapperService, string dbConnection)
+        public KhoaDALService(string connectionString, IDapperWrapper dapperWrapper)
         {
-            _dapperService = dapperService;
-            _dbConnection = dbConnection;
+            _connectionString = connectionString;
+            _dapperWrapper = dapperWrapper;
         }
 
         public List<Khoa> LayDSKhoa()
         {
-            using (var connection = new SqlConnection(_dbConnection))
+            using (var connection = new SqlConnection(_connectionString))
             {
-                List<Khoa> result = _dapperService.Query<Khoa>(connection, "spKHOA_LayDSKhoa").ToList();
-                return result;
+                return _dapperWrapper.Query<Khoa>(connection, "spKHOA_LayDSKhoa").ToList();
             }
         }
 
         public SuaKhoaMessage SuaKhoa(string maKhoaBanDau, string maKhoaSua, string tenKhoaSua)
         {
-            try
+            using (var connection = new SqlConnection(_connectionString))
             {
-                using (var connection = new SqlConnection(_dbConnection))
-                {
-                    var p = new DynamicParameters();
-                    p.Add("@MaKhoaBanDau", maKhoaBanDau);
-                    p.Add("@MaKhoaSua", maKhoaSua);
-                    p.Add("@TenKhoaSua", tenKhoaSua);
-                    _dapperService.Execute(connection, "spKHOA_SuaKhoa", p, CommandType.StoredProcedure);
-                }
+                var p = new DynamicParameters();
+                p.Add("@MaKhoaBanDau", maKhoaBanDau);
+                p.Add("@MaKhoaSua", maKhoaSua);
+                p.Add("@TenKhoaSua", tenKhoaSua);
+                var result = _dapperWrapper.Execute(connection, "spKHOA_SuaKhoa", p, commandType: CommandType.StoredProcedure);
 
-                return SuaKhoaMessage.Success;
-            }
-            catch (SqlException ex)
-            {
-                if (ex.Number == 2627)
-                {
-                    if (ex.Message.Contains("UQ_KHOA_TenKhoa"))
-                    {
-                        return SuaKhoaMessage.DuplicateTenKhoa;
-                    }
-                       
-                    return SuaKhoaMessage.DuplicateMaKhoa;
-                }
-
-                return SuaKhoaMessage.Error;
+                return (result > 0) ? SuaKhoaMessage.Success : SuaKhoaMessage.Failed;
             }
         }
 
         public ThemKhoaMessage ThemKhoa(string maKhoa, string tenKhoa)
         {
-            try
+            using (var connection = new SqlConnection(_connectionString))
             {
-                using (var connection = new SqlConnection(_dbConnection))
-                {
-                    var p = new DynamicParameters();
-                    p.Add("@MaKhoa", maKhoa);
-                    p.Add("@TenKhoa", tenKhoa);
-                    _dapperService.Execute(connection, "spKHOA_ThemKhoa", p, commandType: CommandType.StoredProcedure);
-                }
-            }
-            catch (SqlException ex)
-            {
-                if (ex.Number == 2627)
-                {
-                    if (ex.Message.Contains("PK_KHOA"))
-                    {
-                        return ThemKhoaMessage.DuplicateMaKhoa;
-                    }
-                    else if (ex.Message.Contains("UQ_KHOA_TenKhoa"))
-                    {
-                        return ThemKhoaMessage.DuplicateTenKhoa;
-                    }
-                }
-            }
-            catch (Exception)
-            {
-                return ThemKhoaMessage.Error;
-            }
+                var p = new DynamicParameters();
+                p.Add("@MaKhoa", maKhoa);
+                p.Add("@TenKhoa", tenKhoa);
+                int result = _dapperWrapper.Execute(connection, "spKHOA_ThemKhoa", p, commandType: CommandType.StoredProcedure);
 
-            return ThemKhoaMessage.Success;
+                return (result > 0) ? ThemKhoaMessage.Success : ThemKhoaMessage.Failed;
+            }
         }
 
         public XoaKhoaMessage XoaKhoa(string maKhoa)
         {
-            try
+            using (var connection = new SqlConnection(_connectionString))
             {
-                using (var connection = new SqlConnection(_dbConnection))
-                {
-                    var p = new DynamicParameters();
-                    p.Add("@MaKhoa", maKhoa);
-                    _dapperService.Execute(connection, "spKHOA_XoaKhoa", p, commandType: CommandType.StoredProcedure);
-                }
-            }
-            catch (Exception)
-            {
-                return XoaKhoaMessage.Error;
-            }
+                var p = new DynamicParameters();
+                p.Add("@MaKhoa", maKhoa);
+                int result = _dapperWrapper.Execute(connection, "spKHOA_XoaKhoa", p, commandType: CommandType.StoredProcedure);
 
-            return XoaKhoaMessage.Success;
+                return (result > 0) ? XoaKhoaMessage.Success : XoaKhoaMessage.Failed;
+            }
         }
     }
 }

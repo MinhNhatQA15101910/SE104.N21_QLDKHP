@@ -15,10 +15,44 @@ namespace PL
     public partial class QuanLyChuongTrinhHoc : KryptonForm
     {
         private IChuongTrinhHocRequester chuongTrinhHocRequester;
-        private readonly IKhoaBLLService _khoaBLLService = new KhoaBLLService(new KhoaDALService(new DapperService(), ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString));
-        private readonly INganhBLLService _nganhBLLService = new NganhBLLService(new NganhDALService(new DapperService(), ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString));
-        private readonly IChuongTrinhHocBLLService _chuongtrinhhocBLLService = new ChuongTrinhHocBLLService(new ChuongTrinhHocDALService(new DapperService(), ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString));
-        private readonly IMonHocBLLService _monHocBLLService = new MonHocBLLService(new MonHocDALService(new DapperService(), ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString));
+        private readonly IKhoaBLLService _khoaBLLService 
+            = new KhoaBLLService(
+                new KhoaDALService(
+                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString, 
+                    new DapperWrapper()),
+                new NganhDALService(
+                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString, 
+                    new DapperWrapper()));
+        private readonly INganhBLLService _nganhBLLService 
+            = new NganhBLLService(
+                new NganhDALService(
+                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString, 
+                    new DapperWrapper()),
+                new SinhVienDALService(
+                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString, 
+                    new DapperWrapper()),
+                new ChuongTrinhHocDALService(
+                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString, 
+                    new DapperWrapper()));
+        private readonly IChuongTrinhHocBLLService _chuongtrinhhocBLLService 
+            = new ChuongTrinhHocBLLService(
+                new ChuongTrinhHocDALService(
+                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString, 
+                    new DapperWrapper()));
+        private readonly IMonHocBLLService _monHocBLLService 
+            = new MonHocBLLService(
+                new MonHocDALService(
+                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString, 
+                    new DapperWrapper()), 
+                new DanhSachMonHocMoDALService(
+                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString, 
+                    new DapperWrapper()),
+                new CT_PhieuDKHPDALService(
+                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString,
+                    new DapperWrapper()),
+                new ChuongTrinhHocDALService(
+                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString,
+                    new DapperWrapper()));
 
         BindingList<Khoa> mKhoa;
         BindingList<Nganh> mNganh;
@@ -163,10 +197,7 @@ namespace PL
                         switch (message)
                         {
                             case MessageDeleteListCTHoc.Failed:
-                                MessageBox.Show("False to connect database");
-                                break;
-                            case MessageDeleteListCTHoc.ErrorData:
-                                MessageBox.Show("False to get data");
+                                MessageBox.Show("Xóa chương trình học thất bại!");
                                 break;
                             case MessageDeleteListCTHoc.Success:
                                 MessageBox.Show("Xóa chương trình học thành công");

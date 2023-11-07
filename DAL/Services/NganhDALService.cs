@@ -1,7 +1,6 @@
 ﻿using DAL.IServices;
 using Dapper;
 using DTO;
-using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
@@ -11,128 +10,79 @@ namespace DAL.Services
 {
     public class NganhDALService : INganhDALService
     {
-        private readonly IDapperService _dapperService;
-        private readonly string _dbConnection;
+        private readonly string _connectionString;
+        private readonly IDapperWrapper _dapperWrapper;
 
-        public NganhDALService(IDapperService dapperService, string dbConnection)
+        public NganhDALService(string connectionString, IDapperWrapper dapperWrapper)
         {
-            _dapperService = dapperService;
-            _dbConnection = dbConnection;
+            _connectionString = connectionString;
+            _dapperWrapper = dapperWrapper;
         }
 
         public List<CT_Nganh> LayDSNganh()
         {
-            using (IDbConnection connection = new SqlConnection(_dbConnection))
+            using (var connection = new SqlConnection(_connectionString))
             {
-                return _dapperService.Query<CT_Nganh>(connection, "spNGANH_LayDSNganh").ToList();
+                return _dapperWrapper.Query<CT_Nganh>(connection, "spNGANH_LayDSNganh").ToList();
             }
         }
 
         public XoaNganhMessage XoaNganh(string maNganh)
         {
-            try
+            using (var connection = new SqlConnection(_connectionString))
             {
-                using (IDbConnection connection = new SqlConnection(_dbConnection))
-                {
-                    var p = new DynamicParameters();
-                    p.Add("@MaNganh", maNganh);
-                    _dapperService.Execute(connection, "spNGANH_XoaNganh", p, CommandType.StoredProcedure);
-                }
-            }
-            catch (Exception)
-            {
-                return XoaNganhMessage.Error;
-            }
+                var p = new DynamicParameters();
+                p.Add("@MaNganh", maNganh);
+                int result = _dapperWrapper.Execute(connection, "spNGANH_XoaNganh", p, commandType: CommandType.StoredProcedure);
 
-            return XoaNganhMessage.Success;
+                return (result > 0) ? XoaNganhMessage.Success : XoaNganhMessage.Failed;
+            }
         }
 
         public SuaNganhMessage SuaNganh(string maNganhBanDau, string maNganhSua, string tenNganhSua, string maKhoaSua)
         {
-            try
+            using (var connection = new SqlConnection(_connectionString))
             {
-                using (IDbConnection connection = new SqlConnection(_dbConnection))
-                {
-                    var p = new DynamicParameters();
-                    p.Add("@MaNganhBanDau", maNganhBanDau);
-                    p.Add("@MaNganh", maNganhSua);
-                    p.Add("@TenNganh", tenNganhSua);
-                    p.Add("@MaKhoa", maKhoaSua);
-                    _dapperService.Execute(connection, "spNGANH_SuaNganh", p, commandType: CommandType.StoredProcedure);
-                }
-            }
-            catch (SqlException ex)
-            {
-                if (ex.Number == 2627)
-                {
-                    if (ex.Message.Contains("UQ_NGANH_TenNganh"))
-                    {
-                        return SuaNganhMessage.DuplicateTenNganh;
-                    }
-                }
-            }
-            catch (Exception)
-            {
-                return SuaNganhMessage.Error;
-            }
+                var p = new DynamicParameters();
+                p.Add("@MaNganhBanDau", maNganhBanDau);
+                p.Add("@MaNganh", maNganhSua);
+                p.Add("@TenNganh", tenNganhSua);
+                p.Add("@MaKhoa", maKhoaSua);
+                int result = _dapperWrapper.Execute(connection, "spNGANH_SuaNganh", p, commandType: CommandType.StoredProcedure);
 
-            return SuaNganhMessage.Success;
+                return (result > 0) ? SuaNganhMessage.Success : SuaNganhMessage.Failed;
+            }
         }
 
         public ThemNganhMessage ThemNganh(string maNganh, string tenNganh, string maKhoa)
         {
-            try
+            using (var connection = new SqlConnection(_connectionString))
             {
-                using (IDbConnection connection = new SqlConnection(_dbConnection))
-                {
-                    var p = new DynamicParameters();
-                    p.Add("@MaNganh", maNganh);
-                    p.Add("@TenNganh", tenNganh);
-                    p.Add("@MaKhoa", maKhoa);
-                    _dapperService.Execute(connection, "spNGANH_ThemNganh", p, commandType: CommandType.StoredProcedure);
-                }
-            }
-            catch (SqlException ex)
-            {
-                if (ex.Number == 2627)
-                {
-                    if (ex.Message.Contains("PK_NGANH"))
-                    {
-                        return ThemNganhMessage.DuplicateMaNganh;
-                    }
-                    else if (ex.Message.Contains("UQ_NGANH_TenNganh"))
-                    {
-                        return ThemNganhMessage.DuplicateTenNganh;
-                    }
-                }
-            }
-            catch (Exception)
-            {
-                return ThemNganhMessage.Error;
-            }
+                var p = new DynamicParameters();
+                p.Add("@MaNganh", maNganh);
+                p.Add("@TenNganh", tenNganh);
+                p.Add("@MaKhoa", maKhoa);
+                int result = _dapperWrapper.Execute(connection, "spNGANH_ThemNganh", p, commandType: CommandType.StoredProcedure);
 
-            return ThemNganhMessage.Success;
+                return (result > 0) ? ThemNganhMessage.Success : ThemNganhMessage.Failed;
+            }
         }
 
-        public List<Nganh> GetNganh(string MaKhoa)
+        public List<Nganh> GetNganh(string maKhoa)
         {
-            if (MaKhoa != null)
+            using (var connection = new SqlConnection(_connectionString))
             {
-                using (IDbConnection connection = new SqlConnection(_dbConnection))
+                if (maKhoa != null)
                 {
                     var p = new DynamicParameters();
-                    p.Add("@MaKhoa", MaKhoa);
-                    return _dapperService.Query<Nganh>(connection, "spNGANH_LayNganhBangMaKhoa", p, commandType: CommandType.StoredProcedure).ToList();
+                    p.Add("@MaKhoa", maKhoa);
+                    return _dapperWrapper.Query<Nganh>(connection, "spNGANH_LayNganhBangMaKhoa", p, commandType: CommandType.StoredProcedure).ToList();
                 }
-            }
-            else
-            {
-                using (IDbConnection connection = new SqlConnection(_dbConnection))
+                else
                 {
-                    return _dapperService.Query<Nganh>(connection, "spNGANH_LayDSNganh").ToList();
+                    return _dapperWrapper.Query<Nganh>(connection, "spNGANH_LayDSNganh").ToList();
                 }
             }
-
         }
     }
 }

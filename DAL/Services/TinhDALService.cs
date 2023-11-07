@@ -1,7 +1,6 @@
 ﻿using DAL.IServices;
 using Dapper;
 using DTO;
-using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
@@ -11,92 +10,58 @@ namespace DAL.Services
 {
     public class TinhDALService : ITinhDALService
 	{
-		private readonly IDapperService _dapperService;
-		private readonly string _dbConnection;
+        private readonly string _connectionString;
+        private readonly IDapperWrapper _dapperWrapper;
 
-		public TinhDALService(IDapperService dapperService, string dbConnection)
+        public TinhDALService(string connectionString, IDapperWrapper dapperWrapper)
+        {
+            _connectionString = connectionString;
+            _dapperWrapper = dapperWrapper;
+        }
+
+        public List<Tinh> LayDSTinh()
 		{
-			_dapperService = dapperService;
-			_dbConnection = dbConnection;
-		}
-		public List<Tinh> LayDSTinh()
-		{
-			using (IDbConnection connection = new SqlConnection(_dbConnection))
-			{
-				return _dapperService.Query<Tinh>(connection, "spTINH_LayDSTinh").ToList();
-			}
-		}
+            using (var connection = new SqlConnection(_connectionString))
+            {
+                return _dapperWrapper.Query<Tinh>(connection, "spTINH_LayDSTinh").ToList();
+            }
+        }
 
 		public SuaTinhMessage SuaTinh(int maTinh, string tenTinh)
 		{
-			try
-			{
-				using (IDbConnection connection = new SqlConnection(_dbConnection))
-				{
-					var p = new DynamicParameters();
-					p.Add("@MaTinh", maTinh);
-					p.Add("@TenTinh", tenTinh);
-                    _dapperService.Execute(connection, "spTINH_SuaTinh", p, commandType: CommandType.StoredProcedure);
-				}
-			}
-			catch (SqlException ex)
-			{
-				if (ex.Number == 2627 && ex.Message.Contains("UQ_TINH_TenTinh"))
-				{
-					return SuaTinhMessage.DuplicateTenTinh;
-				}
-			}
-			catch (Exception)
-			{
-				return SuaTinhMessage.Error;
-			}
+            using (var connection = new SqlConnection(_connectionString))
+            {
+                var p = new DynamicParameters();
+                p.Add("@MaTinh", maTinh);
+                p.Add("@TenTinh", tenTinh);
+                int result = _dapperWrapper.Execute(connection, "spTINH_SuaTinh", p, commandType: CommandType.StoredProcedure);
 
-			return SuaTinhMessage.Success;
+                return (result > 0) ? SuaTinhMessage.Success : SuaTinhMessage.Failed;
+            }
 		}
 
 		public XoaTinhMessage XoaTinh(int maTinh)
 		{
-			try
-			{
-				using (IDbConnection connection = new SqlConnection(_dbConnection))
-				{
-					var p = new DynamicParameters();
-					p.Add("@MaTinh", maTinh);
-                    _dapperService.Execute(connection, "spTINH_XoaTinh", p, commandType: CommandType.StoredProcedure);
-				}
-			}
-			catch (Exception)
-			{
-				return XoaTinhMessage.Error;
-			}
+            using (var connection = new SqlConnection(_connectionString))
+            {
+                var p = new DynamicParameters();
+                p.Add("@MaTinh", maTinh);
+                int result = _dapperWrapper.Execute(connection, "spTINH_XoaTinh", p, commandType: CommandType.StoredProcedure);
 
-			return XoaTinhMessage.Success;
+                return (result > 0) ? XoaTinhMessage.Success : XoaTinhMessage.Failed;
+            }
 		}
 
 		public ThemTinhMessage ThemTinh(string tenTinh)
 		{
-			try
-			{
-				using (IDbConnection connection = new SqlConnection(_dbConnection))
-				{
-					var p = new DynamicParameters();
-					p.Add("@TenTinh", tenTinh);
-					_dapperService.Execute(connection, "spTINH_ThemTinh", p, commandType: CommandType.StoredProcedure);
-				}
-			}
-			catch (SqlException ex)
-			{
-				if (ex.Number == 2627 && ex.Message.Contains("UQ_TINH_TenTTP"))
-				{
-					return ThemTinhMessage.DuplicateTenTinh;
-				}
-			}
-			catch (Exception)
-			{
-				return ThemTinhMessage.Error;
-			}
+            using (var connection = new SqlConnection(_connectionString))
+            {
+                var p = new DynamicParameters();
+                p.Add("@TenTinh", tenTinh);
+                int result = _dapperWrapper.Execute(connection, "spTINH_ThemTinh", p, commandType: CommandType.StoredProcedure);
 
-			return ThemTinhMessage.Success;
+                return (result > 0) ? ThemTinhMessage.Success : ThemTinhMessage.Failed;
+            }
 		}
 	}
 }

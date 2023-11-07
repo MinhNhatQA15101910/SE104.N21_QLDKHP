@@ -1,42 +1,50 @@
 ﻿using DAL.IServices;
 using Dapper;
+using DTO;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
+using System.Linq;
 
 namespace DAL.Services
 {
-    public class CT_PhieuDKHPDALService: ICT_PhieuDKHPDALService
+    public class CT_PhieuDKHPDALService : ICT_PhieuDKHPDALService
     {
-        public readonly IDapperService _dapperService;
-        public readonly string _dbConnection;
+        private readonly string _connectionString;
+        private readonly IDapperWrapper _dapperWrapper;
 
-        public CT_PhieuDKHPDALService(IDapperService dapperService, string dbConnection)
+        public CT_PhieuDKHPDALService(string connectionString, IDapperWrapper dapperWrapper)
         {
-            _dapperService = dapperService;
-            _dbConnection = dbConnection;
+            _connectionString = connectionString;
+            _dapperWrapper = dapperWrapper;
         }
-        public void TaoCT_PhieuDKHP(int maPhieu, List<string> list)
+
+        public List<CT_PhieuDKHP> GetCT_PhieuDKHPs()
         {
-            foreach (var i in list)
+            using (var connection = new SqlConnection(_connectionString))
             {
-                using (IDbConnection connection = new SqlConnection(_dbConnection))
-                {
-                    var parameters = new DynamicParameters();
-                    parameters.Add("@maPhieuDKHP", maPhieu);
-                    parameters.Add("@maMH", i);
-                    _dapperService.Execute(connection, "spPHIEUDKHP_TaoCT_PhieuDKHP", parameters, CommandType.StoredProcedure);                  
-                }
+                return _dapperWrapper.Query<CT_PhieuDKHP>(connection, "spCT_PHIEUDKHP_GetCT_PhieuDKHPs").ToList();
+            }
+        }
+
+        public void TaoCT_PhieuDKHP(CT_PhieuDKHP ct_PhieuDKHP)
+        {
+            using (var connection = new SqlConnection(_connectionString))
+            {
+                var parameters = new DynamicParameters();
+                parameters.Add("@maPhieuDKHP", ct_PhieuDKHP.MaPhieuDKHP);
+                parameters.Add("@maMH", ct_PhieuDKHP.MaMH);
+                 _dapperWrapper.Execute(connection, "spPHIEUDKHP_TaoCT_PhieuDKHP", parameters, commandType: CommandType.StoredProcedure);
             }
         }
 
         public void XoaDSMHDKHP(int maPhieu)
         {
-            using (IDbConnection connection = new SqlConnection(_dbConnection))
+            using (var connection = new SqlConnection(_connectionString))
             {
                 var parameters = new DynamicParameters();
                 parameters.Add("@maPhieuDKHP", maPhieu);
-                _dapperService.Execute(connection, "spPHIEUDKHP_XoaCT_PhieuDKHP", parameters, CommandType.StoredProcedure);
+                _dapperWrapper.Execute(connection, "spPHIEUDKHP_XoaCT_PhieuDKHP", parameters, commandType: CommandType.StoredProcedure);
             }
         }
     }

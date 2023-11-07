@@ -1,7 +1,6 @@
 ﻿using DAL.IServices;
 using Dapper;
 using DTO;
-using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
@@ -11,97 +10,62 @@ namespace DAL.Services
 {
     public class HuyenDALService : IHuyenDALService
     {
-        private readonly IDapperService _dapperService;
-        private readonly string _dbConnection;
+        private readonly string _connectionString;
+        private readonly IDapperWrapper _dapperWrapper;
 
-        public HuyenDALService(IDapperService dapperService, string dbConnection)
+        public HuyenDALService(string connectionString, IDapperWrapper dapperWrapper)
         {
-            _dapperService = dapperService;
-            _dbConnection = dbConnection;
+            _connectionString = connectionString;
+            _dapperWrapper = dapperWrapper;
         }
 
         public List<CT_Huyen> LayDSHuyen()
         {
-            using (IDbConnection connection = new SqlConnection(_dbConnection))
+            using (var connection = new SqlConnection(_connectionString))
             {
-                return _dapperService.Query<CT_Huyen>(connection, "spHUYEN_LayDSHuyen").ToList();
+                return _dapperWrapper.Query<CT_Huyen>(connection, "spHUYEN_LayDSHuyen").ToList();
             }
         }
 
         public SuaHuyenMessage SuaHuyen(int maHuyen, string tenHuyen, int vungUT, int maTinh)
         {
-            try
+            using (var connection = new SqlConnection(_connectionString))
             {
-                using (IDbConnection connection = new SqlConnection(_dbConnection))
-                {
-                    var p = new DynamicParameters();
-                    p.Add("@MaHuyen", maHuyen);
-                    p.Add("@TenHuyen", tenHuyen);
-                    p.Add("@VungUT", vungUT);
-                    p.Add("@MaTinh", maTinh);
-                    _dapperService.Execute(connection, "spHUYEN_SuaHuyen", p, commandType: CommandType.StoredProcedure);
-                }
-            }
-            catch (SqlException ex)
-            {
-                if (ex.Number == 2627 && ex.Message.Contains("UQ_HUYEN_TenHuyen"))
-                {
-                    return SuaHuyenMessage.DuplicateTenHuyen;
-                }
-            }
-            catch (Exception)
-            {
-                return SuaHuyenMessage.Error;
-            }
+                var p = new DynamicParameters();
+                p.Add("@MaHuyen", maHuyen);
+                p.Add("@TenHuyen", tenHuyen);
+                p.Add("@VungUT", vungUT);
+                p.Add("@MaTinh", maTinh);
+                int result = _dapperWrapper.Execute(connection, "spHUYEN_SuaHuyen", p, commandType: CommandType.StoredProcedure);
 
-            return SuaHuyenMessage.Success;
+                return (result > 0) ? SuaHuyenMessage.Success : SuaHuyenMessage.Failed;
+            }
         }
 
         public XoaHuyenMessage XoaHuyen(int maHuyen)
         {
-            try
+            using (var connection = new SqlConnection(_connectionString))
             {
-                using (IDbConnection connection = new SqlConnection(_dbConnection))
-                {
-                    var p = new DynamicParameters();
-                    p.Add("@MaHuyen", maHuyen);
-                    _dapperService.Execute(connection, "spHUYEN_XoaHuyen", p, commandType: CommandType.StoredProcedure);
-                }
-            }
-            catch (Exception)
-            {
-                return XoaHuyenMessage.Error;
-            }
+                var p = new DynamicParameters();
+                p.Add("@MaHuyen", maHuyen);
+                int result = _dapperWrapper.Execute(connection, "spHUYEN_XoaHuyen", p, commandType: CommandType.StoredProcedure);
 
-            return XoaHuyenMessage.Success;
+                return (result > 0) ? XoaHuyenMessage.Success : XoaHuyenMessage.Failed;
+            }
         }
 
         public ThemHuyenMessage ThemHuyen(string tenHuyen, int vungUT, int maTinh)
         {
-            try
+            using (var connection = new SqlConnection(_connectionString))
             {
-                using (IDbConnection connection = new SqlConnection(_dbConnection))
-                {
-                    var p = new DynamicParameters();
-                    p.Add("@TenHuyen", tenHuyen);
-                    p.Add("@VungUT", vungUT);
-                    p.Add("@MaTinh", maTinh);
-                    _dapperService.Execute(connection, "spHUYEN_ThemHuyen", p, commandType: CommandType.StoredProcedure);
-                }
-            }
-            catch (SqlException ex)
-            {
-                if (ex.Number == 2627 && ex.Message.Contains("UQ_HUYEN_TenHuyen"))
-                {
-                    return ThemHuyenMessage.DuplicateTenHuyen;
-                }
-            }
-            catch (Exception)
-            {
-                return ThemHuyenMessage.Error;
-            }
+                var p = new DynamicParameters();
+                p.Add("@TenHuyen", tenHuyen);
+                p.Add("@VungUT", vungUT);
+                p.Add("@MaTinh", maTinh);
+                int result = _dapperWrapper.Execute(connection, "spHUYEN_ThemHuyen", p, commandType: CommandType.StoredProcedure);
 
-            return ThemHuyenMessage.Success;
+                return (result > 0) ? ThemHuyenMessage.Success : ThemHuyenMessage.Failed;
+            }
         }
     }
 }

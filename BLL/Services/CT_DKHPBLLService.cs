@@ -1,6 +1,6 @@
 ﻿using BLL.IServices;
 using DAL.IServices;
-using System.Collections.Generic;
+using DTO;
 
 namespace BLL.Services
 {
@@ -13,9 +13,9 @@ namespace BLL.Services
             _phieuDKHPDALService = phieuDKHPDALService;
         }
 
-        public void TaoCT_PhieuDKHP(int maPhieu, List<string> list)
+        public void TaoCT_PhieuDKHP(CT_PhieuDKHP ct_phieuDKHP)
         {
-            _phieuDKHPDALService.TaoCT_PhieuDKHP(maPhieu, list);
+            _phieuDKHPDALService.TaoCT_PhieuDKHP(ct_phieuDKHP);
         }
         public void XoaDSMHDKHP(int maPhieu)
         {

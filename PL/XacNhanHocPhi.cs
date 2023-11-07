@@ -7,6 +7,7 @@ using PL.Interfaces;
 using System;
 using System.ComponentModel;
 using System.Configuration;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -14,8 +15,16 @@ namespace PL
 {
     public partial class XacNhanHocPhi : KryptonForm
     {
-		private readonly IPhieuDKHPBLLService _phieuDKHPBLLService = new PhieuDKHPBLLService(new PhieuDKHPDALService(new DapperService(), ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString));
-		private readonly IPhieuThuHPBLLService _phieuThuHPBLLService = new PhieuThuHPBLLService(new PhieuThuHPDALService(new DapperService(), ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString));
+		private readonly IPhieuDKHPBLLService _phieuDKHPBLLService 
+            = new PhieuDKHPBLLService(
+                new PhieuDKHPDALService(
+                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString, 
+                    new DapperWrapper()));
+		private readonly IPhieuThuHPBLLService _phieuThuHPBLLService 
+            = new PhieuThuHPBLLService(
+                new PhieuThuHPDALService(
+                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString, 
+                    new DapperWrapper()));
 
 		private IThanhToanHocPhiRequester thanhToanHocPhiRequester;
         BindingList<PhieuThuHP> mPhieuThuHP;
@@ -108,12 +117,12 @@ namespace PL
         private void btn_Confirm_Click(object sender, EventArgs e)
         {
             DataGridViewRow selectedRow = dgv_PhieuThuHP.SelectedRows[0];
-            int maphieuthuhp = Int32.Parse(selectedRow.Cells[0].Value.ToString());
+            int maphieuthuhp = int.Parse(selectedRow.Cells[0].Value.ToString());
             MessagePhieuThuHPUpdateTinhTrang message = _phieuThuHPBLLService.PhieuThuHPUpdateTinhTrang(maphieuthuhp, 2);
             switch (message)
             {
                 case MessagePhieuThuHPUpdateTinhTrang.Failed:
-                    MessageBox.Show("Không thể xác nhận phiếu thu học phí");
+                    MessageBox.Show("Không thể xác nhận phiếu thu học phí!");
                     break;
                 case MessagePhieuThuHPUpdateTinhTrang.Success:
                     SetUpDgvPhieuDKHP();

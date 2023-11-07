@@ -15,11 +15,31 @@ namespace PL
     public partial class DangKyHocPhan : KryptonForm
     {
         #region Register Services
-        private readonly ICT_PhieuDKHPBLLService _CT_phieuDKHPBLLService = new CT_DKHPBLLService(new CT_PhieuDKHPDALService(new DapperService(), ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString));
-        private readonly IDanhSachMonHocMoBLLService _danhSachMonHocMoBLLService = new DanhSachMonHocMoBLLService(new DanhSachMonHocMoDALService(new DapperService(), ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString));
-        private readonly IHocKyBLLService _hocKyBLLService = new HocKyBLLService(new HocKyDALService(new DapperService(), ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString));
-        private readonly IPhieuDKHPBLLService _phieuDKHPBLLService = new PhieuDKHPBLLService(new PhieuDKHPDALService(new DapperService(), ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString));
-        private readonly IGlobalConfigBLLService _globalConfigBLLService = new GlobalConfigBLLService(new GlobalConfigDALService(new DapperService(), ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString));
+        private readonly ICT_PhieuDKHPBLLService _CT_phieuDKHPBLLService 
+            = new CT_DKHPBLLService(
+                new CT_PhieuDKHPDALService(
+                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString, 
+                    new DapperWrapper()));
+        private readonly IDanhSachMonHocMoBLLService _danhSachMonHocMoBLLService 
+            = new DanhSachMonHocMoBLLService(
+                new DanhSachMonHocMoDALService(
+                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString, 
+                    new DapperWrapper()));
+        private readonly IHocKyBLLService _hocKyBLLService 
+            = new HocKyBLLService(
+                new HocKyDALService(
+                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString, 
+                    new DapperWrapper()));
+        private readonly IPhieuDKHPBLLService _phieuDKHPBLLService 
+            = new PhieuDKHPBLLService(
+                new PhieuDKHPDALService(
+                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString, 
+                    new DapperWrapper()));
+        private readonly IGlobalConfigBLLService _globalConfigBLLService 
+            = new GlobalConfigBLLService(
+                new GlobalConfigDALService(
+                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString, 
+                    new DapperWrapper()));
         #endregion
 
         private IDangKyHocPhanRequester dangKyHocPhanRequester;
@@ -185,11 +205,18 @@ namespace PL
                         if (_phieuDKHPBLLService.TaoPhieuDKHP(GlobalConfig.CurrNguoiDung.TenDangNhap, GlobalConfig.CurrMaHocKy, GlobalConfig.CurrNamHoc))
                         {
                             int maPhieu = _phieuDKHPBLLService.LayMaPhieuDKHP(GlobalConfig.CurrMaHocKy, GlobalConfig.CurrNamHoc); // next: lấy ma Phieu
-                            List<string> dsMaMH = new List<string>();
                             // tạo ra ct_phiếu đkhp
                             for (int i = 0; i < dgvDSMHDaChon.Rows.Count - 1; i++)
-                                dsMaMH.Add(dgvDSMHDaChon.Rows[i].Cells["MaMH"].Value.ToString());
-                            _CT_phieuDKHPBLLService.TaoCT_PhieuDKHP(maPhieu, dsMaMH);
+                            {
+                                CT_PhieuDKHP ct_phieuDKHP = new CT_PhieuDKHP
+                                {
+                                    MaPhieuDKHP = maPhieu,
+                                    MaMH = dgvDSMHDaChon.Rows[i].Cells["MaMH"].Value.ToString()
+                                };
+
+                                _CT_phieuDKHPBLLService.TaoCT_PhieuDKHP(ct_phieuDKHP);
+                            }
+
                             MessageBox.Show("Đăng ký thành công");
                             Close();
                         }
@@ -201,10 +228,17 @@ namespace PL
                         int maPhieu = _phieuDKHPBLLService.LayMaPhieuDKHP(GlobalConfig.CurrMaHocKy, GlobalConfig.CurrNamHoc); // next: lấy ma Phieu
                          _CT_phieuDKHPBLLService.XoaDSMHDKHP(maPhieu);
                         // tạo ra ct_phiếu đkhp
-                        List<string> dsMaMH = new List<string>();
                         for (int i = 0; i < dgvDSMHDaChon.Rows.Count - 1; i++)
-                            dsMaMH.Add(dgvDSMHDaChon.Rows[i].Cells["MaMH"].Value.ToString());
-                        _CT_phieuDKHPBLLService.TaoCT_PhieuDKHP(maPhieu, dsMaMH);
+                        {
+                            CT_PhieuDKHP ct_phieuDKHP = new CT_PhieuDKHP
+                            {
+                                MaPhieuDKHP = maPhieu,
+                                MaMH = dgvDSMHDaChon.Rows[i].Cells["MaMH"].Value.ToString()
+                            };
+
+                            _CT_phieuDKHPBLLService.TaoCT_PhieuDKHP(ct_phieuDKHP);
+                        }
+
                         MessageBox.Show("Lưu thành công");
                         Close();
                     }

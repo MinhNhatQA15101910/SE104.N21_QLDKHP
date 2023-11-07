@@ -16,7 +16,18 @@ namespace PL
 {
     public partial class QuanLyNganh : KryptonForm, IThemSuaNganhRequester
     {
-        private readonly INganhBLLService _nganhBLLService = new NganhBLLService(new NganhDALService(new DapperService(), ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString));
+        private readonly INganhBLLService _nganhBLLService 
+            = new NganhBLLService(
+                new NganhDALService(
+                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString,
+                    new DapperWrapper()),
+                new SinhVienDALService(
+                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString, 
+                    new DapperWrapper()),
+                new ChuongTrinhHocDALService(
+                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString, 
+                    new DapperWrapper())
+            );
 
         private INganhRequester nganhRequester;
         private BindingList<CT_Nganh> mNganh;
@@ -143,8 +154,12 @@ namespace PL
                 XoaNganhMessage message = _nganhBLLService.XoaNganh(maNganh);
                 switch (message)
                 {
-                    case XoaNganhMessage.Error:
-                        MessageBox.Show("Không thể xóa ngành vì có sinh viên đang thuộc ngành hiện tại!");
+                    case XoaNganhMessage.UnableForSinhVien:
+                        MessageBox.Show("Không thể xóa ngành vì có sinh viên đang thuộc ngành này!");
+                        break;
+                    case XoaNganhMessage.UnableForChuongTrinhHoc:
+                        mNganh.Remove(nganh);
+                        MessageBox.Show("Không thể xóa ngành vì có chương trình học của ngành này!");
                         break;
                     case XoaNganhMessage.Success:
                         mNganh.Remove(nganh);

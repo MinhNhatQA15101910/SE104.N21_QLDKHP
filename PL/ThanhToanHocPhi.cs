@@ -16,8 +16,16 @@ namespace PL
     public partial class ThanhToanHocPhi : KryptonForm
     {
         #region Register Service
-        private readonly IPhieuDKHPBLLService _phieuDKHPBLLService = new PhieuDKHPBLLService(new PhieuDKHPDALService(new DapperService(), ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString));
-        private readonly IGlobalConfigBLLService _globalConfigBLLService = new GlobalConfigBLLService(new GlobalConfigDALService(new DapperService(), ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString));
+        private readonly IPhieuDKHPBLLService _phieuDKHPBLLService 
+            = new PhieuDKHPBLLService(
+                new PhieuDKHPDALService(
+                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString, 
+                    new DapperWrapper()));
+        private readonly IGlobalConfigBLLService _globalConfigBLLService
+            = new GlobalConfigBLLService(
+                new GlobalConfigDALService(
+                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString, 
+                    new DapperWrapper()));
         #endregion
 
         private IThanhToanHocPhiRequester thanhToanHocPhiRequester;

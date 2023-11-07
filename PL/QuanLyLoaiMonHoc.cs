@@ -15,8 +15,19 @@ namespace PL
     public partial class QuanLyLoaiMonHoc : KryptonForm, IThemSuaLoaiMonHocRequester
     {
         #region Register Service
-        private readonly IGlobalConfigBLLService _globalConfigBLLService = new GlobalConfigBLLService(new GlobalConfigDALService(new DapperService(), ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString));
-        private readonly ILoaiMonHocBLLService _loaiMonHocBLLService = new LoaiMonHocBLLService(new LoaiMonHocDALService(new DapperService(), ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString));
+        private readonly IGlobalConfigBLLService _globalConfigBLLService 
+            = new GlobalConfigBLLService(
+                new GlobalConfigDALService(
+                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString, 
+                    new DapperWrapper()));
+        private readonly ILoaiMonHocBLLService _loaiMonHocBLLService 
+            = new LoaiMonHocBLLService(
+                new LoaiMonHocDALService(
+                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString, 
+                    new DapperWrapper()),
+                new MonHocDALService(
+                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString, 
+                    new DapperWrapper()));
         #endregion
 
         private ICaiDatRequester caiDatRequester;
@@ -115,8 +126,8 @@ namespace PL
                 case SuaGioiHanTinChiMessage.Unable:
                     MessageBox.Show("Giá trị nhập vào không hợp lệ!");
                     break;
-                case SuaGioiHanTinChiMessage.Error:
-                    MessageBox.Show("Đã có lỗi xảy ra!");
+                case SuaGioiHanTinChiMessage.Failed:
+                    MessageBox.Show("Cập nhật giới hạn tín chỉ thất bại!");
                     break;
                 case SuaGioiHanTinChiMessage.Success:
                     MessageBox.Show("Cập nhật giới hạn tín chỉ thành công!");
@@ -136,8 +147,11 @@ namespace PL
                 XoaLoaiMonHocMessage message = _loaiMonHocBLLService.XoaLoaiMonHoc(maLoaiMonHoc);
                 switch (message)
                 {
-                    case XoaLoaiMonHocMessage.Error:
-                        MessageBox.Show("Bạn không thể xóa loại môn học này vì có môn học đang thuộc về loại môn học!");
+                    case XoaLoaiMonHocMessage.Unable:
+                        MessageBox.Show("Không thể xóa loại môn học do có môn học đang thuộc loại này!");
+                        break;
+                    case XoaLoaiMonHocMessage.Failed:
+                        MessageBox.Show("Xóa loại môn học thất bại!");
                         break;
                     case XoaLoaiMonHocMessage.Success:
                         mLoaiMonHoc.Remove(loaiMonHoc);

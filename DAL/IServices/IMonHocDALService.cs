@@ -10,9 +10,9 @@ namespace DAL.IServices
         SuaMonHocMessage SuaMonHoc(string maMHBanDau, string tenMH, int maLoaiMonHoc, int soTiet);
         ThemMonHocMessage ThemMonHoc(string maMH, string tenMH, int maLoaiMonHoc, int soTiet);
         List<MonHoc> LayDSMonHoc2();
-        List<MonHoc> GetTermMonHoc(int HocKy);
-        List<MonHoc> GetTermMonHocMo(int HocKy, int NamHoc);
-        List<MonHoc> GetChuongTrinhHoc(string MaNganh, int HocKy);
-        List<MonHoc> GetMonHocPhieuDKHP(int MaPhieuDKHP);
+        List<MonHoc> GetTermMonHoc(int hocKy);
+        List<MonHoc> GetTermMonHocMo(int hocKy, int namHoc);
+        List<MonHoc> GetChuongTrinhHoc(string maNganh, int hocKy);
+        List<MonHoc> GetMonHocPhieuDKHP(int maPhieuDKHP);
     }
 }

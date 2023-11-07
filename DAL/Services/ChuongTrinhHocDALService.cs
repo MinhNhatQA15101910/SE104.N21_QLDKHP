@@ -1,7 +1,6 @@
 ﻿using DAL.IServices;
 using Dapper;
 using DTO;
-using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
@@ -9,89 +8,65 @@ using System.Linq;
 
 namespace DAL.Services
 {
-    public class ChuongTrinhHocDALService: IChuongTrinhHocDALService
+    public class ChuongTrinhHocDALService : IChuongTrinhHocDALService
     {
-        private readonly IDapperService _dapperService;
-        private readonly string _dbConnection;
+        private readonly string _connectionString;
+        private readonly IDapperWrapper _dapperWrapper;
 
-        public ChuongTrinhHocDALService(IDapperService dapperService, string dbConnection)
+        public ChuongTrinhHocDALService(string connectionString, IDapperWrapper dapperWrapper)
         {
-            _dapperService = dapperService;
-            _dbConnection = dbConnection;
+            _connectionString = connectionString;
+            _dapperWrapper = dapperWrapper;
         }
-        public MessageDeleteListCTHoc DeleteListCTHoc(string MaNganh, int HocKy)
+
+        public MessageDeleteListCTHoc DeleteListCTHoc(string maNganh, int hocKy)
         {
-            ChuongTrinhHoc CTHoc = new ChuongTrinhHoc();
-            try
+            using (var connection = new SqlConnection(_connectionString))
             {
-                using (IDbConnection connection = new SqlConnection(_dbConnection))
-                {
-                    var mhm = new DynamicParameters();
-                    mhm.Add("@MaNganh", MaNganh);
-                    mhm.Add("@HocKy", HocKy);
-                    _dapperService.Execute(connection, "spCHUONGTRINHHOC_DeleteListCTHoc", mhm, CommandType.StoredProcedure);
-                }
+                var mhm = new DynamicParameters();
+                mhm.Add("@MaNganh", maNganh);
+                mhm.Add("@HocKy", hocKy);
+                int result = _dapperWrapper.Execute(connection, "spCHUONGTRINHHOC_DeleteListCTHoc", mhm, commandType: CommandType.StoredProcedure);
+
+                return (result > 0) ? MessageDeleteListCTHoc.Success : MessageDeleteListCTHoc.Failed;
             }
-            catch (Exception)
-            {
-                return MessageDeleteListCTHoc.Failed;
-            }
-            if (CTHoc == null) return MessageDeleteListCTHoc.ErrorData;
-            return MessageDeleteListCTHoc.Success;
         }
 
         public List<ChuongTrinhHoc> GetAllCTHoc()
         {
-
-            using (IDbConnection connection = new SqlConnection(_dbConnection))
+            using (var connection = new SqlConnection(_connectionString))
             {
-                return _dapperService.Query<ChuongTrinhHoc>(connection, "spCHUONGTRINHHOC_GetAll").ToList();    
+                return _dapperWrapper.Query<ChuongTrinhHoc>(connection, "spCHUONGTRINHHOC_GetAll").ToList();
             }
-
-        }
-
-        public MessageAddCTHoc AddCTHoc(string MaMH, string MaNganh, int HocKy)
-        {
-            ChuongTrinhHoc CTHoc = new ChuongTrinhHoc();
-            try
-            {
-                using (IDbConnection connection = new SqlConnection(_dbConnection))
-                {
-                    var mhm = new DynamicParameters();
-                    mhm.Add("@MaMH", MaMH);
-                    mhm.Add("@MaNganh", MaNganh);
-                    mhm.Add("@HocKy", HocKy);
-                    _dapperService.Execute(connection, "spCHUONGTRINHHOC_AddCTHoc", mhm, CommandType.StoredProcedure);
-                }
-            }
-            catch (Exception)
-            {
-                return MessageAddCTHoc.Failed;
-            }
-            if (CTHoc == null) return MessageAddCTHoc.ErrorData;
-            return MessageAddCTHoc.Success;
         }
 
         public MessageDeleteCTHoc DeleteCTHoc(string MaMH, string MaNganh, int HocKy)
         {
-            ChuongTrinhHoc CTHoc = new ChuongTrinhHoc();
-            try
+            using (var connection = new SqlConnection(_connectionString))
             {
-                using (IDbConnection connection = new SqlConnection(_dbConnection))
-                {
-                    var mhm = new DynamicParameters();
-                    mhm.Add("@MaMH", MaMH);
-                    mhm.Add("@MaNganh", MaNganh);
-                    mhm.Add("@HocKy", HocKy);
-                    _dapperService.Execute(connection, "spCHUONGTRINHHOC_DeleteCTHoc", mhm, CommandType.StoredProcedure);
-                }
+                var mhm = new DynamicParameters();
+                mhm.Add("@MaMH", MaMH);
+                mhm.Add("@MaNganh", MaNganh);
+                mhm.Add("@HocKy", HocKy);
+                int result = _dapperWrapper.Execute(connection, "spCHUONGTRINHHOC_DeleteCTHoc", mhm, commandType: CommandType.StoredProcedure);
+
+                return (result > 0) ? MessageDeleteCTHoc.Success : MessageDeleteCTHoc.Failed;
             }
-            catch (Exception)
+        }
+
+        public MessageAddCTHoc AddCTHoc(ChuongTrinhHoc chuongTrinhHoc)
+        {
+            using (var connection = new SqlConnection(_connectionString))
             {
-                return MessageDeleteCTHoc.Failed;
+                var mhm = new DynamicParameters();
+                mhm.Add("@MaMH", chuongTrinhHoc.MaMH);
+                mhm.Add("@MaNganh", chuongTrinhHoc.MaNganh);
+                mhm.Add("@HocKy", chuongTrinhHoc.HocKy);
+
+                int result = _dapperWrapper.Execute(connection, "spCHUONGTRINHHOC_AddCTHoc", mhm, commandType: CommandType.StoredProcedure);
+
+                return (result > 0) ? MessageAddCTHoc.Success : MessageAddCTHoc.Failed;
             }
-            if (CTHoc == null) return MessageDeleteCTHoc.ErrorData;
-            return MessageDeleteCTHoc.Success;
         }
     }
 }

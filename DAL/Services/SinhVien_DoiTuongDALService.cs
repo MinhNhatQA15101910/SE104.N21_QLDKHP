@@ -6,23 +6,23 @@ using System.Linq;
 
 namespace DAL.Services
 {
-    public class NhomNguoiDungDALService : INhomNguoiDungDALService
-	{
+    public class SinhVien_DoiTuongDALService : ISinhVien_DoiTuongDALService
+    {
         private readonly string _connectionString;
         private readonly IDapperWrapper _dapperWrapper;
 
-        public NhomNguoiDungDALService(string connectionString, IDapperWrapper dapperWrapper)
+        public SinhVien_DoiTuongDALService(string connectionString, IDapperWrapper dapperWrapper)
         {
             _connectionString = connectionString;
             _dapperWrapper = dapperWrapper;
         }
 
-        public List<NhomNguoiDung> LayDSNhomNguoiDung()
-		{
+        public List<SinhVien_DoiTuong> GetSinhVien_DoiTuongs()
+        {
             using (var connection = new SqlConnection(_connectionString))
             {
-                return _dapperWrapper.Query<NhomNguoiDung>(connection, "spNHOMNGUOIDUNG_LayDSNhomNguoiDung").ToList();
+                return _dapperWrapper.Query<SinhVien_DoiTuong>(connection, "spSINHVIEN_DOITUONG_GetSinhVien_DoiTuongs").ToList();
             }
         }
-	}
+    }
 }

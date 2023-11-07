@@ -2,12 +2,14 @@
 using BLL.Services;
 using ComponentFactory.Krypton.Toolkit;
 using DAL.Services;
+using Dapper;
 using DTO;
 using PL.Interfaces;
 using System;
 using System.ComponentModel;
 using System.Configuration;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
@@ -16,8 +18,14 @@ namespace PL
 {
     public partial class QuanLyKhoa : KryptonForm, IThemSuaKhoaRequester
     {
-        private readonly IKhoaBLLService _khoaBLLService = new KhoaBLLService(new KhoaDALService(new DapperService(), ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString));
-
+        private readonly IKhoaBLLService _khoaBLLService 
+            = new KhoaBLLService(
+                new KhoaDALService(
+                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString, 
+                    new DapperWrapper()),
+                new NganhDALService(
+                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString, 
+                    new DapperWrapper()));
         private IKhoaRequester khoaRequester;
         private BindingList<Khoa> mKhoa;
         private BindingSource mKhoaSource;
@@ -123,8 +131,8 @@ namespace PL
                 XoaKhoaMessage message = _khoaBLLService.XoaKhoa(maKhoa);
                 switch (message)
                 {
-                    case XoaKhoaMessage.Error:
-                        MessageBox.Show("Không thể xóa khoa vì có ngành đang thuộc khoa hiện tại!");
+                    case XoaKhoaMessage.Unable:
+                        MessageBox.Show("Không thể xóa khoa vì có ngành đang thuộc khoa này!");
                         break;
                     case XoaKhoaMessage.Success:
                         mKhoa.Remove(khoa);

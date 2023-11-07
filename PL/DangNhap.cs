@@ -13,8 +13,16 @@ namespace PL
     public partial class DangNhap : KryptonForm, IAdminRequester, IGVRequester, ISinhVienRequester
     {
         #region Register Services
-        private readonly INguoiDungBLLService _nguoiDungBLLService = new NguoiDungBLLService(new NguoiDungDALService(new DapperService(), ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString));
-        private readonly IGlobalConfigBLLService _globalConfigBLLService = new GlobalConfigBLLService(new GlobalConfigDALService(new DapperService(), ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString));
+        private readonly INguoiDungBLLService _nguoiDungBLLService 
+            = new NguoiDungBLLService(
+                new NguoiDungDALService(
+                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString, 
+                    new DapperWrapper()));
+        private readonly IGlobalConfigBLLService _globalConfigBLLService 
+            = new GlobalConfigBLLService(
+                new GlobalConfigDALService(
+                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString, 
+                    new DapperWrapper()));
         #endregion
 
         public DangNhap()
@@ -71,9 +79,6 @@ namespace PL
                     break;
                 case DangNhapMessage.EmptyMatKhau:
                     MessageBox.Show("Vui lòng nhập mật khẩu!");
-                    break;
-                case DangNhapMessage.Error:
-                    MessageBox.Show("Đã có lỗi xảy ra!");
                     break;
                 case DangNhapMessage.Failed:
                     MessageBox.Show("Tên đăng nhập hoặc mật khẩu không chính xác!");

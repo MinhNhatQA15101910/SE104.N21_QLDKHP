@@ -14,7 +14,14 @@ namespace PL
 {
     public partial class QuanLyTinh : KryptonForm, IThemSuaTinhRequester
     {
-		private readonly ITinhBLLService _tinhBLLService = new TinhBLLService(new TinhDALService(new DapperService(), ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString));
+		private readonly ITinhBLLService _tinhBLLService 
+            = new TinhBLLService(
+                new TinhDALService(
+                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString, 
+                    new DapperWrapper()),
+                new HuyenDALService(
+                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString, 
+                    new DapperWrapper()));
 
 		private ICaiDatRequester caiDatRequester;
         private BindingList<Tinh> mTinh;
@@ -110,8 +117,11 @@ namespace PL
                 XoaTinhMessage message = _tinhBLLService.XoaTinh(maTinh);
                 switch (message)
                 {
-                    case XoaTinhMessage.Error:
-                        MessageBox.Show("Bạn không thể xóa tỉnh này do có huyện đang thuộc tỉnh!");
+                    case XoaTinhMessage.Unable:
+                        MessageBox.Show("Không thể xóa tỉnh vì có huyện đang thuộc tỉnh hiện tại!");
+                        break;
+                    case XoaTinhMessage.Failed:
+                        MessageBox.Show("Xóa tỉnh thất bại!");
                         break;
                     case XoaTinhMessage.Success:
                         mTinh.Remove(tinh);

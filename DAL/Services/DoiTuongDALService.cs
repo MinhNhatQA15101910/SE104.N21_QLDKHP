@@ -1,9 +1,7 @@
 ﻿using DAL.IServices;
 using Dapper;
 using DTO;
-using System;
 using System.Collections.Generic;
-using System.Configuration;
 using System.Data;
 using System.Data.SqlClient;
 using System.Linq;
@@ -12,130 +10,90 @@ namespace DAL.Services
 {
     public class DoiTuongDALService: IDoiTuongDALService
     {
-        private readonly IDapperService _dapperService;
-        private readonly string _dbConnection;
+        private readonly string _connectionString;
+        private readonly IDapperWrapper _dapperWrapper;
 
-        public DoiTuongDALService(IDapperService dapperService, string dbConnection)
+        public DoiTuongDALService(string connectionString, IDapperWrapper dapperWrapper)
         {
-            _dapperService = dapperService;
-            _dbConnection = dbConnection;
+            _connectionString = connectionString;
+            _dapperWrapper = dapperWrapper;
         }
 
         public List<DoiTuong> LayDSDoiTuong()
         {
-            using (IDbConnection connection = new SqlConnection(ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString))
+            using (var connection = new SqlConnection(_connectionString))
             {
-                return _dapperService.Query<DoiTuong>(connection, "spDOITUONG_LayDSDoiTuong").ToList();
+                return _dapperWrapper.Query<DoiTuong>(connection, "spDOITUONG_LayDSDoiTuong").ToList();
             }
         }
 
         public SuaDoiTuongMessage SuaDoiTuong(int maDTBanDau, string tenDT, float tiLeGiam)
         {
-            try
+            using (var connection = new SqlConnection(_connectionString))
             {
-                using (IDbConnection connection = new SqlConnection(_dbConnection))
-                {
-                    var p = new DynamicParameters();
-                    p.Add("@MaDT", maDTBanDau);
-                    p.Add("@TenDT", tenDT);
-                    p.Add("@TiLeGiamHocPhi", tiLeGiam);
-                    _dapperService.Execute(connection, "spDOITUONG_SuaDoiTuong", p, CommandType.StoredProcedure);
-                }
-            }
-            catch (SqlException ex)
-            {
-                if (ex.Number == 2627)
-                {
-                    if (ex.Message.Contains("UQ_DOITUONG_TenDT"))
-                    {
-                        return SuaDoiTuongMessage.DuplicateTenDoiTuong;
-                    }
-                }
-            }
-            catch (Exception)
-            {
-                return SuaDoiTuongMessage.Error;
-            }
+                var p = new DynamicParameters();
+                p.Add("@MaDT", maDTBanDau);
+                p.Add("@TenDT", tenDT);
+                p.Add("@TiLeGiamHocPhi", tiLeGiam);
+                int result = _dapperWrapper.Execute(connection, "spDOITUONG_SuaDoiTuong", p, commandType: CommandType.StoredProcedure);
 
-            return SuaDoiTuongMessage.Success;
+                return (result > 0) ? SuaDoiTuongMessage.Success : SuaDoiTuongMessage.Failed;
+            }
         }
 
         public ThemDoiTuongMessage ThemDoiTuong(string tenDT, float tiLeGiam)
         {
-            try
+            using (var connection = new SqlConnection(_connectionString))
             {
-                using (IDbConnection connection = new SqlConnection(_dbConnection))
-                {
-                    var p = new DynamicParameters();
-                    p.Add("@TenDT", tenDT);
-                    p.Add("@TiLeGiamHocPhi", tiLeGiam);
-                    _dapperService.Execute(connection, "spDOITUONG_ThemDoiTuong", p, CommandType.StoredProcedure);
-                }
-            }
-            catch (SqlException ex)
-            {
-                if (ex.Number == 2627)
-                {
-                    if (ex.Message.Contains("UQ_DOITUONG_TenDT"))
-                    {
-                        return ThemDoiTuongMessage.DuplicateTenDoiTuong;
-                    }
-                }
-            }
-            catch (Exception)
-            {
-                return ThemDoiTuongMessage.Error;
-            }
+                var p = new DynamicParameters();
+                p.Add("@TenDT", tenDT);
+                p.Add("@TiLeGiamHocPhi", tiLeGiam);
+                int result = _dapperWrapper.Execute(connection, "spDOITUONG_ThemDoiTuong", p, commandType: CommandType.StoredProcedure);
 
-            return ThemDoiTuongMessage.Success;
+                return (result > 0) ? ThemDoiTuongMessage.Success : ThemDoiTuongMessage.Failed;
+            }
         }
 
         public List<DoiTuong> LayDSDoiTuong2()
         {
-            using (IDbConnection connection = new SqlConnection(_dbConnection))
+            using (var connection = new SqlConnection(_connectionString))
             {
-                return _dapperService.Query<DoiTuong>(connection, "spDOITUONG_LayDSDoiTuong").ToList();
+                return _dapperWrapper.Query<DoiTuong>(connection, "spDOITUONG_LayDSDoiTuong").ToList();
             }
         }
 
         public List<DoiTuong> LayDSDoiTuongKhongThuocVeMaSV(string maSV)
         {
-
-            using (IDbConnection connection = new SqlConnection(_dbConnection))
+            using (var connection = new SqlConnection(_connectionString))
             {
                 var p = new DynamicParameters();
                 p.Add("@MaSV", maSV);
-                return _dapperService.Query<DoiTuong>(connection, "spDOITUONG_LayDSDoiTuongKhongThuocVeMaSV", p, CommandType.StoredProcedure).ToList();
+
+                return _dapperWrapper.Query<DoiTuong>(connection, "spDOITUONG_LayDSDoiTuongKhongThuocVeMaSV", p, commandType: CommandType.StoredProcedure).ToList();
             }
         }
 
         public List<DoiTuong> LayDSDoiTuongBangMaSV(string maSV)
         {
-            using (IDbConnection connection = new SqlConnection(_dbConnection))
+            using (var connection = new SqlConnection(_connectionString))
             {
                 var p = new DynamicParameters();
                 p.Add("@MaSV", maSV);
-                return _dapperService.Query<DoiTuong>(connection, "spDOITUONG_LayDSDoiTuongBangMaSV", p, CommandType.StoredProcedure).ToList();
+
+                return _dapperWrapper.Query<DoiTuong>(connection, "spDOITUONG_LayDSDoiTuongBangMaSV", p, commandType: CommandType.StoredProcedure).ToList();
             }
         }
 
         public XoaDoiTuongMessage XoaDoiTuong(int maDT)
         {
-            try
+            using (var connection = new SqlConnection(_connectionString))
             {
-                using (IDbConnection connection = new SqlConnection(_dbConnection))
-                {
-                    var p = new DynamicParameters();
-                    p.Add("@MaDT", maDT);
-                    _dapperService.Execute(connection, "spDOITUONG_XoaDoiTuong", p, CommandType.StoredProcedure);
-                }
-            }
-            catch (Exception)
-            {
-                return XoaDoiTuongMessage.Error;
-            }
+                var p = new DynamicParameters();
+                p.Add("@MaDT", maDT);
+                int result = _dapperWrapper.Execute(connection, "spDOITUONG_XoaDoiTuong", p, commandType: CommandType.StoredProcedure);
 
-            return XoaDoiTuongMessage.Success;
+                return (result > 0) ? XoaDoiTuongMessage.Success : XoaDoiTuongMessage.Failed;
+            }
         }
     }
 }

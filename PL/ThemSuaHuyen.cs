@@ -15,8 +15,22 @@ namespace PL
     public partial class ThemSuaHuyen : KryptonForm, IThemSuaTinhRequester
     {
         #region Register Services
-        private readonly ITinhBLLService _tinhBLLService = new TinhBLLService(new TinhDALService(new DapperService(), ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString));
-        private readonly IHuyenBLLService _huyenBLLService = new HuyenBLLService(new HuyenDALService(new DapperService(), ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString));
+        private readonly ITinhBLLService _tinhBLLService 
+            = new TinhBLLService(
+                new TinhDALService(
+                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString, 
+                    new DapperWrapper()),
+                new HuyenDALService(
+                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString, 
+                    new DapperWrapper()));
+        private readonly IHuyenBLLService _huyenBLLService 
+            = new HuyenBLLService(
+                new HuyenDALService(
+                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString, 
+                    new DapperWrapper()),
+                new SinhVienDALService(
+                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString, 
+                    new DapperWrapper()));
         #endregion
 
         private IThemSuaHuyenRequester themSuaHuyenRequester;
@@ -111,10 +125,10 @@ namespace PL
                         MessageBox.Show("Tên huyện không được để trống!");
                         break;
                     case SuaHuyenMessage.DuplicateTenHuyen:
-                        MessageBox.Show("Tên huyện đã tồn tại, vui lòng nhập giá trị khác!");
+                        MessageBox.Show("Tên huyện đã tồn tại trong tỉnh này, vui lòng nhập giá trị khác!");
                         break;
-                    case SuaHuyenMessage.Error:
-                        MessageBox.Show("Đã có lỗi xảy ra!");
+                    case SuaHuyenMessage.Failed:
+                        MessageBox.Show("Sửa huyện thất bại!");
                         break;
                     case SuaHuyenMessage.Success:
                         MessageBox.Show("Sửa huyện thành công!");
@@ -141,8 +155,8 @@ namespace PL
                     case ThemHuyenMessage.DuplicateTenHuyen:
                         MessageBox.Show("Tên huyện đã tồn tại, vui lòng nhập giá trị khác!");
                         break;
-                    case ThemHuyenMessage.Error:
-                        MessageBox.Show("Đã có lỗi xảy ra!");
+                    case ThemHuyenMessage.Failed:
+                        MessageBox.Show("Thêm huyện thất bại!");
                         break;
                     case ThemHuyenMessage.Success:
                         if (themSuaHuyenRequester != null)

@@ -1,7 +1,6 @@
 ﻿using DAL.IServices;
 using Dapper;
 using DTO;
-using System;
 using System.Data;
 using System.Data.SqlClient;
 
@@ -9,99 +8,85 @@ namespace DAL.Services
 {
     public class GlobalConfigDALService : IGlobalConfigDALService
     {
-        private readonly IDapperService _dapperService;
-        private readonly string _dbConnection;
+        private readonly string _connectionString;
+        private readonly IDapperWrapper _dapperWrapper;
 
-        public GlobalConfigDALService(IDapperService dapperService, string dbConnection)
+        public GlobalConfigDALService(string connectionString, IDapperWrapper dapperWrapper)
         {
-            _dapperService = dapperService;
-            _dbConnection = dbConnection;
+            _connectionString = connectionString;
+            _dapperWrapper = dapperWrapper;
         }
 
         public int GetCurrNamHoc()
         {
-            using (IDbConnection connection = new SqlConnection(_dbConnection))
+            using (var connection = new SqlConnection(_connectionString))
             {
-                return _dapperService.QueryFirst<int>(connection, "spGLOBALCONFIG_LayNamHocHienTai");
+                return _dapperWrapper.QueryFirst<int>(connection, "spGLOBALCONFIG_LayNamHocHienTai");
             }
         }
 
         public int LaySoTinChiToiDa()
         {
-            using (IDbConnection connection = new SqlConnection(_dbConnection))
+            using (var connection = new SqlConnection(_connectionString))
             {
-                return _dapperService.QueryFirst<int>(connection, "spGLOBALCONFIG_LaySoTinChiToiDa");
+                return _dapperWrapper.QueryFirst<int>(connection, "spGLOBALCONFIG_LaySoTinChiToiDa");
             }
         }
 
         public int LaySoTinChiToiThieu()
         {
-            using (IDbConnection connection = new SqlConnection(_dbConnection))
+            using (var connection = new SqlConnection(_connectionString))
             {
-                return _dapperService.QueryFirst<int>(connection, "spGLOBALCONFIG_LaySoTinChiToiThieu");
+                return _dapperWrapper.QueryFirst<int>(connection, "spGLOBALCONFIG_LaySoTinChiToiThieu");
             }
         }
 
         public int GetCurrMaHocKy()
         {
-            using (IDbConnection connection = new SqlConnection(_dbConnection))
+            using (var connection = new SqlConnection(_connectionString))
             {
                 var p = new DynamicParameters();
                 p.Add("@NamHocHienTai", GlobalConfig.CurrNamHoc);
-                return _dapperService.QueryFirst<int>(connection, "spGLOBALCONFIG_LayMaHocKyHienTai", p, commandType: CommandType.StoredProcedure);
+                return _dapperWrapper.QueryFirst<int>(connection, "spGLOBALCONFIG_LayMaHocKyHienTai", p, commandType: CommandType.StoredProcedure);
             }
         }
 
         public SuaGioiHanTinChiMessage SuaGioiHanTinChi(int tinChiToiDa, int tinChiToiThieu)
         {
-            try
+            using (var connection = new SqlConnection(_connectionString))
             {
-                using (IDbConnection connection = new SqlConnection(_dbConnection))
-                {
-                    var p = new DynamicParameters();
-                    p.Add("@SoTinChiToiDa", tinChiToiDa);
-                    p.Add("@SoTinChiToiThieu", tinChiToiThieu);
-                    _dapperService.Execute(connection, "spGLOBALCONFIG_SuaGioiHanTinChi", p, commandType: CommandType.StoredProcedure);
-                }
-            }
-            catch (Exception)
-            {
-                return SuaGioiHanTinChiMessage.Error;
-            }
+                var p = new DynamicParameters();
+                p.Add("@SoTinChiToiDa", tinChiToiDa);
+                p.Add("@SoTinChiToiThieu", tinChiToiThieu);
+                int result = _dapperWrapper.Execute(connection, "spGLOBALCONFIG_SuaGioiHanTinChi", p, commandType: CommandType.StoredProcedure);
 
-            return SuaGioiHanTinChiMessage.Success;
+                return (result > 0) ? SuaGioiHanTinChiMessage.Success : SuaGioiHanTinChiMessage.Failed;
+            }
         }
 
         public int LayKhoangTGDongHP(int hocKy, int namHoc)
         {
-            using (IDbConnection connection = new SqlConnection(_dbConnection))
+            using (var connection = new SqlConnection(_connectionString))
             {
                 var parameters = new DynamicParameters();
                 parameters.Add("@hocKy", hocKy);
                 parameters.Add("@namHoc", namHoc);
-                return _dapperService.QueryFirstOrDefault<int>(connection, "spGLOBALCONFIG_LayKhoangTGDongHP", parameters, commandType: CommandType.StoredProcedure);
+                return _dapperWrapper.QueryFirstOrDefault<int>(connection, "spGLOBALCONFIG_LayKhoangTGDongHP", parameters, commandType: CommandType.StoredProcedure);
             }
         }
 
-        public MessageKhoangTGDongHP KhoangTGDongHP(int MaHocKy, int NamHoc, int KhoangTG)
+        public MessageKhoangTGDongHP KhoangTGDongHP(int maHocKy, int namHoc, int khoangTG)
         {
-            try
+            using (var connection = new SqlConnection(_connectionString))
             {
-                using (IDbConnection connection = new SqlConnection(_dbConnection))
-                {
-                    var p = new DynamicParameters();
-                    p.Add("@MaHocKy", MaHocKy);
-                    p.Add("@NamHoc", NamHoc);
-                    p.Add("@KhoangTG", KhoangTG);
-                    _dapperService.Execute(connection, "spKHOANGTGDONGHP_Add", p, commandType: CommandType.StoredProcedure);
-                }
-            }
-            catch (Exception)
-            {
-                return MessageKhoangTGDongHP.Failed;
-            }
-            return MessageKhoangTGDongHP.Success;
+                var p = new DynamicParameters();
+                p.Add("@MaHocKy", maHocKy);
+                p.Add("@NamHoc", namHoc);
+                p.Add("@KhoangTG", khoangTG);
+                int result = _dapperWrapper.Execute(connection, "spKHOANGTGDONGHP_Add", p, commandType: CommandType.StoredProcedure);
 
+                return (result > 0) ? MessageKhoangTGDongHP.Success : MessageKhoangTGDongHP.Failed;
+            }
         }
     }
 }

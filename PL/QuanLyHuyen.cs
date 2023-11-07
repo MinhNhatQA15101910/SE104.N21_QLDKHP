@@ -15,7 +15,14 @@ namespace PL
     public partial class QuanLyHuyen : KryptonForm, IThemSuaHuyenRequester
     {
         #region Register Services
-        private readonly IHuyenBLLService _huyenBLLService = new HuyenBLLService(new HuyenDALService(new DapperService(), ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString));
+        private readonly IHuyenBLLService _huyenBLLService 
+            = new HuyenBLLService(
+                new HuyenDALService(
+                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString, 
+                    new DapperWrapper()),
+                new SinhVienDALService(
+                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString, 
+                    new DapperWrapper()));
         #endregion
 
         private ICaiDatRequester caiDatRequester;
@@ -114,8 +121,11 @@ namespace PL
                 XoaHuyenMessage message = _huyenBLLService.XoaHuyen(maHuyen);
                 switch (message)
                 {
-                    case XoaHuyenMessage.Error:
-                        MessageBox.Show("Bạn không thể xóa huyện này do có sinh viên đang thuộc huyện!");
+                    case XoaHuyenMessage.Unable:
+                        MessageBox.Show("Không thể xóa huyện vì có sinh viên đang thuộc huyện trên!");
+                        break;
+                    case XoaHuyenMessage.Failed:
+                        MessageBox.Show("Xóa huyện thất bại!");
                         break;
                     case XoaHuyenMessage.Success:
                         mHuyen.Remove(huyen);

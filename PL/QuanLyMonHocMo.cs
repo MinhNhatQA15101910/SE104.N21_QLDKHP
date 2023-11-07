@@ -17,9 +17,30 @@ namespace PL
     public partial class QuanLyMonHocMo : KryptonForm, ITraCuuMonHocMoRequester
     {
         #region Register Service
-        private readonly IMonHocBLLService _monHocBLLService = new MonHocBLLService(new MonHocDALService(new DapperService(), ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString));
-        private readonly IGlobalConfigBLLService _globalConfigBLLService = new GlobalConfigBLLService(new GlobalConfigDALService(new DapperService(), ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString));
-        private readonly IMonHocMoBLLService _monHocMoBLLService = new MonHocMoBLLService(new MonHocMoDALService(new DapperService(), ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString));
+        private readonly IMonHocBLLService _monHocBLLService
+            = new MonHocBLLService(
+                new MonHocDALService(
+                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString,
+                    new DapperWrapper()),
+                new DanhSachMonHocMoDALService(
+                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString,
+                    new DapperWrapper()),
+                new CT_PhieuDKHPDALService(
+                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString,
+                    new DapperWrapper()),
+                new ChuongTrinhHocDALService(
+                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString,
+                    new DapperWrapper()));
+        private readonly IGlobalConfigBLLService _globalConfigBLLService 
+            = new GlobalConfigBLLService(
+                new GlobalConfigDALService(
+                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString, 
+                    new DapperWrapper()));
+        private readonly IMonHocMoBLLService _monHocMoBLLService 
+            = new MonHocMoBLLService(
+                new MonHocMoDALService(
+                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString, 
+                    new DapperWrapper()));
         #endregion
 
         private IMonHocMoRequester monHocMoRequester;
@@ -210,7 +231,7 @@ namespace PL
                     }
                     else
                     {
-                        MessageKhoangTGDongHP message = _globalConfigBLLService.KhoangTGDongHP(HocKyNow, NamHocNow, Int32.Parse(txt_SoNgayDongHp.Text.ToString()));
+                        MessageKhoangTGDongHP message = _globalConfigBLLService.KhoangTGDongHP(HocKyNow, NamHocNow, int.Parse(txt_SoNgayDongHp.Text.ToString()));
                         switch (message)
                         {
                             case MessageKhoangTGDongHP.Failed:

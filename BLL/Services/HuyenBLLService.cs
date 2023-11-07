@@ -1,17 +1,21 @@
 ﻿using BLL.IServices;
 using DAL.IServices;
+using DAL.Services;
 using DTO;
 using System.Collections.Generic;
+using System.Configuration;
 
 namespace BLL.Services
 {
     public class HuyenBLLService : IHuyenBLLService
     {
         private readonly IHuyenDALService _huyenDALService;
+        private readonly ISinhVienDALService _sinhVienDALService;
 
-        public HuyenBLLService(IHuyenDALService huyenDALService)
+        public HuyenBLLService(IHuyenDALService huyenDALService, ISinhVienDALService sinhVienDALService)
         {
             _huyenDALService = huyenDALService;
+            _sinhVienDALService = sinhVienDALService;
         }
 
         public List<CT_Huyen> LayDSHuyen()
@@ -21,9 +25,16 @@ namespace BLL.Services
 
         public SuaHuyenMessage SuaHuyen(int maHuyen, string tenHuyen, int vungUT, int maTinh)
         {
-            if (tenHuyen.Equals(""))
+            if (string.IsNullOrEmpty(tenHuyen))
             {
                 return SuaHuyenMessage.EmptyTenHuyen;
+            }
+
+            List<CT_Huyen> ct_Huyens = _huyenDALService.LayDSHuyen();
+            CT_Huyen ct_Huyen = ct_Huyens.Find(h => h.TenHuyen == tenHuyen && h.MaTinh == maTinh && h.MaHuyen != maHuyen);
+            if (ct_Huyen != null)
+            {
+                return SuaHuyenMessage.DuplicateTenHuyen;
             }
 
             return _huyenDALService.SuaHuyen(maHuyen, tenHuyen, vungUT, maTinh);
@@ -31,9 +42,16 @@ namespace BLL.Services
 
         public ThemHuyenMessage ThemHuyen(string tenHuyen, int vungUT, int maTinh)
         {
-            if (tenHuyen.Equals(""))
+            if (string.IsNullOrEmpty(tenHuyen))
             {
                 return ThemHuyenMessage.EmptyTenHuyen;
+            }
+
+            List<CT_Huyen> ct_Huyens = _huyenDALService.LayDSHuyen();
+            CT_Huyen ct_Huyen = ct_Huyens.Find(h => h.TenHuyen == tenHuyen && h.MaTinh == maTinh);
+            if (ct_Huyen != null)
+            {
+                return ThemHuyenMessage.DuplicateTenHuyen;
             }
 
             return _huyenDALService.ThemHuyen(tenHuyen, vungUT, maTinh);
@@ -41,6 +59,13 @@ namespace BLL.Services
 
         public XoaHuyenMessage XoaHuyen(int maHuyen)
         {
+            List<CT_SinhVien> ct_SinhViens = _sinhVienDALService.LayDSSV();
+            CT_SinhVien ct_SinhVien = ct_SinhViens.Find(sv => sv.MaHuyen == maHuyen);
+            if (ct_SinhVien != null)
+            {
+                return XoaHuyenMessage.Unable;
+            }
+
             return _huyenDALService.XoaHuyen(maHuyen);
         }
     }

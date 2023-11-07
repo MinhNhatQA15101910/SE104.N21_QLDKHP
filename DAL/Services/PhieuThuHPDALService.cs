@@ -11,68 +11,62 @@ namespace DAL.Services
 {
     public class PhieuThuHPDALService : IPhieuThuHPDALService
 	{
-		private readonly IDapperService _dapperService;
-		private readonly string _dbConnection;
+        private readonly string _connectionString;
+        private readonly IDapperWrapper _dapperWrapper;
 
-		public PhieuThuHPDALService(IDapperService dapperService, string dbConnection)
+        public PhieuThuHPDALService(string connectionString, IDapperWrapper dapperWrapper)
+        {
+            _connectionString = connectionString;
+            _dapperWrapper = dapperWrapper;
+        }
+
+        public DateTime LayThoiGianDongHPGanNhat(int maPhieuDKHP)
 		{
-			_dapperService = dapperService;
-			_dbConnection = dbConnection;
-		}
-		public DateTime LayThoiGianDongHPGanNhat(int maPhieuDKHP)
-		{
-			using (IDbConnection connection = new SqlConnection(_dbConnection))
-			{
-				var parameters = new DynamicParameters();
-				parameters.Add("@ma", maPhieuDKHP);
-                return _dapperService.QueryFirstOrDefault<DateTime>(connection, "spPHIEUTHUHP_LayThoiGianDongHPGanNhat", parameters, commandType: CommandType.StoredProcedure);
-			}
-		}
+            using (var connection = new SqlConnection(_connectionString))
+            {
+                var parameters = new DynamicParameters();
+                parameters.Add("@ma", maPhieuDKHP);
+                return _dapperWrapper.QueryFirstOrDefault<DateTime>(connection, "spPHIEUTHUHP_LayThoiGianDongHPGanNhat", parameters, commandType: CommandType.StoredProcedure);
+            }
+        }
 
 		public bool TaoPhieuThu_ChoXacNhan(int soTienThu, int soPhieuDKHP)
 		{
-			int numRowsAffected;
-			using (IDbConnection connection = new SqlConnection(_dbConnection))
-			{
-				var parameters = new DynamicParameters();
-				parameters.Add("@soTienThu", soTienThu);
-				parameters.Add("@maPhieuDKHP", soPhieuDKHP);
-				numRowsAffected = _dapperService.Execute(connection, "spPHIEUTHUHP_TaoPhieuThu_ChoXacNhan ", parameters, commandType: CommandType.StoredProcedure);
-			}
+            using (var connection = new SqlConnection(_connectionString))
+            {
+                var parameters = new DynamicParameters();
+                parameters.Add("@soTienThu", soTienThu);
+                parameters.Add("@maPhieuDKHP", soPhieuDKHP);
+                int numRowsAffected = _dapperWrapper.Execute(connection, "spPHIEUTHUHP_TaoPhieuThu_ChoXacNhan ", parameters, commandType: CommandType.StoredProcedure);
 
-			if (numRowsAffected > 0)
-				return true;
-			else
-				return false;
+                if (numRowsAffected > 0)
+                    return true;
+                else
+                    return false;
+            }
 		}
 
-		public List<PhieuThuHP> GetPhieuThuHP(int MaTinhTrang)
+		public List<PhieuThuHP> GetPhieuThuHP(int maTinhTrang)
 		{
-			using (IDbConnection connection = new SqlConnection(_dbConnection))
-			{
-				var p = new DynamicParameters();
-				p.Add("@MaTinhTrang", MaTinhTrang);
-				return _dapperService.Query<PhieuThuHP>(connection, "spPHIEUTHUHP_GetPhieuThuHP", p, commandType: CommandType.StoredProcedure).ToList();
-			}
-		}
+            using (var connection = new SqlConnection(_connectionString))
+            {
+                var p = new DynamicParameters();
+                p.Add("@MaTinhTrang", maTinhTrang);
+                return _dapperWrapper.Query<PhieuThuHP>(connection, "spPHIEUTHUHP_GetPhieuThuHP", p, commandType: CommandType.StoredProcedure).ToList();
+            }
+        }
 
-		public MessagePhieuThuHPUpdateTinhTrang PhieuThuHPUpdateTinhTrang(int MaPhieuThuHP, int MaTinhTrang)
+		public MessagePhieuThuHPUpdateTinhTrang PhieuThuHPUpdateTinhTrang(int maPhieuThuHP, int maTinhTrang)
 		{
-			try
-			{
-				using (IDbConnection connection = new SqlConnection(_dbConnection))
-				{
-					var p = new DynamicParameters();
-					p.Add("@MaPhieuThuHP", MaPhieuThuHP);
-					p.Add("@MaTinhTrang", MaTinhTrang);
-					_dapperService.Execute(connection, "spPHIEUTHUHP_UpdateTinhTrang", p, commandType: CommandType.StoredProcedure);
-				}
-			}
-			catch (Exception)
-			{
-				return MessagePhieuThuHPUpdateTinhTrang.Failed;
-			}
-			return MessagePhieuThuHPUpdateTinhTrang.Success;
+            using (var connection = new SqlConnection(_connectionString))
+            {
+                var p = new DynamicParameters();
+                p.Add("@MaPhieuThuHP", maPhieuThuHP);
+                p.Add("@MaTinhTrang", maTinhTrang);
+                int result = _dapperWrapper.Execute(connection, "spPHIEUTHUHP_UpdateTinhTrang", p, commandType: CommandType.StoredProcedure);
+
+                return (result > 0) ? MessagePhieuThuHPUpdateTinhTrang.Success : MessagePhieuThuHPUpdateTinhTrang.Failed;
+            }
 		}
 	}
 }

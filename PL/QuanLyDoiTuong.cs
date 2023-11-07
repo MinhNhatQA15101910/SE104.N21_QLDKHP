@@ -14,7 +14,13 @@ namespace PL
 {
     public partial class QuanLyDoiTuong : KryptonForm, IThemSuaDoiTuongRequester
     {
-        private readonly IDoiTuongBLLService _doiTuongBLLService = new DoiTuongBLLService(new DoiTuongDALService(new DapperService(), ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString));
+        private readonly IDoiTuongBLLService _doiTuongBLLService = new DoiTuongBLLService(
+            new DoiTuongDALService(
+                ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString, 
+                new DapperWrapper()),
+            new SinhVien_DoiTuongDALService(
+                ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString, 
+                new DapperWrapper()));
 
         private ICaiDatRequester caiDatRequester;
         private BindingList<DoiTuong> mDoiTuong;
@@ -112,11 +118,14 @@ namespace PL
                 XoaDoiTuongMessage message = _doiTuongBLLService.XoaDoiTuong(maDT);
                 switch (message)
                 {
-                    case XoaDoiTuongMessage.Error:
-                        MessageBox.Show("Bạn không thể xóa đối tượng này do có sinh viên đang thuộc đối tượng!");
+                    case XoaDoiTuongMessage.UnableToDeleteVungSauVungXa:
+                        MessageBox.Show("Bạn không thể xóa đối tượng vùng sâu vùng xa!");
                         break;
                     case XoaDoiTuongMessage.Unable:
-                        MessageBox.Show("Bạn không thể xóa đối tượng vùng sâu vùng xa!");
+                        MessageBox.Show("Bạn không thể xóa đối tượng này vì đang có sinh viên thuộc đối tượng!");
+                        break;
+                    case XoaDoiTuongMessage.Failed:
+                        MessageBox.Show("Xóa đối tượng thất bại!");
                         break;
                     case XoaDoiTuongMessage.Success:
                         mDoiTuong.Remove(doiTuong);

@@ -35,34 +35,22 @@ namespace BLL.Services
 
         public SuaGioiHanTinChiMessage SuaGioiHanTinChi(string tinChiToiDa, string tinChiToiThieu)
         {
-            if (tinChiToiDa == "")
+            if (string.IsNullOrEmpty(tinChiToiDa))
             {
                 return SuaGioiHanTinChiMessage.TinChiToiDaRong;
             }
 
-            if (tinChiToiThieu == "")
+            if (string.IsNullOrEmpty(tinChiToiThieu))
             {
                 return SuaGioiHanTinChiMessage.TinChiToiThieuRong;
             }
 
-            int tinChiToiDaValue;
-            if (!int.TryParse(tinChiToiDa, out tinChiToiDaValue))
+            if (!int.TryParse(tinChiToiDa, out int tinChiToiDaValue) || tinChiToiDaValue <= 0)
             {
                 return SuaGioiHanTinChiMessage.TinChiToiDaKhongHopLe;
             }
 
-            if (tinChiToiDaValue <= 0)
-            {
-                return SuaGioiHanTinChiMessage.TinChiToiDaKhongHopLe;
-            }
-
-            int tinChiToiThieuValue;
-            if (!int.TryParse(tinChiToiThieu, out tinChiToiThieuValue))
-            {
-                return SuaGioiHanTinChiMessage.TinChiToiThieuKhongHopLe;
-            }
-
-            if (tinChiToiThieuValue <= 0)
+            if (!int.TryParse(tinChiToiThieu, out int tinChiToiThieuValue) || tinChiToiThieuValue <= 0)
             {
                 return SuaGioiHanTinChiMessage.TinChiToiThieuKhongHopLe;
             }
@@ -80,9 +68,9 @@ namespace BLL.Services
             return _globalConfigDALService.LayKhoangTGDongHP(hocKy, namHoc);
         }
 
-        public MessageKhoangTGDongHP KhoangTGDongHP(int MaHocKy, int NamHoc, int KhoangTG)
+        public MessageKhoangTGDongHP KhoangTGDongHP(int maHocKy, int namHoc, int khoangTG)
         {
-            return _globalConfigDALService.KhoangTGDongHP(MaHocKy, NamHoc, KhoangTG);
+            return _globalConfigDALService.KhoangTGDongHP(maHocKy, namHoc, khoangTG);
         }
     }
 }

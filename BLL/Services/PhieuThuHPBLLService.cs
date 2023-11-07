@@ -9,21 +9,24 @@ namespace BLL.Services
     public class PhieuThuHPBLLService : IPhieuThuHPBLLService
 	{
 		private readonly IPhieuThuHPDALService _phieuThuHPDALService;
+
 		public PhieuThuHPBLLService(IPhieuThuHPDALService phieuThuHPDALService)
 		{
 			_phieuThuHPDALService = phieuThuHPDALService;
 		}
+
 		public TimKiemTTHocPhiMessage KtTimKiemTTHocPhi(string namHoc)
 		{
-			if (namHoc == "")
+			if (string.IsNullOrEmpty(namHoc))
 			{
 				return TimKiemTTHocPhiMessage.EmptyNamHoc;
 			}
 
-			if (!int.TryParse(namHoc, out _))
+			if (!int.TryParse(namHoc, out int namHocValue) || namHocValue < 0)
 			{
 				return TimKiemTTHocPhiMessage.InvalidNamHoc;
 			}
+
 			return TimKiemTTHocPhiMessage.Sucess;
 		}
 
@@ -51,14 +54,14 @@ namespace BLL.Services
 			return _phieuThuHPDALService.TaoPhieuThu_ChoXacNhan(soTienThu, soPhieuDKHP);
 		}
 
-		public List<DTO.PhieuThuHP> GetPhieuThuHP(int MaTinhTrang)
+		public List<DTO.PhieuThuHP> GetPhieuThuHP(int maTinhTrang)
 		{
-			return _phieuThuHPDALService.GetPhieuThuHP(MaTinhTrang);
+			return _phieuThuHPDALService.GetPhieuThuHP(maTinhTrang);
 		}
 
-		public MessagePhieuThuHPUpdateTinhTrang PhieuThuHPUpdateTinhTrang(int MaPhieuThuHP, int MaTinhTrang)
+		public MessagePhieuThuHPUpdateTinhTrang PhieuThuHPUpdateTinhTrang(int maPhieuThuHP, int maTinhTrang)
 		{
-			return _phieuThuHPDALService.PhieuThuHPUpdateTinhTrang(MaPhieuThuHP, MaTinhTrang);
+			return _phieuThuHPDALService.PhieuThuHPUpdateTinhTrang(maPhieuThuHP, maTinhTrang);
 		}
 	}
 }

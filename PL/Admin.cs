@@ -17,8 +17,16 @@ namespace PL
 {
     public partial class Admin : KryptonForm, IThemSuaTaiKhoanRequester
     {
-		private readonly INguoiDungBLLService _nguoiDungBLLService = new NguoiDungBLLService(new NguoiDungDALService(new DapperService(), ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString));
-		private readonly ISinhVienBLLService _sinhVienBLLService = new SinhVienBLLService(new SinhVienDALService(new DapperService(), ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString));
+		private readonly INguoiDungBLLService _nguoiDungBLLService 
+            = new NguoiDungBLLService(
+                new NguoiDungDALService(
+                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString, 
+                    new DapperWrapper()));
+		private readonly ISinhVienBLLService _sinhVienBLLService 
+            = new SinhVienBLLService(
+                new SinhVienDALService(
+                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString,
+                    new DapperWrapper()));
 
 		private IAdminRequester adminRequester;
 
@@ -269,11 +277,11 @@ namespace PL
                 case ThemTaiKhoanSVMessage.Unable:
                     MessageBox.Show("Vui lòng chọn sinh viên để thêm tài khoản!");
                     break;
-                case ThemTaiKhoanSVMessage.Error:
-                    MessageBox.Show("Đã có lỗi xảy ra!");
+                case ThemTaiKhoanSVMessage.Failed:
+                    MessageBox.Show("Thêm tài khoản sinh viên thất bại!");
                     break;
                 case ThemTaiKhoanSVMessage.Success:
-                    MessageBox.Show("Thêm tài khoản thành công!");
+                    MessageBox.Show("Thêm tài khoản sinh viên thành công!");
 
                     mSinhVienChuaCoTKSelected.Clear();
                     mNguoiDung = new BindingList<CT_NguoiDung>(_nguoiDungBLLService.LayDSNguoiDung());
@@ -296,8 +304,8 @@ namespace PL
                     case XoaTaiKhoanMessage.Unable:
                         MessageBox.Show("Không thể xóa tài khoản hiện tại!");
                         break;
-                    case XoaTaiKhoanMessage.Error:
-                        MessageBox.Show("Đã có lỗi xảy ra!");
+                    case XoaTaiKhoanMessage.Failed:
+                        MessageBox.Show("Xóa tài khoản thất bại!");
                         break;
                     case XoaTaiKhoanMessage.Success:
                         mNguoiDung = new BindingList<CT_NguoiDung>(_nguoiDungBLLService.LayDSNguoiDung());

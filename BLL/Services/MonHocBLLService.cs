@@ -1,21 +1,23 @@
 ﻿using BLL.IServices;
 using DAL.IServices;
-using DAL.Services;
 using DTO;
 using System.Collections.Generic;
-using System.Configuration;
 
 namespace BLL.Services
 {
-    public class MonHocBLLService: IMonHocBLLService
+    public class MonHocBLLService : IMonHocBLLService
     {
-        private readonly IDanhSachMonHocMoDALService _danhSachMonHocMoDALService = new DanhSachMonHocMoDALService(new DapperService(), ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString);
-        
         private readonly IMonHocDALService _monHocDALService;
+        private readonly IDanhSachMonHocMoDALService _danhSachMonHocMoDALService;
+        private readonly ICT_PhieuDKHPDALService _ct_PhieuDKHPDALService;
+        private readonly IChuongTrinhHocDALService _chuongTrinhHocDALService;
 
-        public MonHocBLLService(IMonHocDALService monHocDALService)
+        public MonHocBLLService(IMonHocDALService monHocDALService, IDanhSachMonHocMoDALService danhSachMonHocMoDALService, ICT_PhieuDKHPDALService ct_PhieuDKHPDALService, IChuongTrinhHocDALService chuongTrinhHocDALService)
         {
             _monHocDALService = monHocDALService;
+            _danhSachMonHocMoDALService = danhSachMonHocMoDALService;
+            _ct_PhieuDKHPDALService = ct_PhieuDKHPDALService;
+            _chuongTrinhHocDALService = chuongTrinhHocDALService;
         }
 
         public List<CT_MonHoc> LayDSMonHoc()
@@ -25,46 +27,78 @@ namespace BLL.Services
 
         public XoaMonHocMessage XoaMonHoc(string maMH)
         {
+            var danhSachMonHocMos = _danhSachMonHocMoDALService.LayDSMonHocMo();
+            var danhSachMonHocMo = danhSachMonHocMos.Find(dsmhm => dsmhm == maMH);
+            if (danhSachMonHocMo != null)
+            {
+                return XoaMonHocMessage.UnableForDanhSachMonHocMo;
+            }
+
+            var ct_PhieuDKHPs = _ct_PhieuDKHPDALService.GetCT_PhieuDKHPs();
+            var ct_PhieuDKHP = ct_PhieuDKHPs.Find(ct_pdkhp => ct_pdkhp.MaMH == maMH);
+            if (ct_PhieuDKHP != null)
+            {
+                return XoaMonHocMessage.UnableForCT_PhieuDKHP;
+            }
+
+            var chuongTrinhHocs = _chuongTrinhHocDALService.GetAllCTHoc();
+            var chuongTrinhHoc = chuongTrinhHocs.Find(cth => cth.MaMH == maMH);
+            if (chuongTrinhHoc != null)
+            {
+                return XoaMonHocMessage.UnableForChuongTrinhHoc;
+            }
+
             return _monHocDALService.XoaMonHoc(maMH);
         }
 
         public SuaMonHocMessage SuaMonHoc(string maMHBanDau, string maMH, string tenMH, int maLoaiMonHoc, string soTiet, int soTietLoaiMon)
         {
-            List<string> currMonHocMoList = _danhSachMonHocMoDALService.LayDSMonHocMo();
-            if (currMonHocMoList.Contains(maMHBanDau))
-            {
-                return SuaMonHocMessage.Unable;
-            }
-
-            if (maMH.Equals(""))
+            if (string.IsNullOrEmpty(maMH))
             {
                 return SuaMonHocMessage.EmptyMaMH;
             }
 
-            if (tenMH.Equals(""))
+            if (string.IsNullOrEmpty(tenMH))
             {
                 return SuaMonHocMessage.EmptyTenMH;
             }
 
-            if (soTiet.Equals(""))
+            if (string.IsNullOrEmpty(soTiet))
             {
                 return SuaMonHocMessage.EmptySoTiet;
             }
 
-            int soTietValue;
-            if (!int.TryParse(soTiet, out soTietValue))
+            if (!int.TryParse(soTiet, out int soTietValue) || soTietValue < 0 || soTietValue % soTietLoaiMon != 0)
             {
                 return SuaMonHocMessage.InvalidSoTiet;
             }
 
-            if (soTietValue < 0)
+            var monHocs = _monHocDALService.LayDSMonHoc();
+            var monHoc = monHocs.Find(mh => mh.MaMH == maMH && mh.MaMH != maMHBanDau);
+            if (monHoc != null)
             {
-                return SuaMonHocMessage.InvalidSoTiet;
+                return SuaMonHocMessage.DuplicateMaMH;
             }
 
-            if (soTietValue % soTietLoaiMon != 0)
+            var danhSachMonHocMos = _danhSachMonHocMoDALService.LayDSMonHocMo();
+            var danhSachMonHocMo = danhSachMonHocMos.Find(dsmhm => dsmhm == maMH && dsmhm != maMHBanDau);
+            if (danhSachMonHocMo != null)
             {
-                return SuaMonHocMessage.InvalidSoTiet;
+                return SuaMonHocMessage.UnableForDanhSachMonHocMo;
+            }
+
+            var ct_PhieuDKHPs = _ct_PhieuDKHPDALService.GetCT_PhieuDKHPs();
+            var ct_PhieuDKHP = ct_PhieuDKHPs.Find(ct_pdkhp => ct_pdkhp.MaMH == maMH && ct_pdkhp.MaMH != maMHBanDau);
+            if (ct_PhieuDKHP != null)
+            {
+                return SuaMonHocMessage.UnableForCT_PhieuDKHP;
+            }
+
+            var chuongTrinhHocs = _chuongTrinhHocDALService.GetAllCTHoc();
+            var chuongTrinhHoc = chuongTrinhHocs.Find(cth => cth.MaMH == maMH && cth.MaMH != maMHBanDau);
+            if (chuongTrinhHoc != null)
+            {
+                return SuaMonHocMessage.UnableForChuongTrinhHoc;
             }
 
             return _monHocDALService.SuaMonHoc(maMHBanDau, tenMH, maLoaiMonHoc, soTietValue);
@@ -72,48 +106,49 @@ namespace BLL.Services
 
         public ThemMonHocMessage ThemMonHoc(string maMH, string tenMH, int maLoaiMonHoc, string soTiet, int soTietLoaiMon)
         {
-            if (maMH.Equals(""))
+            if (string.IsNullOrEmpty(maMH))
             {
                 return ThemMonHocMessage.EmptyMaMH;
             }
 
-            if (tenMH.Equals(""))
+            if (string.IsNullOrEmpty(tenMH))
             {
                 return ThemMonHocMessage.EmptyTenMH;
             }
 
-            if (soTiet.Equals(""))
+            if (string.IsNullOrEmpty(soTiet))
             {
                 return ThemMonHocMessage.EmptySoTiet;
             }
 
-            int soTietValue;
-            if (!int.TryParse(soTiet, out soTietValue))
+            if (!int.TryParse(soTiet, out int soTietValue) || soTietValue < 0 || soTietValue % soTietLoaiMon != 0)
             {
                 return ThemMonHocMessage.InvalidSoTiet;
             }
 
-            if (soTietValue % soTietLoaiMon != 0)
+            var monHocs = _monHocDALService.LayDSMonHoc();
+            var monHoc = monHocs.Find(mh => mh.MaMH == maMH);
+            if (monHoc != null)
             {
-                return ThemMonHocMessage.InvalidSoTiet;
+                return ThemMonHocMessage.DuplicateMaMH;
             }
 
             return _monHocDALService.ThemMonHoc(maMH, tenMH, maLoaiMonHoc, soTietValue);
         }
 
-        public List<MonHoc> GetTermMonHoc(int HocKy)
+        public List<MonHoc> GetTermMonHoc(int hocKy)
         {
-            return _monHocDALService.GetTermMonHoc(HocKy);
+            return _monHocDALService.GetTermMonHoc(hocKy);
         }
 
-        public List<MonHoc> GetTermMonHocMo(int HocKy, int NamHoc)
+        public List<MonHoc> GetTermMonHocMo(int hocKy, int namHoc)
         {
-            return _monHocDALService.GetTermMonHocMo(HocKy, NamHoc);
+            return _monHocDALService.GetTermMonHocMo(hocKy, namHoc);
         }
 
-        public List<MonHoc> GetChuongTrinhHoc(string Nganh, int HocKy)
+        public List<MonHoc> GetChuongTrinhHoc(string nganh, int hocKy)
         {
-            return _monHocDALService.GetChuongTrinhHoc(Nganh, HocKy);
+            return _monHocDALService.GetChuongTrinhHoc(nganh, hocKy);
         }
 
         public List<MonHoc> LayDSMonHoc2()
@@ -121,9 +156,9 @@ namespace BLL.Services
             return _monHocDALService.LayDSMonHoc2();
         }
 
-        public List<MonHoc> GetMonHocPhieuDKHP(int MaPhieuDKHP)
+        public List<MonHoc> GetMonHocPhieuDKHP(int maPhieuDKHP)
         {
-            return _monHocDALService.GetMonHocPhieuDKHP(MaPhieuDKHP);
+            return _monHocDALService.GetMonHocPhieuDKHP(maPhieuDKHP);
         }
     }
 }

@@ -13,7 +13,13 @@ namespace PL
     public partial class ThemSuaLoaiMonHoc : KryptonForm
     {
         #region Register Services
-        private readonly ILoaiMonHocBLLService _loaiMonHocBLLService = new LoaiMonHocBLLService(new LoaiMonHocDALService(new DapperService(), ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString));
+        private readonly ILoaiMonHocBLLService _loaiMonHocBLLService = new LoaiMonHocBLLService(
+            new LoaiMonHocDALService(
+                ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString,
+                new DapperWrapper()),
+            new MonHocDALService(
+                ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString, 
+                new DapperWrapper()));
         #endregion
 
         private IThemSuaLoaiMonHocRequester themSuaLoaiMonHocRequester;
@@ -93,8 +99,8 @@ namespace PL
                     case SuaLoaiMonHocMessage.DuplicateTenLoaiMonHoc:
                         MessageBox.Show("Tên loại môn học đã tồn tại, vui lòng nhập lại giá trị khác!");
                         break;
-                    case SuaLoaiMonHocMessage.Error:
-                        MessageBox.Show("Đã có lỗi xảy ra!");
+                    case SuaLoaiMonHocMessage.Failed:
+                        MessageBox.Show("Sửa loại môn học thất bại!");
                         break;
                     case SuaLoaiMonHocMessage.Success:
                         MessageBox.Show("Sửa loại môn học thành công!");
@@ -129,8 +135,8 @@ namespace PL
                     case ThemLoaiMonHocMessage.DuplicateTenLoaiMonHoc:
                         MessageBox.Show("Tên loại môn học đã tồn tại, vui lòng nhập lại giá trị khác!");
                         break;
-                    case ThemLoaiMonHocMessage.Error:
-                        MessageBox.Show("Đã có lỗi xảy ra!");
+                    case ThemLoaiMonHocMessage.Failed:
+                        MessageBox.Show("Thêm loại môn học thất bại!");
                         break;
                     case ThemLoaiMonHocMessage.Success:
                         if (themSuaLoaiMonHocRequester != null)

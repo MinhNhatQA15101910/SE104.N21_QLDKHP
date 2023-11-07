@@ -11,7 +11,11 @@ namespace PL
 {
     public partial class DoiMatKhau : KryptonForm
     {
-		private readonly INguoiDungBLLService _nguoiDungBLLService = new NguoiDungBLLService(new NguoiDungDALService(new DapperService(), ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString));
+		private readonly INguoiDungBLLService _nguoiDungBLLService 
+            = new NguoiDungBLLService(
+                new NguoiDungDALService(
+                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString, 
+                    new DapperWrapper()));
 
 		public DoiMatKhau()
         {
@@ -52,9 +56,6 @@ namespace PL
                 case DoiMatKhauMessage.Failed:
                     errProv1.SetError(txtMatKhauHT, "Mật khẩu hiện tại không chính xác");
                     txtMatKhauHT.Focus();
-                    break;
-                case DoiMatKhauMessage.Error:
-                    MessageBox.Show("Đã có lỗi xảy ra!");
                     break;
                 case DoiMatKhauMessage.Success:
                     MessageBox.Show("Đổi mật khẩu thành công");

@@ -14,8 +14,29 @@ namespace PL
     public partial class ThemSuaMonHoc : KryptonForm, IThemSuaLoaiMonHocRequester
     {
         #region Register Services
-        private readonly IMonHocBLLService _monHocBLLService = new MonHocBLLService(new MonHocDALService(new DapperService(), ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString));
-        private readonly ILoaiMonHocBLLService _loaiMonHocBLLService = new LoaiMonHocBLLService(new LoaiMonHocDALService(new DapperService(), ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString));
+        private readonly IMonHocBLLService _monHocBLLService
+            = new MonHocBLLService(
+                new MonHocDALService(
+                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString,
+                    new DapperWrapper()),
+                new DanhSachMonHocMoDALService(
+                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString,
+                    new DapperWrapper()),
+                new CT_PhieuDKHPDALService(
+                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString,
+                    new DapperWrapper()),
+                new ChuongTrinhHocDALService(
+                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString,
+                    new DapperWrapper()));
+
+        private readonly ILoaiMonHocBLLService _loaiMonHocBLLService 
+            = new LoaiMonHocBLLService(
+                new LoaiMonHocDALService(
+                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString, 
+                    new DapperWrapper()), 
+                new MonHocDALService(
+                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString, 
+                    new DapperWrapper()));
         #endregion
 
         private IThemSuaMonHocRequester themSuaMonHocRequester;
@@ -117,8 +138,14 @@ namespace PL
                 SuaMonHocMessage message = _monHocBLLService.SuaMonHoc(maMHBanDau, maMH, tenMH, maLoaiMonHoc, soTiet, soTietLoaiMon);
                 switch (message)
                 {
-                    case SuaMonHocMessage.Unable:
-                        MessageBox.Show("Không thể chỉnh sửa môn học trong danh sách môn học đang mở!");
+                    case SuaMonHocMessage.UnableForDanhSachMonHocMo:
+                        MessageBox.Show("Không thể chỉnh sửa môn học vì có danh sách môn học mở chứa môn học này!");
+                        break;
+                    case SuaMonHocMessage.UnableForCT_PhieuDKHP:
+                        MessageBox.Show("Không thể chỉnh sửa môn học vì có phiếu DKHP chứa môn học này!");
+                        break;
+                    case SuaMonHocMessage.UnableForChuongTrinhHoc:
+                        MessageBox.Show("Không thể chỉnh sửa môn học vì có chương trình học chứa môn học này!");
                         break;
                     case SuaMonHocMessage.EmptyMaMH:
                         MessageBox.Show("Mã môn học không được để trống!");
@@ -134,9 +161,6 @@ namespace PL
                         break;
                     case SuaMonHocMessage.DuplicateMaMH:
                         MessageBox.Show("Mã môn học đã tồn tại, vui lòng nhập giá trị khác!");
-                        break;
-                    case SuaMonHocMessage.Error:
-                        MessageBox.Show("Đã có lỗi xảy ra!");
                         break;
                     case SuaMonHocMessage.Success:
                         MessageBox.Show("Sửa môn học thành công!");
@@ -169,9 +193,6 @@ namespace PL
                         break;
                     case ThemMonHocMessage.DuplicateMaMH:
                         MessageBox.Show("Mã môn học đã tồn tại, vui lòng nhập giá trị khác!");
-                        break;
-                    case ThemMonHocMessage.Error:
-                        MessageBox.Show("Đã có lỗi xảy ra!");
                         break;
                     case ThemMonHocMessage.Success:
                         MessageBox.Show("Thêm môn học thành công!");

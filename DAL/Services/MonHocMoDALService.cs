@@ -1,7 +1,6 @@
 ﻿using DAL.IServices;
 using Dapper;
 using DTO;
-using System;
 using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
@@ -11,68 +10,56 @@ namespace DAL.Services
 {
     public class MonHocMoDALService : IMonHocMoDALService
     {
-        private readonly IDapperService _dapperService;
-        private readonly string _dbConnection;
+        private readonly string _connectionString;
+        private readonly IDapperWrapper _dapperWrapper;
 
-        public MonHocMoDALService(IDapperService dapperService, string dbConnection)
+        public MonHocMoDALService(string connectionString, IDapperWrapper dapperWrapper)
         {
-            _dapperService = dapperService;
-            _dbConnection = dbConnection;
+            _connectionString = connectionString;
+            _dapperWrapper = dapperWrapper;
         }
 
         public List<HocKyNamHoc> GetAllHocKyNamHoc()
         {
-            using (IDbConnection connection = new SqlConnection(_dbConnection))
+            using (var connection = new SqlConnection(_connectionString))
             {
-                return _dapperService.Query<HocKyNamHoc>(connection, "spDANHSACHMONHOCMO_GetHocKyNamHoc").ToList();
+                return _dapperWrapper.Query<HocKyNamHoc>(connection, "spDANHSACHMONHOCMO_GetHocKyNamHoc").ToList();
             }
         }
 
-        public MessageAddMonHocMo AddMonHocMo(string MaMH, int MaHocKy, int NamHoc)
+        public MessageAddMonHocMo AddMonHocMo(string maMH, int maHocKy, int namHoc)
         {
-            try
+            using (var connection = new SqlConnection(_connectionString))
             {
-                using (IDbConnection connection = new SqlConnection(_dbConnection))
-                {
-                    var p = new DynamicParameters();
-                    p.Add("@MaHocKy", MaHocKy);
-                    p.Add("@MaMH", MaMH);
-                    p.Add("@NamHoc", NamHoc);
-                    _dapperService.Execute(connection, "spDANHSACHMONHOCMO_AddMonHocMo", p, commandType: CommandType.StoredProcedure);
-                }
+                var p = new DynamicParameters();
+                p.Add("@MaHocKy", maHocKy);
+                p.Add("@MaMH", maMH);
+                p.Add("@NamHoc", namHoc);
+                int result = _dapperWrapper.Execute(connection, "spDANHSACHMONHOCMO_AddMonHocMo", p, commandType: CommandType.StoredProcedure);
+
+                return (result > 0) ? MessageAddMonHocMo.Success : MessageAddMonHocMo.Failed;
             }
-            catch (Exception)
-            {
-                return MessageAddMonHocMo.Failed;
-            }
-            return MessageAddMonHocMo.Success;
         }
 
         public List<int> GetAllNamHoc()
         {
-            using (IDbConnection connection = new SqlConnection(_dbConnection))
+            using (var connection = new SqlConnection(_connectionString))
             {
-                return _dapperService.Query<int>(connection, "spDANHSACHMONHOCMO_GetNam").ToList();
+                return _dapperWrapper.Query<int>(connection, "spDANHSACHMONHOCMO_GetNam").ToList();
             }
         }
 
-        public MessageDeleteHocKyNamHocMHM DeleteHocKyNamHocMHM(int MaHocKy, int NamHoc)
+        public MessageDeleteHocKyNamHocMHM DeleteHocKyNamHocMHM(int maHocKy, int namHoc)
         {
-            try
+            using (var connection = new SqlConnection(_connectionString))
             {
-                using (IDbConnection connection = new SqlConnection(_dbConnection))
-                {
-                    var mhm = new DynamicParameters();
-                    mhm.Add("@MaHocKy", MaHocKy);
-                    mhm.Add("@NamHoc", NamHoc);
-                    _dapperService.Execute(connection, "spDANHSACHMONHOCMO_XoaDanhSach", mhm, commandType: CommandType.StoredProcedure);
-                }
+                var mhm = new DynamicParameters();
+                mhm.Add("@MaHocKy", maHocKy);
+                mhm.Add("@NamHoc", namHoc);
+                int result = _dapperWrapper.Execute(connection, "spDANHSACHMONHOCMO_XoaDanhSach", mhm, commandType: CommandType.StoredProcedure);
+
+                return (result > 0) ? MessageDeleteHocKyNamHocMHM.Success : MessageDeleteHocKyNamHocMHM.Failed;
             }
-            catch (Exception)
-            {
-                return MessageDeleteHocKyNamHocMHM.Failed;
-            }
-            return MessageDeleteHocKyNamHocMHM.Success;
         }
     }
 }

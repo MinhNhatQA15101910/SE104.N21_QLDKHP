@@ -10,30 +10,30 @@ namespace DAL.Services
 {
     public class HocKyDALService: IHocKyDALService
     {
-        private readonly IDapperService _dapperService;
-        private readonly string _dbConnection;
+        private readonly string _connectionString;
+        private readonly IDapperWrapper _dapperWrapper;
 
-        public HocKyDALService(IDapperService dapperService, string dbConnection)
+        public HocKyDALService(string connectionString, IDapperWrapper dapperWrapper)
         {
-            _dapperService = dapperService;
-            _dbConnection = dbConnection;
+            _connectionString = connectionString;
+            _dapperWrapper = dapperWrapper;
         }
 
         public List<HocKy> LayDanhSachHK()
         {
-            using (IDbConnection connection = new SqlConnection(_dbConnection))
+            using (var connection = new SqlConnection(_connectionString))
             {
-                return _dapperService.Query<HocKy>(connection, "spHOCKY_LayDanhSachHK").ToList();
+                return _dapperWrapper.Query<HocKy>(connection, "spHOCKY_LayDanhSachHK").ToList();
             }
         }
 
         public string LayHKByMaHK(int currMaHocKy)
         {
-            using (IDbConnection connection = new SqlConnection(_dbConnection))
+            using (var connection = new SqlConnection(_connectionString))
             {
                 var p = new DynamicParameters();
                 p.Add("@MaHocKy", currMaHocKy);
-                return _dapperService.Query<string>(connection, "spHOCKY_LayHKByMaHK", p, commandType: CommandType.StoredProcedure).ToString();
+                return _dapperWrapper.Query<string>(connection, "spHOCKY_LayHKByMaHK", p, commandType: CommandType.StoredProcedure).ToString();
             }
         }
     }

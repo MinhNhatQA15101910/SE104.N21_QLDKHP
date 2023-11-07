@@ -66,19 +66,21 @@
     <Compile Include="IServices\IChuongTrinhHocDALService.cs" />
     <Compile Include="IServices\ICT_PhieuDKHPDALService.cs" />
     <Compile Include="IServices\IDanhSachMonHocMoDALService.cs" />
+    <Compile Include="IServices\IDapperWrapper.cs" />
     <Compile Include="IServices\IDoiTuongDALService.cs" />
     <Compile Include="IServices\IGlobalConfigDALService.cs" />
     <Compile Include="IServices\IHocKyDALService.cs" />
     <Compile Include="IServices\IHuyenDALService.cs" />
     <Compile Include="IServices\IKhoaDALService.cs" />
-    <Compile Include="IServices\IDapperService.cs" />
     <Compile Include="IServices\ILoaiMonHocDALService.cs" />
     <Compile Include="IServices\IMonHocDALService.cs" />
     <Compile Include="IServices\IMonHocMoDALService.cs" />
     <Compile Include="IServices\INganhDALService.cs" />
+    <Compile Include="IServices\ISinhVien_DoiTuongDALService.cs" />
     <Compile Include="Services\ChuongTrinhHocDALService.cs" />
     <Compile Include="Services\CT_PhieuDKHPDALService.cs" />
     <Compile Include="Services\DanhSachMonHocMoDALService.cs.cs" />
+    <Compile Include="Services\DapperWrapper.cs" />
     <Compile Include="Services\DoiTuongDALService.cs" />
     <Compile Include="Services\GlobalConfigDALService.cs" />
     <Compile Include="Services\HocKyDALService.cs" />
@@ -91,7 +93,6 @@
     <Compile Include="Services\HuyenDALService.cs" />
     <Compile Include="Services\KhoaDALService.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Services\DapperService.cs" />
     <Compile Include="Services\LoaiMonHocDALService.cs" />
     <Compile Include="Services\MonHocDALService.cs" />
     <Compile Include="Services\MonHocMoDALService.cs" />
@@ -101,6 +102,7 @@
     <Compile Include="Services\PhieuDKHPDALService.cs" />
     <Compile Include="Services\PhieuThuHPDALService.cs" />
     <Compile Include="Services\SinhVienDALService.cs" />
+    <Compile Include="Services\SinhVien_DoiTuongDALService.cs" />
     <Compile Include="Services\TinhDALService.cs" />
   </ItemGroup>
   <ItemGroup>

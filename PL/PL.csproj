@@ -57,6 +57,9 @@
     <Reference Include="ComponentFactory.Krypton.Workspace">
       <HintPath>..\External\ComponentFactory.Krypton.Workspace.dll</HintPath>
     </Reference>
+    <Reference Include="Dapper, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\Dapper.2.1.15\lib\net461\Dapper.dll</HintPath>
+    </Reference>
     <Reference Include="Microsoft.ReportViewer.Common, Version=15.0.0.0, Culture=neutral, PublicKeyToken=89845dcd8080cc91, processorArchitecture=MSIL">
       <HintPath>..\packages\Microsoft.ReportingServices.ReportViewerControl.Winforms.150.1576.0\lib\net40\Microsoft.ReportViewer.Common.dll</HintPath>
     </Reference>

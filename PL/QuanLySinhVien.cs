@@ -8,6 +8,7 @@ using System;
 using System.ComponentModel;
 using System.Configuration;
 using System.Data;
+using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
@@ -17,8 +18,20 @@ namespace PL
     public partial class QuanLySinhVien : KryptonForm, IThemSuaSinhVienRequester
     {
 
-        private readonly IDoiTuongBLLService _doiTuongBLLService = new DoiTuongBLLService(new DoiTuongDALService(new DapperService(), ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString));
-        private readonly ISinhVienBLLService _sinhVienBLLService = new SinhVienBLLService(new SinhVienDALService(new DapperService(), ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString));
+        private readonly IDoiTuongBLLService _doiTuongBLLService 
+            = new DoiTuongBLLService(
+                new DoiTuongDALService(
+                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString, 
+                    new DapperWrapper()),
+                new SinhVien_DoiTuongDALService(
+                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString, 
+                    new DapperWrapper()));
+
+        private readonly ISinhVienBLLService _sinhVienBLLService 
+            = new SinhVienBLLService(
+                new SinhVienDALService(
+                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString, 
+                    new DapperWrapper()));
         
         private readonly IDanhSachSinhVienRequester dssvRequester;
         private BindingList<CT_SinhVien> mSinhVien;
@@ -184,9 +197,6 @@ namespace PL
                 XoaSinhVienMessage message = _sinhVienBLLService.XoaSinhVien(maSV);
                 switch (message)
                 {
-                    case XoaSinhVienMessage.Error:
-                        MessageBox.Show("Đã có lỗi xảy ra!");
-                        break;
                     case XoaSinhVienMessage.Success:
                         mSinhVien.Remove(sinhVien);
                         MessageBox.Show("Xóa sinh viên thành công!");

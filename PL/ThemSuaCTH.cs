@@ -13,10 +13,44 @@ namespace PL
 {
     public partial class ThemSuaCTH : KryptonForm
     {
-        private readonly IKhoaBLLService _khoaBLLService = new KhoaBLLService(new KhoaDALService(new DapperService(), ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString));
-        private readonly INganhBLLService _nganhBLLService = new NganhBLLService(new NganhDALService(new DapperService(), ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString));
-        private readonly IChuongTrinhHocBLLService _chuongtrinhhocBLLService = new ChuongTrinhHocBLLService(new ChuongTrinhHocDALService(new DapperService(), ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString));
-        private readonly IMonHocBLLService _monHocBLLService = new MonHocBLLService(new MonHocDALService(new DapperService(), ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString));
+        private readonly IKhoaBLLService _khoaBLLService 
+            = new KhoaBLLService(
+                new KhoaDALService(
+                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString, 
+                    new DapperWrapper()),
+                new NganhDALService(
+                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString, 
+                    new DapperWrapper()));
+        private readonly INganhBLLService _nganhBLLService 
+            = new NganhBLLService(
+                new NganhDALService(
+                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString, 
+                    new DapperWrapper()),
+                new SinhVienDALService(
+                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString, 
+                    new DapperWrapper()),
+                new ChuongTrinhHocDALService(
+                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString, 
+                    new DapperWrapper()));
+        private readonly IChuongTrinhHocBLLService _chuongtrinhhocBLLService 
+            = new ChuongTrinhHocBLLService(
+                new ChuongTrinhHocDALService(
+                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString, 
+                    new DapperWrapper()));
+        private readonly IMonHocBLLService _monHocBLLService
+            = new MonHocBLLService(
+                new MonHocDALService(
+                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString,
+                    new DapperWrapper()),
+                new DanhSachMonHocMoDALService(
+                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString,
+                    new DapperWrapper()),
+                new CT_PhieuDKHPDALService(
+                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString,
+                    new DapperWrapper()),
+                new ChuongTrinhHocDALService(
+                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString,
+                    new DapperWrapper()));
 
         BindingList<Khoa> mKhoa;
         BindingList<Nganh> mNganh;
@@ -231,21 +265,18 @@ namespace PL
 
         private void btn_Save_Click(object sender, EventArgs e)
         {
-            int failed = 0, error = 0, success = 0;
+            int failed = 0, success = 0;
             if (mDSMonHocThem != null)
             {
                 foreach (var item in mDSMonHocThem)
                 {
                     if (item != null)
                     {
-                        MessageAddCTHoc message = _chuongtrinhhocBLLService.AddCTHoc(item.MaMH, item.MaNganh, item.HocKy);
+                        MessageAddCTHoc message = _chuongtrinhhocBLLService.AddCTHoc(item);
                         switch (message)
                         {
                             case MessageAddCTHoc.Failed:
                                 failed++;
-                                break;
-                            case MessageAddCTHoc.ErrorData:
-                                error++;
                                 break;
                             case MessageAddCTHoc.Success:
                                 success++;
@@ -266,9 +297,6 @@ namespace PL
                             case MessageDeleteCTHoc.Failed:
                                 failed++;
                                 break;
-                            case MessageDeleteCTHoc.ErrorData:
-                                error++;
-                                break;
                             case MessageDeleteCTHoc.Success:
                                 success++;
                                 break;
@@ -277,7 +305,6 @@ namespace PL
             }
             if (success > 0) MessageBox.Show("Cập nhật chương trình học thành công!");
             else if (failed > 0) MessageBox.Show("Failed to connect databse");
-            else if (error > 0) MessageBox.Show("Failed to add data");
             SetUpDgvMonHocChon();
             SetUpDgvMonHoc();
             DeleteSameRows();

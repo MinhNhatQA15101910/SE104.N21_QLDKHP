@@ -13,8 +13,15 @@ namespace PL
 {
     public partial class SinhVien : KryptonForm, IThongTinSinhVienRequester, IDangKyHocPhanRequester, IThanhToanHocPhiRequester
     {
-		private readonly IPhieuDKHPBLLService _phieuDKHPBLLService = new PhieuDKHPBLLService(new PhieuDKHPDALService(new DapperService(), ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString));
-		private readonly ISinhVienBLLService _sinhVienBLLService = new SinhVienBLLService(new SinhVienDALService(new DapperService(), ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString));
+		private readonly IPhieuDKHPBLLService _phieuDKHPBLLService 
+            = new PhieuDKHPBLLService(
+                new PhieuDKHPDALService(
+                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString, 
+                    new DapperWrapper()));
+		private readonly ISinhVienBLLService _sinhVienBLLService 
+            = new SinhVienBLLService(
+                new SinhVienDALService(ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString, 
+                    new DapperWrapper()));
 
 		private readonly ISinhVienRequester sinhVienRequester;
 

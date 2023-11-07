@@ -15,10 +15,41 @@ namespace PL
     public partial class ThemSuaSinhVien : KryptonForm, IThemSuaNganhRequester, IThemSuaHuyenRequester, IThemSuaDoiTuongRequester
     {
         #region Register Services
-        private readonly IHuyenBLLService _huyenBLLService = new HuyenBLLService(new HuyenDALService(new DapperService(), ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString));
-        private readonly INganhBLLService _nganhBLLService = new NganhBLLService(new NganhDALService(new DapperService(), ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString));
-        private readonly IDoiTuongBLLService _doiTuongBLLService = new DoiTuongBLLService(new DoiTuongDALService(new DapperService(), ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString));
-		private readonly ISinhVienBLLService _sinhVienBLLService = new SinhVienBLLService(new SinhVienDALService(new DapperService(), ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString));
+        private readonly IHuyenBLLService _huyenBLLService 
+            = new HuyenBLLService(
+                new HuyenDALService(
+                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString, 
+                    new DapperWrapper()),
+                new SinhVienDALService(
+                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString, 
+                    new DapperWrapper()));
+
+        private readonly INganhBLLService _nganhBLLService 
+            = new NganhBLLService(
+                new NganhDALService(
+                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString, 
+                    new DapperWrapper()),
+                new SinhVienDALService(
+                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString, 
+                    new DapperWrapper()),
+                new ChuongTrinhHocDALService(
+                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString, 
+                    new DapperWrapper()));
+
+        private readonly IDoiTuongBLLService _doiTuongBLLService 
+            = new DoiTuongBLLService(
+                new DoiTuongDALService(
+                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString, 
+                    new DapperWrapper()),
+                new SinhVien_DoiTuongDALService(
+                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString, 
+                    new DapperWrapper()));
+
+		private readonly ISinhVienBLLService _sinhVienBLLService 
+            = new SinhVienBLLService(
+                new SinhVienDALService(
+                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString, 
+                    new DapperWrapper()));
         #endregion
 
         private readonly IThemSuaSinhVienRequester themSuaSinhVienRequester;
@@ -265,9 +296,6 @@ namespace PL
                     case SuaSinhVienMessage.DuplicateMaSV:
                         MessageBox.Show("Mã sinh viên đã tồn tại, vui lòng nhập giá trị khác!");
                         break;
-                    case SuaSinhVienMessage.Error:
-                        MessageBox.Show("Đã có lỗi xảy ra!");
-                        break;
                     case SuaSinhVienMessage.Success:
                         MessageBox.Show("Cập nhật sinh viên thành công!");
                         Close();
@@ -303,9 +331,6 @@ namespace PL
                         break;
                     case ThemSinhVienMessage.DuplicateMaSV:
                         MessageBox.Show("Mã sinh viên đã tồn tại, vui lòng nhập giá trị khác!");
-                        break;
-                    case ThemSinhVienMessage.Error:
-                        MessageBox.Show("Đã có lỗi xảy ra!");
                         break;
                     case ThemSinhVienMessage.Success:
                         if (themSuaSinhVienRequester != null)

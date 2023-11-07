@@ -46,6 +46,7 @@
     <Compile Include="CT_MonHoc.cs" />
     <Compile Include="CT_Nganh.cs" />
     <Compile Include="CT_NguoiDung.cs" />
+    <Compile Include="CT_PhieuDKHP.cs" />
     <Compile Include="CT_SinhVien.cs" />
     <Compile Include="DoiTuong.cs" />
     <Compile Include="HocKy.cs" />
@@ -64,6 +65,7 @@
     <Compile Include="PhieuThuHP.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SinhVien.cs" />
+    <Compile Include="SinhVien_DoiTuong.cs" />
     <Compile Include="Tinh.cs" />
     <Compile Include="TinhTrang.cs" />
   </ItemGroup>

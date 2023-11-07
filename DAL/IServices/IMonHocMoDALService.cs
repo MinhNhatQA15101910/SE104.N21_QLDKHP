@@ -7,10 +7,10 @@ namespace DAL.IServices
     {
         List<HocKyNamHoc> GetAllHocKyNamHoc();
 
-        MessageAddMonHocMo AddMonHocMo(string MaMH, int MaHocKy, int NamHoc);
+        MessageAddMonHocMo AddMonHocMo(string maMH, int maHocKy, int namHoc);
 
         List<int> GetAllNamHoc();
 
-        MessageDeleteHocKyNamHocMHM DeleteHocKyNamHocMHM(int MaHocKy, int NamHoc);
+        MessageDeleteHocKyNamHocMHM DeleteHocKyNamHocMHM(int maHocKy, int namHoc);
     }
 }

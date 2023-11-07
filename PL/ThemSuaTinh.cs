@@ -6,13 +6,21 @@ using DTO;
 using PL.Interfaces;
 using System;
 using System.Configuration;
+using System.Data.SqlClient;
 using System.Windows.Forms;
 
 namespace PL
 {
     public partial class ThemSuaTinh : KryptonForm
     {
-		private readonly ITinhBLLService _tinhBLLService = new TinhBLLService(new TinhDALService(new DapperService(), ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString));
+		private readonly ITinhBLLService _tinhBLLService 
+            = new TinhBLLService(
+                new TinhDALService(
+                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString, 
+                    new DapperWrapper()),
+                new HuyenDALService(
+                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString, 
+                    new DapperWrapper()));
 
 		private IThemSuaTinhRequester themSuaTinhRequester;
         private Tinh tinh;
@@ -73,8 +81,8 @@ namespace PL
                     case SuaTinhMessage.DuplicateTenTinh:
                         MessageBox.Show("Tên tỉnh đã tồn tại, vui lòng nhập giá trị khác!");
                         break;
-                    case SuaTinhMessage.Error:
-                        MessageBox.Show("Đã có lỗi xảy ra!");
+                    case SuaTinhMessage.Failed:
+                        MessageBox.Show("Sửa tỉnh thất bại!");
                         break;
                     case SuaTinhMessage.Success:
                         MessageBox.Show("Sửa tỉnh thành công!");
@@ -95,8 +103,8 @@ namespace PL
                     case ThemTinhMessage.DuplicateTenTinh:
                         MessageBox.Show("Tên tỉnh đã tồn tại, vui lòng nhập giá trị khác!");
                         break;
-                    case ThemTinhMessage.Error:
-                        MessageBox.Show("Đã có lỗi xảy ra!");
+                    case ThemTinhMessage.Failed:
+                        MessageBox.Show("Thêm tỉnh thất bại!");
                         break;
                     case ThemTinhMessage.Success:
                         if (themSuaTinhRequester != null)
