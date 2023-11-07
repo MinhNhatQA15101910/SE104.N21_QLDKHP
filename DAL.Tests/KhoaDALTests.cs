@@ -60,7 +60,7 @@
                 _ => _.Execute(
                     It.Is<IDbConnection>(db => db.ConnectionString == _testConnectionString), 
                     expectedQuery,
-                    It.Is<DynamicParameters>(p => !string.IsNullOrEmpty(p.Get<string>(expectedMaKhoaParameterName))),
+                    It.Is<DynamicParameters>(p => p.Get<string>(expectedMaKhoaParameterName) == maKhoa),
                     expectedCommandType))
                 .Returns(expectedResult);
 
@@ -84,7 +84,7 @@
                 _ => _.Execute(
                     It.Is<IDbConnection>(db => db.ConnectionString == _testConnectionString),
                     expectedQuery,
-                    It.Is<DynamicParameters>(p => !string.IsNullOrEmpty(p.Get<string>(expectedMaKhoaParameterName))),
+                    It.Is<DynamicParameters>(p => p.Get<string>(expectedMaKhoaParameterName) == maKhoa),
                     expectedCommandType))
                 .Returns(expectedResult);
 
@@ -113,9 +113,9 @@
                     It.Is<IDbConnection>(db => db.ConnectionString == _testConnectionString),
                     expectedQuery,
                     It.Is<DynamicParameters>(
-                        p => !string.IsNullOrEmpty(p.Get<string>(expectedMaKhoaBanDauParameterName)) &&
-                            !string.IsNullOrEmpty(p.Get<string>(expectedMaKhoaSuaParameterName)) &&
-                            !string.IsNullOrEmpty(p.Get<string>(expectedTenKhoaSuaParameterName))),
+                        p => p.Get<string>(expectedMaKhoaBanDauParameterName) == maKhoaBanDau &&
+                            p.Get<string>(expectedMaKhoaSuaParameterName) == maKhoaSua &&
+                            p.Get<string>(expectedTenKhoaSuaParameterName) == tenKhoaSua),
                     expectedCommandType))
                 .Returns(expectedResult);
 
@@ -142,9 +142,9 @@
                     It.Is<IDbConnection>(db => db.ConnectionString == _testConnectionString),
                     expectedQuery,
                     It.Is<DynamicParameters>(
-                        p => !string.IsNullOrEmpty(p.Get<string>(expectedMaKhoaBanDauParameterName)) &&
-                            !string.IsNullOrEmpty(p.Get<string>(expectedMaKhoaSuaParameterName)) &&
-                            !string.IsNullOrEmpty(p.Get<string>(expectedTenKhoaSuaParameterName))),
+                        p => p.Get<string>(expectedMaKhoaBanDauParameterName) == maKhoaBanDau &&
+                            p.Get<string>(expectedMaKhoaSuaParameterName) == maKhoaSua &&
+                            p.Get<string>(expectedTenKhoaSuaParameterName) == tenKhoaSua),
                     expectedCommandType))
                 .Returns(expectedResult);
 
@@ -172,8 +172,8 @@
                     It.Is<IDbConnection>(db => db.ConnectionString == _testConnectionString),
                     expectedQuery,
                     It.Is<DynamicParameters>(
-                        p => !string.IsNullOrEmpty(p.Get<string>(expectedMaKhoaParameterName)) &&
-                            !string.IsNullOrEmpty(p.Get<string>(expectedTenKhoaParameterName))),
+                        p => p.Get<string>(expectedMaKhoaParameterName) == maKhoa &&
+                            p.Get<string>(expectedTenKhoaParameterName) == tenKhoa),
                     expectedCommandType))
                 .Returns(expectedResult);
 
@@ -199,8 +199,8 @@
                     It.Is<IDbConnection>(db => db.ConnectionString == _testConnectionString),
                     expectedQuery,
                     It.Is<DynamicParameters>(
-                        p => !string.IsNullOrEmpty(p.Get<string>(expectedMaKhoaParameterName)) &&
-                            !string.IsNullOrEmpty(p.Get<string>(expectedTenKhoaParameterName))),
+                        p => p.Get<string>(expectedMaKhoaParameterName) == maKhoa &&
+                            p.Get<string>(expectedTenKhoaParameterName) == tenKhoa),
                     expectedCommandType))
                 .Returns(expectedResult);
 

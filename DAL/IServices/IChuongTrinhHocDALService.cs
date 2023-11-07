@@ -8,6 +8,6 @@ namespace DAL.IServices
         MessageDeleteListCTHoc DeleteListCTHoc(string maNganh, int hocKy);
         List<ChuongTrinhHoc> GetAllCTHoc();
         MessageAddCTHoc AddCTHoc(ChuongTrinhHoc chuongTrinhHoc);
-        MessageDeleteCTHoc DeleteCTHoc(string MaMH, string MaNganh, int HocKy);
+        MessageDeleteCTHoc DeleteCTHoc(string maMH, string maNganh, int hocKy);
     }
 }
