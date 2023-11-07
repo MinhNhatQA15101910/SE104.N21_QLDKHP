@@ -197,7 +197,7 @@ namespace PL
                         switch (message)
                         {
                             case MessageDeleteListCTHoc.Failed:
-                                MessageBox.Show("False to connect database");
+                                MessageBox.Show("Xóa chương trình học thất bại!");
                                 break;
                             case MessageDeleteListCTHoc.Success:
                                 MessageBox.Show("Xóa chương trình học thành công");

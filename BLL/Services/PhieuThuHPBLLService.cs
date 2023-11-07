@@ -9,21 +9,24 @@ namespace BLL.Services
     public class PhieuThuHPBLLService : IPhieuThuHPBLLService
 	{
 		private readonly IPhieuThuHPDALService _phieuThuHPDALService;
+
 		public PhieuThuHPBLLService(IPhieuThuHPDALService phieuThuHPDALService)
 		{
 			_phieuThuHPDALService = phieuThuHPDALService;
 		}
+
 		public TimKiemTTHocPhiMessage KtTimKiemTTHocPhi(string namHoc)
 		{
-			if (namHoc == "")
+			if (string.IsNullOrEmpty(namHoc))
 			{
 				return TimKiemTTHocPhiMessage.EmptyNamHoc;
 			}
 
-			if (!int.TryParse(namHoc, out _))
+			if (!int.TryParse(namHoc, out int namHocValue) || namHocValue < 0)
 			{
 				return TimKiemTTHocPhiMessage.InvalidNamHoc;
 			}
+
 			return TimKiemTTHocPhiMessage.Sucess;
 		}
 

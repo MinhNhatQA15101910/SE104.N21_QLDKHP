@@ -117,12 +117,12 @@ namespace PL
         private void btn_Confirm_Click(object sender, EventArgs e)
         {
             DataGridViewRow selectedRow = dgv_PhieuThuHP.SelectedRows[0];
-            int maphieuthuhp = Int32.Parse(selectedRow.Cells[0].Value.ToString());
+            int maphieuthuhp = int.Parse(selectedRow.Cells[0].Value.ToString());
             MessagePhieuThuHPUpdateTinhTrang message = _phieuThuHPBLLService.PhieuThuHPUpdateTinhTrang(maphieuthuhp, 2);
             switch (message)
             {
                 case MessagePhieuThuHPUpdateTinhTrang.Failed:
-                    MessageBox.Show("Không thể xác nhận phiếu thu học phí");
+                    MessageBox.Show("Không thể xác nhận phiếu thu học phí!");
                     break;
                 case MessagePhieuThuHPUpdateTinhTrang.Success:
                     SetUpDgvPhieuDKHP();

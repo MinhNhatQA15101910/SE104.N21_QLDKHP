@@ -186,15 +186,15 @@ namespace PL
                     {
                         hk = 3;
                     }
-                    int nh = Int32.Parse(selectedRow.Cells[1].Value.ToString());
+                    int nh = int.Parse(selectedRow.Cells[1].Value.ToString());
                     MessageDeleteHocKyNamHocMHM message = _monHocMoBLLService.DeleteHocKyNamHocMHM(hk, nh);
                     switch (message)
                     {
                         case MessageDeleteHocKyNamHocMHM.Failed:
-                            MessageBox.Show("Failed to Delete data.");
+                            MessageBox.Show("Xóa danh sách môn học mở thất bại!");
                             break;
                         case MessageDeleteHocKyNamHocMHM.Success:
-                            MessageBox.Show("Xóa danh sách môn học mở thành công.");
+                            MessageBox.Show("Xóa danh sách môn học mở thành công!");
                             break;
                     }
                     SetUpHocKyNamHocMHM();

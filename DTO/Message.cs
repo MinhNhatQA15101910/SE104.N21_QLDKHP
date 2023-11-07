@@ -317,7 +317,6 @@
         None,
         EmptyNamHoc,
         InvalidNamHoc,
-        Failed,
         Sucess
     }
 
@@ -326,7 +325,6 @@
         None,
         EmptyNamHoc,
         InvalidNamHoc,
-        Failed,
         Sucess
     }
 
@@ -341,8 +339,7 @@
     {
         None,
         Success,
-        Failed,
-        Data
+        Failed
     }
 
     public enum MessageDeleteHocKyNamHocMHM
@@ -363,16 +360,14 @@
     {
         None,
         Success,
-        Failed,
-        Data
+        Failed
     }
 
     public enum MessageDeleteCTHoc
     {
         None,
         Success,
-        Failed,
-        Data
+        Failed
     }
 
     public enum MessagePhieuDKHPUpdateTinhTrang

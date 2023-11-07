@@ -83,9 +83,9 @@ namespace DAL.Services
                 p.Add("@MaHocKy", MaHocKy);
                 p.Add("@NamHoc", NamHoc);
                 p.Add("@KhoangTG", KhoangTG);
-                _dapperWrapper.Execute(connection, "spKHOANGTGDONGHP_Add", p, commandType: CommandType.StoredProcedure);
+                int result = _dapperWrapper.Execute(connection, "spKHOANGTGDONGHP_Add", p, commandType: CommandType.StoredProcedure);
 
-                return MessageKhoangTGDongHP.Success;
+                return (result > 0) ? MessageKhoangTGDongHP.Success : MessageKhoangTGDongHP.Failed;
             }
         }
     }

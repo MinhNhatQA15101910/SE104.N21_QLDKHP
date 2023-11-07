@@ -159,9 +159,9 @@ namespace DAL.Services
                 p.Add("@MaPhieuDKHP", MaPhieuDKHP);
                 p.Add("@MaTinhTrang", MaTinhTrang);
 
-                _dapperWrapper.Execute(connection, "spPHIEUDKHP_UpdateTinhTrang", p, commandType: CommandType.StoredProcedure);
+                int result = _dapperWrapper.Execute(connection, "spPHIEUDKHP_UpdateTinhTrang", p, commandType: CommandType.StoredProcedure);
 
-                return MessagePhieuDKHPUpdateTinhTrang.Success;
+                return (result > 0) ? MessagePhieuDKHPUpdateTinhTrang.Success : MessagePhieuDKHPUpdateTinhTrang.Failed;
             }
         }
 

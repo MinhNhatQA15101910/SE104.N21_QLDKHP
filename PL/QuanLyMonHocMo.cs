@@ -231,7 +231,7 @@ namespace PL
                     }
                     else
                     {
-                        MessageKhoangTGDongHP message = _globalConfigBLLService.KhoangTGDongHP(HocKyNow, NamHocNow, Int32.Parse(txt_SoNgayDongHp.Text.ToString()));
+                        MessageKhoangTGDongHP message = _globalConfigBLLService.KhoangTGDongHP(HocKyNow, NamHocNow, int.Parse(txt_SoNgayDongHp.Text.ToString()));
                         switch (message)
                         {
                             case MessageKhoangTGDongHP.Failed:
