@@ -40,14 +40,14 @@ namespace DAL.Services
             }
         }
 
-        public MessageDeleteCTHoc DeleteCTHoc(string MaMH, string MaNganh, int HocKy)
+        public MessageDeleteCTHoc DeleteCTHoc(string maMH, string maNganh, int hocKy)
         {
             using (var connection = new SqlConnection(_connectionString))
             {
                 var mhm = new DynamicParameters();
-                mhm.Add("@MaMH", MaMH);
-                mhm.Add("@MaNganh", MaNganh);
-                mhm.Add("@HocKy", HocKy);
+                mhm.Add("@MaMH", maMH);
+                mhm.Add("@MaNganh", maNganh);
+                mhm.Add("@HocKy", hocKy);
                 int result = _dapperWrapper.Execute(connection, "spCHUONGTRINHHOC_DeleteCTHoc", mhm, commandType: CommandType.StoredProcedure);
 
                 return (result > 0) ? MessageDeleteCTHoc.Success : MessageDeleteCTHoc.Failed;

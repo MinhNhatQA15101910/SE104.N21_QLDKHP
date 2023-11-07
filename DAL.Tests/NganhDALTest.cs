@@ -1,6 +1,4 @@
-﻿using DTO;
-
-namespace DAL.Tests
+﻿namespace DAL.Tests
 {
     [ExcludeFromCodeCoverage]
     public class NganhDALTest
@@ -65,7 +63,7 @@ namespace DAL.Tests
                 _ => _.Execute(
                     It.Is<IDbConnection>(db => db.ConnectionString == _testConnectionString),
                     expectedQuery,
-                    It.Is<DynamicParameters>(p => !string.IsNullOrEmpty(p.Get<string>(expectedMaNganhParameterName))),
+                    It.Is<DynamicParameters>(p => p.Get<string>(expectedMaNganhParameterName) == maNganh),
                     expectedCommandType))
                 .Returns(expectedResult);
 
@@ -89,7 +87,7 @@ namespace DAL.Tests
                 _ => _.Execute(
                     It.Is<IDbConnection>(db => db.ConnectionString == _testConnectionString),
                     expectedQuery,
-                    It.Is<DynamicParameters>(p => !string.IsNullOrEmpty(p.Get<string>(expectedMaNganhParameterName))),
+                    It.Is<DynamicParameters>(p => p.Get<string>(expectedMaNganhParameterName) == maNganh),
                     expectedCommandType))
                 .Returns(expectedResult);
 
@@ -119,10 +117,10 @@ namespace DAL.Tests
                     It.Is<IDbConnection>(db => db.ConnectionString == _testConnectionString),
                     expectedQuery,
                     It.Is<DynamicParameters>(
-                        p => !string.IsNullOrEmpty(p.Get<string>(expectedMaNganhBanDauParameterName)) &&
-                            !string.IsNullOrEmpty(p.Get<string>(expectedMaNganhSuaParameterName)) &&
-                            !string.IsNullOrEmpty(p.Get<string>(expectedTenNganhSuaParameterName)) && 
-                            !string.IsNullOrEmpty(p.Get<string>(expectedMaKhoaSuaParameterName))),
+                        p => p.Get<string>(expectedMaNganhBanDauParameterName) == maNganhBanDau &&
+                            p.Get<string>(expectedMaNganhSuaParameterName) == maNganhSua &&
+                            p.Get<string>(expectedTenNganhSuaParameterName) == tenNganhSua && 
+                            p.Get<string>(expectedMaKhoaSuaParameterName) == maKhoaSua),
                     expectedCommandType))
                 .Returns(expectedResult);
 
@@ -150,10 +148,10 @@ namespace DAL.Tests
                     It.Is<IDbConnection>(db => db.ConnectionString == _testConnectionString),
                     expectedQuery,
                     It.Is<DynamicParameters>(
-                        p => !string.IsNullOrEmpty(p.Get<string>(expectedMaNganhBanDauParameterName)) &&
-                            !string.IsNullOrEmpty(p.Get<string>(expectedMaNganhSuaParameterName)) &&
-                            !string.IsNullOrEmpty(p.Get<string>(expectedTenNganhSuaParameterName)) &&
-                            !string.IsNullOrEmpty(p.Get<string>(expectedMaKhoaSuaParameterName))),
+                        p => p.Get<string>(expectedMaNganhBanDauParameterName) == maNganhBanDau &&
+                            p.Get<string>(expectedMaNganhSuaParameterName) == maNganhSua &&
+                            p.Get<string>(expectedTenNganhSuaParameterName) == tenNganhSua &&
+                            p.Get<string>(expectedMaKhoaSuaParameterName) == maKhoaSua),
                     expectedCommandType))
                 .Returns(expectedResult);
 
@@ -182,9 +180,9 @@ namespace DAL.Tests
                     It.Is<IDbConnection>(db => db.ConnectionString == _testConnectionString),
                     expectedQuery,
                     It.Is<DynamicParameters>(
-                        p => !string.IsNullOrEmpty(p.Get<string>(expectedMaNganhParameterName)) &&
-                            !string.IsNullOrEmpty(p.Get<string>(expectedTenNganhParameterName)) &&
-                            !string.IsNullOrEmpty(p.Get<string>(expectedMaKhoaParameterName))),
+                        p => p.Get<string>(expectedMaNganhParameterName) == maNganh &&
+                            p.Get<string>(expectedTenNganhParameterName) == tenNganh &&
+                            p.Get<string>(expectedMaKhoaParameterName) == maKhoa),
                     expectedCommandType))
                 .Returns(expectedResult);
 
@@ -211,9 +209,9 @@ namespace DAL.Tests
                     It.Is<IDbConnection>(db => db.ConnectionString == _testConnectionString),
                     expectedQuery,
                     It.Is<DynamicParameters>(
-                        p => !string.IsNullOrEmpty(p.Get<string>(expectedMaNganhParameterName)) &&
-                            !string.IsNullOrEmpty(p.Get<string>(expectedTenNganhParameterName)) &&
-                            !string.IsNullOrEmpty(p.Get<string>(expectedMaKhoaParameterName))),
+                        p => p.Get<string>(expectedMaNganhParameterName) == maNganh &&
+                            p.Get<string>(expectedTenNganhParameterName) == tenNganh &&
+                            p.Get<string>(expectedMaKhoaParameterName) == maKhoa),
                     expectedCommandType))
                 .Returns(expectedResult);
 
@@ -276,7 +274,7 @@ namespace DAL.Tests
                 _ => _.Query<Nganh>(
                     It.Is<IDbConnection>(db => db.ConnectionString == _testConnectionString),
                     expectedQuery,
-                    It.Is<DynamicParameters>(p => !string.IsNullOrEmpty(p.Get<string>(expectedMaKhoaParameterName))),
+                    It.Is<DynamicParameters>(p => p.Get<string>(expectedMaKhoaParameterName) == maKhoa),
                     expectedCommandType))
                 .Returns(expectedResult);
 
