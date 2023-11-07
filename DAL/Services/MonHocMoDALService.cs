@@ -27,14 +27,14 @@ namespace DAL.Services
             }
         }
 
-        public MessageAddMonHocMo AddMonHocMo(string MaMH, int MaHocKy, int NamHoc)
+        public MessageAddMonHocMo AddMonHocMo(string maMH, int maHocKy, int namHoc)
         {
             using (var connection = new SqlConnection(_connectionString))
             {
                 var p = new DynamicParameters();
-                p.Add("@MaHocKy", MaHocKy);
-                p.Add("@MaMH", MaMH);
-                p.Add("@NamHoc", NamHoc);
+                p.Add("@MaHocKy", maHocKy);
+                p.Add("@MaMH", maMH);
+                p.Add("@NamHoc", namHoc);
                 int result = _dapperWrapper.Execute(connection, "spDANHSACHMONHOCMO_AddMonHocMo", p, commandType: CommandType.StoredProcedure);
 
                 return (result > 0) ? MessageAddMonHocMo.Success : MessageAddMonHocMo.Failed;
@@ -49,13 +49,13 @@ namespace DAL.Services
             }
         }
 
-        public MessageDeleteHocKyNamHocMHM DeleteHocKyNamHocMHM(int MaHocKy, int NamHoc)
+        public MessageDeleteHocKyNamHocMHM DeleteHocKyNamHocMHM(int maHocKy, int namHoc)
         {
             using (var connection = new SqlConnection(_connectionString))
             {
                 var mhm = new DynamicParameters();
-                mhm.Add("@MaHocKy", MaHocKy);
-                mhm.Add("@NamHoc", NamHoc);
+                mhm.Add("@MaHocKy", maHocKy);
+                mhm.Add("@NamHoc", namHoc);
                 int result = _dapperWrapper.Execute(connection, "spDANHSACHMONHOCMO_XoaDanhSach", mhm, commandType: CommandType.StoredProcedure);
 
                 return (result > 0) ? MessageDeleteHocKyNamHocMHM.Success : MessageDeleteHocKyNamHocMHM.Failed;

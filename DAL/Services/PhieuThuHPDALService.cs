@@ -46,23 +46,23 @@ namespace DAL.Services
             }
 		}
 
-		public List<PhieuThuHP> GetPhieuThuHP(int MaTinhTrang)
+		public List<PhieuThuHP> GetPhieuThuHP(int maTinhTrang)
 		{
             using (var connection = new SqlConnection(_connectionString))
             {
                 var p = new DynamicParameters();
-                p.Add("@MaTinhTrang", MaTinhTrang);
+                p.Add("@MaTinhTrang", maTinhTrang);
                 return _dapperWrapper.Query<PhieuThuHP>(connection, "spPHIEUTHUHP_GetPhieuThuHP", p, commandType: CommandType.StoredProcedure).ToList();
             }
         }
 
-		public MessagePhieuThuHPUpdateTinhTrang PhieuThuHPUpdateTinhTrang(int MaPhieuThuHP, int MaTinhTrang)
+		public MessagePhieuThuHPUpdateTinhTrang PhieuThuHPUpdateTinhTrang(int maPhieuThuHP, int maTinhTrang)
 		{
             using (var connection = new SqlConnection(_connectionString))
             {
                 var p = new DynamicParameters();
-                p.Add("@MaPhieuThuHP", MaPhieuThuHP);
-                p.Add("@MaTinhTrang", MaTinhTrang);
+                p.Add("@MaPhieuThuHP", maPhieuThuHP);
+                p.Add("@MaTinhTrang", maTinhTrang);
                 int result = _dapperWrapper.Execute(connection, "spPHIEUTHUHP_UpdateTinhTrang", p, commandType: CommandType.StoredProcedure);
 
                 return (result > 0) ? MessagePhieuThuHPUpdateTinhTrang.Success : MessagePhieuThuHPUpdateTinhTrang.Failed;

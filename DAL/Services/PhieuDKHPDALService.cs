@@ -138,26 +138,26 @@ namespace DAL.Services
             }
         }
 
-		public List<PhieuDKHP> GetPhieuDKHP(int MaHocKy, int NamHoc, int MaTinhTrang)
+		public List<PhieuDKHP> GetPhieuDKHP(int maHocKy, int namHoc, int maTinhTrang)
 		{
             using (var connection = new SqlConnection(_connectionString))
             {
                 var p = new DynamicParameters();
-                p.Add("@MaHocKy", MaHocKy);
-                p.Add("@NamHoc", NamHoc);
-                p.Add("@MaTinhTrang", MaTinhTrang);
+                p.Add("@MaHocKy", maHocKy);
+                p.Add("@NamHoc", namHoc);
+                p.Add("@MaTinhTrang", maTinhTrang);
 
                 return _dapperWrapper.Query<PhieuDKHP>(connection, "spPHIEUDKHP_GetPhieuDKHP", p, commandType: CommandType.StoredProcedure).ToList();
             }
         }
 
-		public MessagePhieuDKHPUpdateTinhTrang PhieuDKHPUpdateTinhTrang(int MaPhieuDKHP, int MaTinhTrang)
+		public MessagePhieuDKHPUpdateTinhTrang PhieuDKHPUpdateTinhTrang(int maPhieuDKHP, int maTinhTrang)
 		{
             using (var connection = new SqlConnection(_connectionString))
             {
                 var p = new DynamicParameters();
-                p.Add("@MaPhieuDKHP", MaPhieuDKHP);
-                p.Add("@MaTinhTrang", MaTinhTrang);
+                p.Add("@MaPhieuDKHP", maPhieuDKHP);
+                p.Add("@MaTinhTrang", maTinhTrang);
 
                 int result = _dapperWrapper.Execute(connection, "spPHIEUDKHP_UpdateTinhTrang", p, commandType: CommandType.StoredProcedure);
 

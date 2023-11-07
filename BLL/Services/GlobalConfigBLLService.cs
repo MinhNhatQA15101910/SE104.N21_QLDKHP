@@ -68,9 +68,9 @@ namespace BLL.Services
             return _globalConfigDALService.LayKhoangTGDongHP(hocKy, namHoc);
         }
 
-        public MessageKhoangTGDongHP KhoangTGDongHP(int MaHocKy, int NamHoc, int KhoangTG)
+        public MessageKhoangTGDongHP KhoangTGDongHP(int maHocKy, int namHoc, int khoangTG)
         {
-            return _globalConfigDALService.KhoangTGDongHP(MaHocKy, NamHoc, KhoangTG);
+            return _globalConfigDALService.KhoangTGDongHP(maHocKy, namHoc, khoangTG);
         }
     }
 }

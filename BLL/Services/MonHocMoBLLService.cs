@@ -19,9 +19,9 @@ namespace BLL.Services
             return _monHocMoDALService.GetAllHocKyNamHoc();
         }
 
-        public MessageAddMonHocMo AddMonHocMo(string MaMH, int MaHocKy, int NamHoc)
+        public MessageAddMonHocMo AddMonHocMo(string maMH, int maHocKy, int namHoc)
         {
-            return _monHocMoDALService.AddMonHocMo(MaMH, MaHocKy, NamHoc);
+            return _monHocMoDALService.AddMonHocMo(maMH, maHocKy, namHoc);
         }
 
         public List<int> GetAllNamHoc()
@@ -29,9 +29,9 @@ namespace BLL.Services
             return _monHocMoDALService.GetAllNamHoc();
         }
 
-        public MessageDeleteHocKyNamHocMHM DeleteHocKyNamHocMHM(int MaHocKy, int NamHoc)
+        public MessageDeleteHocKyNamHocMHM DeleteHocKyNamHocMHM(int maHocKy, int namHoc)
         {
-            return _monHocMoDALService.DeleteHocKyNamHocMHM(MaHocKy, NamHoc);
+            return _monHocMoDALService.DeleteHocKyNamHocMHM(maHocKy, namHoc);
         }
     }
 }

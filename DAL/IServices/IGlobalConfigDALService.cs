@@ -10,6 +10,6 @@ namespace DAL.IServices
         int GetCurrMaHocKy();
         SuaGioiHanTinChiMessage SuaGioiHanTinChi(int tinChiToiDa, int tinChiToiThieu);
         int LayKhoangTGDongHP(int hocKy, int namHoc);
-        MessageKhoangTGDongHP KhoangTGDongHP(int MaHocKy, int NamHoc, int KhoangTG);
+        MessageKhoangTGDongHP KhoangTGDongHP(int maHocKy, int namHoc, int khoangTG);
     }
 }

@@ -75,14 +75,14 @@ namespace DAL.Services
             }
         }
 
-        public MessageKhoangTGDongHP KhoangTGDongHP(int MaHocKy, int NamHoc, int KhoangTG)
+        public MessageKhoangTGDongHP KhoangTGDongHP(int maHocKy, int namHoc, int khoangTG)
         {
             using (var connection = new SqlConnection(_connectionString))
             {
                 var p = new DynamicParameters();
-                p.Add("@MaHocKy", MaHocKy);
-                p.Add("@NamHoc", NamHoc);
-                p.Add("@KhoangTG", KhoangTG);
+                p.Add("@MaHocKy", maHocKy);
+                p.Add("@NamHoc", namHoc);
+                p.Add("@KhoangTG", khoangTG);
                 int result = _dapperWrapper.Execute(connection, "spKHOANGTGDONGHP_Add", p, commandType: CommandType.StoredProcedure);
 
                 return (result > 0) ? MessageKhoangTGDongHP.Success : MessageKhoangTGDongHP.Failed;

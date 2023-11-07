@@ -64,14 +64,14 @@ namespace BLL.Services
 			return _phieuDKHPDALService.LayDanhSachDKHPDaXacNhan(mssv);
 		}
 
-		public List<PhieuDKHP> GetPhieuDKHP(int MaHocKy, int NamHoc, int MaTinhTrang)
+		public List<PhieuDKHP> GetPhieuDKHP(int maHocKy, int namHoc, int maTinhTrang)
 		{
-			return _phieuDKHPDALService.GetPhieuDKHP(MaHocKy, NamHoc, MaTinhTrang);
+			return _phieuDKHPDALService.GetPhieuDKHP(maHocKy, namHoc, maTinhTrang);
 		}
 
-		public MessagePhieuDKHPUpdateTinhTrang PhieuDKHPUpdateTinhTrang(int MaPhieuDKHP, int MaTinhTrang)
+		public MessagePhieuDKHPUpdateTinhTrang PhieuDKHPUpdateTinhTrang(int maPhieuDKHP, int maTinhTrang)
 		{
-			return _phieuDKHPDALService.PhieuDKHPUpdateTinhTrang(MaPhieuDKHP,MaTinhTrang);
+			return _phieuDKHPDALService.PhieuDKHPUpdateTinhTrang(maPhieuDKHP, maTinhTrang);
 		}
 
 		public List<PhieuDKHP> GetAllPhieuDKHP()

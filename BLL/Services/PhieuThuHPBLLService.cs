@@ -54,14 +54,14 @@ namespace BLL.Services
 			return _phieuThuHPDALService.TaoPhieuThu_ChoXacNhan(soTienThu, soPhieuDKHP);
 		}
 
-		public List<DTO.PhieuThuHP> GetPhieuThuHP(int MaTinhTrang)
+		public List<DTO.PhieuThuHP> GetPhieuThuHP(int maTinhTrang)
 		{
-			return _phieuThuHPDALService.GetPhieuThuHP(MaTinhTrang);
+			return _phieuThuHPDALService.GetPhieuThuHP(maTinhTrang);
 		}
 
-		public MessagePhieuThuHPUpdateTinhTrang PhieuThuHPUpdateTinhTrang(int MaPhieuThuHP, int MaTinhTrang)
+		public MessagePhieuThuHPUpdateTinhTrang PhieuThuHPUpdateTinhTrang(int maPhieuThuHP, int maTinhTrang)
 		{
-			return _phieuThuHPDALService.PhieuThuHPUpdateTinhTrang(MaPhieuThuHP, MaTinhTrang);
+			return _phieuThuHPDALService.PhieuThuHPUpdateTinhTrang(maPhieuThuHP, maTinhTrang);
 		}
 	}
 }
