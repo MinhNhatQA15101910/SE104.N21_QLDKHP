@@ -31,68 +31,78 @@
         #endregion
 
         #region SuaDoiTuong
-        [Theory, InlineData ("1", "", "0.5")]
-        public void SuaDoiTuong_EmptyTenDoiTuong_ReturnEmptyTenDoiTuongMessage(string maDTBanDau, string tenDT, string tiLeGiam)
+        [Theory, InlineData (1, "", "0.5")]
+        public void SuaDoiTuong_EmptyTenDoiTuong_ReturnEmptyTenDoiTuongMessage(int maDTBanDau, string tenDT, string tiLeGiam)
         {
             // Act
-            var result = _doiTuongBLLService.SuaDoiTuong(int.Parse(maDTBanDau), tenDT, tiLeGiam);
+            var result = _doiTuongBLLService.SuaDoiTuong(maDTBanDau, tenDT, tiLeGiam);
 
             // Assert
             Assert.Equal(SuaDoiTuongMessage.EmptyTenDoiTuong, result);
         }
 
-        [Theory, InlineData("1", "Không thuộc đối tượng ưu tiên", "")]
-        public void SuaDoiTuong_EmptyTiLeGiam_ReturnEmptyTiLeGiamMessage(string maDTBanDau, string tenDT, string tiLeGiam)
+        [Theory, InlineData(1, "Không thuộc đối tượng ưu tiên", "")]
+        public void SuaDoiTuong_EmptyTiLeGiam_ReturnEmptyTiLeGiamMessage(int maDTBanDau, string tenDT, string tiLeGiam)
         {
             // Act
-            var result = _doiTuongBLLService.SuaDoiTuong(int.Parse(maDTBanDau), tenDT, tiLeGiam);
+            var result = _doiTuongBLLService.SuaDoiTuong(maDTBanDau, tenDT, tiLeGiam);
 
             // Assert
             Assert.Equal(SuaDoiTuongMessage.EmptyTiLeGiam, result);
         }
 
-        [Theory, InlineData("1", "Không thuộc đối tượng ưu tiên", "abc")]
-        public void SuaDoiTuong_InvalidTiLeGiam1_ReturnTiLeGiamKhongHopLeMessage(string maDTBanDau, string tenDT, string tiLeGiam)
+        [Theory, InlineData(1, "Không thuộc đối tượng ưu tiên", "abc")]
+        public void SuaDoiTuong_InvalidTiLeGiam1_ReturnTiLeGiamKhongHopLeMessage(int maDTBanDau, string tenDT, string tiLeGiam)
         {
             // Act
-            var result = _doiTuongBLLService.SuaDoiTuong(int.Parse(maDTBanDau), tenDT, tiLeGiam);
+            var result = _doiTuongBLLService.SuaDoiTuong(maDTBanDau, tenDT, tiLeGiam);
 
             // Assert
             Assert.Equal(SuaDoiTuongMessage.TiLeGiamKhongHopLe, result);
         }
 
-        [Theory, InlineData("1", "Không thuộc đối tượng ưu tiên", "1.1")]
-        public void SuaDoiTuong_InvalidTiLeGiam2_ReturnTiLeGiamKhongHopLeMessage(string maDTBanDau, string tenDT, string tiLeGiam)
+        [Theory, InlineData(1, "Không thuộc đối tượng ưu tiên", "1,1")]
+        public void SuaDoiTuong_InvalidTiLeGiam3_ReturnTiLeGiamKhongHopLeMessage(int maDTBanDau, string tenDT, string tiLeGiam)
         {
             // Act
-            var result = _doiTuongBLLService.SuaDoiTuong(int.Parse(maDTBanDau), tenDT, tiLeGiam);
+            var result = _doiTuongBLLService.SuaDoiTuong(maDTBanDau, tenDT, tiLeGiam);
 
             // Assert
             Assert.Equal(SuaDoiTuongMessage.TiLeGiamKhongHopLe, result);
         }
 
-        [Theory, InlineData("1", "Không thuộc đối tượng ưu tiên", "-1")]
-        public void SuaDoiTuong_InvalidTiLeGiam3_ReturnTiLeGiamKhongHopLeMessage(string maDTBanDau, string tenDT, string tiLeGiam)
+        [Theory, InlineData(1, "Không thuộc đối tượng ưu tiên", "0")]
+        public void SuaDoiTuong_InvalidTiLeGiam4_ReturnTiLeGiamKhongHopLeMessage(int maDTBanDau, string tenDT, string tiLeGiam)
         {
             // Act
-            var result = _doiTuongBLLService.SuaDoiTuong(int.Parse(maDTBanDau), tenDT, tiLeGiam);
+            var result = _doiTuongBLLService.SuaDoiTuong(maDTBanDau, tenDT, tiLeGiam);
 
             // Assert
             Assert.Equal(SuaDoiTuongMessage.TiLeGiamKhongHopLe, result);
         }
 
-        [Theory, InlineData("2", "Không thuộc đối tượng ưu tiên", "0,5")]
-        public void SuaDoiTuong_Unable_ReturnUnableMessage(string maDTBanDau, string tenDT, string tiLeGiam)
+        [Theory, InlineData(1, "Không thuộc đối tượng ưu tiên", "-1")]
+        public void SuaDoiTuong_InvalidTiLeGiam5_ReturnTiLeGiamKhongHopLeMessage(int maDTBanDau, string tenDT, string tiLeGiam)
         {
             // Act
-            var result = _doiTuongBLLService.SuaDoiTuong(int.Parse(maDTBanDau), tenDT, tiLeGiam);
+            var result = _doiTuongBLLService.SuaDoiTuong(maDTBanDau, tenDT, tiLeGiam);
+
+            // Assert
+            Assert.Equal(SuaDoiTuongMessage.TiLeGiamKhongHopLe, result);
+        }
+
+        [Theory, InlineData(2, "Không thuộc đối tượng ưu tiên", "1")]
+        public void SuaDoiTuong_Unable_ReturnUnableMessage(int maDTBanDau, string tenDT, string tiLeGiam)
+        {
+            // Act
+            var result = _doiTuongBLLService.SuaDoiTuong(maDTBanDau, tenDT, tiLeGiam);
 
             // Assert
             Assert.Equal(SuaDoiTuongMessage.Unable, result);
         }
 
-        [Theory , InlineData("0", "Đối tượng 1", "0,5")]
-        public void SuaDoiTuong_DuplicateTenDoiTuong_ReturnDuplicateTenDoiTuongMessage(string maDTBanDau, string tenDT, string tiLeGiam)
+        [Theory , InlineData(0, "Đối tượng 1", "0,5")]
+        public void SuaDoiTuong_DuplicateTenDoiTuong_ReturnDuplicateTenDoiTuongMessage(int maDTBanDau, string tenDT, string tiLeGiam)
         {
             // Arrange
             var doiTuongList = new List<DoiTuong>
@@ -107,21 +117,21 @@
             _doiTuongDALServiceMock.Setup(_ => _.LayDSDoiTuong()).Returns(doiTuongList);
 
             // Act
-            var result = _doiTuongBLLService.SuaDoiTuong(int.Parse(maDTBanDau), tenDT, tiLeGiam);
+            var result = _doiTuongBLLService.SuaDoiTuong(maDTBanDau, tenDT, tiLeGiam);
 
             // Assert
             Assert.Equal(SuaDoiTuongMessage.DuplicateTenDoiTuong, result);
         }
 
-        [Theory, InlineData("1", "Đối tượng ưu tiên mới", "0,5")]
-        public void SuaDoiTuong_WithValidInput_VerifyExecuteDAL(string maDTBanDau, string tenDT, string tiLeGiam)
+        [Theory, InlineData(1, "Đối tượng ưu tiên mới", "0,5")]
+        public void SuaDoiTuong_WithValidInput_VerifyExecuteDAL(int maDTBanDau, string tenDT, string tiLeGiam)
         {
             // Arrange
             var doiTuongList = new List<DoiTuong>
             {
                 new DoiTuong
                 {
-                    MaDT = 1,
+                    MaDT = 2,
                     TenDT = "Không thuộc đối tượng ưu tiên",
                     TiLeGiamHocPhi = 0
                 }
@@ -129,10 +139,10 @@
             _doiTuongDALServiceMock.Setup(_ => _.LayDSDoiTuong()).Returns(doiTuongList);
 
             // Act
-            _doiTuongBLLService.SuaDoiTuong(int.Parse(maDTBanDau), tenDT, tiLeGiam);
+            _doiTuongBLLService.SuaDoiTuong(maDTBanDau, tenDT, tiLeGiam);
 
             // Assert
-            _doiTuongDALServiceMock.Verify(_ => _.SuaDoiTuong(int.Parse(maDTBanDau), tenDT, float.Parse(tiLeGiam)), Times.Once);
+            _doiTuongDALServiceMock.Verify(_ => _.SuaDoiTuong(maDTBanDau, tenDT, float.Parse(tiLeGiam)), Times.Once);
         }
         #endregion
 
@@ -167,17 +177,7 @@
             Assert.Equal(ThemDoiTuongMessage.TiLeGiamKhongHopLe, result);
         }
 
-        [Theory, InlineData("Đối tượng mới", "1.1")]
-        public void ThemDoiTuong_InvalidTiLeGiam2_ReturnTiLeGiamKhongHopLeMessage(string tenDT, string tiLeGiam)
-        {
-            // Act
-            var result = _doiTuongBLLService.ThemDoiTuong(tenDT, tiLeGiam);
-
-            // Assert
-            Assert.Equal(ThemDoiTuongMessage.TiLeGiamKhongHopLe, result);
-        }
-
-        [Theory, InlineData("Đối tượng mới", "-1")]
+        [Theory, InlineData("Đối tượng mới", "1,1")]
         public void ThemDoiTuong_InvalidTiLeGiam3_ReturnTiLeGiamKhongHopLeMessage(string tenDT, string tiLeGiam)
         {
             // Act
@@ -187,7 +187,27 @@
             Assert.Equal(ThemDoiTuongMessage.TiLeGiamKhongHopLe, result);
         }
 
-        [Theory, InlineData("Đối tượng 1", "0,5")]
+        [Theory, InlineData("Đối tượng mới", "0")]
+        public void ThemDoiTuong_InvalidTiLeGiam4_ReturnTiLeGiamKhongHopLeMessage(string tenDT, string tiLeGiam)
+        {
+            // Act
+            var result = _doiTuongBLLService.ThemDoiTuong(tenDT, tiLeGiam);
+
+            // Assert
+            Assert.Equal(ThemDoiTuongMessage.TiLeGiamKhongHopLe, result);
+        }
+
+        [Theory, InlineData("Đối tượng mới", "-1")]
+        public void ThemDoiTuong_InvalidTiLeGiam5_ReturnTiLeGiamKhongHopLeMessage(string tenDT, string tiLeGiam)
+        {
+            // Act
+            var result = _doiTuongBLLService.ThemDoiTuong(tenDT, tiLeGiam);
+
+            // Assert
+            Assert.Equal(ThemDoiTuongMessage.TiLeGiamKhongHopLe, result);
+        }
+
+        [Theory, InlineData("Đối tượng 1", "1")]
         public void ThemDoiTuong_DuplicateTenDoiTuong_ReturnDuplicateTenDoiTuongMessage(string tenDT, string tiLeGiam)
         {
             // Arrange
