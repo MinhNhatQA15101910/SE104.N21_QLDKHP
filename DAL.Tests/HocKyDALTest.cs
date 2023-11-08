@@ -1,5 +1,6 @@
 ﻿namespace DAL.Tests
 {
+    [ExcludeFromCodeCoverage]
     public class HocKyDALTest
     {
         #region Services
