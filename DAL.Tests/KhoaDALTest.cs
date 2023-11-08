@@ -1,7 +1,7 @@
 ﻿namespace DAL.Tests
 {
     [ExcludeFromCodeCoverage]
-    public class KhoaDALTests
+    public class KhoaDALTest
     {
         #region Services
         private readonly IKhoaDALService _khoaDALService;
@@ -10,7 +10,7 @@
         #endregion
 
         #region Constructor
-        public KhoaDALTests()
+        public KhoaDALTest()
         {
             _dapperWrapperMock = new Mock<IDapperWrapper>();
             _testConnectionString = @"Server=SERVERNAME;Database=TESTDB;Integrated Security=true;";

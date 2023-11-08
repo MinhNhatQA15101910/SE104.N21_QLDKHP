@@ -1,7 +1,7 @@
 ﻿namespace BLL.Tests
 {
     [ExcludeFromCodeCoverage]
-    public class NganhBLLTests
+    public class NganhBLLTest
     {
         #region Services
         private readonly INganhBLLService _nganhBLLService;
@@ -11,7 +11,7 @@
         #endregion
 
         #region Constructor
-        public NganhBLLTests()
+        public NganhBLLTest()
         {
             _nganhDALServiceMock = new Mock<INganhDALService>();
             _sinhVienDALServiceMock = new Mock<ISinhVienDALService>();
