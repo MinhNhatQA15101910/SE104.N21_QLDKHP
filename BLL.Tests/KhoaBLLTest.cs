@@ -1,7 +1,7 @@
 ﻿namespace BLL.Tests
 {
     [ExcludeFromCodeCoverage]
-    public class KhoaBLLTests
+    public class KhoaBLLTest
     {
         #region Services
         private readonly IKhoaBLLService _khoaBLLService;
@@ -10,7 +10,7 @@
         #endregion
 
         #region Constructor
-        public KhoaBLLTests()
+        public KhoaBLLTest()
         {
             _khoaDALServiceMock = new Mock<IKhoaDALService>();
             _nganhDALServiceMock = new Mock<INganhDALService>();
