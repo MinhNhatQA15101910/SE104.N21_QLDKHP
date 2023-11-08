@@ -58,7 +58,7 @@ namespace DAL.Services
         {
             using (var connection = new SqlConnection(_connectionString))
             {
-                return _dapperWrapper.Query<DoiTuong>(connection, "spDOITUONG_LayDSDoiTuong").ToList();
+                return _dapperWrapper.Query<DoiTuong>(connection, "spDOITUONG_LayDSDoiTuong2").ToList();
             }
         }
 
