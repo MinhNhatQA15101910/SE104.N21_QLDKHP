@@ -7,21 +7,21 @@ namespace BLL.Services
 {
     public class HocKyBLLService: IHocKyBLLService
     {
-        private readonly IHocKyDALService _hockiDALService;
+        private readonly IHocKyDALService _hockyDALService;
 
-        public HocKyBLLService(IHocKyDALService hockiDALService)
+        public HocKyBLLService(IHocKyDALService hockyDALService)
         {
-            _hockiDALService = hockiDALService;
+            _hockyDALService = hockyDALService;
         }
 
         public List<HocKy> LayDanhSachHK()
         {
-            return _hockiDALService.LayDanhSachHK();
+            return _hockyDALService.LayDanhSachHK();
         }
 
         public string LayHKByMaHK(int currMaHocKy)
         {
-            return _hockiDALService.LayHKByMaHK(currMaHocKy);
+            return _hockyDALService.LayHKByMaHK(currMaHocKy);
         }
     }
 }
