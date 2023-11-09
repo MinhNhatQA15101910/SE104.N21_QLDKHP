@@ -44,7 +44,7 @@ namespace BLL.Services
 			return _nguoiDungDALService.XoaTaiKhoan(tenDangNhap);
 		}
 
-		public DoiMatKhauMessage DoiMatKhau(string matKhauHT, string matKhauMoi, string matKhauNhapLai)
+		public DoiMatKhauMessage DoiMatKhau(string tenDangNhap, string matKhauHT, string matKhauMoi, string matKhauNhapLai)
 		{
 			if (string.IsNullOrEmpty(matKhauHT))
 			{
@@ -66,7 +66,7 @@ namespace BLL.Services
 				return DoiMatKhauMessage.InvalidNewPassword;
 			}
 
-			return _nguoiDungDALService.DoiMatKhau(matKhauHT, matKhauMoi);
+			return _nguoiDungDALService.DoiMatKhau(tenDangNhap, matKhauHT, matKhauMoi);
 		}
 
 		public ThemTaiKhoanMessage ThemTaiKhoan(string tenDangNhap, string maNhom)

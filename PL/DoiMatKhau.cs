@@ -34,7 +34,7 @@ namespace PL
             string matKhauNhapLai = txtMatKhauNhapLai.Text.Trim();
 
             errProv1.Clear();
-            DoiMatKhauMessage message = _nguoiDungBLLService.DoiMatKhau(matKhauHT, matKhauMoi, matKhauNhapLai);
+            DoiMatKhauMessage message = _nguoiDungBLLService.DoiMatKhau(GlobalConfig.CurrNguoiDung.TenDangNhap, matKhauHT, matKhauMoi, matKhauNhapLai);
             switch (message)
             {
                 case DoiMatKhauMessage.EmptyMatKhauHT:
