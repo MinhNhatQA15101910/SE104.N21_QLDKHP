@@ -103,15 +103,12 @@ namespace DAL.Services
             using (var connection = new SqlConnection(_connectionString))
             {
                 var parameters = new DynamicParameters();
-                parameters.Add("@maSV", mssv);
+                parameters.Add("@maSV", mssv); 
                 parameters.Add("@hocKy", hocKy);
                 parameters.Add("@namHoc", namHoc);
-                int numRowsAffected = _dapperWrapper.Execute(connection, "spPHIEUDKHP_TaoPhieuDKHP ", parameters, commandType: CommandType.StoredProcedure);
+                int numRowsAffected = _dapperWrapper.Execute(connection, "spPHIEUDKHP_TaoPhieuDKHP", parameters, commandType: CommandType.StoredProcedure);
 
-                if (numRowsAffected > 0)
-                    return true;
-                else
-                    return false;
+                return (numRowsAffected > 0);
             }
 		}
 
