@@ -27,7 +27,7 @@ namespace DAL.Services
             }
         }
 
-        public  XoaMonHocMessage XoaMonHoc(string maMH)
+        public XoaMonHocMessage XoaMonHoc(string maMH)
         {
             using (var connection = new SqlConnection(_connectionString))
             {
@@ -54,7 +54,7 @@ namespace DAL.Services
             }
         }
 
-        public  ThemMonHocMessage ThemMonHoc(string maMH, string tenMH, int maLoaiMonHoc, int soTiet)
+        public ThemMonHocMessage ThemMonHoc(string maMH, string tenMH, int maLoaiMonHoc, int soTiet)
         {
             using (var connection = new SqlConnection(_connectionString))
             {
@@ -69,7 +69,7 @@ namespace DAL.Services
             }
         }
 
-        public  List<MonHoc> LayDSMonHoc2()
+        public List<MonHoc> LayDSMonHoc2()
         {
             using (var connection = new SqlConnection(_connectionString))
             {
@@ -77,7 +77,7 @@ namespace DAL.Services
             }
         }
 
-        public  List<MonHoc> GetTermMonHoc(int hocKy)
+        public List<MonHoc> GetTermMonHoc(int hocKy)
         {
             using (var connection = new SqlConnection(_connectionString))
             {
@@ -94,7 +94,7 @@ namespace DAL.Services
             }
         }
 
-        public  List<MonHoc> GetTermMonHocMo(int hocKy, int namHoc)
+        public List<MonHoc> GetTermMonHocMo(int hocKy, int namHoc)
         {
             using (var connection = new SqlConnection(_connectionString))
             {
@@ -105,7 +105,7 @@ namespace DAL.Services
             }
         }
 
-        public  List<MonHoc> GetChuongTrinhHoc(string maNganh, int hocKy)
+        public List<MonHoc> GetChuongTrinhHoc(string maNganh, int hocKy)
         {
             using (var connection = new SqlConnection(_connectionString))
             {
@@ -125,7 +125,7 @@ namespace DAL.Services
             }
         }
 
-        public  List<MonHoc> GetMonHocPhieuDKHP(int maPhieuDKHP)
+        public List<MonHoc> GetMonHocPhieuDKHP(int maPhieuDKHP)
         {
             using (var connection = new SqlConnection(_connectionString))
             {
