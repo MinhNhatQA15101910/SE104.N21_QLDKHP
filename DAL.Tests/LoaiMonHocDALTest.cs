@@ -20,7 +20,7 @@
 
         #region LayDSLoaiMonHoc
         [Fact]
-        public void LayDSHuyen_VerifyQueryData()
+        public void LayDSLoaiMonHoc_VerifyQueryData()
         {
             // Arrange
             var expectedQuery = "spLOAIMONHOC_LayDSLoaiMonHoc";
@@ -51,7 +51,7 @@
 
         #region XoaLoaiMonHoc
         [Theory, InlineData(1)]
-        public void XoaHuyen_ReturnsSuccessfulMessage(int maLoaiMonHoc)
+        public void XoaLoaiMonHoc_ReturnsSuccessfulMessage(int maLoaiMonHoc)
         {
             // Arrange
             var expectedQuery = "spLOAIMONHOC_XoaLoaiMonHoc";
@@ -76,7 +76,7 @@
         }
 
         [Theory, InlineData(1)]
-        public void XoaHuyen_ReturnsFailedMessage(int maLoaiMonHoc)
+        public void XoaLoaiMonHoc_ReturnsFailedMessage(int maLoaiMonHoc)
         {
             // Arrange
             var expectedQuery = "spLOAIMONHOC_XoaLoaiMonHoc";
