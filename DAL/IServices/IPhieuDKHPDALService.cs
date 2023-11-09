@@ -15,7 +15,7 @@ namespace DAL.IServices
 		bool TaoPhieuDKHP(string mssv, int hocKy, int namHoc);
 		int LayMaPhieuDKHP(int hocKy, int namHoc);
 		List<PhieuDKHP> LayDanhSachDKHPDaXacNhan(string mssv);
-		List<PhieuDKHP> GetPhieuDKHP(int MmHocKy, int namHoc, int maTinhTrang);
+		List<PhieuDKHP> GetPhieuDKHP(int maHocKy, int namHoc, int maTinhTrang);
 		MessagePhieuDKHPUpdateTinhTrang PhieuDKHPUpdateTinhTrang(int maPhieuDKHP, int maTinhTrang);
 		List<PhieuDKHP> GetAllPhieuDKHP();
 
