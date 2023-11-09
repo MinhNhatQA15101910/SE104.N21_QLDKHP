@@ -58,7 +58,7 @@
 
             _dapperWrapperMock.Setup(
                 _ => _.Execute(
-                    It.Is<IDbConnection>(db => db.ConnectionString == _testConnectionString), 
+                    It.Is<IDbConnection>(db => db.ConnectionString == _testConnectionString),
                     expectedQuery,
                     It.Is<DynamicParameters>(p => p.Get<string>(expectedMaKhoaParameterName) == maKhoa),
                     expectedCommandType))
