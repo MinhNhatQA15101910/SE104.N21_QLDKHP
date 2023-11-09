@@ -1,7 +1,4 @@
-﻿using Microsoft.VisualStudio.TestPlatform;
-using System.Reflection;
-
-namespace DAL.Tests
+﻿namespace DAL.Tests
 {
     [ExcludeFromCodeCoverage]
     public class NguoiDungDALTest
