@@ -37,7 +37,7 @@
 			Assert.Equal(TimKiemTTHocPhiMessage.InvalidNamHoc, result);
 		}
 
-		[Theory, InlineData("2023")]
+		[Theory, InlineData("0")]
 		public void KtTimKiemTTHocPhi_WithValidInputs_VerifyExecuteDAL(string namhoc)
 		{
 			// Act
