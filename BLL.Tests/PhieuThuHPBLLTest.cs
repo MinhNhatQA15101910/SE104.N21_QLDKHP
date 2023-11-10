@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 
 namespace BLL.Tests
 {
+	[ExcludeFromCodeCoverage]
 	public class PhieuThuHPBLLTest
 	{
 		#region Services
