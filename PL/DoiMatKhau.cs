@@ -32,9 +32,11 @@ namespace PL
             string matKhauHT = txtMatKhauHT.Text.Trim();
             string matKhauMoi = txtMatKhauMoi.Text.Trim();
             string matKhauNhapLai = txtMatKhauNhapLai.Text.Trim();
+            string tenDangNhap = GlobalConfig.CurrNguoiDung.TenDangNhap;
 
-            errProv1.Clear();
-            DoiMatKhauMessage message = _nguoiDungBLLService.DoiMatKhau(matKhauHT, matKhauMoi, matKhauNhapLai);
+
+			errProv1.Clear();
+            DoiMatKhauMessage message = _nguoiDungBLLService.DoiMatKhau(tenDangNhap, matKhauHT, matKhauMoi, matKhauNhapLai);
             switch (message)
             {
                 case DoiMatKhauMessage.EmptyMatKhauHT:

@@ -70,7 +70,7 @@ namespace DAL.Services
             }
 		}
 
-		public DoiMatKhauMessage DoiMatKhau(string matKhauHT, string matKhauMoi)
+		public DoiMatKhauMessage DoiMatKhau(string tenDangNhap, string matKhauHT, string matKhauMoi)
 		{
             using (var connection = new SqlConnection(_connectionString))
             {

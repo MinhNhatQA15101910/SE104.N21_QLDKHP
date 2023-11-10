@@ -8,7 +8,7 @@ namespace DAL.IServices
 		List<CT_NguoiDung> LayDSNguoiDung();
 		DangNhapMessage DangNhap(string tenDangNhap, string matKhau);
 		XoaTaiKhoanMessage XoaTaiKhoan(string tenDangNhap);
-		DoiMatKhauMessage DoiMatKhau(string matKhauHT, string matKhauMoi);
+		DoiMatKhauMessage DoiMatKhau(string tenDangNhap, string matKhauHT, string matKhauMoi);
 		ThemTaiKhoanMessage ThemTaiKhoan(string tenDangNhap, string maNhom);
 		SuaTaiKhoanMessage SuaTaiKhoan(string tenDangNhapBD, string tenDangNhap, string maNhom);
 		ThemTaiKhoanSVMessage ThemTaiKhoanSV(IList<SinhVien> dssv);

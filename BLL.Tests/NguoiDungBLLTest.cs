@@ -120,48 +120,48 @@ namespace BLL.Tests
 		#endregion
 
 		#region DoiMatKhau
-		[Theory, InlineData("", "123456789", "123456789")]
-		public void DoiMatKhau_WithEmptyMatKhauHT_ReturnsEmptyMatKhauHTMessage(string matkhauht, string matkhaumoi, string matkhaunhaplai)
+		[Theory, InlineData("admin1","", "123456789", "123456789")]
+		public void DoiMatKhau_WithEmptyMatKhauHT_ReturnsEmptyMatKhauHTMessage(string tenDangNhap, string matkhauht, string matkhaumoi, string matkhaunhaplai)
 		{
 			// Act
-			var result = _nguoiDungBLLService.DoiMatKhau(matkhauht, matkhaumoi, matkhaunhaplai);
+			var result = _nguoiDungBLLService.DoiMatKhau(tenDangNhap, matkhauht, matkhaumoi, matkhaunhaplai);
 
 			// Assert
 			Assert.Equal(DoiMatKhauMessage.EmptyMatKhauHT, result);
 		}
 
-		[Theory, InlineData("12345678", "", "123456789")]
-		public void DoiMatKhau_WithEmptyMatKhauMoi_ReturnsEmptyMatKhauMoiMessage(string matkhauht, string matkhaumoi, string matkhaunhaplai)
+		[Theory, InlineData("admin1", "12345678", "", "123456789")]
+		public void DoiMatKhau_WithEmptyMatKhauMoi_ReturnsEmptyMatKhauMoiMessage(string tendangnhap, string matkhauht, string matkhaumoi, string matkhaunhaplai)
 		{
 			// Act
-			var result = _nguoiDungBLLService.DoiMatKhau(matkhauht, matkhaumoi, matkhaunhaplai);
+			var result = _nguoiDungBLLService.DoiMatKhau(tendangnhap, matkhauht, matkhaumoi, matkhaunhaplai);
 
 			// Assert
 			Assert.Equal(DoiMatKhauMessage.EmptyMatKhauMoi, result);
 		}
 
-		[Theory, InlineData("12345678", "123456789", "")]
-		public void DoiMatKhau_WithEmptyMatKhauNhapLai_ReturnsEmptyMatKhauNhapLaiMessage(string matkhauht, string matkhaumoi, string matkhaunhaplai)
+		[Theory, InlineData("admin1", "12345678", "123456789", "")]
+		public void DoiMatKhau_WithEmptyMatKhauNhapLai_ReturnsEmptyMatKhauNhapLaiMessage(string tendangnhap, string matkhauht, string matkhaumoi, string matkhaunhaplai)
 		{
 			// Act
-			var result = _nguoiDungBLLService.DoiMatKhau(matkhauht, matkhaumoi, matkhaunhaplai);
+			var result = _nguoiDungBLLService.DoiMatKhau(tendangnhap, matkhauht, matkhaumoi, matkhaunhaplai);
 
 			// Assert
 			Assert.Equal(DoiMatKhauMessage.EmptyMatKhauNhapLai, result);
 		}
 
-		[Theory, InlineData("12345678", "123456789", "1234567")]
-		public void DoiMatKhau_WithInvalidNewPassword_ReturnsInvalidNewPasswordMessage(string matkhauht, string matkhaumoi, string matkhaunhaplai)
+		[Theory, InlineData("admin1", "12345678", "123456789", "1234567")]
+		public void DoiMatKhau_WithInvalidNewPassword_ReturnsInvalidNewPasswordMessage(string tendangnhap, string matkhauht, string matkhaumoi, string matkhaunhaplai)
 		{
 			// Act
-			var result = _nguoiDungBLLService.DoiMatKhau(matkhauht, matkhaumoi, matkhaunhaplai);
+			var result = _nguoiDungBLLService.DoiMatKhau(tendangnhap, matkhauht, matkhaumoi, matkhaunhaplai);
 
 			// Assert
 			Assert.Equal(DoiMatKhauMessage.InvalidNewPassword, result);
 		}
 
-		[Theory, InlineData("12345678", "123456789", "123456789")]
-		public void DoiMatKhau_WithValidInputs_VerifyExecuteDAL(string matkhauht, string matkhaumoi, string matkhaunhaplai)
+		[Theory, InlineData("admin1", "12345678", "123456789", "123456789")]
+		public void DoiMatKhau_WithValidInputs_VerifyExecuteDAL(string tendangnhap, string matkhauht, string matkhaumoi, string matkhaunhaplai)
 		{
 			//Arrange
 			var nguoidungs = new List<CT_NguoiDung>
@@ -176,10 +176,10 @@ namespace BLL.Tests
 			};
 			_nguoiDungDALServiceMock.Setup(_ => _.LayDSNguoiDung()).Returns(nguoidungs);
 			// Act
-			var result = _nguoiDungBLLService.DoiMatKhau(matkhauht, matkhaumoi, matkhaunhaplai);
+			var result = _nguoiDungBLLService.DoiMatKhau(tendangnhap, matkhauht, matkhaumoi, matkhaunhaplai);
 
 			// Assert
-			_nguoiDungDALServiceMock.Verify(_ => _.DoiMatKhau(matkhauht, matkhaumoi), Times.Once);
+			_nguoiDungDALServiceMock.Verify(_ => _.DoiMatKhau(tendangnhap, matkhauht, matkhaumoi), Times.Once);
 		}
 		#endregion
 
