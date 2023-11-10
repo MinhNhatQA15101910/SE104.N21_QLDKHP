@@ -183,7 +183,7 @@
 			Assert.Equal(TimKiemPhieuDKHPMessage.EmptyNamHoc, result);
 		}
 
-		[Theory, InlineData("a")]
+		[Theory, InlineData("a"), InlineData("-1")]
 		public void KtTimKiemPhieuDKHPn_WithInvalidNamHoc_VerifyExecuteDAL(string namhoc)
 		{
 			// Act
@@ -193,7 +193,7 @@
 			Assert.Equal(TimKiemPhieuDKHPMessage.InvalidNamHoc, result);
 		}
 
-		[Theory, InlineData("2023")]
+		[Theory, InlineData("0")]
 		public void KtTimKiemPhieuDKHP_WithValidInputs_VerifyExecuteDAL(string namhoc)
 		{
 			// Act
