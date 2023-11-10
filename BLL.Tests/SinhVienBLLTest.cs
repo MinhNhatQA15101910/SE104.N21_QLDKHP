@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace BLL.Tests
+﻿namespace BLL.Tests
 {
-	[ExcludeFromCodeCoverage]
+    [ExcludeFromCodeCoverage]
 	public class SinhVienBLLTest
 	{
 		#region Services
@@ -135,7 +129,7 @@ namespace BLL.Tests
 			};
 			_sinhVienDALServiceMock.Setup(_ => _.LayDSSV()).Returns(sinhviens);
 			// Act
-			var result = _sinhVienBLLService.SuaSinhVien(masvbandau, mssv, hoten, ngaysinh, gioitinh, mahuyen, manganh, madts);
+			_sinhVienBLLService.SuaSinhVien(masvbandau, mssv, hoten, ngaysinh, gioitinh, mahuyen, manganh, madts);
 
 			// Assert
 			_sinhVienDALServiceMock.Verify(_ => _.SuaSinhVien(masvbandau, mssv, hoten, ngaysinh, gioitinh, mahuyen, manganh, madts), Times.Once);
@@ -165,7 +159,7 @@ namespace BLL.Tests
 			};
 			_sinhVienDALServiceMock.Setup(_ => _.LayDSSV()).Returns(sinhviens);
 			// Act
-			var result = _sinhVienBLLService.SuaSinhVien(masvbandau, mssv, hoten, ngaysinh, gioitinh, mahuyen, manganh, madts);
+			_sinhVienBLLService.SuaSinhVien(masvbandau, mssv, hoten, ngaysinh, gioitinh, mahuyen, manganh, madts);
 
 			// Assert
 			_sinhVienDALServiceMock.Verify(_ => _.SuaSinhVien(masvbandau, mssv, hoten, ngaysinh, gioitinh, mahuyen, manganh, madts), Times.Once);
@@ -261,7 +255,7 @@ namespace BLL.Tests
 			};
 			_sinhVienDALServiceMock.Setup(_ => _.LayDSSV()).Returns(sinhviens);
 			// Act
-			var result = _sinhVienBLLService.ThemSinhVien(mssv, hoten, ngaysinh, gioitinh, mahuyen, manganh, madts);
+			_sinhVienBLLService.ThemSinhVien(mssv, hoten, ngaysinh, gioitinh, mahuyen, manganh, madts);
 
 			// Assert
 			_sinhVienDALServiceMock.Verify(_ => _.ThemSinhVien(mssv, hoten, ngaysinh, gioitinh, mahuyen, manganh, madts), Times.Once);
@@ -288,7 +282,7 @@ namespace BLL.Tests
 			};
 			_sinhVienDALServiceMock.Setup(_ => _.LayDSSV()).Returns(sinhviens);
 			// Act
-			var result = _sinhVienBLLService.XoaSinhVien(mssv);
+			_sinhVienBLLService.XoaSinhVien(mssv);
 
 			// Assert
 			_sinhVienDALServiceMock.Verify(_ => _.XoaSinhVien(mssv), Times.Once);

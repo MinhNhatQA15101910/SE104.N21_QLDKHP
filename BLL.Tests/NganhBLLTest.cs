@@ -127,7 +127,7 @@
                 {
                     MaSV = "SV21522415",
                     HoTen = "Do Minh Nhat",
-                    NgaySinh = new DateTime(2003, 10, 19),
+                    NgaySinh = new DateTime(2003, 10, 19, 0, 0, 0, DateTimeKind.Utc),
                     GioiTinh = "Nam",
                     MaHuyen = 100,
                     MaNganh = "KTPM",
@@ -161,7 +161,7 @@
                 {
                     MaSV = "SV21522415",
                     HoTen = "Do Minh Nhat",
-                    NgaySinh = new DateTime(2003, 10, 19),
+                    NgaySinh = new DateTime(2003, 10, 19, 0, 0, 0, DateTimeKind.Utc),
                     GioiTinh = "Nam",
                     MaHuyen = 100,
                     MaNganh = "HTTT",
@@ -224,7 +224,7 @@
                 {
                     MaSV = "SV21522415",
                     HoTen = "Do Minh Nhat",
-                    NgaySinh = new DateTime(2003, 10, 19),
+                    NgaySinh = new DateTime(2003, 10, 19, 0, 0, 0, DateTimeKind.Utc),
                     GioiTinh = "Nam",
                     MaHuyen = 100,
                     MaNganh = "HTTT",
@@ -390,7 +390,7 @@
                 {
                     MaSV = "SV21522415",
                     HoTen = "Do Minh Nhat",
-                    NgaySinh = new DateTime(2003, 10, 19),
+                    NgaySinh = new DateTime(2003, 10, 19, 0, 0, 0, DateTimeKind.Utc),
                     GioiTinh = "Nam",
                     MaHuyen = 100,
                     MaNganh = "HTTT",
@@ -423,7 +423,7 @@
                 {
                     MaSV = "SV21522415",
                     HoTen = "Do Minh Nhat",
-                    NgaySinh = new DateTime(2003, 10, 19),
+                    NgaySinh = new DateTime(2003, 10, 19, 0, 0, 0, DateTimeKind.Utc),
                     GioiTinh = "Nam",
                     MaHuyen = 100,
                     MaNganh = "HTTT",
@@ -467,7 +467,7 @@
                 {
                     MaSV = "SV21522415",
                     HoTen = "Do Minh Nhat",
-                    NgaySinh = new DateTime(2003, 10, 19),
+                    NgaySinh = new DateTime(2003, 10, 19, 0, 0, 0, DateTimeKind.Utc),
                     GioiTinh = "Nam",
                     MaHuyen = 100,
                     MaNganh = "HTTT",

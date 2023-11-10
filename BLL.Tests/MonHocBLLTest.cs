@@ -1,8 +1,6 @@
-﻿using DTO;
-
-namespace BLL.Tests
+﻿namespace BLL.Tests
 {
-	[ExcludeFromCodeCoverage]
+    [ExcludeFromCodeCoverage]
 	public class MonHocBLLTest
 	{
 		#region Services
@@ -150,7 +148,7 @@ namespace BLL.Tests
 			_chuongTrinhHocDALServiceMock.Setup(_ => _.GetAllCTHoc()).Returns(chuongtrinhhocs);
 
 			// Act
-			var result = _monHocBLLService.XoaMonHoc(mamh);
+			_monHocBLLService.XoaMonHoc(mamh);
 
 			// Assert
 			_monHocDALServiceMock.Verify(_ => _.XoaMonHoc(mamh), Times.Once);
@@ -190,15 +188,6 @@ namespace BLL.Tests
 
 		[Theory, InlineData("NMLT", "NMLT1", "Nhập môn lập trình", 1, "a", 15)]
 		public void SuaMonHoc_WithInvalidSoTiet_ReturnsInvalidSoTietMessage2(string mamhbandau, string mamh, string tenmh, int maloaimonhoc, string sotiet, int sotietloaimon)
-		{
-			// Act
-			var result = _monHocBLLService.SuaMonHoc(mamhbandau, mamh, tenmh, maloaimonhoc, sotiet, sotietloaimon);
-
-			// Assert
-			Assert.Equal(SuaMonHocMessage.InvalidSoTiet, result);
-		}
-
-		public void SuaMonHoc_WithInvalidSoTiet_ReturnsInvalidSoTietMessage(string mamhbandau, string mamh, string tenmh, int maloaimonhoc, string sotiet, int sotietloaimon)
 		{
 			// Act
 			var result = _monHocBLLService.SuaMonHoc(mamhbandau, mamh, tenmh, maloaimonhoc, sotiet, sotietloaimon);
@@ -397,7 +386,7 @@ namespace BLL.Tests
 			_danhSachMonHocMoDALServiceMock.Setup(m => m.LayDSMonHocMo()).Returns(monhocmos);
 
 			// Act
-			var result = _monHocBLLService.SuaMonHoc(mamhbandau, mamh, tenmh, maloaimonhoc, sotiet, sotietloaimon);
+			_monHocBLLService.SuaMonHoc(mamhbandau, mamh, tenmh, maloaimonhoc, sotiet, sotietloaimon);
 
 			// Assert
 			_monHocDALServiceMock.Verify(_ => _.SuaMonHoc(mamhbandau, tenmh, maloaimonhoc, Int32.Parse(sotiet)), Times.Once);
@@ -435,28 +424,8 @@ namespace BLL.Tests
 			Assert.Equal(ThemMonHocMessage.EmptySoTiet, result);
 		}
 
-		[Theory, InlineData("NMLT", "Nhập môn lập trình", 1, "-3", 15)]
+		[Theory, InlineData("NMLT", "Nhập môn lập trình", 1, "-3", 15), InlineData("NMLT", "Nhập môn lập trình", 1, "a", 15), InlineData("NMLT", "Nhập môn lập trình", 1, "14", 15)]
 		public void ThemMonHoc_WithInvalidSoTiet_ReturnInvalidSoTietMessage(string mamh, string tenmh, int maloaimonhoc, string sotiet, int sotietloaimon)
-		{
-			// Act
-			var result = _monHocBLLService.ThemMonHoc(mamh, tenmh, maloaimonhoc, sotiet, sotietloaimon);
-
-			// Assert
-			Assert.Equal(ThemMonHocMessage.InvalidSoTiet, result);
-		}
-
-		[Theory, InlineData("NMLT", "Nhập môn lập trình", 1, "a", 15)]
-		public void ThemMonHoc_WithInvalidSoTiet_ReturnInvalidSoTietMessage2(string mamh, string tenmh, int maloaimonhoc, string sotiet, int sotietloaimon)
-		{
-			// Act
-			var result = _monHocBLLService.ThemMonHoc(mamh, tenmh, maloaimonhoc, sotiet, sotietloaimon);
-
-			// Assert
-			Assert.Equal(ThemMonHocMessage.InvalidSoTiet, result);
-		}
-
-		[Theory, InlineData("NMLT", "Nhập môn lập trình", 1, "14", 15)]
-		public void ThemMonHoc_WithInvalidSoTiet_ReturnInvalidSoTietMessage3(string mamh, string tenmh, int maloaimonhoc, string sotiet, int sotietloaimon)
 		{
 			// Act
 			var result = _monHocBLLService.ThemMonHoc(mamh, tenmh, maloaimonhoc, sotiet, sotietloaimon);
@@ -509,7 +478,7 @@ namespace BLL.Tests
 			};
 			_monHocDALServiceMock.Setup(_ => _.LayDSMonHoc()).Returns(monhocs);
 			// Act
-			var result = _monHocBLLService.ThemMonHoc(mamh, tenmh, maloaimonhoc, sotiet, sotietloaimon);
+			_monHocBLLService.ThemMonHoc(mamh, tenmh, maloaimonhoc, sotiet, sotietloaimon);
 
 			// Assert
 			_monHocDALServiceMock.Verify(_ => _.ThemMonHoc(mamh, tenmh, maloaimonhoc, Int32.Parse(sotiet)), Times.Once);
@@ -521,7 +490,7 @@ namespace BLL.Tests
 		public void GetTermMonHoc_WithValidInputs_VerifyExecuteDAL(int hocky)
 		{
 			// Act
-			var result = _monHocBLLService.GetTermMonHoc(hocky);
+			_monHocBLLService.GetTermMonHoc(hocky);
 
 			// Assert
 			_monHocDALServiceMock.Verify(_ => _.GetTermMonHoc(hocky), Times.Once);
@@ -533,7 +502,7 @@ namespace BLL.Tests
 		public void GetTermMonHocMo_WithValidInputs_VerifyExecuteDAL(int hocky, int namhoc)
 		{
 			// Act
-			var result = _monHocBLLService.GetTermMonHocMo(hocky,namhoc);
+			_monHocBLLService.GetTermMonHocMo(hocky, namhoc);
 
 			// Assert
 			_monHocDALServiceMock.Verify(_ => _.GetTermMonHocMo(hocky, namhoc), Times.Once);
@@ -545,7 +514,7 @@ namespace BLL.Tests
 		public void GetChuongTrinhHoc_WithValidInputs_VerifyExecuteDAL(string nganh, int hocky)
 		{
 			// Act
-			var result = _monHocBLLService.GetChuongTrinhHoc(nganh,hocky);
+			_monHocBLLService.GetChuongTrinhHoc(nganh, hocky);
 
 			// Assert
 			_monHocDALServiceMock.Verify(_ => _.GetChuongTrinhHoc(nganh, hocky), Times.Once);
@@ -557,7 +526,7 @@ namespace BLL.Tests
 		public void LayDSMonHoc2_VerifyExecuteDAL()
 		{
 			// Act
-			var result = _monHocBLLService.LayDSMonHoc2();
+			_monHocBLLService.LayDSMonHoc2();
 
 			// Assert
 			_monHocDALServiceMock.Verify(_ => _.LayDSMonHoc2(), Times.Once);
@@ -569,7 +538,7 @@ namespace BLL.Tests
 		public void GetMonHocPhieuDKHP_WithValidInputs_VerifyExecuteDAL(int maphieudkhp)
 		{
 			// Act
-			var result = _monHocBLLService.GetMonHocPhieuDKHP(maphieudkhp);
+			_monHocBLLService.GetMonHocPhieuDKHP(maphieudkhp);
 
 			// Assert
 			_monHocDALServiceMock.Verify(_ => _.GetMonHocPhieuDKHP(maphieudkhp), Times.Once);

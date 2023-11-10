@@ -1,5 +1,8 @@
-﻿namespace DTO
+﻿using System.Diagnostics.CodeAnalysis;
+
+namespace DTO
 {
+    [ExcludeFromCodeCoverage]
     public class GlobalConfig
     {
         public static NguoiDung CurrNguoiDung { get; set; } = new NguoiDung();

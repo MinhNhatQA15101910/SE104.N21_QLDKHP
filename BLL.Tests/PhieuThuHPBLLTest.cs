@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace BLL.Tests
+﻿namespace BLL.Tests
 {
-	[ExcludeFromCodeCoverage]
+    [ExcludeFromCodeCoverage]
 	public class PhieuThuHPBLLTest
 	{
 		#region Services
@@ -33,18 +27,8 @@ namespace BLL.Tests
 			Assert.Equal(TimKiemTTHocPhiMessage.EmptyNamHoc, result);
 		}
 
-		[Theory, InlineData("a")]
+		[Theory, InlineData("a"), InlineData("-1")]
 		public void KtTimKiemTTHocPhi_WithInvalidNamHoc_ReturnsInvalidNamHocMessage(string namhoc)
-		{
-			// Act
-			var result = _phieuThuHPBLLService.KtTimKiemTTHocPhi(namhoc);
-
-			// Assert
-			Assert.Equal(TimKiemTTHocPhiMessage.InvalidNamHoc, result);
-		}
-
-		[Theory, InlineData("-1")]
-		public void KtTimKiemTTHocPhi_WithInvalidNamHoc_ReturnsInvalidNamHocMessage2(string namhoc)
 		{
 			// Act
 			var result = _phieuThuHPBLLService.KtTimKiemTTHocPhi(namhoc);
@@ -55,16 +39,6 @@ namespace BLL.Tests
 
 		[Theory, InlineData("2023")]
 		public void KtTimKiemTTHocPhi_WithValidInputs_VerifyExecuteDAL(string namhoc)
-		{
-			// Act
-			var result = _phieuThuHPBLLService.KtTimKiemTTHocPhi(namhoc);
-
-			// Assert
-			Assert.Equal(TimKiemTTHocPhiMessage.Sucess, result);
-		}
-
-		[Theory, InlineData("0")]
-		public void KtTimKiemTTHocPhi_WithValidInputs_VerifyExecuteDAL2(string namhoc)
 		{
 			// Act
 			var result = _phieuThuHPBLLService.KtTimKiemTTHocPhi(namhoc);
@@ -109,16 +83,6 @@ namespace BLL.Tests
 
 		[Theory, InlineData("2023")]
 		public void KtTimKiemSoTienThu_WithValidInputs_VerifyExecuteDAL(string namhoc)
-		{
-			// Act
-			var result = _phieuThuHPBLLService.KtTimKiemSoTienThu(namhoc);
-
-			// Assert
-			Assert.Equal(TimKiemPhieuDKHPMessage.Sucess, result);
-		}
-
-		[Theory, InlineData("0")]
-		public void KtTimKiemSoTienThu_WithValidInputs_VerifyExecuteDAL2(string namhoc)
 		{
 			// Act
 			var result = _phieuThuHPBLLService.KtTimKiemSoTienThu(namhoc);

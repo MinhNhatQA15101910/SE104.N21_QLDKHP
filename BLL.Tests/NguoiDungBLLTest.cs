@@ -1,14 +1,6 @@
-﻿using DTO;
-using System;
-using System.Collections.Generic;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace BLL.Tests
+﻿namespace BLL.Tests
 {
-	[ExcludeFromCodeCoverage]
+    [ExcludeFromCodeCoverage]
 	public class NguoiDungBLLTest
 	{
 		#region Services
@@ -72,8 +64,9 @@ namespace BLL.Tests
 				}
 			};
 			_nguoiDungDALServiceMock.Setup(_ => _.LayDSNguoiDung()).Returns(nguoidungs);
+
 			// Act
-			var result = _nguoiDungBLLService.DangNhap(tendangnhap, matkhau);
+			_nguoiDungBLLService.DangNhap(tendangnhap, matkhau);
 
 			// Assert
 			_nguoiDungDALServiceMock.Verify(_ => _.DangNhap(tendangnhap, matkhau), Times.Once);
@@ -112,7 +105,7 @@ namespace BLL.Tests
 			};
 			_nguoiDungDALServiceMock.Setup(_=>_.LayDSNguoiDung()).Returns(nguoidungs);
 			// Act
-			var result = _nguoiDungBLLService.XoaTaiKhoan(tendangnhap);
+			_nguoiDungBLLService.XoaTaiKhoan(tendangnhap);
 
 			// Assert
 			_nguoiDungDALServiceMock.Verify(_ => _.XoaTaiKhoan(tendangnhap), Times.Once);
@@ -176,7 +169,7 @@ namespace BLL.Tests
 			};
 			_nguoiDungDALServiceMock.Setup(_ => _.LayDSNguoiDung()).Returns(nguoidungs);
 			// Act
-			var result = _nguoiDungBLLService.DoiMatKhau(tendangnhap, matkhauht, matkhaumoi, matkhaunhaplai);
+			_nguoiDungBLLService.DoiMatKhau(tendangnhap, matkhauht, matkhaumoi, matkhaunhaplai);
 
 			// Assert
 			_nguoiDungDALServiceMock.Verify(_ => _.DoiMatKhau(tendangnhap, matkhauht, matkhaumoi), Times.Once);
@@ -233,7 +226,7 @@ namespace BLL.Tests
 			};
 			_nguoiDungDALServiceMock.Setup(_ => _.LayDSNguoiDung()).Returns(nguoidungs);
 			// Act
-			var result = _nguoiDungBLLService.ThemTaiKhoan(tendangnhap, manhom);
+			_nguoiDungBLLService.ThemTaiKhoan(tendangnhap, manhom);
 
 			// Assert
 			_nguoiDungDALServiceMock.Verify(_ => _.ThemTaiKhoan(tendangnhap, manhom), Times.Once);
@@ -289,7 +282,7 @@ namespace BLL.Tests
 			};
 			_nguoiDungDALServiceMock.Setup(_ => _.LayDSNguoiDung()).Returns(nguoidungs);
 			// Act
-			var result = _nguoiDungBLLService.SuaTaiKhoan(tendangnhapbd, tendangnhap, manhom);
+			_nguoiDungBLLService.SuaTaiKhoan(tendangnhapbd, tendangnhap, manhom);
 
 			// Assert
 			_nguoiDungDALServiceMock.Verify(_ => _.SuaTaiKhoan(tendangnhapbd, tendangnhap, manhom), Times.Once);
@@ -311,7 +304,7 @@ namespace BLL.Tests
 			};
 			_nguoiDungDALServiceMock.Setup(_ => _.LayDSNguoiDung()).Returns(nguoidungs);
 			// Act
-			var result = _nguoiDungBLLService.SuaTaiKhoan(tendangnhapbd, tendangnhap, manhom);
+			_nguoiDungBLLService.SuaTaiKhoan(tendangnhapbd, tendangnhap, manhom);
 
 			// Assert
 			_nguoiDungDALServiceMock.Verify(_ => _.SuaTaiKhoan(tendangnhapbd, tendangnhap, manhom), Times.Once);
@@ -323,7 +316,7 @@ namespace BLL.Tests
 		public void ThemTaiKhoanSV_WithNullDSSV_ReturnsUnableMessage()
 		{
 			// Arrange
-			IList<SinhVien> dssv = null;
+			IList<SinhVien>? dssv = null;
 
 			// Act
 			var result = _nguoiDungBLLService.ThemTaiKhoanSV(dssv);
@@ -362,7 +355,7 @@ namespace BLL.Tests
 			};
 
 			// Act
-			var result = _nguoiDungBLLService.ThemTaiKhoanSV(dssvs);
+			_nguoiDungBLLService.ThemTaiKhoanSV(dssvs);
 
 			// Assert
 			_nguoiDungDALServiceMock.Verify(service => service.ThemTaiKhoanSV(dssvs), Times.Once);

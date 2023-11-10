@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace BLL.Tests
+﻿namespace BLL.Tests
 {
-	[ExcludeFromCodeCoverage]
+    [ExcludeFromCodeCoverage]
 	public class MonHocMoBLLTest
 	{
 		#region Services
@@ -39,7 +33,7 @@ namespace BLL.Tests
 		public void AddMonHocMo_WithValidInputs_VerifyExecuteDAL(string mamh, int mahocky, int namhoc)
 		{
 			// Act
-			var result = _monHocMoBLLService.AddMonHocMo(mamh, mahocky, namhoc);
+			_monHocMoBLLService.AddMonHocMo(mamh, mahocky, namhoc);
 
 			// Assert
 			_monHocMoDALServiceMock.Verify(_ => _.AddMonHocMo(mamh, mahocky, namhoc), Times.Once);
@@ -72,8 +66,9 @@ namespace BLL.Tests
 				}
 			};
 			_monHocMoDALServiceMock.Setup(_ => _.GetAllHocKyNamHoc()).Returns(hockynamhoc);
+
 			// Act
-			var result = _monHocMoBLLService.DeleteHocKyNamHocMHM(mahk,namhoc);
+			_monHocMoBLLService.DeleteHocKyNamHocMHM(mahk,namhoc);
 
 			// Assert
 			_monHocMoDALServiceMock.Verify(_ => _.DeleteHocKyNamHocMHM(mahk,namhoc), Times.Once);

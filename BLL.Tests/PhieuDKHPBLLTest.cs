@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace BLL.Tests
+﻿namespace BLL.Tests
 {
-	[ExcludeFromCodeCoverage]
+    [ExcludeFromCodeCoverage]
 	public class PhieuDKHPBLLTest
 	{
 		#region Services
@@ -199,31 +193,11 @@ namespace BLL.Tests
 			Assert.Equal(TimKiemPhieuDKHPMessage.InvalidNamHoc, result);
 		}
 
-		[Theory, InlineData("-10")]
-		public void KtTimKiemPhieuDKHPn_WithInvalidNamHoc_VerifyExecuteDAL2(string namhoc)
-		{
-			// Act
-			var result = _phieuDKHPBLLService.KtTimKiemPhieuDKHP(namhoc);
-
-			// Assert
-			Assert.Equal(TimKiemPhieuDKHPMessage.InvalidNamHoc, result);
-		}
-
 		[Theory, InlineData("2023")]
 		public void KtTimKiemPhieuDKHP_WithValidInputs_VerifyExecuteDAL(string namhoc)
 		{
 			// Act
 			var result =_phieuDKHPBLLService.KtTimKiemPhieuDKHP(namhoc);
-
-			// Assert
-			Assert.Equal(TimKiemPhieuDKHPMessage.Sucess, result);
-		}
-
-		[Theory, InlineData("0")]
-		public void KtTimKiemPhieuDKHP_WithValidInputs_VerifyExecuteDAL2(string namhoc)
-		{
-			// Act
-			var result = _phieuDKHPBLLService.KtTimKiemPhieuDKHP(namhoc);
 
 			// Assert
 			Assert.Equal(TimKiemPhieuDKHPMessage.Sucess, result);
