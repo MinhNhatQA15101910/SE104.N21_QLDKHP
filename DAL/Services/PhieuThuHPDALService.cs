@@ -37,7 +37,7 @@ namespace DAL.Services
                 var parameters = new DynamicParameters();
                 parameters.Add("@soTienThu", soTienThu);
                 parameters.Add("@maPhieuDKHP", soPhieuDKHP);
-                int numRowsAffected = _dapperWrapper.Execute(connection, "spPHIEUTHUHP_TaoPhieuThu_ChoXacNhan ", parameters, commandType: CommandType.StoredProcedure);
+                int numRowsAffected = _dapperWrapper.Execute(connection, "spPHIEUTHUHP_TaoPhieuThu_ChoXacNhan", parameters, commandType: CommandType.StoredProcedure);
 
                 if (numRowsAffected > 0)
                     return true;

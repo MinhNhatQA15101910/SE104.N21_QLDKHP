@@ -41,12 +41,12 @@ namespace DAL.Services
             }
         }
 
-        public int GetCurrMaHocKy()
+        public int GetCurrMaHocKy(int namHoc)
         {
             using (var connection = new SqlConnection(_connectionString))
             {
                 var p = new DynamicParameters();
-                p.Add("@NamHocHienTai", GlobalConfig.CurrNamHoc);
+                p.Add("@NamHocHienTai", namHoc);
                 return _dapperWrapper.QueryFirst<int>(connection, "spGLOBALCONFIG_LayMaHocKyHienTai", p, commandType: CommandType.StoredProcedure);
             }
         }

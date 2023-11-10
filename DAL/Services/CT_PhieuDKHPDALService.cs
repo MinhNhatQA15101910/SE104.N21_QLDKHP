@@ -27,24 +27,24 @@ namespace DAL.Services
             }
         }
 
-        public void TaoCT_PhieuDKHP(CT_PhieuDKHP ct_PhieuDKHP)
+        public int TaoCT_PhieuDKHP(CT_PhieuDKHP ct_PhieuDKHP)
         {
             using (var connection = new SqlConnection(_connectionString))
             {
                 var parameters = new DynamicParameters();
                 parameters.Add("@maPhieuDKHP", ct_PhieuDKHP.MaPhieuDKHP);
                 parameters.Add("@maMH", ct_PhieuDKHP.MaMH);
-                 _dapperWrapper.Execute(connection, "spPHIEUDKHP_TaoCT_PhieuDKHP", parameters, commandType: CommandType.StoredProcedure);
+                return _dapperWrapper.Execute(connection, "spPHIEUDKHP_TaoCT_PhieuDKHP", parameters, commandType: CommandType.StoredProcedure);
             }
         }
 
-        public void XoaDSMHDKHP(int maPhieu)
+        public int XoaDSMHDKHP(int maPhieu)
         {
             using (var connection = new SqlConnection(_connectionString))
             {
                 var parameters = new DynamicParameters();
                 parameters.Add("@maPhieuDKHP", maPhieu);
-                _dapperWrapper.Execute(connection, "spPHIEUDKHP_XoaCT_PhieuDKHP", parameters, commandType: CommandType.StoredProcedure);
+                return _dapperWrapper.Execute(connection, "spPHIEUDKHP_XoaCT_PhieuDKHP", parameters, commandType: CommandType.StoredProcedure);
             }
         }
     }

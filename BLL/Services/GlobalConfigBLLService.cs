@@ -18,9 +18,9 @@ namespace BLL.Services
             return _globalConfigDALService.GetCurrNamHoc();
         }
 
-        public int GetCurrMaHocKy()
+        public int GetCurrMaHocKy(int namHoc)
         {
-            return _globalConfigDALService.GetCurrMaHocKy();
+            return _globalConfigDALService.GetCurrMaHocKy(namHoc);
         }
 
         public int LaySoTinChiToiDa()

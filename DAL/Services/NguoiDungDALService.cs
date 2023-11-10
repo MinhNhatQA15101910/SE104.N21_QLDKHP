@@ -70,12 +70,12 @@ namespace DAL.Services
             }
 		}
 
-		public DoiMatKhauMessage DoiMatKhau(string matKhauHT, string matKhauMoi)
+		public DoiMatKhauMessage DoiMatKhau(string tenDangNhap, string matKhauHT, string matKhauMoi)
 		{
             using (var connection = new SqlConnection(_connectionString))
             {
                 var p = new DynamicParameters();
-                p.Add("@TenDangNhap", GlobalConfig.CurrNguoiDung.TenDangNhap);
+                p.Add("@TenDangNhap", tenDangNhap);
                 p.Add("@MatKhauHT", ConvertToSHA512(matKhauHT));
                 p.Add("@MatKhauMoi", ConvertToSHA512(matKhauMoi));
                 int rowsAffected = _dapperWrapper.Execute(connection, "spNGUOIDUNG_DoiMatKhau", p, commandType: CommandType.StoredProcedure);
@@ -97,9 +97,9 @@ namespace DAL.Services
                 var p = new DynamicParameters();
                 p.Add("@TenDangNhap", tenDangNhap);
                 p.Add("@MaNhom", maNhom);
-                _dapperWrapper.Execute(connection, "spNGUOIDUNG_ThemTaiKhoan", p, commandType: CommandType.StoredProcedure);
+                int result = _dapperWrapper.Execute(connection, "spNGUOIDUNG_ThemTaiKhoan", p, commandType: CommandType.StoredProcedure);
 
-                return ThemTaiKhoanMessage.Success;
+                return (result > 0) ? ThemTaiKhoanMessage.Success : ThemTaiKhoanMessage.Failed;
             }
 		}
 

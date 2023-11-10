@@ -5,7 +5,7 @@ namespace BLL.IServices
     public interface IGlobalConfigBLLService
     {
         int GetCurrNamHoc();
-        int GetCurrMaHocKy();
+        int GetCurrMaHocKy(int namHoc);
         int LaySoTinChiToiDa();
         int LaySoTinChiToiThieu();
         SuaGioiHanTinChiMessage SuaGioiHanTinChi(string tinChiToiDa, string tinChiToiThieu);

@@ -85,7 +85,7 @@ namespace PL
                     break;
                 case DangNhapMessage.Success:
                     GlobalConfig.CurrNamHoc = _globalConfigBLLService.GetCurrNamHoc();
-                    GlobalConfig.CurrMaHocKy = _globalConfigBLLService.GetCurrMaHocKy();
+                    GlobalConfig.CurrMaHocKy = _globalConfigBLLService.GetCurrMaHocKy(GlobalConfig.CurrNamHoc);
 
                     MessageBox.Show("Đăng nhập thành công!");
 
