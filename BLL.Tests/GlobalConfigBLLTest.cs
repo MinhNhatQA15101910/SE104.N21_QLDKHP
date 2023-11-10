@@ -85,8 +85,8 @@
             Assert.Equal(SuaGioiHanTinChiMessage.TinChiToiThieuRong, result);
         }
 
-        [Theory, InlineData("abc", "10")]
-        public void SuaGioiHanTinChi_WithInvalidTinChiToiDa1_ReturnTinChiToiDaKhongHopLeMessage(string tinChiToiDa, string tinChiToiThieu)
+        [Theory, InlineData("abc", "10"), InlineData("0", "10")]
+        public void SuaGioiHanTinChi_WithInvalidTinChiToiDa_ReturnTinChiToiDaKhongHopLeMessage(string tinChiToiDa, string tinChiToiThieu)
         {
             // Act
             var result = _globalConfigBLLService.SuaGioiHanTinChi(tinChiToiDa, tinChiToiThieu);
@@ -95,28 +95,8 @@
             Assert.Equal(SuaGioiHanTinChiMessage.TinChiToiDaKhongHopLe, result);
         }
 
-        [Theory, InlineData("0", "10")]
-        public void SuaGioiHanTinChi_WithInvalidTinChiToiDa2_ReturnTinChiToiDaKhongHopLeMessage(string tinChiToiDa, string tinChiToiThieu)
-        {
-            // Act
-            var result = _globalConfigBLLService.SuaGioiHanTinChi(tinChiToiDa, tinChiToiThieu);
-
-            // Assert
-            Assert.Equal(SuaGioiHanTinChiMessage.TinChiToiDaKhongHopLe, result);
-        }
-
-        [Theory, InlineData("20", "abc")]
-        public void SuaGioiHanTinChi_WithInvalidTinChiToiThieu1_ReturnTinChiToiThieuKhongHopLeMessage(string tinChiToiDa, string tinChiToiThieu)
-        {
-            // Act
-            var result = _globalConfigBLLService.SuaGioiHanTinChi(tinChiToiDa, tinChiToiThieu);
-
-            // Assert
-            Assert.Equal(SuaGioiHanTinChiMessage.TinChiToiThieuKhongHopLe, result);
-        }
-
-        [Theory, InlineData("20", "0")]
-        public void SuaGioiHanTinChi_WithInvalidTinChiToiThieu2_ReturnTinChiToiThieuKhongHopLeMessage(string tinChiToiDa, string tinChiToiThieu)
+        [Theory, InlineData("20", "abc"), InlineData("20", "0")]
+        public void SuaGioiHanTinChi_WithInvalidTinChiToiThieu_ReturnTinChiToiThieuKhongHopLeMessage(string tinChiToiDa, string tinChiToiThieu)
         {
             // Act
             var result = _globalConfigBLLService.SuaGioiHanTinChi(tinChiToiDa, tinChiToiThieu);
