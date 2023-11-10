@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace BLL.Tests
+﻿namespace BLL.Tests
 {
-	[ExcludeFromCodeCoverage]
+    [ExcludeFromCodeCoverage]
 	public class NhomNguoiDungBLLTest
 	{
 		#region Services

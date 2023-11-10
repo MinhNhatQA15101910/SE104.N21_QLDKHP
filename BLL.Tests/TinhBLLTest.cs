@@ -1,13 +1,6 @@
-﻿using DTO;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace BLL.Tests
+﻿namespace BLL.Tests
 {
-	[ExcludeFromCodeCoverage]
+    [ExcludeFromCodeCoverage]
 	public class TinhBLLTest
 	{
 		#region Services
@@ -82,7 +75,7 @@ namespace BLL.Tests
 			};
 			_tinhDALServiceMock.Setup(_ => _.LayDSTinh()).Returns(tinhs);
 			// Act
-			var result = _tinhBLLService.SuaTinh(matinh, tentinh);
+			_tinhBLLService.SuaTinh(matinh, tentinh);
 
 			// Assert
 			_tinhDALServiceMock.Verify(_ => _.SuaTinh(matinh, tentinh), Times.Once);
@@ -102,7 +95,7 @@ namespace BLL.Tests
 			};
 			_tinhDALServiceMock.Setup(_ => _.LayDSTinh()).Returns(tinhs);
 			// Act
-			var result = _tinhBLLService.SuaTinh(matinh, tentinh);
+			_tinhBLLService.SuaTinh(matinh, tentinh);
 
 			// Assert
 			_tinhDALServiceMock.Verify(_ => _.SuaTinh(matinh, tentinh), Times.Once);
@@ -154,7 +147,7 @@ namespace BLL.Tests
 			};
 			_tinhDALServiceMock.Setup(_ => _.LayDSTinh()).Returns(tinhs);
 			// Act
-			var result = _tinhBLLService.ThemTinh(tentinh);
+			_tinhBLLService.ThemTinh(tentinh);
 
 			// Assert
 			_tinhDALServiceMock.Verify(_ => _.ThemTinh(tentinh), Times.Once);
@@ -209,7 +202,7 @@ namespace BLL.Tests
 			_tinhDALServiceMock.Setup(_ => _.LayDSTinh()).Returns(tinhs);
 			_huyenDALServiceMock.Setup(_ => _.LayDSHuyen()).Returns(ct_huyens);
 			// Act
-			var result = _tinhBLLService.XoaTinh(matinh);
+			_tinhBLLService.XoaTinh(matinh);
 
 			// Assert
 			_tinhDALServiceMock.Verify(_ => _.XoaTinh(matinh), Times.Once);
