@@ -1,12 +1,9 @@
 ﻿using BLL.IServices;
-using BLL.Services;
 using ComponentFactory.Krypton.Toolkit;
-using DAL.Services;
 using DTO;
 using PL.Interfaces;
 using System;
 using System.ComponentModel;
-using System.Configuration;
 using System.Data;
 using System.Drawing;
 using System.Linq;
@@ -16,18 +13,8 @@ namespace PL
 {
     public partial class QuanLyNganh : KryptonForm, IThemSuaNganhRequester
     {
-        private readonly INganhBLLService _nganhBLLService 
-            = new NganhBLLService(
-                new NganhDALService(
-                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString,
-                    new DapperWrapper()),
-                new SinhVienDALService(
-                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString, 
-                    new DapperWrapper()),
-                new ChuongTrinhHocDALService(
-                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString, 
-                    new DapperWrapper())
-            );
+        private readonly IKhoaBLLService _khoaBLLService;
+        private readonly INganhBLLService _nganhBLLService;
 
         private INganhRequester nganhRequester;
         private BindingList<CT_Nganh> mNganh;
@@ -35,12 +22,14 @@ namespace PL
 
         private string placeholderText = "🔎 Tìm kiếm";
 
-        public QuanLyNganh(INganhRequester requester)
+        public QuanLyNganh(INganhRequester requester, INganhBLLService nganhBLLService, IKhoaBLLService khoaBLLService)
         {
             InitializeComponent();
             SettingProperties();
 
             nganhRequester = requester;
+            _nganhBLLService = nganhBLLService;
+            _khoaBLLService = khoaBLLService;
         }
 
         private void SettingProperties()
@@ -130,7 +119,7 @@ namespace PL
 
         private void btnThem_Click(object sender, EventArgs e)
         {
-            ThemSuaNganh themSuaNganh = new ThemSuaNganh(this);
+            ThemSuaNganh themSuaNganh = new ThemSuaNganh(this, _khoaBLLService, _nganhBLLService);
             themSuaNganh.Show();
         }
 
@@ -138,7 +127,7 @@ namespace PL
         {
             CT_Nganh nganh = mNganh[dgvDanhSachNganh.CurrentRow.Index];
 
-            ThemSuaNganh themSuaNganh = new ThemSuaNganh(this, nganh);
+            ThemSuaNganh themSuaNganh = new ThemSuaNganh(this, nganh, _khoaBLLService, _nganhBLLService);
             themSuaNganh.Show();
         }
 

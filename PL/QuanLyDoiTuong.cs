@@ -1,12 +1,10 @@
 ﻿using BLL.IServices;
-using BLL.Services;
 using ComponentFactory.Krypton.Toolkit;
-using DAL.Services;
 using DTO;
+using Microsoft.Extensions.DependencyInjection;
 using PL.Interfaces;
 using System;
 using System.ComponentModel;
-using System.Configuration;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -14,23 +12,18 @@ namespace PL
 {
     public partial class QuanLyDoiTuong : KryptonForm, IThemSuaDoiTuongRequester
     {
-        private readonly IDoiTuongBLLService _doiTuongBLLService = new DoiTuongBLLService(
-            new DoiTuongDALService(
-                ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString, 
-                new DapperWrapper()),
-            new SinhVien_DoiTuongDALService(
-                ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString, 
-                new DapperWrapper()));
+        private readonly IDoiTuongBLLService _doiTuongBLLService;
 
         private ICaiDatRequester caiDatRequester;
         private BindingList<DoiTuong> mDoiTuong;
         private BindingSource mDoiTuongSource;
 
-        public QuanLyDoiTuong(ICaiDatRequester requester)
+        public QuanLyDoiTuong(ICaiDatRequester requester, IDoiTuongBLLService doiTuongBLLService)
         {
             InitializeComponent();
 
             caiDatRequester = requester;
+            _doiTuongBLLService = doiTuongBLLService;
 
             SettingProperties();
         }
@@ -89,14 +82,14 @@ namespace PL
 
         private void btnThem_Click(object sender, EventArgs e)
         {
-            ThemSuaDoiTuong themSuaDoiTuong = new ThemSuaDoiTuong(this);
+            ThemSuaDoiTuong themSuaDoiTuong = new ThemSuaDoiTuong(this, _doiTuongBLLService);
             themSuaDoiTuong.Show();
         }
 
         private void btnSua_Click(object sender, EventArgs e)
         {
             DoiTuong doiTuong = mDoiTuong[dgvDSDoiTuong.CurrentRow.Index];
-            ThemSuaDoiTuong themSuaDoiTuong = new ThemSuaDoiTuong(this, doiTuong);
+            ThemSuaDoiTuong themSuaDoiTuong = new ThemSuaDoiTuong(this, _doiTuongBLLService, doiTuong);
             themSuaDoiTuong.Show();
         }
 
@@ -137,21 +130,21 @@ namespace PL
 
         private void btnLoaiMon_Click(object sender, EventArgs e)
         {
-            QuanLyLoaiMonHoc quanLyLoaiMonHoc = new QuanLyLoaiMonHoc(caiDatRequester);
+            QuanLyLoaiMonHoc quanLyLoaiMonHoc = Program.ServiceProvider.GetRequiredService<QuanLyLoaiMonHoc>();
             quanLyLoaiMonHoc.Show();
             Hide();
         }
 
         private void btnTinh_Click(object sender, EventArgs e)
         {
-            QuanLyTinh quanLyTinh = new QuanLyTinh(caiDatRequester);
+            QuanLyTinh quanLyTinh = Program.ServiceProvider.GetRequiredService<QuanLyTinh>();
             quanLyTinh.Show();
             Hide();
         }
 
         private void btnHuyen_Click(object sender, EventArgs e)
         {
-            QuanLyHuyen quanLyHuyen = new QuanLyHuyen(caiDatRequester);
+            QuanLyHuyen quanLyHuyen = Program.ServiceProvider.GetRequiredService<QuanLyHuyen>();
             quanLyHuyen.Show();
             Hide();
         }

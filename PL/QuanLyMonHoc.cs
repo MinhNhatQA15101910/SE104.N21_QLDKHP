@@ -1,12 +1,9 @@
 ﻿using BLL.IServices;
-using BLL.Services;
 using ComponentFactory.Krypton.Toolkit;
-using DAL.Services;
 using DTO;
 using PL.Interfaces;
 using System;
 using System.ComponentModel;
-using System.Configuration;
 using System.Data;
 using System.Drawing;
 using System.Linq;
@@ -16,20 +13,8 @@ namespace PL
 {
     public partial class QuanLyMonHoc : KryptonForm, IThemSuaMonHocRequester
     {
-        private readonly IMonHocBLLService _monHocBLLService
-            = new MonHocBLLService(
-                new MonHocDALService(
-                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString,
-                    new DapperWrapper()),
-                new DanhSachMonHocMoDALService(
-                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString,
-                    new DapperWrapper()),
-                new CT_PhieuDKHPDALService(
-                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString,
-                    new DapperWrapper()),
-                new ChuongTrinhHocDALService(
-                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString,
-                    new DapperWrapper()));
+        private readonly IMonHocBLLService _monHocBLLService;
+        private readonly ILoaiMonHocBLLService _loaiMonHocBLLService;
 
         private IMonHocRequester monHocRequester;
         private BindingList<CT_MonHoc> mMonHoc;
@@ -37,11 +22,13 @@ namespace PL
 
         private string placeholderText = "🔎 Tìm kiếm";
 
-        public QuanLyMonHoc(IMonHocRequester requester)
+        public QuanLyMonHoc(IMonHocRequester requester, IMonHocBLLService monHocBLLService, ILoaiMonHocBLLService loaiMonHocBLLService)
         {
             InitializeComponent();
 
             monHocRequester = requester;
+            _monHocBLLService = monHocBLLService;
+            _loaiMonHocBLLService = loaiMonHocBLLService;
 
             SettingProperties();
         }
@@ -132,7 +119,7 @@ namespace PL
         {
             CT_MonHoc monHoc = mMonHoc[dgvDanhSachMonHoc.CurrentRow.Index];
 
-            ThemSuaMonHoc themSuaMonHoc = new ThemSuaMonHoc(this, monHoc);
+            ThemSuaMonHoc themSuaMonHoc = new ThemSuaMonHoc(this, monHoc, _monHocBLLService, _loaiMonHocBLLService);
             themSuaMonHoc.Show();
         }
 

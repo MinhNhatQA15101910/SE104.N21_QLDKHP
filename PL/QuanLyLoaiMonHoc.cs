@@ -3,6 +3,7 @@ using BLL.Services;
 using ComponentFactory.Krypton.Toolkit;
 using DAL.Services;
 using DTO;
+using Microsoft.Extensions.DependencyInjection;
 using PL.Interfaces;
 using System;
 using System.ComponentModel;
@@ -15,30 +16,21 @@ namespace PL
     public partial class QuanLyLoaiMonHoc : KryptonForm, IThemSuaLoaiMonHocRequester
     {
         #region Register Service
-        private readonly IGlobalConfigBLLService _globalConfigBLLService 
-            = new GlobalConfigBLLService(
-                new GlobalConfigDALService(
-                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString, 
-                    new DapperWrapper()));
-        private readonly ILoaiMonHocBLLService _loaiMonHocBLLService 
-            = new LoaiMonHocBLLService(
-                new LoaiMonHocDALService(
-                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString, 
-                    new DapperWrapper()),
-                new MonHocDALService(
-                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString, 
-                    new DapperWrapper()));
+        private readonly IGlobalConfigBLLService _globalConfigBLLService;
+        private readonly ILoaiMonHocBLLService _loaiMonHocBLLService;
         #endregion
 
         private ICaiDatRequester caiDatRequester;
         private BindingList<LoaiMonHoc> mLoaiMonHoc;
         private BindingSource mLoaiMonHocSource;
 
-        public QuanLyLoaiMonHoc(ICaiDatRequester requester)
+        public QuanLyLoaiMonHoc(ICaiDatRequester requester, IGlobalConfigBLLService globalConfigBLLService, ILoaiMonHocBLLService loaiMonHocBLLService)
         {
             InitializeComponent();
 
             caiDatRequester = requester;
+            _globalConfigBLLService = globalConfigBLLService;
+            _loaiMonHocBLLService = loaiMonHocBLLService;
 
             SettingProperties();
         }
@@ -164,7 +156,7 @@ namespace PL
         private void btnSuaLoaiMon_Click(object sender, EventArgs e)
         {
             LoaiMonHoc loaiMonHoc = mLoaiMonHoc[dgvDSLoaiMon.CurrentRow.Index];
-            ThemSuaLoaiMonHoc themSuaLoaiMonHoc = new ThemSuaLoaiMonHoc(this, loaiMonHoc);
+            ThemSuaLoaiMonHoc themSuaLoaiMonHoc = new ThemSuaLoaiMonHoc(this, loaiMonHoc, _loaiMonHocBLLService);
             themSuaLoaiMonHoc.Show();
         }
 
@@ -182,21 +174,21 @@ namespace PL
 
         private void btnDoiTuong_Click(object sender, EventArgs e)
         {
-            QuanLyDoiTuong quanLyDoiTuong = new QuanLyDoiTuong(caiDatRequester);
+            QuanLyDoiTuong quanLyDoiTuong = Program.ServiceProvider.GetRequiredService<QuanLyDoiTuong>();
             quanLyDoiTuong.Show();
             Hide();
         }
 
         private void btnTinh_Click(object sender, EventArgs e)
         {
-            QuanLyTinh quanLyTinh = new QuanLyTinh(caiDatRequester);
+            QuanLyTinh quanLyTinh = Program.ServiceProvider.GetRequiredService<QuanLyTinh>();
             quanLyTinh.Show();
             Hide();
         }
 
         private void btnHuyen_Click(object sender, EventArgs e)
         {
-            QuanLyHuyen quanLyHuyen = new QuanLyHuyen(caiDatRequester);
+            QuanLyHuyen quanLyHuyen = Program.ServiceProvider.GetRequiredService<QuanLyHuyen>();
             quanLyHuyen.Show();
             Hide();
         }

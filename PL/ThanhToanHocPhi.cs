@@ -16,26 +16,22 @@ namespace PL
     public partial class ThanhToanHocPhi : KryptonForm
     {
         #region Register Service
-        private readonly IPhieuDKHPBLLService _phieuDKHPBLLService 
-            = new PhieuDKHPBLLService(
-                new PhieuDKHPDALService(
-                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString, 
-                    new DapperWrapper()));
-        private readonly IGlobalConfigBLLService _globalConfigBLLService
-            = new GlobalConfigBLLService(
-                new GlobalConfigDALService(
-                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString, 
-                    new DapperWrapper()));
+        private readonly IPhieuDKHPBLLService _phieuDKHPBLLService;
+        private readonly IGlobalConfigBLLService _globalConfigBLLService;
+        private readonly IPhieuThuHPBLLService _phieuThuHPBLLService;
         #endregion
 
         private IThanhToanHocPhiRequester thanhToanHocPhiRequester;
         CultureInfo cultureInfo = new CultureInfo("vi-VN");
 
-        public ThanhToanHocPhi(IThanhToanHocPhiRequester requester)
+        public ThanhToanHocPhi(IThanhToanHocPhiRequester requester, IPhieuDKHPBLLService phieuDKHPBLLService, IGlobalConfigBLLService globalConfigBLLService, IPhieuThuHPBLLService phieuThuHPBLLService)
         {
             InitializeComponent();
 
             thanhToanHocPhiRequester = requester;
+            _phieuDKHPBLLService = phieuDKHPBLLService;
+            _globalConfigBLLService = globalConfigBLLService;
+            _phieuThuHPBLLService = phieuThuHPBLLService;
         }
 
         private void ThanhToanHocPhi_Load(object sender, EventArgs e)
@@ -143,7 +139,7 @@ namespace PL
                 TimeSpan kc = ngayLap.Subtract(DateTime.Now);
                 if (kc.Days * -1 <= khoangTGDongHP)
                 {
-                    CT_ThanhToanHocPhi ct_tt = new CT_ThanhToanHocPhi(maHP);
+                    CT_ThanhToanHocPhi ct_tt = new CT_ThanhToanHocPhi(maHP, _phieuThuHPBLLService);
                     ct_tt.ShowDialog();
                     LoadDSHP();
                 }

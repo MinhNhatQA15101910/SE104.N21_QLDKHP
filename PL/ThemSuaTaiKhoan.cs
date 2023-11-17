@@ -1,40 +1,31 @@
 ﻿using BLL.IServices;
-using BLL.Services;
 using ComponentFactory.Krypton.Toolkit;
-using DAL.Services;
 using DTO;
 using PL.Interfaces;
 using System;
 using System.ComponentModel;
-using System.Configuration;
 using System.Windows.Forms;
 
 namespace PL
 {
     public partial class ThemSuaTaiKhoan : KryptonForm
     {
-		private readonly INhomNguoiDungBLLService _nhomNguoiDungBLLService 
-            = new NhomNguoiDungBLLService(
-                new NhomNguoiDungDALService(
-                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString, 
-                    new DapperWrapper()));
-		private readonly INguoiDungBLLService _nguoiDungBLLService 
-            = new NguoiDungBLLService(
-                new NguoiDungDALService(
-                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString, 
-                    new DapperWrapper()));
+        private readonly INhomNguoiDungBLLService _nhomNguoiDungBLLService;
+        private readonly INguoiDungBLLService _nguoiDungBLLService;
 		private IThemSuaTaiKhoanRequester themSuaTaiKhoanRequester;
         private CT_NguoiDung nguoiDung;
 
         private BindingList<NhomNguoiDung> mNhomNguoiDung;
         private BindingSource mNhomNguoiDungSource;
 
-        public ThemSuaTaiKhoan(IThemSuaTaiKhoanRequester requester, CT_NguoiDung nguoiDung)
+        public ThemSuaTaiKhoan(IThemSuaTaiKhoanRequester requester, CT_NguoiDung nguoiDung, INhomNguoiDungBLLService nhomNguoiDungBLLService, INguoiDungBLLService nguoiDungBLLService)
         {
             InitializeComponent();
 
             themSuaTaiKhoanRequester = requester;
             this.nguoiDung = nguoiDung;
+            _nhomNguoiDungBLLService = nhomNguoiDungBLLService;
+            _nguoiDungBLLService = nguoiDungBLLService;
 
             SettingProperties();
         }

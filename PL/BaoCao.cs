@@ -1,12 +1,9 @@
 ﻿using BLL.IServices;
-using BLL.Services;
 using ComponentFactory.Krypton.Toolkit;
-using DAL.Services;
 using DTO;
 using PL.Interfaces;
 using System;
 using System.Collections.Generic;
-using System.Configuration;
 using System.Windows.Forms;
 
 namespace PL
@@ -14,30 +11,21 @@ namespace PL
     public partial class BaoCao : KryptonForm
     {
 
-        private readonly IHocKyBLLService _hocKyBLLService 
-            = new HocKyBLLService(
-                new HocKyDALService(
-                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString, 
-                    new DapperWrapper()));
-        private readonly ISinhVienBLLService _sinhVienBLLService 
-            = new SinhVienBLLService(
-                new SinhVienDALService(
-                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString, 
-                    new DapperWrapper()));
-        private readonly IPhieuDKHPBLLService _phieuDKHPBLLService 
-            = new PhieuDKHPBLLService(
-                new PhieuDKHPDALService(
-                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString, 
-                    new DapperWrapper()));
+        private readonly IHocKyBLLService _hocKyBLLService;
+        private readonly ISinhVienBLLService _sinhVienBLLService;
+        private readonly IPhieuDKHPBLLService _phieuDKHPBLLService;
 
         private IBaoCaoRequester baoCaoRequester;
 
 
-        public BaoCao(IBaoCaoRequester requester)
+        public BaoCao(IBaoCaoRequester requester, IHocKyBLLService hocKyBLLService, ISinhVienBLLService sinhVienBLLService, IPhieuDKHPBLLService phieuDKHPBLLService)
         {
             InitializeComponent();
 
             baoCaoRequester = requester;
+            _hocKyBLLService = hocKyBLLService;
+            _sinhVienBLLService = sinhVienBLLService;
+            _phieuDKHPBLLService = phieuDKHPBLLService;
         }
 
         private void BaoCao_Load(object sender, EventArgs e)

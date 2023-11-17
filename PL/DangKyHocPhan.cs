@@ -15,31 +15,11 @@ namespace PL
     public partial class DangKyHocPhan : KryptonForm
     {
         #region Register Services
-        private readonly ICT_PhieuDKHPBLLService _CT_phieuDKHPBLLService 
-            = new CT_DKHPBLLService(
-                new CT_PhieuDKHPDALService(
-                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString, 
-                    new DapperWrapper()));
-        private readonly IDanhSachMonHocMoBLLService _danhSachMonHocMoBLLService 
-            = new DanhSachMonHocMoBLLService(
-                new DanhSachMonHocMoDALService(
-                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString, 
-                    new DapperWrapper()));
-        private readonly IHocKyBLLService _hocKyBLLService 
-            = new HocKyBLLService(
-                new HocKyDALService(
-                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString, 
-                    new DapperWrapper()));
-        private readonly IPhieuDKHPBLLService _phieuDKHPBLLService 
-            = new PhieuDKHPBLLService(
-                new PhieuDKHPDALService(
-                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString, 
-                    new DapperWrapper()));
-        private readonly IGlobalConfigBLLService _globalConfigBLLService 
-            = new GlobalConfigBLLService(
-                new GlobalConfigDALService(
-                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString, 
-                    new DapperWrapper()));
+        private readonly ICT_PhieuDKHPBLLService _CT_phieuDKHPBLLService;
+        private readonly IDanhSachMonHocMoBLLService _danhSachMonHocMoBLLService;
+        private readonly IHocKyBLLService _hocKyBLLService;
+        private readonly IPhieuDKHPBLLService _phieuDKHPBLLService;
+        private readonly IGlobalConfigBLLService _globalConfigBLLService;
         #endregion
 
         private IDangKyHocPhanRequester dangKyHocPhanRequester;
@@ -47,11 +27,16 @@ namespace PL
         private int selectedIndex1 = -1;
         private int selectedIndex2 = -1;
 
-        public DangKyHocPhan(IDangKyHocPhanRequester requester)
+        public DangKyHocPhan(IDangKyHocPhanRequester requester, ICT_PhieuDKHPBLLService ct_PhieuDKHPBLLService, IDanhSachMonHocMoBLLService danhSachMonHocMoBLLService, IHocKyBLLService hocKyBLLService, IPhieuDKHPBLLService phieuDKHPBLLService, IGlobalConfigBLLService globalConfigBLLService)
         {
             InitializeComponent();
 
             dangKyHocPhanRequester = requester;
+            _CT_phieuDKHPBLLService = ct_PhieuDKHPBLLService;
+            _danhSachMonHocMoBLLService = danhSachMonHocMoBLLService;
+            _hocKyBLLService = hocKyBLLService;
+            _phieuDKHPBLLService = phieuDKHPBLLService;
+            _globalConfigBLLService = globalConfigBLLService;
         }
 
         private void DangKyHocPhan_Load(object sender, EventArgs e)

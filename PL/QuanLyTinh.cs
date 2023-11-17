@@ -3,6 +3,7 @@ using BLL.Services;
 using ComponentFactory.Krypton.Toolkit;
 using DAL.Services;
 using DTO;
+using Microsoft.Extensions.DependencyInjection;
 using PL.Interfaces;
 using System;
 using System.ComponentModel;
@@ -14,24 +15,18 @@ namespace PL
 {
     public partial class QuanLyTinh : KryptonForm, IThemSuaTinhRequester
     {
-		private readonly ITinhBLLService _tinhBLLService 
-            = new TinhBLLService(
-                new TinhDALService(
-                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString, 
-                    new DapperWrapper()),
-                new HuyenDALService(
-                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString, 
-                    new DapperWrapper()));
+        private readonly ITinhBLLService _tinhBLLService;
 
 		private ICaiDatRequester caiDatRequester;
         private BindingList<Tinh> mTinh;
         private BindingSource mTinhSource;
 
-        public QuanLyTinh(ICaiDatRequester requester)
+        public QuanLyTinh(ICaiDatRequester requester, ITinhBLLService tinhBLLService)
         {
             InitializeComponent();
 
             caiDatRequester = requester;
+            _tinhBLLService = tinhBLLService;
 
             SettingProperties();
         }
@@ -95,7 +90,7 @@ namespace PL
         private void btnSua_Click(object sender, EventArgs e)
         {
             Tinh tinh = mTinh[dgvDSTinh.CurrentRow.Index];
-            ThemSuaTinh themSuaTinh = new ThemSuaTinh(this, tinh);
+            ThemSuaTinh themSuaTinh = new ThemSuaTinh(this, tinh, Program.ServiceProvider.GetRequiredService<ITinhBLLService>());
             themSuaTinh.Show();
         }
 
@@ -133,21 +128,21 @@ namespace PL
 
         private void btnLoaiMon_Click(object sender, EventArgs e)
         {
-            QuanLyLoaiMonHoc quanLyLoaiMonHoc = new QuanLyLoaiMonHoc(caiDatRequester);
+            QuanLyLoaiMonHoc quanLyLoaiMonHoc = Program.ServiceProvider.GetRequiredService<QuanLyLoaiMonHoc>();
             quanLyLoaiMonHoc.Show();
             Hide();
         }
 
         private void btnDoiTuong_Click(object sender, EventArgs e)
         {
-            QuanLyDoiTuong quanLyDoiTuong = new QuanLyDoiTuong(caiDatRequester);
+            QuanLyDoiTuong quanLyDoiTuong = Program.ServiceProvider.GetRequiredService<QuanLyDoiTuong>();
             quanLyDoiTuong.Show();
             Hide();
         }
 
         private void btnHuyen_Click(object sender, EventArgs e)
         {
-            QuanLyHuyen quanLyHuyen = new QuanLyHuyen(caiDatRequester);
+            QuanLyHuyen quanLyHuyen = Program.ServiceProvider.GetRequiredService<QuanLyHuyen>();
             quanLyHuyen.Show();
             Hide();
         }

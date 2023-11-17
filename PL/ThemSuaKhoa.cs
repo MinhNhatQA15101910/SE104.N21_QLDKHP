@@ -1,46 +1,36 @@
 ﻿using BLL.IServices;
-using BLL.Services;
 using ComponentFactory.Krypton.Toolkit;
-using DAL.Services;
-using Dapper;
 using DTO;
 using PL.Interfaces;
 using System;
-using System.Configuration;
-using System.Data.SqlClient;
 using System.Windows.Forms;
 
 namespace PL
 {
     public partial class ThemSuaKhoa : KryptonForm
     {
-        private readonly IKhoaBLLService _khoaBLLService 
-            = new KhoaBLLService(
-                new KhoaDALService(
-                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString, 
-                    new DapperWrapper()),
-                new NganhDALService(
-                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString, 
-                    new DapperWrapper()));
+        private readonly IKhoaBLLService _khoaBLLService;
 
         private IThemSuaKhoaRequester themSuaKhoaRequester;
         private Khoa khoa;
 
-        public ThemSuaKhoa(IThemSuaKhoaRequester requester, DTO.Khoa khoa)
+        public ThemSuaKhoa(IThemSuaKhoaRequester requester, Khoa khoa, IKhoaBLLService khoaBLLService)
         {
             InitializeComponent();
 
             themSuaKhoaRequester = requester;
             this.khoa = khoa;
+            _khoaBLLService = khoaBLLService;
 
             SettingProperties();
         }
 
-        public ThemSuaKhoa(IThemSuaKhoaRequester requester)
+        public ThemSuaKhoa(IThemSuaKhoaRequester requester, IKhoaBLLService khoaBLLService)
         {
             InitializeComponent();
 
             themSuaKhoaRequester = requester;
+            _khoaBLLService = khoaBLLService;
 
             SettingProperties();
         }

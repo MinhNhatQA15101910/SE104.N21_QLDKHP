@@ -1,39 +1,28 @@
 ﻿using BLL.IServices;
-using BLL.Services;
 using ComponentFactory.Krypton.Toolkit;
-using DAL.Services;
 using DTO;
+using Microsoft.Extensions.DependencyInjection;
 using PL.Interfaces;
 using System;
 using System.Collections.Generic;
-using System.Configuration;
 using System.Windows.Forms;
 
 namespace PL
 {
     public partial class ThongTinSinhVien : KryptonForm
     {
-        private readonly IDoiTuongBLLService _doiTuongBLLService 
-            = new DoiTuongBLLService(
-                new DoiTuongDALService(
-                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString, 
-                    new DapperWrapper()), 
-                new SinhVien_DoiTuongDALService(
-                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString, 
-                    new DapperWrapper()));
-        private readonly ISinhVienBLLService _sinhVienBLLService 
-            = new SinhVienBLLService(
-                new SinhVienDALService(
-                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString, 
-                    new DapperWrapper()));
+        private readonly IDoiTuongBLLService _doiTuongBLLService;
+        private readonly ISinhVienBLLService _sinhVienBLLService;
 
         private readonly IThongTinSinhVienRequester thongTinSinhVienRequester;
 
-        public ThongTinSinhVien(IThongTinSinhVienRequester requester)
+        public ThongTinSinhVien(IThongTinSinhVienRequester requester, IDoiTuongBLLService doiTuongBLLService, ISinhVienBLLService sinhVienBLLService)
         {
             InitializeComponent();
 
             thongTinSinhVienRequester = requester;
+            _doiTuongBLLService = doiTuongBLLService;
+            _sinhVienBLLService = sinhVienBLLService;
         }
 
         private void ThongTinSinhVien_Load(object sender, EventArgs e)
@@ -91,13 +80,13 @@ namespace PL
 
         private void btnThongTinDKHP_Click(object sender, EventArgs e)
         {
-            ThongTinDKHP ttdk = new ThongTinDKHP();
+            ThongTinDKHP ttdk = Program.ServiceProvider.GetRequiredService<ThongTinDKHP>();
             ttdk.Show();
         }
 
         private void btnThongTinHocPhi_Click(object sender, EventArgs e)
         {
-            ThongTinHocPhi t = new ThongTinHocPhi();
+            ThongTinHocPhi t = Program.ServiceProvider.GetRequiredService<ThongTinHocPhi>();
             t.Show();
         }
     }

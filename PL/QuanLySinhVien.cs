@@ -1,14 +1,11 @@
 ﻿using BLL.IServices;
-using BLL.Services;
 using ComponentFactory.Krypton.Toolkit;
-using DAL.Services;
 using DTO;
+using Microsoft.Extensions.DependencyInjection;
 using PL.Interfaces;
 using System;
 using System.ComponentModel;
-using System.Configuration;
 using System.Data;
-using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
@@ -17,21 +14,8 @@ namespace PL
 {
     public partial class QuanLySinhVien : KryptonForm, IThemSuaSinhVienRequester
     {
-
-        private readonly IDoiTuongBLLService _doiTuongBLLService 
-            = new DoiTuongBLLService(
-                new DoiTuongDALService(
-                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString, 
-                    new DapperWrapper()),
-                new SinhVien_DoiTuongDALService(
-                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString, 
-                    new DapperWrapper()));
-
-        private readonly ISinhVienBLLService _sinhVienBLLService 
-            = new SinhVienBLLService(
-                new SinhVienDALService(
-                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString, 
-                    new DapperWrapper()));
+        private readonly IDoiTuongBLLService _doiTuongBLLService;
+        private readonly ISinhVienBLLService _sinhVienBLLService;
         
         private readonly IDanhSachSinhVienRequester dssvRequester;
         private BindingList<CT_SinhVien> mSinhVien;
@@ -41,11 +25,13 @@ namespace PL
 
         private readonly string placeholderText = "🔎 Tìm kiếm";
 
-        public QuanLySinhVien(IDanhSachSinhVienRequester requester)
+        public QuanLySinhVien(IDanhSachSinhVienRequester requester, IDoiTuongBLLService doiTuongBLLService, ISinhVienBLLService sinhVienBLLService)
         {
             InitializeComponent();
 
             dssvRequester = requester;
+            _doiTuongBLLService = doiTuongBLLService;
+            _sinhVienBLLService = sinhVienBLLService;
 
             SettingProperties();
         }
@@ -181,7 +167,11 @@ namespace PL
 
         private void btnThem_Click(object sender, EventArgs e)
         {
-            ThemSuaSinhVien themSuaSinhVien = new ThemSuaSinhVien(this);
+            ThemSuaSinhVien themSuaSinhVien = new ThemSuaSinhVien(this, 
+                Program.ServiceProvider.GetRequiredService<IHuyenBLLService>(),
+                Program.ServiceProvider.GetRequiredService<INganhBLLService>(),
+                Program.ServiceProvider.GetRequiredService<IDoiTuongBLLService>(),
+                Program.ServiceProvider.GetRequiredService<ISinhVienBLLService>());
             themSuaSinhVien.Show();
         }
 
@@ -209,7 +199,11 @@ namespace PL
         {
             CT_SinhVien sinhVien = mSinhVien[dgvDanhSachSinhVien.CurrentRow.Index];
 
-            ThemSuaSinhVien themSuaSinhVien = new ThemSuaSinhVien(this, sinhVien);
+            ThemSuaSinhVien themSuaSinhVien = new ThemSuaSinhVien(this, sinhVien, 
+                Program.ServiceProvider.GetRequiredService<IHuyenBLLService>(),
+                Program.ServiceProvider.GetRequiredService<INganhBLLService>(),
+                Program.ServiceProvider.GetRequiredService<IDoiTuongBLLService>(),
+                Program.ServiceProvider.GetRequiredService<ISinhVienBLLService>());
             themSuaSinhVien.Show();
         }
     }

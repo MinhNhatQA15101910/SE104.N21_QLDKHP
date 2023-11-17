@@ -1,13 +1,11 @@
 ﻿using BLL.IServices;
-using BLL.Services;
 using ComponentFactory.Krypton.Toolkit;
-using DAL.Services;
 using DTO;
+using Microsoft.Extensions.DependencyInjection;
 using PL.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Configuration;
 using System.Windows.Forms;
 
 namespace PL
@@ -15,41 +13,10 @@ namespace PL
     public partial class ThemSuaSinhVien : KryptonForm, IThemSuaNganhRequester, IThemSuaHuyenRequester, IThemSuaDoiTuongRequester
     {
         #region Register Services
-        private readonly IHuyenBLLService _huyenBLLService 
-            = new HuyenBLLService(
-                new HuyenDALService(
-                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString, 
-                    new DapperWrapper()),
-                new SinhVienDALService(
-                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString, 
-                    new DapperWrapper()));
-
-        private readonly INganhBLLService _nganhBLLService 
-            = new NganhBLLService(
-                new NganhDALService(
-                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString, 
-                    new DapperWrapper()),
-                new SinhVienDALService(
-                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString, 
-                    new DapperWrapper()),
-                new ChuongTrinhHocDALService(
-                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString, 
-                    new DapperWrapper()));
-
-        private readonly IDoiTuongBLLService _doiTuongBLLService 
-            = new DoiTuongBLLService(
-                new DoiTuongDALService(
-                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString, 
-                    new DapperWrapper()),
-                new SinhVien_DoiTuongDALService(
-                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString, 
-                    new DapperWrapper()));
-
-		private readonly ISinhVienBLLService _sinhVienBLLService 
-            = new SinhVienBLLService(
-                new SinhVienDALService(
-                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString, 
-                    new DapperWrapper()));
+        private readonly IHuyenBLLService _huyenBLLService;
+        private readonly INganhBLLService _nganhBLLService;
+        private readonly IDoiTuongBLLService _doiTuongBLLService;
+        private readonly ISinhVienBLLService _sinhVienBLLService;
         #endregion
 
         private readonly IThemSuaSinhVienRequester themSuaSinhVienRequester;
@@ -66,21 +33,29 @@ namespace PL
         private BindingSource mHuyenSource;
 
 
-        public ThemSuaSinhVien(IThemSuaSinhVienRequester requester, CT_SinhVien sinhVien)
+        public ThemSuaSinhVien(IThemSuaSinhVienRequester requester, CT_SinhVien sinhVien, IHuyenBLLService huyenBLLService, INganhBLLService nganhBLLService, IDoiTuongBLLService doiTuongBLLService, ISinhVienBLLService sinhVienBLLService)
         {
             InitializeComponent();
 
             themSuaSinhVienRequester = requester;
             this.sinhVien = sinhVien;
+            _huyenBLLService = huyenBLLService;
+            _nganhBLLService = nganhBLLService;
+            _doiTuongBLLService = doiTuongBLLService;
+            _sinhVienBLLService = sinhVienBLLService;
 
             SettingProperties();
         }
 
-        public ThemSuaSinhVien(IThemSuaSinhVienRequester requester)
+        public ThemSuaSinhVien(IThemSuaSinhVienRequester requester, IHuyenBLLService huyenBLLService, INganhBLLService nganhBLLService, IDoiTuongBLLService doiTuongBLLService, ISinhVienBLLService sinhVienBLLService)
         {
             InitializeComponent();
 
             themSuaSinhVienRequester = requester;
+            _huyenBLLService = huyenBLLService;
+            _nganhBLLService = nganhBLLService;
+            _doiTuongBLLService = doiTuongBLLService;
+            _sinhVienBLLService = sinhVienBLLService;
 
             SettingProperties();
         }
@@ -210,7 +185,7 @@ namespace PL
 
         private void btnThemDoiTuong_Click(object sender, EventArgs e)
         {
-            ThemSuaDoiTuong themSuaDoiTuong = new ThemSuaDoiTuong(this);
+            ThemSuaDoiTuong themSuaDoiTuong = new ThemSuaDoiTuong(this, _doiTuongBLLService);
             themSuaDoiTuong.ShowDialog();
         }
 
@@ -259,7 +234,9 @@ namespace PL
 
         private void btnThemNganh_Click(object sender, EventArgs e)
         {
-            ThemSuaNganh themSuaNganh = new ThemSuaNganh(this);
+            ThemSuaNganh themSuaNganh = new ThemSuaNganh(this, 
+                Program.ServiceProvider.GetRequiredService<IKhoaBLLService>(),
+                Program.ServiceProvider.GetRequiredService<INganhBLLService>());
             themSuaNganh.ShowDialog();
         }
 
@@ -410,7 +387,9 @@ namespace PL
 
         private void picThemHuyen_Click(object sender, EventArgs e)
         {
-            ThemSuaHuyen themSuaHuyen = new ThemSuaHuyen(this);
+            ThemSuaHuyen themSuaHuyen = new ThemSuaHuyen(this, 
+                Program.ServiceProvider.GetRequiredService<ITinhBLLService>(),
+                Program.ServiceProvider.GetRequiredService<IHuyenBLLService>());
             themSuaHuyen.Show();
         }
     }

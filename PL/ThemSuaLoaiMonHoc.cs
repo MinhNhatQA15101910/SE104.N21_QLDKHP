@@ -1,11 +1,8 @@
 ﻿using BLL.IServices;
-using BLL.Services;
 using ComponentFactory.Krypton.Toolkit;
-using DAL.Services;
 using DTO;
 using PL.Interfaces;
 using System;
-using System.Configuration;
 using System.Windows.Forms;
 
 namespace PL
@@ -13,24 +10,19 @@ namespace PL
     public partial class ThemSuaLoaiMonHoc : KryptonForm
     {
         #region Register Services
-        private readonly ILoaiMonHocBLLService _loaiMonHocBLLService = new LoaiMonHocBLLService(
-            new LoaiMonHocDALService(
-                ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString,
-                new DapperWrapper()),
-            new MonHocDALService(
-                ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString, 
-                new DapperWrapper()));
+        private readonly ILoaiMonHocBLLService _loaiMonHocBLLService;
         #endregion
 
         private IThemSuaLoaiMonHocRequester themSuaLoaiMonHocRequester;
         private LoaiMonHoc loaiMonHoc;
 
-        public ThemSuaLoaiMonHoc(IThemSuaLoaiMonHocRequester requester, LoaiMonHoc loaiMonHoc)
+        public ThemSuaLoaiMonHoc(IThemSuaLoaiMonHocRequester requester, LoaiMonHoc loaiMonHoc, ILoaiMonHocBLLService loaiMonHocBLLService)
         {
             InitializeComponent();
 
             themSuaLoaiMonHocRequester = requester;
             this.loaiMonHoc = loaiMonHoc;
+            _loaiMonHocBLLService = loaiMonHocBLLService;
 
             SettingProperties();
         }

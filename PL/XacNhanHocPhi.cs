@@ -1,13 +1,9 @@
 ﻿using BLL.IServices;
-using BLL.Services;
 using ComponentFactory.Krypton.Toolkit;
-using DAL.Services;
 using DTO;
 using PL.Interfaces;
 using System;
 using System.ComponentModel;
-using System.Configuration;
-using System.Data.SqlClient;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -15,26 +11,21 @@ namespace PL
 {
     public partial class XacNhanHocPhi : KryptonForm
     {
-		private readonly IPhieuDKHPBLLService _phieuDKHPBLLService 
-            = new PhieuDKHPBLLService(
-                new PhieuDKHPDALService(
-                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString, 
-                    new DapperWrapper()));
-		private readonly IPhieuThuHPBLLService _phieuThuHPBLLService 
-            = new PhieuThuHPBLLService(
-                new PhieuThuHPDALService(
-                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString, 
-                    new DapperWrapper()));
+        private readonly IPhieuDKHPBLLService _phieuDKHPBLLService;
+        private readonly IPhieuThuHPBLLService _phieuThuHPBLLService;
 
 		private IThanhToanHocPhiRequester thanhToanHocPhiRequester;
         BindingList<PhieuThuHP> mPhieuThuHP;
         BindingList<PhieuDKHP> mPhieuDKHP;
 
-        public XacNhanHocPhi(IThanhToanHocPhiRequester requester)
+        public XacNhanHocPhi(IThanhToanHocPhiRequester requester, IPhieuDKHPBLLService phieuDKHPBLLService, IPhieuThuHPBLLService phieuThuHPBLLService)
         {
             InitializeComponent();
 
             thanhToanHocPhiRequester = requester;
+            _phieuDKHPBLLService = phieuDKHPBLLService;
+            _phieuThuHPBLLService = phieuThuHPBLLService;
+
             SettingColumnXacNhanHocPhi();
             Setting();
             SetUpDgvPhieuDKHP();

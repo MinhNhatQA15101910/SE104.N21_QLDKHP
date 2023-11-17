@@ -14,35 +14,21 @@ namespace PL
 {
     public partial class ThongTinHocPhi : KryptonForm
     {
-        private readonly IDoiTuongBLLService _doiTuongBLLService 
-            = new DoiTuongBLLService(
-                new DoiTuongDALService(
-                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString, 
-                    new DapperWrapper()), 
-                new SinhVien_DoiTuongDALService(
-                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString, 
-                    new DapperWrapper()));
-        private readonly IHocKyBLLService _hocKyBLLService 
-            = new HocKyBLLService(
-                new HocKyDALService(
-                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString, 
-                    new DapperWrapper()));
-        private readonly IPhieuDKHPBLLService _phieuDKHPBLLService 
-            = new PhieuDKHPBLLService(
-                new PhieuDKHPDALService(
-                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString, 
-                    new DapperWrapper()));
-        private readonly IPhieuThuHPBLLService _phieuThuHPBLLService 
-            = new PhieuThuHPBLLService(
-                new PhieuThuHPDALService(
-                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString, 
-                    new DapperWrapper()));
+        private readonly IDoiTuongBLLService _doiTuongBLLService;
+        private readonly IHocKyBLLService _hocKyBLLService;
+        private readonly IPhieuDKHPBLLService _phieuDKHPBLLService;
+        private readonly IPhieuThuHPBLLService _phieuThuHPBLLService;
 
         CultureInfo cultureInfo = new CultureInfo("vi-VN");
 
-        public ThongTinHocPhi()
+        public ThongTinHocPhi(IDoiTuongBLLService doiTuongBLLService, IHocKyBLLService hocKyBLLService, IPhieuDKHPBLLService phieuDKHPBLLService, IPhieuThuHPBLLService phieuThuHPBLLService)
         {
             InitializeComponent();
+
+            _doiTuongBLLService = doiTuongBLLService;
+            _hocKyBLLService = hocKyBLLService;
+            _phieuDKHPBLLService = phieuDKHPBLLService;
+            _phieuThuHPBLLService = phieuThuHPBLLService;
         }
 
         private void ThongTinHocPhi_Load(object sender, EventArgs e)

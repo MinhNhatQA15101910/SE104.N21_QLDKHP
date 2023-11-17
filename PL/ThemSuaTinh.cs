@@ -1,36 +1,26 @@
 ﻿using BLL.IServices;
-using BLL.Services;
 using ComponentFactory.Krypton.Toolkit;
-using DAL.Services;
 using DTO;
 using PL.Interfaces;
 using System;
-using System.Configuration;
-using System.Data.SqlClient;
 using System.Windows.Forms;
 
 namespace PL
 {
     public partial class ThemSuaTinh : KryptonForm
     {
-		private readonly ITinhBLLService _tinhBLLService 
-            = new TinhBLLService(
-                new TinhDALService(
-                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString, 
-                    new DapperWrapper()),
-                new HuyenDALService(
-                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString, 
-                    new DapperWrapper()));
+        private readonly ITinhBLLService _tinhBLLService;
 
 		private IThemSuaTinhRequester themSuaTinhRequester;
         private Tinh tinh;
 
-        public ThemSuaTinh(IThemSuaTinhRequester requester, Tinh tinh)
+        public ThemSuaTinh(IThemSuaTinhRequester requester, Tinh tinh, ITinhBLLService tinhBLLService)
         {
             InitializeComponent();
 
             themSuaTinhRequester = requester;
             this.tinh = tinh;
+            _tinhBLLService = tinhBLLService;
 
             SettingProperties();
         }

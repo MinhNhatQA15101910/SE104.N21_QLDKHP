@@ -14,29 +14,8 @@ namespace PL
     public partial class ThemSuaMonHoc : KryptonForm, IThemSuaLoaiMonHocRequester
     {
         #region Register Services
-        private readonly IMonHocBLLService _monHocBLLService
-            = new MonHocBLLService(
-                new MonHocDALService(
-                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString,
-                    new DapperWrapper()),
-                new DanhSachMonHocMoDALService(
-                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString,
-                    new DapperWrapper()),
-                new CT_PhieuDKHPDALService(
-                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString,
-                    new DapperWrapper()),
-                new ChuongTrinhHocDALService(
-                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString,
-                    new DapperWrapper()));
-
-        private readonly ILoaiMonHocBLLService _loaiMonHocBLLService 
-            = new LoaiMonHocBLLService(
-                new LoaiMonHocDALService(
-                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString, 
-                    new DapperWrapper()), 
-                new MonHocDALService(
-                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString, 
-                    new DapperWrapper()));
+        private readonly IMonHocBLLService _monHocBLLService;
+        private readonly ILoaiMonHocBLLService _loaiMonHocBLLService;
         #endregion
 
         private IThemSuaMonHocRequester themSuaMonHocRequester;
@@ -44,12 +23,14 @@ namespace PL
         private BindingList<LoaiMonHoc> mLoaiMonHoc;
         private BindingSource mLoaiMonHocSource;
 
-        public ThemSuaMonHoc(IThemSuaMonHocRequester requester, CT_MonHoc monHoc)
+        public ThemSuaMonHoc(IThemSuaMonHocRequester requester, CT_MonHoc monHoc, IMonHocBLLService monHocBLLService, ILoaiMonHocBLLService loaiMonHocBLLService)
         {
             InitializeComponent();
 
             themSuaMonHocRequester = requester;
             this.monHoc = monHoc;
+            _monHocBLLService = monHocBLLService;
+            _loaiMonHocBLLService = loaiMonHocBLLService;
 
             SettingProperties();
         }

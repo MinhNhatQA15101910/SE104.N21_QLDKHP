@@ -13,44 +13,10 @@ namespace PL
 {
     public partial class ThemSuaCTH : KryptonForm
     {
-        private readonly IKhoaBLLService _khoaBLLService 
-            = new KhoaBLLService(
-                new KhoaDALService(
-                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString, 
-                    new DapperWrapper()),
-                new NganhDALService(
-                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString, 
-                    new DapperWrapper()));
-        private readonly INganhBLLService _nganhBLLService 
-            = new NganhBLLService(
-                new NganhDALService(
-                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString, 
-                    new DapperWrapper()),
-                new SinhVienDALService(
-                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString, 
-                    new DapperWrapper()),
-                new ChuongTrinhHocDALService(
-                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString, 
-                    new DapperWrapper()));
-        private readonly IChuongTrinhHocBLLService _chuongtrinhhocBLLService 
-            = new ChuongTrinhHocBLLService(
-                new ChuongTrinhHocDALService(
-                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString, 
-                    new DapperWrapper()));
-        private readonly IMonHocBLLService _monHocBLLService
-            = new MonHocBLLService(
-                new MonHocDALService(
-                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString,
-                    new DapperWrapper()),
-                new DanhSachMonHocMoDALService(
-                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString,
-                    new DapperWrapper()),
-                new CT_PhieuDKHPDALService(
-                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString,
-                    new DapperWrapper()),
-                new ChuongTrinhHocDALService(
-                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString,
-                    new DapperWrapper()));
+        private readonly IKhoaBLLService _khoaBLLService;
+        private readonly INganhBLLService _nganhBLLService;
+        private readonly IChuongTrinhHocBLLService _chuongtrinhhocBLLService;
+        private readonly IMonHocBLLService _monHocBLLService;
 
         BindingList<Khoa> mKhoa;
         BindingList<Nganh> mNganh;
@@ -58,8 +24,13 @@ namespace PL
         BindingList<MonHoc> mChuongTrinhHoc;
         BindingList<ChuongTrinhHoc> mDSMonHocThem = new BindingList<ChuongTrinhHoc>();
         BindingList<ChuongTrinhHoc> mDSMonHocXoa = new BindingList<ChuongTrinhHoc>();
-        public ThemSuaCTH()
+        public ThemSuaCTH(IKhoaBLLService khoaBLLService, INganhBLLService nganhBLLService, IChuongTrinhHocBLLService chuongTrinhHocBLLService, IMonHocBLLService monHocBLLService)
         {
+            _khoaBLLService = khoaBLLService;
+            _nganhBLLService = nganhBLLService;
+            _chuongtrinhhocBLLService = chuongTrinhHocBLLService;
+            _monHocBLLService = monHocBLLService;
+
             InitializeComponent();
             SettingColumnDgvDSMonHoc();
             SettingColumnDgvDSMonHocChon();

@@ -1,13 +1,11 @@
 ﻿using BLL.IServices;
-using BLL.Services;
 using ComponentFactory.Krypton.Toolkit;
-using DAL.Services;
 using DTO;
+using Microsoft.Extensions.DependencyInjection;
 using PL.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Configuration;
 using System.Data;
 using System.Drawing;
 using System.Linq;
@@ -17,18 +15,9 @@ namespace PL
 {
     public partial class Admin : KryptonForm, IThemSuaTaiKhoanRequester
     {
-		private readonly INguoiDungBLLService _nguoiDungBLLService 
-            = new NguoiDungBLLService(
-                new NguoiDungDALService(
-                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString, 
-                    new DapperWrapper()));
-		private readonly ISinhVienBLLService _sinhVienBLLService 
-            = new SinhVienBLLService(
-                new SinhVienDALService(
-                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString,
-                    new DapperWrapper()));
-
-		private IAdminRequester adminRequester;
+        private readonly INguoiDungBLLService _nguoiDungBLLService;
+        private readonly ISinhVienBLLService _sinhVienBLLService;
+		private readonly IAdminRequester adminRequester;
 
         private BindingList<DTO.SinhVien> mSinhVienChuaCoTK;
         private BindingList<DTO.SinhVien> mSinhVienChuaCoTKSelected;
@@ -40,11 +29,13 @@ namespace PL
 
         private string placeholderText = "🔎 Tìm kiếm";
 
-        public Admin(IAdminRequester requester)
+        public Admin(IAdminRequester requester, INguoiDungBLLService nguoiDungBLLService, ISinhVienBLLService sinhVienBLLService)
         {
             InitializeComponent();
 
             adminRequester = requester;
+            _nguoiDungBLLService = nguoiDungBLLService;
+            _sinhVienBLLService = sinhVienBLLService;
 
             SettingProperties();
         }
@@ -343,13 +334,13 @@ namespace PL
 
         private void btnDoiMatKhau1_Click(object sender, EventArgs e)
         {
-            DoiMatKhau doiMatKhau = new DoiMatKhau();
+            DoiMatKhau doiMatKhau = Program.ServiceProvider.GetRequiredService<DoiMatKhau>();
             doiMatKhau.Show();
         }
 
         private void btnDoiMatKhau2_Click(object sender, EventArgs e)
         {
-            DoiMatKhau doiMatKhau = new DoiMatKhau();
+            DoiMatKhau doiMatKhau = Program.ServiceProvider.GetRequiredService<DoiMatKhau>();
             doiMatKhau.Show();
         }
 
@@ -382,7 +373,7 @@ namespace PL
                 return;
             }
 
-            ThemSuaTaiKhoan themSuaTaiKhoan = new ThemSuaTaiKhoan(this, nguoiDung);
+            ThemSuaTaiKhoan themSuaTaiKhoan = new ThemSuaTaiKhoan(this, nguoiDung, Program.ServiceProvider.GetRequiredService<INhomNguoiDungBLLService>(), Program.ServiceProvider.GetRequiredService<INguoiDungBLLService>());
             themSuaTaiKhoan.Show();
         }
 

@@ -1,12 +1,9 @@
 ﻿using BLL.IServices;
-using BLL.Services;
 using ComponentFactory.Krypton.Toolkit;
-using DAL.Services;
 using DTO;
 using PL.Interfaces;
 using System;
 using System.ComponentModel;
-using System.Configuration;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -15,33 +12,9 @@ namespace PL
     public partial class XacNhanDKHP : KryptonForm
     {
         #region Register Services
-        private readonly IMonHocBLLService _monHocBLLService
-            = new MonHocBLLService(
-                new MonHocDALService(
-                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString,
-                    new DapperWrapper()),
-                new DanhSachMonHocMoDALService(
-                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString,
-                    new DapperWrapper()),
-                new CT_PhieuDKHPDALService(
-                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString,
-                    new DapperWrapper()),
-                new ChuongTrinhHocDALService(
-                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString,
-                    new DapperWrapper()));
-        private readonly IPhieuDKHPBLLService _phieuDKHPBLLService 
-            = new PhieuDKHPBLLService(
-                new PhieuDKHPDALService(
-                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString, 
-                    new DapperWrapper()));
-        private readonly ILoaiMonHocBLLService _loaiMonHocBLLService 
-            = new LoaiMonHocBLLService(
-                new LoaiMonHocDALService(
-                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString, 
-                    new DapperWrapper()),
-                new MonHocDALService(
-                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString, 
-                    new DapperWrapper()));
+        private readonly ILoaiMonHocBLLService _loaiMonHocBLLService;
+        private readonly IMonHocBLLService _monHocBLLService;
+        private readonly IPhieuDKHPBLLService _phieuDKHPBLLService;
         #endregion
 
         private IXacNhanDKHPRequester xacNhanDKHPRequester;
@@ -49,13 +22,17 @@ namespace PL
         int thisYear = 2024;
         BindingList<PhieuDKHP> mPhieuDKHP;
         BindingList<LoaiMonHoc> mLoaiMonHoc;
-        BindingList<DTO.MonHoc> mMonHoc;
+        BindingList<MonHoc> mMonHoc;
 
-        public XacNhanDKHP(IXacNhanDKHPRequester requester)
+        public XacNhanDKHP(IXacNhanDKHPRequester requester, ILoaiMonHocBLLService loaiMonHocBLLService, IMonHocBLLService monHocBLLService, IPhieuDKHPBLLService phieuDKHPBLLService)
         {
             InitializeComponent();
 
             xacNhanDKHPRequester = requester;
+            _loaiMonHocBLLService = loaiMonHocBLLService;
+            _monHocBLLService = monHocBLLService;
+            _phieuDKHPBLLService = phieuDKHPBLLService;
+
             SettingColumnDgvPhieuDKHP();
             SettingColumnDgvMonHoc();
             GetSetting();

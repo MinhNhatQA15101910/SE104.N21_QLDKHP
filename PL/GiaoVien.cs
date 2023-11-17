@@ -1,4 +1,5 @@
 ﻿using ComponentFactory.Krypton.Toolkit;
+using Microsoft.Extensions.DependencyInjection;
 using PL.Interfaces;
 using System;
 using System.Windows.Forms;
@@ -102,7 +103,7 @@ namespace PL
 
         private void picCaiDat_Click(object sender, EventArgs e)
         {
-            QuanLyLoaiMonHoc quanLyLoaiMonHoc = new QuanLyLoaiMonHoc(this);
+            QuanLyLoaiMonHoc quanLyLoaiMonHoc = Program.ServiceProvider.GetRequiredService<QuanLyLoaiMonHoc>();
             quanLyLoaiMonHoc.Show();
             Hide();
         }
@@ -114,7 +115,7 @@ namespace PL
 
         private void btnDoiMatKhau_Click(object sender, EventArgs e)
         {
-            DoiMatKhau doiMatKhau = new DoiMatKhau();
+            DoiMatKhau doiMatKhau = Program.ServiceProvider.GetRequiredService<DoiMatKhau>();
             doiMatKhau.Show();
         }
 
@@ -125,63 +126,63 @@ namespace PL
 
         private void btnNganh_Click(object sender, EventArgs e)
         {
-            QuanLyNganh quanLyNganh = new QuanLyNganh(this);
+            QuanLyNganh quanLyNganh = Program.ServiceProvider.GetRequiredService<QuanLyNganh>();
             quanLyNganh.Show();
             Hide();
         }
 
         private void btnKhoa_Click(object sender, EventArgs e)
         {
-            QuanLyKhoa quanLyKhoa = new QuanLyKhoa(this);
+            QuanLyKhoa quanLyKhoa = Program.ServiceProvider.GetRequiredService<QuanLyKhoa>();
             quanLyKhoa.Show();
             Hide();
         }
 
         private void btnMonHoc_Click(object sender, EventArgs e)
         {
-            QuanLyMonHoc quanLyMonHoc = new QuanLyMonHoc(this);
+            QuanLyMonHoc quanLyMonHoc = Program.ServiceProvider.GetRequiredService<QuanLyMonHoc>();
             quanLyMonHoc.Show();
             Hide();
         }
 
         private void btnDSSV_Click(object sender, EventArgs e)
         {
-            QuanLySinhVien quanLySinhVien = new QuanLySinhVien(this);
+            QuanLySinhVien quanLySinhVien = Program.ServiceProvider.GetRequiredService<QuanLySinhVien>();
             quanLySinhVien.Show();
             Hide();
         }
 
         private void picBaoCao_Click(object sender, EventArgs e)
         {
-            BaoCao baoCao = new BaoCao(this);
+            BaoCao baoCao = Program.ServiceProvider.GetRequiredService<BaoCao>();
             baoCao.Show();
             Hide();
         }
 
         private void btnQuanLyMonHocMo_Click(object sender, EventArgs e)
         {
-            QuanLyMonHocMo quanLyMonHocMo = new QuanLyMonHocMo(this);
+            QuanLyMonHocMo quanLyMonHocMo = Program.ServiceProvider.GetRequiredService<QuanLyMonHocMo>();
             quanLyMonHocMo.Show();
             Hide();
         }
 
         private void btnChuongTrinhHoc_Click(object sender, EventArgs e)
         {
-            QuanLyChuongTrinhHoc quanLyChuongTrinhHoc = new QuanLyChuongTrinhHoc(this);
+            QuanLyChuongTrinhHoc quanLyChuongTrinhHoc = Program.ServiceProvider.GetRequiredService<QuanLyChuongTrinhHoc>();
             quanLyChuongTrinhHoc.Show();
             Hide();
         }
 
         private void btnXacNhanDKHP_Click(object sender, EventArgs e)
         {
-            XacNhanDKHP xacNhanDKHP = new XacNhanDKHP(this);
+            XacNhanDKHP xacNhanDKHP = Program.ServiceProvider.GetRequiredService<XacNhanDKHP>();
             xacNhanDKHP.Show();
             Hide();
         }
 
         private void btnXacNhanThanhToanHP_Click(object sender, EventArgs e)
         {
-            XacNhanHocPhi xacNhanHocPhi = new XacNhanHocPhi(this);
+            XacNhanHocPhi xacNhanHocPhi = Program.ServiceProvider.GetRequiredService<XacNhanHocPhi>();
             xacNhanHocPhi.Show();
             Hide();
         }

@@ -1,12 +1,9 @@
 ﻿using BLL.IServices;
-using BLL.Services;
 using ComponentFactory.Krypton.Toolkit;
-using DAL.Services;
 using DTO;
 using PL.Interfaces;
 using System;
 using System.ComponentModel;
-using System.Configuration;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -15,36 +12,22 @@ namespace PL
     public partial class TraCuuMonHocMo : KryptonForm
     {
         #region Register Services
-        private readonly IMonHocBLLService _monHocBLLService
-            = new MonHocBLLService(
-                new MonHocDALService(
-                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString,
-                    new DapperWrapper()),
-                new DanhSachMonHocMoDALService(
-                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString,
-                    new DapperWrapper()),
-                new CT_PhieuDKHPDALService(
-                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString,
-                    new DapperWrapper()),
-                new ChuongTrinhHocDALService(
-                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString,
-                    new DapperWrapper()));
-        private readonly IMonHocMoBLLService _monHocMoBLLService 
-            = new MonHocMoBLLService(
-                new MonHocMoDALService(
-                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString, 
-                    new DapperWrapper()));
+        private readonly IMonHocBLLService _monHocBLLService;
+        private readonly IMonHocMoBLLService _monHocMoBLLService;
         #endregion
 
         private ITraCuuMonHocMoRequester traCuuMonHocMoRequester;
         BindingList<int> mNamHoc;
         BindingList<MonHoc> mMonHoc;
         BindingList<HocKyNamHoc> mHocKyNamHoc;
-        public TraCuuMonHocMo(ITraCuuMonHocMoRequester requester)
+        public TraCuuMonHocMo(ITraCuuMonHocMoRequester requester, IMonHocBLLService monHocBLLService, IMonHocMoBLLService monHocMoBLLService)
         {
             InitializeComponent();
 
             traCuuMonHocMoRequester = requester;
+            _monHocBLLService = monHocBLLService;
+            _monHocMoBLLService = monHocMoBLLService;
+
             SettingHocKyNamHoc();
             SettingColumnDgvMonHoc();
             GetSetting();

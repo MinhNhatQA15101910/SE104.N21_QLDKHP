@@ -1,58 +1,42 @@
 ﻿using BLL.IServices;
-using BLL.Services;
 using ComponentFactory.Krypton.Toolkit;
-using DAL.Services;
 using DTO;
 using PL.Interfaces;
 using System;
 using System.ComponentModel;
-using System.Configuration;
 using System.Windows.Forms;
 
 namespace PL
 {
     public partial class ThemSuaNganh : KryptonForm, IThemSuaKhoaRequester
 	{
-        private readonly IKhoaBLLService _khoaBLLService 
-			= new KhoaBLLService(
-				new KhoaDALService(
-					ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString, 
-					new DapperWrapper()),
-				new NganhDALService(
-					ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString, 
-					new DapperWrapper()));
-        private readonly INganhBLLService _nganhBLLService 
-			= new NganhBLLService(
-				new NganhDALService(
-					ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString, 
-					new DapperWrapper()),
-				new SinhVienDALService(
-					ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString, 
-					new DapperWrapper()),
-				new ChuongTrinhHocDALService(
-					ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString, 
-					new DapperWrapper()));
+		private readonly IKhoaBLLService _khoaBLLService;
+		private readonly INganhBLLService _nganhBLLService;
 
 		private IThemSuaNganhRequester themSuaNganhRequester;
 		private CT_Nganh nganh;
-		private BindingList<DTO.Khoa> mKhoa;
+		private BindingList<Khoa> mKhoa;
 		private BindingSource mKhoaSource;
 
-		public ThemSuaNganh(IThemSuaNganhRequester requester, CT_Nganh nganh)
+		public ThemSuaNganh(IThemSuaNganhRequester requester, CT_Nganh nganh, IKhoaBLLService khoaBLLService, INganhBLLService nganhBLLService)
 		{
 			InitializeComponent();
 
 			themSuaNganhRequester = requester;
 			this.nganh = nganh;
+			_khoaBLLService = khoaBLLService;
+			_nganhBLLService = nganhBLLService;
 
 			SettingProperties();
 		}
 
-		public ThemSuaNganh(IThemSuaNganhRequester requester)
+		public ThemSuaNganh(IThemSuaNganhRequester requester, IKhoaBLLService khoaBLLService, INganhBLLService nganhBLLService)
 		{
 			InitializeComponent();
 
 			themSuaNganhRequester = requester;
+			_khoaBLLService = khoaBLLService;
+			_nganhBLLService = nganhBLLService;
 
 			SettingProperties();
 		}
@@ -101,7 +85,7 @@ namespace PL
 
 		private void btnThemKhoa_Click(object sender, EventArgs e)
 		{
-			ThemSuaKhoa themSuaKhoa = new ThemSuaKhoa(this);
+			ThemSuaKhoa themSuaKhoa = new ThemSuaKhoa(this, _khoaBLLService);
 			themSuaKhoa.ShowDialog();
 		}
 

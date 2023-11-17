@@ -1,11 +1,8 @@
 ﻿using BLL.IServices;
-using BLL.Services;
 using ComponentFactory.Krypton.Toolkit;
-using DAL.Services;
 using DTO;
 using System;
 using System.Collections.Generic;
-using System.Configuration;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -14,20 +11,14 @@ namespace PL
     public partial class ThongTinDKHP : KryptonForm
     {
 
-        private readonly IHocKyBLLService _hocKyBLLService 
-            = new HocKyBLLService(
-                new HocKyDALService(
-                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString, 
-                    new DapperWrapper()));
-        private readonly IPhieuDKHPBLLService _phieuDKHPBLLService 
-            = new PhieuDKHPBLLService(
-                new PhieuDKHPDALService(
-                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString, 
-                    new DapperWrapper()));
+        private readonly IHocKyBLLService _hocKyBLLService;
+        private readonly IPhieuDKHPBLLService _phieuDKHPBLLService;
 
-        public ThongTinDKHP()
+        public ThongTinDKHP(IHocKyBLLService hocKyBLLService, IPhieuDKHPBLLService phieuDKHPBLLService)
         {
             InitializeComponent();
+            _hocKyBLLService = hocKyBLLService;
+            _phieuDKHPBLLService = phieuDKHPBLLService;
         }
 
         private void ThongTinDKHP_Load(object sender, EventArgs e)

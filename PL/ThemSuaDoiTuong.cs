@@ -1,43 +1,36 @@
 ﻿using BLL.IServices;
-using BLL.Services;
 using ComponentFactory.Krypton.Toolkit;
-using DAL.Services;
 using DTO;
 using PL.Interfaces;
 using System;
-using System.Configuration;
 using System.Windows.Forms;
 
 namespace PL
 {
     public partial class ThemSuaDoiTuong : KryptonForm
     {
-        private readonly IDoiTuongBLLService _doiTuongBLLService = new DoiTuongBLLService(
-            new DoiTuongDALService(
-                ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString,
-                new DapperWrapper()),
-            new SinhVien_DoiTuongDALService(
-                ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString,
-                new DapperWrapper()));
+        private readonly IDoiTuongBLLService _doiTuongBLLService;
 
         private IThemSuaDoiTuongRequester themSuaDoiTuongRequester;
         private DoiTuong doiTuong;
 
-        public ThemSuaDoiTuong(IThemSuaDoiTuongRequester requester, DoiTuong doiTuong)
+        public ThemSuaDoiTuong(IThemSuaDoiTuongRequester requester, IDoiTuongBLLService doiTuongBLLService, DoiTuong doiTuong)
         {
             InitializeComponent();
 
             themSuaDoiTuongRequester = requester;
+            _doiTuongBLLService = doiTuongBLLService;
             this.doiTuong = doiTuong;
 
             SettingProperties();
         }
 
-        public ThemSuaDoiTuong(IThemSuaDoiTuongRequester requester)
+        public ThemSuaDoiTuong(IThemSuaDoiTuongRequester requester, IDoiTuongBLLService doiTuongBLLService)
         {
             InitializeComponent();
 
             themSuaDoiTuongRequester = requester;
+            _doiTuongBLLService = doiTuongBLLService;
 
             SettingProperties();
         }

@@ -1,11 +1,9 @@
 ﻿using BLL.IServices;
-using BLL.Services;
 using ComponentFactory.Krypton.Toolkit;
-using DAL.Services;
 using DTO;
+using Microsoft.Extensions.DependencyInjection;
 using PL.Interfaces;
 using System;
-using System.Configuration;
 using System.Windows.Forms;
 
 namespace PL
@@ -13,21 +11,15 @@ namespace PL
     public partial class DangNhap : KryptonForm, IAdminRequester, IGVRequester, ISinhVienRequester
     {
         #region Register Services
-        private readonly INguoiDungBLLService _nguoiDungBLLService 
-            = new NguoiDungBLLService(
-                new NguoiDungDALService(
-                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString, 
-                    new DapperWrapper()));
-        private readonly IGlobalConfigBLLService _globalConfigBLLService 
-            = new GlobalConfigBLLService(
-                new GlobalConfigDALService(
-                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString, 
-                    new DapperWrapper()));
+        private readonly INguoiDungBLLService _nguoiDungBLLService;
+        private readonly IGlobalConfigBLLService _globalConfigBLLService;
         #endregion
 
-        public DangNhap()
+        public DangNhap(INguoiDungBLLService nguoiDungBLLService, IGlobalConfigBLLService globalConfigBLLService)
         {
             InitializeComponent();
+            _nguoiDungBLLService = nguoiDungBLLService;
+            _globalConfigBLLService = globalConfigBLLService;
         }
 
         public void OnAdminClosing()
@@ -91,19 +83,19 @@ namespace PL
 
                     if (GlobalConfig.CurrNguoiDung.MaNhom == "gv")
                     {
-                        GiaoVien gv = new GiaoVien(this);
+                        GiaoVien gv = Program.ServiceProvider.GetRequiredService<GiaoVien>();
                         gv.Show();
                         Hide();
                     }
                     else if (GlobalConfig.CurrNguoiDung.MaNhom == "ad")
                     {
-                        Admin admin = new Admin(this);
+                        Admin admin = Program.ServiceProvider.GetRequiredService<Admin>();
                         admin.Show();
                         Hide();
                     }
                     else if (GlobalConfig.CurrNguoiDung.MaNhom == "sv")
                     {
-                        SinhVien sinhVien = new SinhVien(this);
+                        SinhVien sinhVien = Program.ServiceProvider.GetRequiredService<SinhVien>();
                         sinhVien.Show();
                         Hide();
                     }

@@ -1,35 +1,28 @@
 ﻿using BLL.IServices;
-using BLL.Services;
 using ComponentFactory.Krypton.Toolkit;
-using DAL.Services;
 using DTO;
+using Microsoft.Extensions.DependencyInjection;
 using PL.Interfaces;
 using System;
 using System.Collections.Generic;
-using System.Configuration;
 using System.Windows.Forms;
 
 namespace PL
 {
     public partial class SinhVien : KryptonForm, IThongTinSinhVienRequester, IDangKyHocPhanRequester, IThanhToanHocPhiRequester
     {
-		private readonly IPhieuDKHPBLLService _phieuDKHPBLLService 
-            = new PhieuDKHPBLLService(
-                new PhieuDKHPDALService(
-                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString, 
-                    new DapperWrapper()));
-		private readonly ISinhVienBLLService _sinhVienBLLService 
-            = new SinhVienBLLService(
-                new SinhVienDALService(ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString, 
-                    new DapperWrapper()));
+        private readonly IPhieuDKHPBLLService _phieuDKHPBLLService;
+        private readonly ISinhVienBLLService _sinhVienBLLService;
 
 		private readonly ISinhVienRequester sinhVienRequester;
 
-        public SinhVien(ISinhVienRequester requester)
+        public SinhVien(ISinhVienRequester requester, IPhieuDKHPBLLService phieuDKHPBLLService, ISinhVienBLLService sinhVienBLLService)
         {
             InitializeComponent();
 
             sinhVienRequester = requester;
+            _phieuDKHPBLLService = phieuDKHPBLLService;
+            _sinhVienBLLService = sinhVienBLLService;
         }
 
         private void SinhVien_Load(object sender, EventArgs e)
@@ -50,7 +43,7 @@ namespace PL
 
         private void btnDoiMatKhau_Click(object sender, EventArgs e)
         {
-            DoiMatKhau doiMatKhau = new DoiMatKhau();
+            DoiMatKhau doiMatKhau = Program.ServiceProvider.GetRequiredService<DoiMatKhau>();
             doiMatKhau.Show();
         }
 
@@ -74,7 +67,7 @@ namespace PL
 
         private void btnTTSV_Click(object sender, EventArgs e)
         {
-            ThongTinSinhVien t = new ThongTinSinhVien(this);
+            ThongTinSinhVien t = Program.ServiceProvider.GetRequiredService<ThongTinSinhVien>();
             t.Show();
             Hide();
         }
@@ -88,7 +81,7 @@ namespace PL
             }
             else
             {
-                DangKyHocPhan dkhp = new DangKyHocPhan(this);
+                DangKyHocPhan dkhp = Program.ServiceProvider.GetRequiredService<DangKyHocPhan>();
                 dkhp.Show();
                 Hide();
             }
@@ -96,7 +89,7 @@ namespace PL
 
         private void btnThanhToanHP_Click(object sender, EventArgs e)
         {
-            ThanhToanHocPhi t = new ThanhToanHocPhi(this);
+            ThanhToanHocPhi t = Program.ServiceProvider.GetRequiredService<ThanhToanHocPhi>();
             t.Show();
             Hide();
         }

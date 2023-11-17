@@ -1,13 +1,10 @@
 ﻿using BLL.IServices;
-using BLL.Services;
 using ComponentFactory.Krypton.Toolkit;
-using DAL.Services;
 using DTO;
 using PL.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
-using System.Configuration;
 using System.Windows.Forms;
 
 namespace PL
@@ -15,22 +12,8 @@ namespace PL
     public partial class ThemSuaHuyen : KryptonForm, IThemSuaTinhRequester
     {
         #region Register Services
-        private readonly ITinhBLLService _tinhBLLService 
-            = new TinhBLLService(
-                new TinhDALService(
-                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString, 
-                    new DapperWrapper()),
-                new HuyenDALService(
-                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString, 
-                    new DapperWrapper()));
-        private readonly IHuyenBLLService _huyenBLLService 
-            = new HuyenBLLService(
-                new HuyenDALService(
-                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString, 
-                    new DapperWrapper()),
-                new SinhVienDALService(
-                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString, 
-                    new DapperWrapper()));
+        private readonly ITinhBLLService _tinhBLLService;
+        private readonly IHuyenBLLService _huyenBLLService;
         #endregion
 
         private IThemSuaHuyenRequester themSuaHuyenRequester;
@@ -39,21 +22,25 @@ namespace PL
         private List<string> mUT;
         private BindingSource mSource;
 
-        public ThemSuaHuyen(IThemSuaHuyenRequester requester, Huyen huyen)
+        public ThemSuaHuyen(IThemSuaHuyenRequester requester, Huyen huyen, ITinhBLLService tinhBLLService, IHuyenBLLService huyenBLLService)
         {
             InitializeComponent();
 
             themSuaHuyenRequester = requester;
             this.huyen = huyen;
+            _tinhBLLService = tinhBLLService;
+            _huyenBLLService = huyenBLLService;
 
             SettingProperties();
         }
 
-        public ThemSuaHuyen(IThemSuaHuyenRequester requester)
+        public ThemSuaHuyen(IThemSuaHuyenRequester requester, ITinhBLLService tinhBLLService, IHuyenBLLService huyenBLLService)
         {
             InitializeComponent();
 
             themSuaHuyenRequester = requester;
+            _tinhBLLService = tinhBLLService;
+            _huyenBLLService = huyenBLLService;
 
             SettingProperties();
         }

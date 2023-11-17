@@ -3,6 +3,7 @@ using BLL.Services;
 using ComponentFactory.Krypton.Toolkit;
 using DAL.Services;
 using DTO;
+using Microsoft.Extensions.DependencyInjection;
 using PL.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -17,30 +18,9 @@ namespace PL
     public partial class QuanLyMonHocMo : KryptonForm, ITraCuuMonHocMoRequester
     {
         #region Register Service
-        private readonly IMonHocBLLService _monHocBLLService
-            = new MonHocBLLService(
-                new MonHocDALService(
-                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString,
-                    new DapperWrapper()),
-                new DanhSachMonHocMoDALService(
-                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString,
-                    new DapperWrapper()),
-                new CT_PhieuDKHPDALService(
-                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString,
-                    new DapperWrapper()),
-                new ChuongTrinhHocDALService(
-                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString,
-                    new DapperWrapper()));
-        private readonly IGlobalConfigBLLService _globalConfigBLLService 
-            = new GlobalConfigBLLService(
-                new GlobalConfigDALService(
-                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString, 
-                    new DapperWrapper()));
-        private readonly IMonHocMoBLLService _monHocMoBLLService 
-            = new MonHocMoBLLService(
-                new MonHocMoDALService(
-                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString, 
-                    new DapperWrapper()));
+        private readonly IMonHocBLLService _monHocBLLService;
+        private readonly IGlobalConfigBLLService _globalConfigBLLService;
+        private readonly IMonHocMoBLLService _monHocMoBLLService;
         #endregion
 
         private IMonHocMoRequester monHocMoRequester;
@@ -50,11 +30,15 @@ namespace PL
         int NamHocNow = 0;
         int HocKyNow = 0;
 
-        public QuanLyMonHocMo(IMonHocMoRequester requester)
+        public QuanLyMonHocMo(IMonHocMoRequester requester, IMonHocBLLService monHocBLLService, IGlobalConfigBLLService globalConfigBLLService, IMonHocMoBLLService monHocMoBLLService)
         {
             InitializeComponent();
 
             monHocMoRequester = requester;
+            _monHocBLLService = monHocBLLService;
+            _globalConfigBLLService = globalConfigBLLService;
+            _monHocMoBLLService = monHocMoBLLService;
+
             SettingColumnDgvDSMonHocMo();
             SettingColumnDgvMonHoc();
             SetUpCurrentHocKyNamHoc();
@@ -270,7 +254,7 @@ namespace PL
 
         private void btn_ViewDSMHM_Click(object sender, EventArgs e)
         {
-            TraCuuMonHocMo monHocMoTraCuu = new TraCuuMonHocMo(this);
+            TraCuuMonHocMo monHocMoTraCuu = Program.ServiceProvider.GetRequiredService<TraCuuMonHocMo>();
             monHocMoTraCuu.Show();
             Hide();
         }

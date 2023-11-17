@@ -1,12 +1,10 @@
 ﻿using BLL.IServices;
-using BLL.Services;
 using ComponentFactory.Krypton.Toolkit;
-using DAL.Services;
 using DTO;
+using Microsoft.Extensions.DependencyInjection;
 using PL.Interfaces;
 using System;
 using System.ComponentModel;
-using System.Configuration;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -14,56 +12,27 @@ namespace PL
 {
     public partial class QuanLyChuongTrinhHoc : KryptonForm
     {
-        private IChuongTrinhHocRequester chuongTrinhHocRequester;
-        private readonly IKhoaBLLService _khoaBLLService 
-            = new KhoaBLLService(
-                new KhoaDALService(
-                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString, 
-                    new DapperWrapper()),
-                new NganhDALService(
-                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString, 
-                    new DapperWrapper()));
-        private readonly INganhBLLService _nganhBLLService 
-            = new NganhBLLService(
-                new NganhDALService(
-                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString, 
-                    new DapperWrapper()),
-                new SinhVienDALService(
-                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString, 
-                    new DapperWrapper()),
-                new ChuongTrinhHocDALService(
-                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString, 
-                    new DapperWrapper()));
-        private readonly IChuongTrinhHocBLLService _chuongtrinhhocBLLService 
-            = new ChuongTrinhHocBLLService(
-                new ChuongTrinhHocDALService(
-                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString, 
-                    new DapperWrapper()));
-        private readonly IMonHocBLLService _monHocBLLService 
-            = new MonHocBLLService(
-                new MonHocDALService(
-                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString, 
-                    new DapperWrapper()), 
-                new DanhSachMonHocMoDALService(
-                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString, 
-                    new DapperWrapper()),
-                new CT_PhieuDKHPDALService(
-                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString,
-                    new DapperWrapper()),
-                new ChuongTrinhHocDALService(
-                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString,
-                    new DapperWrapper()));
+        private readonly IChuongTrinhHocRequester chuongTrinhHocRequester;
+        private readonly IKhoaBLLService _khoaBLLService;
+        private readonly INganhBLLService _nganhBLLService;
+        private readonly IChuongTrinhHocBLLService _chuongtrinhhocBLLService;
+        private readonly IMonHocBLLService _monHocBLLService;
 
         BindingList<Khoa> mKhoa;
         BindingList<Nganh> mNganh;
         BindingList<MonHoc> mChuongTrinhHoc;
         BindingList<ChuongTrinhHoc> mAllCTHoc;
 
-        public QuanLyChuongTrinhHoc(IChuongTrinhHocRequester requester)
+        public QuanLyChuongTrinhHoc(IChuongTrinhHocRequester requester, IKhoaBLLService khoaBLLService, INganhBLLService nganhBLLService, IChuongTrinhHocBLLService chuongTrinhHocBLLService, IMonHocBLLService monHocBLLService)
         {
             InitializeComponent();
 
             chuongTrinhHocRequester = requester;
+            _khoaBLLService = khoaBLLService;
+            _nganhBLLService = nganhBLLService;
+            _chuongtrinhhocBLLService = chuongTrinhHocBLLService;
+            _monHocBLLService = monHocBLLService;
+
             SettingColumnDgvCTH();
             GetSetting();
             GetCbKhoaItems();
@@ -172,7 +141,7 @@ namespace PL
 
         private void btn_AddUpdate_Click(object sender, EventArgs e)
         {
-            ThemSuaCTH addUpdate = new ThemSuaCTH();
+            ThemSuaCTH addUpdate = Program.ServiceProvider.GetRequiredService<ThemSuaCTH>();
             addUpdate.Show();
         }
 

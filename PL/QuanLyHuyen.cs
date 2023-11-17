@@ -1,12 +1,10 @@
 ﻿using BLL.IServices;
-using BLL.Services;
 using ComponentFactory.Krypton.Toolkit;
-using DAL.Services;
 using DTO;
+using Microsoft.Extensions.DependencyInjection;
 using PL.Interfaces;
 using System;
 using System.ComponentModel;
-using System.Configuration;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -15,25 +13,21 @@ namespace PL
     public partial class QuanLyHuyen : KryptonForm, IThemSuaHuyenRequester
     {
         #region Register Services
-        private readonly IHuyenBLLService _huyenBLLService 
-            = new HuyenBLLService(
-                new HuyenDALService(
-                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString, 
-                    new DapperWrapper()),
-                new SinhVienDALService(
-                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString, 
-                    new DapperWrapper()));
+        private readonly ITinhBLLService _tinhBLLService;
+        private readonly IHuyenBLLService _huyenBLLService;
         #endregion
 
         private ICaiDatRequester caiDatRequester;
         private BindingList<CT_Huyen> mHuyen;
         private BindingSource mHuyenSource;
 
-        public QuanLyHuyen(ICaiDatRequester requester)
+        public QuanLyHuyen(ICaiDatRequester requester, ITinhBLLService tinhBLLService, IHuyenBLLService huyenBLLService)
         {
             InitializeComponent();
 
             caiDatRequester = requester;
+            _tinhBLLService = tinhBLLService;
+            _huyenBLLService = huyenBLLService;
 
             SettingProperties();
         }
@@ -92,7 +86,7 @@ namespace PL
 
         private void btnThem_Click(object sender, EventArgs e)
         {
-            ThemSuaHuyen themSuaHuyen = new ThemSuaHuyen(this);
+            ThemSuaHuyen themSuaHuyen = new ThemSuaHuyen(this, _tinhBLLService, _huyenBLLService);
             themSuaHuyen.Show();
         }
 
@@ -105,7 +99,7 @@ namespace PL
                 VungUT = ct_huyen.VungUT,
                 MaTinh = ct_huyen.MaTinh
             };
-            ThemSuaHuyen themSuaHuyen = new ThemSuaHuyen(this, huyen);
+            ThemSuaHuyen themSuaHuyen = new ThemSuaHuyen(this, huyen, _tinhBLLService, _huyenBLLService);
             themSuaHuyen.Show();
         }
 
@@ -137,14 +131,14 @@ namespace PL
 
         private void btnLoaiMon_Click(object sender, EventArgs e)
         {
-            QuanLyLoaiMonHoc quanLyLoaiMonHoc = new QuanLyLoaiMonHoc(caiDatRequester);
+            QuanLyLoaiMonHoc quanLyLoaiMonHoc = Program.ServiceProvider.GetRequiredService<QuanLyLoaiMonHoc>();
             quanLyLoaiMonHoc.Show();
             Hide();
         }
 
         private void btnDoiTuong_Click(object sender, EventArgs e)
         {
-            QuanLyDoiTuong quanLyDoiTuong = new QuanLyDoiTuong(caiDatRequester);
+            QuanLyDoiTuong quanLyDoiTuong = Program.ServiceProvider.GetRequiredService<QuanLyDoiTuong>();
             quanLyDoiTuong.Show();
             Hide();
         }
@@ -162,7 +156,7 @@ namespace PL
 
         private void btnTinh_Click(object sender, EventArgs e)
         {
-            QuanLyTinh quanLyTinh = new QuanLyTinh(caiDatRequester);
+            QuanLyTinh quanLyTinh = Program.ServiceProvider.GetRequiredService<QuanLyTinh>();
             quanLyTinh.Show();
             Hide();
         }

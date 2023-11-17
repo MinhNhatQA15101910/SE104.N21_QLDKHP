@@ -1,15 +1,10 @@
 ﻿using BLL.IServices;
-using BLL.Services;
 using ComponentFactory.Krypton.Toolkit;
-using DAL.Services;
-using Dapper;
 using DTO;
 using PL.Interfaces;
 using System;
 using System.ComponentModel;
-using System.Configuration;
 using System.Data;
-using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
@@ -18,25 +13,19 @@ namespace PL
 {
     public partial class QuanLyKhoa : KryptonForm, IThemSuaKhoaRequester
     {
-        private readonly IKhoaBLLService _khoaBLLService 
-            = new KhoaBLLService(
-                new KhoaDALService(
-                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString, 
-                    new DapperWrapper()),
-                new NganhDALService(
-                    ConfigurationManager.ConnectionStrings["QuanLyDangKyHP"].ConnectionString, 
-                    new DapperWrapper()));
+        private readonly IKhoaBLLService _khoaBLLService;
         private IKhoaRequester khoaRequester;
         private BindingList<Khoa> mKhoa;
         private BindingSource mKhoaSource;
 
         private string placeholderText = "🔎 Tìm kiếm";
 
-        public QuanLyKhoa(IKhoaRequester requester)
+        public QuanLyKhoa(IKhoaRequester requester, IKhoaBLLService khoaBLLService)
         {
             InitializeComponent();
 
             khoaRequester = requester;
+            _khoaBLLService = khoaBLLService;
 
             SettingProperties();
         }
@@ -107,7 +96,7 @@ namespace PL
 
         private void btnThem_Click(object sender, EventArgs e)
         {
-            ThemSuaKhoa themSuaKhoa = new ThemSuaKhoa(this);
+            ThemSuaKhoa themSuaKhoa = new ThemSuaKhoa(this, _khoaBLLService);
             themSuaKhoa.ShowDialog();
         }
 
@@ -115,7 +104,7 @@ namespace PL
         {
             Khoa khoa = mKhoa[dgvDanhSachKhoa.CurrentRow.Index];
 
-            ThemSuaKhoa themSuaKhoa = new ThemSuaKhoa(this, khoa);
+            ThemSuaKhoa themSuaKhoa = new ThemSuaKhoa(this, khoa, _khoaBLLService);
             themSuaKhoa.ShowDialog();
         }
 
