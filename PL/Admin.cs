@@ -353,7 +353,7 @@ namespace PL
 
         private void btnThem_Click(object sender, EventArgs e)
         {
-            ThemSuaTaiKhoan themSuaTaiKhoan = new ThemSuaTaiKhoan(this);
+            ThemSuaTaiKhoan themSuaTaiKhoan = new ThemSuaTaiKhoan(this, Program.ServiceProvider.GetRequiredService<INhomNguoiDungBLLService>(), Program.ServiceProvider.GetRequiredService<INguoiDungBLLService>());
             themSuaTaiKhoan.Show();
         }
 

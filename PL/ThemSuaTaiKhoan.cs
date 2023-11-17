@@ -30,11 +30,13 @@ namespace PL
             SettingProperties();
         }
 
-        public ThemSuaTaiKhoan(IThemSuaTaiKhoanRequester requester)
+        public ThemSuaTaiKhoan(IThemSuaTaiKhoanRequester requester, INhomNguoiDungBLLService nhomNguoiDungBLLService, INguoiDungBLLService nguoiDungBLLService)
         {
             InitializeComponent();
 
             themSuaTaiKhoanRequester = requester;
+            _nhomNguoiDungBLLService = nhomNguoiDungBLLService;
+            _nguoiDungBLLService = nguoiDungBLLService;
 
             SettingProperties();
         }

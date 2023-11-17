@@ -1,6 +1,7 @@
 ﻿using BLL.IServices;
 using ComponentFactory.Krypton.Toolkit;
 using DTO;
+using Microsoft.Extensions.DependencyInjection;
 using PL.Interfaces;
 using System;
 using System.ComponentModel;
@@ -111,7 +112,9 @@ namespace PL
 
         private void btnThem_Click(object sender, EventArgs e)
         {
-            ThemSuaMonHoc themSuaMonHoc = new ThemSuaMonHoc(this);
+            ThemSuaMonHoc themSuaMonHoc = new ThemSuaMonHoc(this, 
+                Program.ServiceProvider.GetRequiredService<IMonHocBLLService>(),
+                Program.ServiceProvider.GetRequiredService<ILoaiMonHocBLLService>());
             themSuaMonHoc.Show();
         }
 

@@ -88,12 +88,11 @@ namespace PL
                         services.AddTransient<IMonHocMoRequester>(provider => new GiaoVien(provider.GetRequiredService<IGVRequester>()));
                         services.AddTransient<INganhRequester>(provider => new GiaoVien(provider.GetRequiredService<IGVRequester>()));
                         services.AddTransient<ISinhVienRequester>(provider => new DangNhap(provider.GetRequiredService<INguoiDungBLLService>(), provider.GetRequiredService<IGlobalConfigBLLService>()));
-                        services.AddTransient<IThanhToanHocPhiRequester>(provider => new GiaoVien(provider.GetRequiredService<IGVRequester>()));
+                        services.AddTransient<IThanhToanHocPhiRequester>(provider => new SinhVien(provider.GetRequiredService<ISinhVienRequester>(), provider.GetRequiredService<IPhieuDKHPBLLService>(), provider.GetRequiredService<ISinhVienBLLService>()));
                         services.AddTransient<IThemSuaDoiTuongRequester>(provider => new QuanLyDoiTuong(provider.GetRequiredService<ICaiDatRequester>(), provider.GetRequiredService<IDoiTuongBLLService>()));
                         services.AddTransient<IThemSuaHuyenRequester>(provider => new QuanLyHuyen(provider.GetRequiredService<ICaiDatRequester>(), provider.GetRequiredService<ITinhBLLService>(), provider.GetRequiredService<IHuyenBLLService>()));
                         services.AddTransient<IThemSuaKhoaRequester>(provider => new QuanLyKhoa(provider.GetRequiredService<IKhoaRequester>(), provider.GetRequiredService<IKhoaBLLService>()));
                         services.AddTransient<IThemSuaLoaiMonHocRequester>(provider => new QuanLyLoaiMonHoc(provider.GetRequiredService<ICaiDatRequester>(), provider.GetRequiredService<IGlobalConfigBLLService>(), provider.GetRequiredService<ILoaiMonHocBLLService>()));
-                        services.AddTransient<IThemSuaLoaiMonHocRequester>(provider => new ThemSuaMonHoc(provider.GetRequiredService<IThemSuaMonHocRequester>()));
                         services.AddTransient<IThemSuaMonHocRequester>(provider => new QuanLyMonHoc(provider.GetRequiredService<IMonHocRequester>(), provider.GetRequiredService<IMonHocBLLService>(), provider.GetRequiredService<ILoaiMonHocBLLService>()));
                         services.AddTransient<IThemSuaNganhRequester>(provider => new QuanLyNganh(provider.GetRequiredService<INganhRequester>(), provider.GetRequiredService<INganhBLLService>(), provider.GetRequiredService<IKhoaBLLService>()));
                         services.AddTransient<IThemSuaSinhVienRequester>(provider => new QuanLySinhVien(provider.GetRequiredService<IDanhSachSinhVienRequester>(), provider.GetRequiredService<IDoiTuongBLLService>(), provider.GetRequiredService<ISinhVienBLLService>()));

@@ -1,12 +1,9 @@
 ﻿using BLL.IServices;
-using BLL.Services;
 using ComponentFactory.Krypton.Toolkit;
-using DAL.Services;
 using DTO;
 using PL.Interfaces;
 using System;
 using System.ComponentModel;
-using System.Configuration;
 using System.Windows.Forms;
 
 namespace PL
@@ -35,11 +32,13 @@ namespace PL
             SettingProperties();
         }
 
-        public ThemSuaMonHoc(IThemSuaMonHocRequester requester)
+        public ThemSuaMonHoc(IThemSuaMonHocRequester requester, IMonHocBLLService monHocBLLService, ILoaiMonHocBLLService loaiMonHocBLLService)
         {
             InitializeComponent();
 
             themSuaMonHocRequester = requester;
+            _monHocBLLService = monHocBLLService;
+            _loaiMonHocBLLService = loaiMonHocBLLService;
 
             SettingProperties();
         }

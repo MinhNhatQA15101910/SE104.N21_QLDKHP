@@ -14,15 +14,15 @@ namespace PL
         private readonly IPhieuDKHPBLLService _phieuDKHPBLLService;
         private readonly IPhieuThuHPBLLService _phieuThuHPBLLService;
 
-		private IThanhToanHocPhiRequester thanhToanHocPhiRequester;
+		private IXacNhanHocPhiRequester xacNhanHocPhiRequester;
         BindingList<PhieuThuHP> mPhieuThuHP;
         BindingList<PhieuDKHP> mPhieuDKHP;
 
-        public XacNhanHocPhi(IThanhToanHocPhiRequester requester, IPhieuDKHPBLLService phieuDKHPBLLService, IPhieuThuHPBLLService phieuThuHPBLLService)
+        public XacNhanHocPhi(IXacNhanHocPhiRequester requester, IPhieuDKHPBLLService phieuDKHPBLLService, IPhieuThuHPBLLService phieuThuHPBLLService)
         {
             InitializeComponent();
 
-            thanhToanHocPhiRequester = requester;
+            xacNhanHocPhiRequester = requester;
             _phieuDKHPBLLService = phieuDKHPBLLService;
             _phieuThuHPBLLService = phieuThuHPBLLService;
 
@@ -34,9 +34,9 @@ namespace PL
         {
             base.OnFormClosing(e);
 
-            if (thanhToanHocPhiRequester != null)
+            if (xacNhanHocPhiRequester != null)
             {
-                thanhToanHocPhiRequester.OnThanhToanHocPhiClosing();
+                xacNhanHocPhiRequester.OnXacNhanHocPhiClosing();
             }
         }
         public void SettingColumnXacNhanHocPhi()

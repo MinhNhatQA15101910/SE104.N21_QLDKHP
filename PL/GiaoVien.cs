@@ -17,8 +17,7 @@ namespace PL
         IMonHocRequester,
         IDanhSachSinhVienRequester,
         IXacNhanHocPhiRequester,
-        IBaoCaoRequester,
-        IThanhToanHocPhiRequester
+        IBaoCaoRequester
     {
         private readonly IGVRequester gvRequester;
 
@@ -65,11 +64,6 @@ namespace PL
         }
 
         public void OnNganhClosing()
-        {
-            Show();
-        }
-
-        public void OnThanhToanHocPhiClosing()
         {
             Show();
         }
