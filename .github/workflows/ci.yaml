@@ -36,7 +36,7 @@ jobs:
 
       # Add Dapper Package for DAL
       - name: Add Dapper package for DAL
-        run: nuget install Dapper ${{ env.DAL_Project_Path }}
+        run: nuget install Dapper -OutputDirectory ${{ env.DAL_Project_Path }}
 
       # Execute all unit tests in the solution
       - name: Execute unit tests
