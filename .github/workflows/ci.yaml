@@ -16,7 +16,6 @@ jobs:
 
     env:
       Solution_Name: QUANLYHOCPHAN.sln
-      DAL_Project_Path: DAL\DAL.csproj
 
     steps:
       - name: Checkout
@@ -33,10 +32,6 @@ jobs:
       # Add  MSBuild to the PATH: https://github.com/microsoft/setup-msbuild
       - name: Setup MSBuild.exe
         uses: microsoft/setup-msbuild@v1.0.2
-
-      # Add Dapper Package for DAL
-      - name: Add Dapper package for DAL
-        run: nuget install Dapper -OutputDirectory ${{ env.DAL_Project_Path }}
 
       # Execute all unit tests in the solution
       - name: Execute unit tests
