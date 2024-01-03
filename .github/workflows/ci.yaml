@@ -34,3 +34,6 @@ jobs:
 
       - name: Execute unit tests
         run: dotnet test
+
+      - name: Execute mutation tests
+        run: dotnet stryker
