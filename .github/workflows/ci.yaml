@@ -37,7 +37,7 @@ jobs:
 
       - run: dotnet new tool-manifest
 
-      - run: dotnet install dotnet-stryker
+      - run: dotnet tool install dotnet-stryker
 
       - name: Execute mutation tests
         run: dotnet stryker
