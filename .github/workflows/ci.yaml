@@ -42,4 +42,4 @@ jobs:
         run: dotnet tool install dotnet-stryker
 
       - name: Execute mutation tests
-        run: dotnet stryker -o
+        run: dotnet stryker
