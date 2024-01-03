@@ -35,8 +35,8 @@ jobs:
         uses: microsoft/setup-msbuild@v1.0.2
 
       # Add Dapper Package for DAL
-      - name: Add Dapper package for BLL
-        run: dotnet add ${{ env.DAL_Project_Path }} package Dapper
+      - name: Add Dapper package for DAL
+        run: nuget install Dapper ${{ env.DAL_Project_Path }}
 
       # Execute all unit tests in the solution
       - name: Execute unit tests
