@@ -29,6 +29,8 @@ jobs:
         with:
           dotnet-version: 7.0.x
 
+      - run: NuGet Package Restore
+
       - run: dotnet build QUANLYHOCPHAN.sln
 
       - name: Setup MSBuild.exe
