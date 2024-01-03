@@ -35,5 +35,9 @@ jobs:
       - name: Execute unit tests
         run: dotnet test
 
+      - run: dotnet new tool-manifest
+
+      - run: dotnet install dotnet-stryker
+
       - name: Execute mutation tests
         run: dotnet stryker
