@@ -16,8 +16,7 @@ jobs:
 
     env:
       Solution_Name: QUANLYHOCPHAN.sln
-      BLL_Test_Project_Path: BLL.Tests\BLL.Tests.csproj
-      DAL_Test_Project_Path: DAL.Tests\DAL.Tests.csproj
+      DAL_Project_Path: DAL\DAL.csproj
 
     steps:
       - name: Checkout
@@ -35,13 +34,9 @@ jobs:
       - name: Setup MSBuild.exe
         uses: microsoft/setup-msbuild@v1.0.2
 
-      # Add Dapper Package for BLL
+      # Add Dapper Package for DAL
       - name: Add Dapper package for BLL
-        run: dotnet add ${{ env.BLL_Test_Project_Path }} package Dapper
-
-        # Add Dapper Package for DAL
-      - name: Add Dapper package for DAL
-        run: dotnet add ${{ env.DAL_Test_Project_Path }} package Dapper
+        run: dotnet add ${{ env.DAL_Project_Path }} package Dapper
 
       # Execute all unit tests in the solution
       - name: Execute unit tests
