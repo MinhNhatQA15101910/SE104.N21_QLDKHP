@@ -233,14 +233,12 @@ namespace PL
         private void picLocTaiKhoan_Click(object sender, EventArgs e)
         {
             string searchQuery = txtTimKiemTaiKhoan.Text.Trim().ToLower();
-            if (!string.IsNullOrEmpty(searchQuery))
-            {
-                BindingList<CT_NguoiDung> mDSTimKiem = new BindingList<CT_NguoiDung>(mNguoiDung.Where(d =>
+
+            BindingList<CT_NguoiDung> mDSTimKiem = new BindingList<CT_NguoiDung>(mNguoiDung.Where(d =>
                     d.TenDangNhap.ToLower().Contains(searchQuery) ||
                     d.TenNhom.ToLower().Contains(searchQuery)).ToList()
                 );
-                mNguoiDungSource.DataSource = mDSTimKiem;
-            }
+            mNguoiDungSource.DataSource = mDSTimKiem;
         }
 
         private void picBoLocTaiKhoan_Click(object sender, EventArgs e)
@@ -252,14 +250,12 @@ namespace PL
         private void picLocSinhVien_Click(object sender, EventArgs e)
         {
             string searchQuery = txtTimKiemSinhVien.Text.Trim().ToLower();
-            if (!string.IsNullOrEmpty(searchQuery))
-            {
-                BindingList<DTO.SinhVien> mDSTimKiem = new BindingList<DTO.SinhVien>(mSinhVienChuaCoTK.Where(d =>
+
+            BindingList<DTO.SinhVien> mDSTimKiem = new BindingList<DTO.SinhVien>(mSinhVienChuaCoTK.Where(d =>
                     d.MaSV.ToLower().Contains(searchQuery) ||
                     d.HoTen.ToLower().Contains(searchQuery)).ToList()
                 );
-                mSinhVienChuaCoTKSource.DataSource = mDSTimKiem;
-            }
+            mSinhVienChuaCoTKSource.DataSource = mDSTimKiem;
         }
 
         private void picBoLocSinhVien_Click(object sender, EventArgs e)

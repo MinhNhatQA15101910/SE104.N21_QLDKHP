@@ -176,16 +176,14 @@ namespace PL
         private void picLoc_Click(object sender, EventArgs e)
         {
             string searchQuery = txtTimKiem.Text.Trim().ToLower();
-            if (!string.IsNullOrEmpty(searchQuery))
-            {
-                BindingList<CT_MonHoc> filterList = new BindingList<CT_MonHoc>(mMonHoc.Where(d =>
+
+            BindingList<CT_MonHoc> filterList = new BindingList<CT_MonHoc>(mMonHoc.Where(d =>
                     d.MaMH.ToLower().Contains(searchQuery) ||
                     d.TenMH.ToLower().Contains(searchQuery) ||
                     d.TenLoaiMonHoc.ToLower().Contains(searchQuery) ||
                     d.SoTiet.ToString().Contains(searchQuery)).ToList()
                 );
-                mMonHocSource.DataSource = filterList;
-            }
+            mMonHocSource.DataSource = filterList;
         }
 
         private void picBoLoc_Click(object sender, EventArgs e)
