@@ -29,7 +29,8 @@ jobs:
         with:
           dotnet-version: 7.0.x
 
-      - run: NuGet Package Restore
+      - name: Install dependencies
+        run: dotnet restore
 
       - run: dotnet build QUANLYHOCPHAN.sln
 
