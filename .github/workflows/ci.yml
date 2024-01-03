@@ -16,7 +16,7 @@ jobs:
 
     env:
       Solution_Name: QUANLYHOCPHAN.sln
-      Test_Project_Path: BLL.Tests/BLL.Tests.csproj
+      Test_Project_Path: BLL.Tests\BLL.Tests.csproj
 
     steps:
       - name: Checkout
@@ -36,7 +36,7 @@ jobs:
 
       # Add Dapper Package
       - name: Add Dapper package
-        run: dotnet add package Dapper
+        run: dotnet add ${{ env.Test_Project_Path }} package Dapper
 
       # Execute all unit tests in the solution
       - name: Execute unit tests
