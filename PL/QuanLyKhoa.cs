@@ -2,14 +2,12 @@
 using BLL.Services;
 using ComponentFactory.Krypton.Toolkit;
 using DAL.Services;
-using Dapper;
 using DTO;
 using PL.Interfaces;
 using System;
 using System.ComponentModel;
 using System.Configuration;
 using System.Data;
-using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
@@ -145,14 +143,12 @@ namespace PL
         private void picLoc_Click(object sender, EventArgs e)
         {
             string searchQuery = txtTimKiem.Text.Trim().ToLower();
-            if (!string.IsNullOrEmpty(searchQuery))
-            {
-                BindingList<Khoa> filterList = new BindingList<Khoa>(mKhoa.Where(d =>
+
+            BindingList<Khoa> filterList = new BindingList<Khoa>(mKhoa.Where(d =>
                     d.MaKhoa.ToLower().Contains(searchQuery) ||
                     d.TenKhoa.ToLower().Contains(searchQuery)).ToList()
                 );
-                mKhoaSource.DataSource = filterList;
-            }
+            mKhoaSource.DataSource = filterList;
         }
 
         private void picBoLoc_Click(object sender, EventArgs e)

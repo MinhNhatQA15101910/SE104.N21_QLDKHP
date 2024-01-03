@@ -8,7 +8,6 @@ using System;
 using System.ComponentModel;
 using System.Configuration;
 using System.Data;
-using System.Data.SqlClient;
 using System.Drawing;
 using System.Linq;
 using System.Windows.Forms;
@@ -163,14 +162,12 @@ namespace PL
         private void picLoc_Click(object sender, EventArgs e)
         {
             string searchQuery = txtTimKiem.Text.Trim().ToLower();
-            if (!string.IsNullOrEmpty(searchQuery))
-            {
-                BindingList<CT_SinhVien> filterList = new BindingList<CT_SinhVien>(mSinhVien.Where(d =>
+
+            BindingList<CT_SinhVien> filterList = new BindingList<CT_SinhVien>(mSinhVien.Where(d =>
                     d.MaSV.ToLower().Contains(searchQuery) ||
                     d.HoTen.ToLower().Contains(searchQuery)).ToList()
                 );
-                mSinhVienSource.DataSource = filterList;
-            }
+            mSinhVienSource.DataSource = filterList;
         }
 
         private void picBoLoc_Click(object sender, EventArgs e)
