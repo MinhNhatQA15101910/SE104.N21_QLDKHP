@@ -11,7 +11,7 @@ jobs:
     strategy:
       matrix:
         os: [windows-latest]
-        dotnet: ['y.0.417', '7.0.320', '7.0.125']
+        dotnet: ['7.0.114', '7.0.14', '7.0.311']
 
     runs-on: windows-latest
 
