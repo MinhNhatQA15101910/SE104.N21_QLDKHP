@@ -10,9 +10,10 @@ jobs:
   Test:
     strategy:
       matrix:
-        configuration: [windows-latest]
+        os: [windows-latest]
+        dotnet: ['7.0.305', '7.0.108', '7.0.202']
 
-    runs-on: windows-latest
+    runs-on: ${{ matrix.os }}
 
     env:
       Solution_Name: QUANLYHOCPHAN.sln
@@ -22,6 +23,11 @@ jobs:
         uses: actions/checkout@v4.1.1
         with:
           fetch-depth: 0
+
+      - name: Setup .NET Core SDK
+        uses: actions/setup-dotnet@v2
+        with:
+          dotnet-version: ${{ matrix.dotnet }}
 
       - name: Setup MSBuild.exe
         uses: microsoft/setup-msbuild@v1.3.1
