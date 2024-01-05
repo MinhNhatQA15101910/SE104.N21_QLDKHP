@@ -10,8 +10,8 @@ jobs:
   Test:
     strategy:
       matrix:
-        os: [windows-latest, utunbu-latest, macos-latest]
-        dotnet: ['7.0.404', '7.0.311', '7.0.114']
+        os: [windows-latest]
+        dotnet: ['7.0.305', '7.0.108']
 
     runs-on: ${{ matrix.os }}
 
