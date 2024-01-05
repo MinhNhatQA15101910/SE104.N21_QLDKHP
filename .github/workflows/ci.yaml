@@ -13,7 +13,7 @@ jobs:
         os: [windows-latest]
         dotnet: ['7.0.114', '7.0.14', '7.0.311']
 
-    runs-on: windows-latest
+    runs-on: ${{ matrix.os }}
 
     env:
       Solution_Name: QUANLYHOCPHAN.sln
