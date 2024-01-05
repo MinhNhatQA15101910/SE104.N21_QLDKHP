@@ -10,7 +10,8 @@ jobs:
   Test:
     strategy:
       matrix:
-        configuration: [windows-latest]
+        os: [windows-latest]
+        dotnet: ['6.0.417', '6.0.320', '6.0.125']
 
     runs-on: windows-latest
 
@@ -22,6 +23,11 @@ jobs:
         uses: actions/checkout@v4.1.1
         with:
           fetch-depth: 0
+
+      - name: Setup .NET Core SDK
+        uses: actions/setup-dotnet@v2
+        with:
+          dotnet-version: ${{ matrix.dotnet }}
 
       - name: Setup MSBuild.exe
         uses: microsoft/setup-msbuild@v1.3.1
