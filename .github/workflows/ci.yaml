@@ -40,8 +40,6 @@ jobs:
 
       - name: Execute unit tests
         run: dotnet test
-        with:
-          dotnet-version: ${{ matrix.dotnet }}
 
       - name: Create new tool manifest
         run: dotnet new tool-manifest
