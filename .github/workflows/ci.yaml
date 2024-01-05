@@ -11,7 +11,7 @@ jobs:
     strategy:
       matrix:
         os: [windows-latest]
-        dotnet: ['7.0.114', '7.0.14', '7.0.311']
+        dotnet: ['7.0.1', '7.0.2', '7.0.3']
 
     runs-on: ${{ matrix.os }}
 
