@@ -24,10 +24,10 @@ jobs:
         with:
           fetch-depth: 0
 
-      - name: Setup .NET Core SDK
-        uses: actions/setup-dotnet@v2
-        with:
-          dotnet-version: ${{ matrix.dotnet }}
+      # - name: Setup .NET Core SDK
+      #   uses: actions/setup-dotnet@v2
+      #   with:
+      #     dotnet-version: ${{ matrix.dotnet }}
 
       - name: Setup MSBuild.exe
         uses: microsoft/setup-msbuild@v1.3.1
@@ -40,6 +40,8 @@ jobs:
 
       - name: Execute unit tests
         run: dotnet test
+        with:
+          dotnet-version: ${{ matrix.dotnet }}
 
       - name: Create new tool manifest
         run: dotnet new tool-manifest
