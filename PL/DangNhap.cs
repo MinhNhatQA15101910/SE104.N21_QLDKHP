@@ -89,7 +89,7 @@ namespace PL
 
                     MessageBox.Show("Đăng nhập thành công!");
 
-                    if (GlobalConfig.CurrNguoiDung.MaNhom == "gv")
+                    if (GlobalConfig.CurrNguoiDung.MaNhom == "gv" || GlobalConfig.CurrNguoiDung.MaNhom == "tv")
                     {
                         GiaoVien gv = new GiaoVien(this);
                         gv.Show();

@@ -114,7 +114,7 @@ namespace DAL.Services
                     var p = new DynamicParameters();
                     p.Add("@MaNganh", maNganh);
                     p.Add("@HocKy", hocKy);
-                    return _dapperWrapper.Query<MonHoc>(connection, "spMONHOC_GetCTHHocKy", p, commandType: CommandType.StoredProcedure).ToList();
+                    return _dapperWrapper.Query<MonHoc>(connection, "spMONHOC_GetCTHHocKyMaNganh", p, commandType: CommandType.StoredProcedure).ToList();
                 }
                 else
                 {

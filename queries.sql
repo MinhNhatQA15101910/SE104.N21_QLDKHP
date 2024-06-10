@@ -2,24 +2,6 @@
 --use QuanLyDangKyHP;
 --drop database QuanLyDangKyHP;
 
--- 1.1. Yêu cầu lập hồ sơ sinh viên - Tính đúng đắn
-create table SINHVIEN
-(
-	MaSV varchar(10) not null,
-	HoTen nvarchar(100) not null, 
-	NgaySinh date not null, 
-	GioiTinh nvarchar(10) not null, 
-	QueQuan nvarchar(200) not null, 
-	TenDoiTuong nvarchar(100) not null, 
-	TenNganh nvarchar(100) not null, 
-
-	constraint PK_SINHVIEN primary key (MaSV)
-);
-go
-
--- 1.2. Yêu cầu lập hồ sơ sinh viên - Tính tiến hóa
-drop table SINHVIEN;
-go
 create table KHOA
 (
 	MaKhoa nvarchar(50) not null, 
@@ -29,6 +11,7 @@ create table KHOA
 	constraint UQ_KHOA_TenKhoa unique (TenKhoa)
 );
 go
+
 create table NGANH 
 (
 	MaNganh nvarchar(50) not null, 
@@ -40,6 +23,7 @@ create table NGANH
 	constraint UQ_NGANH_TenNganh unique (TenNganh)
 );
 go
+
 create table TINH
 (
 	MaTinh int identity(1, 1) not null,
@@ -49,6 +33,7 @@ create table TINH
 	constraint UQ_TINH_TenTTP unique (TenTTP)
 );
 go
+
 create table HUYEN
 (
 	MaHuyen int identity(1, 1) not null,
@@ -61,6 +46,7 @@ create table HUYEN
 	constraint UQ_HUYEN_TenHuyen_MaTinh unique (TenHuyen, MaTinh)
 );
 go
+
 create table DOITUONG
 (
 	MaDT int identity(1, 1) not null,
@@ -71,6 +57,7 @@ create table DOITUONG
 	constraint UQ_DOITUONG_TenDT unique (TenDT)
 );
 go
+
 create table SINHVIEN
 (
 	MaSV varchar(10) not null, 
@@ -85,6 +72,7 @@ create table SINHVIEN
 	constraint FK_SINHVIEN_NGANH foreign key (MaNganh) references NGANH(MaNganh)
 );
 go
+
 create table SINHVIEN_DOITUONG 
 (
 	MaSV varchar(10) not null, 
@@ -94,22 +82,6 @@ create table SINHVIEN_DOITUONG
 	constraint FK_SINHVIEN_DOITUONG1 foreign key (MaSV) references SINHVIEN(MaSV), 
 	constraint FK_SINHVIEN_DOITUONG2 foreign key (MaDT) references DOITUONG(MaDT)
 );
-go
-
--- 2.1. Yêu cầu nhập danh sách môn học - Tính đúng đắn
-create table MONHOC
-(
-	MaMH nvarchar(50) not null, 
-	TenMH nvarchar(100) not null, 
-	LoaiMon nvarchar(50) not null, 
-	SoTiet int not null, 
-
-	constraint PK_MONHOC primary key (MaMH)
-);
-go
-
--- 2.2. Yêu cầu nhập danh sách môn học - Tính tiến hóa
-drop table MONHOC;
 go
 
 create table LOAIMONHOC
@@ -122,6 +94,7 @@ create table LOAIMONHOC
 	constraint UQ_LOAIMONHOC_TenLoaiMonHoc unique (TenLoaiMonHoc)
 );
 go
+
 create table MONHOC
 (
 	MaMH nvarchar(50) not null, 
@@ -155,24 +128,6 @@ create table CHUONGTRINHHOC
 );
 go
 
--- 5.2. Yêu cầu nhập chương trình học - Tính tiến hóa
-
--- 6.1. Yêu cầu nhập môn học mở trong học kỳ - Tính đúng đắn
-create table DANHSACHMONHOCMO
-(
-	MaMH nvarchar(50), 
-	HocKy nvarchar(50),
-	NamHoc int, 
-
-	constraint PK_DANHSACHMONHOCMO primary key (MaMH, HocKy, NamHoc), 
-	constraint FK_DANHSACHMONHOCMO_MONHOC foreign key (MaMH) references MONHOC(MaMH)
-);
-go
-
--- 6.2 Yêu cầu nhập môn học mở trong học kỳ - Tính tiến hóa
-drop table DANHSACHMONHOCMO;
-go
-
 create table HOCKY
 (
 	MaHocKy int identity (1, 1) not null, 
@@ -182,6 +137,7 @@ create table HOCKY
 	constraint UQ_HOCKY_TenHocKy unique (TenHocKy)
 );
 go
+
 create table DANHSACHMONHOCMO
 (
 	MaMH nvarchar(50), 
@@ -209,6 +165,7 @@ create table PHIEUDKHP
 	constraint UQ_PHIEUDKHP unique(MaSV, MaHocKy, NamHoc)
 );
 go
+
 create table CT_PHIEUDKHP
 (
 	MaPhieuDKHP int not null, 
@@ -323,23 +280,6 @@ go
 alter table PHIEUTHUHP add constraint FK_PHIEUTHUHP_MaTinhTrang foreign key (MaTinhTrang) references TINHTRANG(MaTinhTrang)
 go
 
--- 9.1 - Yêu cầu lập báo cáo sinh viên chưa đóng học phí - Tính đúng đắn
-
--- 9.2 - Yêu cầu lập báo cáo sinh viên chưa đóng học phí - Tính tiến hóa
-
--- 10.1 - Yêu cầu tra cứu sinh viên - Tính đúng đắn
-
--- 10.2 - Yêu cầu tra cứu sinh viên - Tính tiến hóa
-
--- 11.1 - Yêu cầu tra cứu phiếu đăng ký học phần - Tính đúng đắn
-
--- 11.2 - Yêu cầu tra cứu phiếu đăng ký học phần - Tính tiến hóa
-
--- 12.1 - Yêu cầu tra cứu phiếu thu học phí - Tính đúng đắn
-
--- 12.2 - Yêu cầu tra cứu phiếu thu học phí - Tính tiến hóa
-
--- 13.1 - Yêu cầu phân quyền người dùng - Tính đúng đắn
 create table NHOMNGUOIDUNG
 (
 	MaNhom nvarchar(20) not null, 
@@ -2291,12 +2231,14 @@ insert into TINHTRANG values
 -- table NHOMNGUOIDUNG
 insert into NHOMNGUOIDUNG values
 ('ad', N'Admin'), 
-('gv', N'Nhân viên phòng tài vụ'), 
+('gv', N'Nhân viên phòng giáo vụ'),
+('tv', N'Nhân viên phòng tài vụ'),
 ('sv', N'Sinh viên');
 
 -- table NGUOIDUNG
 insert into NGUOIDUNG values ('admin1', 'FA585D89C851DD338A70DCF535AA2A92FEE7836DD6AFF1226583E88E0996293F16BC009C652826E0FC5C706695A03CDDCE372F139EFF4D13959DA6F1F5D3EABE', 'ad');
-insert into NGUOIDUNG values ('teacher1', 'FA585D89C851DD338A70DCF535AA2A92FEE7836DD6AFF1226583E88E0996293F16BC009C652826E0FC5C706695A03CDDCE372F139EFF4D13959DA6F1F5D3EABE', 'gv');
+insert into NGUOIDUNG values ('giaovu1', 'FA585D89C851DD338A70DCF535AA2A92FEE7836DD6AFF1226583E88E0996293F16BC009C652826E0FC5C706695A03CDDCE372F139EFF4D13959DA6F1F5D3EABE', 'gv');
+insert into NGUOIDUNG values ('taivu1', 'FA585D89C851DD338A70DCF535AA2A92FEE7836DD6AFF1226583E88E0996293F16BC009C652826E0FC5C706695A03CDDCE372F139EFF4D13959DA6F1F5D3EABE', 'tv');
 insert into NGUOIDUNG values ('SV21520007', 'FA585D89C851DD338A70DCF535AA2A92FEE7836DD6AFF1226583E88E0996293F16BC009C652826E0FC5C706695A03CDDCE372F139EFF4D13959DA6F1F5D3EABE', 'sv');
 insert into NGUOIDUNG values ('SV21520013', 'FA585D89C851DD338A70DCF535AA2A92FEE7836DD6AFF1226583E88E0996293F16BC009C652826E0FC5C706695A03CDDCE372F139EFF4D13959DA6F1F5D3EABE', 'sv');
 insert into NGUOIDUNG values ('SV21520053', 'FA585D89C851DD338A70DCF535AA2A92FEE7836DD6AFF1226583E88E0996293F16BC009C652826E0FC5C706695A03CDDCE372F139EFF4D13959DA6F1F5D3EABE', 'sv');
