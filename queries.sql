@@ -2940,10 +2940,15 @@ go
 
 --spPHIEUDKHP_TinhHocPhi
 CREATE proc spPHIEUDKHP_TinhHocPhi
- @maPhieuDKHP int
+@maPhieuDKHP int
 as
 begin
-SELECT COALESCE((dbo.fcPHIEUDKHP_TinhHocPhi (@maPhieuDKHP)), 0)
+	SELECT SUM ((mh.SoTiet / lmh.SoTiet) * lmh.SoTien)
+	FROM PHIEUDKHP pdkhp, CT_PHIEUDKHP ctpdkhp, MONHOC mh, LOAIMONHOC lmh
+	WHERE pdkhp.MaPhieuDKHP = ctpdkhp.MaPhieuDKHP
+	AND ctpdkhp.MaMH = mh.MaMH
+	AND mh.MaLoaiMonHoc = lmh.MaLoaiMonHoc
+	AND pdkhp.MaPhieuDKHP = @maPhieuDKHP
 end
 go
 
@@ -2972,7 +2977,8 @@ CREATE proc spPHIEUDKHP_TinhHocPhiPhaiDong
  @maPhieuDKHP int
 as
 begin 
-SELECT COALESCE((select dbo.fcPHIEUDKHP_TinhHocPhiPhaiDong  (@maPhieuDKHP)	), 0)
+	
+	SELECT COALESCE((select dbo.fcPHIEUDKHP_TinhHocPhiPhaiDong  (@maPhieuDKHP)	), 0)
 end 
 go
 

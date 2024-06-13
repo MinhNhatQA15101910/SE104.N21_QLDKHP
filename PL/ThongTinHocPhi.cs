@@ -118,7 +118,7 @@ namespace PL
                             HienThiTinhTrang(kq.MaTinhTrang);
                             List<DoiTuong> dt = _doiTuongBLLService.LayDSDoiTuongBangMaSV(GlobalConfig.CurrNguoiDung.TenDangNhap);
                             DoiTuong dt1 = dt[0];
-                            lblTyLeGiam.Text = "(Học phí được giảm " + (hocPhi - hocPhiPhaiDong).ToString("c", cultureInfo) + " - theo đối tượng " + dt1.TenDT + " )";
+                            lblTyLeGiam.Text = "(Đối tượng" + dt1.TenDT + " được giảm học phí " + dt1.TiLeGiamHocPhi;
                             break;
 
                         }

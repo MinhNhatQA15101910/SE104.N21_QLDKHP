@@ -252,9 +252,21 @@ namespace PL
 
         private void btnChuongTrinhHoc_Click(object sender, EventArgs e)
         {
-            QuanLyChuongTrinhHoc quanLyChuongTrinhHoc = new QuanLyChuongTrinhHoc(this);
-            quanLyChuongTrinhHoc.Show();
-            Hide();
+            if (GlobalConfig.CurrNguoiDung.MaNhom == "gv")
+            {
+                QuanLyChuongTrinhHoc quanLyChuongTrinhHoc = new QuanLyChuongTrinhHoc(this);
+                quanLyChuongTrinhHoc.Show();
+                Hide();
+            }
+            else
+            {
+                MessageBox.Show(
+                    "Bạn không thể sử dụng chức năng này.",
+                    "Không cho phép",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error
+                    );
+            }
         }
 
         private void btnXacNhanDKHP_Click(object sender, EventArgs e)
